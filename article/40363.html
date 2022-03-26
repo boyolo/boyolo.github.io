@@ -1,0 +1,635 @@
+
+
+<!DOCTYPE html>
+<html lang="en" color-mode=light>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Java引用类型 - Boyolo</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+  
+  <meta name="description" content="
+The mystery of creation is...">
+  <meta name="author" content="bobo">
+  <link rel="icon" href="/images/icons/favicon-16x16.png" type="image/png" sizes="16x16">
+  <link rel="icon" href="/images/icons/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" sizes="180x180">
+  <meta rel="mask-icon" href="/images/icons/boyolo-logo.svg" color="#333333">
+  
+    <meta rel="msapplication-TileImage" content="/images/icons/favicon-144x144.png">
+    <meta rel="msapplication-TileColor" content="#000000">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+    
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1445822_p6ry5n7lrr.css">
+
+  
+
+  
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+    
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/xcode.min.css" name="highlight-style" mode="light">
+
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/solarized-dark.min.css" name="highlight-style" mode="dark">
+
+      
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {};
+    var ZHAOO = window.ZHAOO || {};
+    CONFIG = {
+      isHome: false,
+      fancybox: true,
+      pjax: false,
+      loading: {
+        gif: '/images/theme/loading.gif',
+        lottie: ''
+      },
+      lazyload: {
+        enable: true,
+        only_post: 'false',
+        loading: {
+          gif: '/images/theme/loading.gif',
+          lottie: ''
+        }
+      },
+      donate: {
+        enable: true,
+        alipay: '/images/theme/alipay.jpg',
+        wechat: '/images/theme/wechatpay.jpg'
+      },
+      galleries: {
+        enable: true
+      },
+      fab: {
+        enable: true,
+        always_show: false
+      },
+      carrier: {
+        enable: true
+      },
+      daovoice: {
+        enable: false
+      },
+      preview: {
+        background: {
+          default: '',
+          api: ''
+        },
+        motto: {
+          default: '我在开了灯的床头下，想问问自己的心啊。',
+          typing: true,
+          api: 'https://v1.hitokoto.cn/?encode=text&c=i',
+          data_contents: ''
+        },
+      },
+      qrcode: {
+        enable: true,
+        type: 'url',
+        image: '/images/theme/wechat',
+      },
+      toc: {
+        enable: true
+      },
+      scrollbar: {
+        type: 'default'
+      },
+      notification: {
+        enable: false,
+        delay: 4500,
+        list: '',
+        page_white_list: '',
+        page_black_list: ''
+      },
+      search: {
+        enable: true,
+        path: 'search.xml'
+      }
+    }
+  </script>
+
+  
+
+  
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="lock-screen">
+  <div class="loading" id="loading"></div>
+  
+    
+
+
+  <nav class="navbar">
+    <div class="left">
+      
+        <i class="iconfont iconhome j-navbar-back-home"></i>
+      
+      
+        <i class="iconfont iconqrcode j-navbar-qrcode"></i>
+      
+      
+        <i class="iconfont iconmoono" id="color-toggle" color-toggle="light"></i>
+      
+      
+        <i class="iconfont iconsearch j-navbar-search"></i>
+      
+    </div>
+    <div class="center">Java引用类型</div>
+    <div class="right">
+      <i class="iconfont iconmenu j-navbar-menu"></i>
+    </div>
+    
+      <div id="qrcode-navbar"></div>
+    
+  </nav>
+
+  
+  
+
+<nav class="menu">
+  <div class="menu-container">
+    <div class="menu-close">
+      <i class="iconfont iconbaseline-close-px"></i>
+    </div>
+    <ul class="menu-content"><li class="menu-item">
+        <a href="/" class="underline "> 首页</a>
+      </li><li class="menu-item">
+        <a href="/tags/" class="underline "> 标签</a>
+      </li><li class="menu-item">
+        <a href="/categories/" class="underline "> 分类</a>
+      </li><li class="menu-item">
+        <a href="/archives/" class="underline "> 归档</a>
+      </li><li class="menu-item">
+        <a href="/galleries/" class="underline "> 相册</a>
+      </li><li class="menu-item">
+        <a href="/about/ " class="underline "> 关于</a>
+      </li></ul>
+    
+      <div class="menu-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a> |  website - <a target="_blank" href="https://boyolo.github.io/">bobo</a></p></div>
+    
+  </div>
+</nav>
+  <main id="main">
+  <div class="article-wrap">
+    <div class="row container">
+      <div class="col-xl-3"></div>
+      <div class="col-xl-6"><article class="article">
+  <div class="wrap">
+    <section class="head">
+  <img   class="lazyload" data-original="/images/theme/coverphoto/java.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title">Java引用类型</h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>December 16, 2021</span>
+      
+        <span class="post-info-item">
+          <i class="iconfont iconeye"></i><span id="/article/40363.html" class="leancloud-counter" data-flag-title="Java引用类型"></span>
+        </span>
+        <span class="post-info-item">
+          <i class="iconfont iconheart"></i><span id="/article/40363.html" class="leancloud-like" data-flag-title="Java引用类型"></span>
+        </span>
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>7330</span>
+    </div>
+  </div>
+</section>
+    <section class="main">
+      <section class="content">
+        
+        <blockquote>
+<p>The mystery of creation is like the darkness of night–it is great. </p>
+<p>创造的神秘，有如夜间的黑暗－－是伟大的。</p>
+<p>Delusions of knowledge are like the fog of the morning. </p>
+<p>而知识的幻影却不过如晨间 之雾。 </p>
+</blockquote>
+<p>java中的4种引用类型，它们从强到弱分别是：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">引用类型</th>
+<th style="text-align:center">对象是否可引用</th>
+<th style="text-align:center">回收时间</th>
+<th style="text-align:center">使用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">强引用</td>
+<td style="text-align:center">可以</td>
+<td style="text-align:center">从不回收</td>
+<td style="text-align:center">普遍对象的状态</td>
+</tr>
+<tr>
+<td style="text-align:center">软引用</td>
+<td style="text-align:center">可以</td>
+<td style="text-align:center">内存不足时</td>
+<td style="text-align:center">内存敏感的高速缓存</td>
+</tr>
+<tr>
+<td style="text-align:center">弱引用</td>
+<td style="text-align:center">可以</td>
+<td style="text-align:center">下一次GC</td>
+<td style="text-align:center">对象缓存</td>
+</tr>
+<tr>
+<td style="text-align:center">虚引用</td>
+<td style="text-align:center">不可以</td>
+<td style="text-align:center">下一次GC，不影响对象生命周期</td>
+<td style="text-align:center">必须和引用队列(ReferenceQueue)一起使用，一般用于追踪垃圾收集器的回收动作。相比对象的finalize方法，虚引用的方式更加灵活和安全。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="对象可达性判断"><a href="#对象可达性判断" class="headerlink" title="对象可达性判断"></a>对象可达性判断</h2><p>目前，大多数JVM都是使用可达性分析算法来判断对象的是否可达。可达性分析算法以GC Roots对象作为起始点进行搜索。当一个对象与GC Roots对象没有任何引用链相连时(也即引用有向图中从GC Roots对象到这个对象是不连通的)，则表明该对象是不可用的（不可用的对象不一定被判定为可以回收的对象）。当对象与GC Roots对象有引用链相连时，则需要根据引用链的类型来判断对象是否可达。</p>
+<blockquote>
+<p>不可用的对象不一定被判定为可以回收的对象：判定对象为”死亡”至少需要经历两次标记的过程。第一次标记：对象可达性分析，如果发现对象没有与GC Roots相连接的引用链，且对象需要执行finalize方法，将会被加入F-Queue队列中。第二次标记：由一个优先级低的Finalizer线程去取F-Queue队列的对象，“尝试执行”对象的finalize方法。<br>JVM会保证触发满足条件的对象的finalize方法，但是并不承诺会等待方法执行结束。finalize方法是对象逃脱死亡命运的最后一次机会。</p>
+</blockquote>
+<h2 id="GC-Roots对象"><a href="#GC-Roots对象" class="headerlink" title="GC Roots对象"></a>GC Roots对象</h2><p>GC Roots对象包含以下四类：</p>
+<ul>
+<li>虚拟机栈(栈桢中的本地变量表)中的引用的对象；</li>
+<li>方法区中的类静态属性引用的对象；</li>
+<li>方法区中的常量引用的对象；</li>
+<li>本地方法栈中JNI（Native方法）引用的对象；</li>
+</ul>
+<h2 id="可达性判断"><a href="#可达性判断" class="headerlink" title="可达性判断"></a>可达性判断</h2><h3 id="可达性状态类型"><a href="#可达性状态类型" class="headerlink" title="可达性状态类型"></a>可达性状态类型</h3><p>Java有5种类型的可达性状态：</p>
+<ul>
+<li>强可达(Strongly Reachable)：与GC Roots对象之间有强引用相连通，则为强可达的；</li>
+<li>软可达(Soft Reachable)：与GC Roots对象之间没有强引用相连通，但有软引用相连通，则为软可达的；</li>
+<li>弱可达(Weak Reachable)：与GC Roots对象之间没有强引用或软引用相连通，但有弱引用相连通，则为弱可达的；</li>
+<li>虚可达(Phantom Reachable)：与GC Roots对象之间没有强引用、软引用或弱引用相连通，然后该对象finalize方法已执行，并且有虚引用相连通，则为虚可达的；</li>
+<li>不可达(Unreachable)：如果对象finalize方法已执行并且没有任何引用相连通，则对象是不可达的，可以被回收。</li>
+</ul>
+<h3 id="可达性判断规则"><a href="#可达性判断规则" class="headerlink" title="可达性判断规则"></a>可达性判断规则</h3><p>从GC Roots对象到一个对象的引用链可能存在多条，那么此时会依据两个原则来判断对象的可达性：</p>
+<ul>
+<li>单个引用链中，以最弱的引用类型为准；</li>
+<li>多引用链联合看时，以最强的引用类型为准；</li>
+</ul>
+<img   class="lazyload" data-original="/article/40363/%E5%8F%AF%E8%BE%BE%E6%80%A7%E8%A7%84%E5%88%99%E5%88%A4%E6%96%AD.jpeg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="可达性判断">
+<p>首先，单个引用链中，以最弱的引用类型为准：则GC Roots-&gt;Obj1-&gt;Obj4是软引用连通的，GC Roots-&gt;Obj2-&gt;Obj4是弱引用连通的，GC Roots-&gt;Obj3-&gt;Obj5是弱引用连通的。然后多引用链联合看时，以最强的引用类型为准：则GC Roots到Obj4对象的引用联合来看是弱引用连通的。</p>
+<h3 id="状态转换"><a href="#状态转换" class="headerlink" title="状态转换"></a>状态转换</h3><p>对象可达性状态是随着程序运行而不断变化的，对象可达性状态转换图可参考下图。</p>
+<ul>
+<li>对象创建后一般是强可达的。</li>
+<li>当GC Roots对象到该对象的强引用被清除后：如果剩余引用链最高为软引用，则状态转换为软可达的；反之如果最高为弱引用，则状态转换为弱可达的，反之则把对象标记为可执行finalize方法状态。</li>
+<li>当软可达对象重新被强引用连接时，则转换为强可达状态；当软可达对象的软引用被清除后，如果剩余引用链最高为弱引用，则状态转换为弱可达；反之则把对象标记为可执行finalize方法状态。</li>
+<li>当弱可达对象重新被强引用或者软引用连接时，则可转换为强可达或者软可达；当弱可达对象的弱引用被清除后，则把对象标记为可执行finalize方法状态。</li>
+<li>可对象被标记为可执行finalize方法状态，如果对象finalize从未被执行，则执行finalize方法，并标记对象的finalize方法已经被执行（在finalize方法可能会重新生成强/软/弱引用等，对象状态会重新转换为强/软/弱可达，不过并不推荐这么做，因为可能会导致对象状态紊乱，无法被正常回收）；反之当对象有虚引用连接时，则转换为虚可达状态，否则转换为不可达状态。</li>
+<li>虚可达对象在垃圾回收后状态转换为不可达（不能通过虚引用获取对象引用，所以对象状态不会再转换为强/软/弱可达）；</li>
+</ul>
+<img   class="lazyload" data-original="/article/40363/%E5%8F%AF%E8%BE%BE%E6%80%A7%E7%8A%B6%E6%80%81%E8%BD%AC%E6%8D%A2.jpeg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="可达性状态转换图">
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p>Reference类是所有引用类型的基类，定义了reference对象的通用操作，用来保存对象引用及引用的内部状态。Reference抽象类初始化时，会启动一个ReferenceHandler线程。Reference的referent被回收前，垃圾回收器会把reference添加到pending这个链表里（如果注册了ReferenceQueue），然后ReferenceHandler线程不断的读取pending中的reference，把它加入到对应的ReferenceQueue中（如果Reference是Cleaner类的实例，即虚引用对象，则调用其注册的预处理钩子方法）。</p>
+<blockquote>
+<p>ReferenceQueue提供了两个静态字段NULL，ENQUEUED。这两个字段的主要功能：NULL是当我们构造Reference实例时queue传入null时，会默认使用NULL，这样在enqueue时判断queue是否为NULL,如果为NULL直接返回，入队失败。ENQUEUED的作用是防止重复入队，reference后会把其queue字段赋值为ENQUEUED,当再次入队时会直接返回失败。</p>
+</blockquote>
+<h2 id="类定义"><a href="#类定义" class="headerlink" title="类定义"></a>类定义</h2><p>Reference对象的基类。该类定义了reference对象的通用操作。因为reference对象是和垃圾回收器密切配合实现的，因此该类不能直接进行子类化。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Reference</span>&lt;<span class="hljs-title">T</span>&gt; </span>&#123;<br>	<span class="hljs-comment">// 用于保存对象的引用，GC会特别对待该变量</span><br>    <span class="hljs-keyword">private</span> T referent; <br>	<span class="hljs-comment">// 如果注册了ReferenceQueue（需要通知机制），用来保存对象引用的队列，</span><br>    <span class="hljs-keyword">volatile</span> ReferenceQueue&lt;? <span class="hljs-keyword">super</span> T&gt; queue;<br><br>  <span class="hljs-comment">// 保存需要由ReferenceHandler处理的引用</span><br>    <span class="hljs-keyword">volatile</span> Reference next;<br><br>	<span class="hljs-comment">// 被JVM使用，保存需要被JVM处理的下一个引用</span><br>    <span class="hljs-keyword">transient</span> <span class="hljs-keyword">private</span> Reference&lt;T&gt; discovered;<br><br>    <span class="hljs-comment">// 同步锁，用于同步pending队列的进队和出队</span><br>    <span class="hljs-keyword">static</span> <span class="hljs-keyword">private</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Lock</span> </span>&#123; &#125;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Lock lock = <span class="hljs-keyword">new</span> Lock();<br><br>    <span class="hljs-comment">// 一个PENDING队列，配合上述next一起使用，实现类单向循环链表的操作</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Reference&lt;Object&gt; pending = <span class="hljs-keyword">null</span>;<br><br>	<span class="hljs-comment">// 高优先级线程，用于将pending队列里面的Reference实例依次添加到不同的ReferenceQueue中</span><br>	<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ReferenceHandler</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Thread</span> </span>&#123;...&#125;<br>	...<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="状态变化"><a href="#状态变化" class="headerlink" title="状态变化"></a>状态变化</h2><p>一个对象引用有四种内部状态:</p>
+<ul>
+<li><p>Active: 新创建的实例的状态，当对象引用被垃圾回收器回收前：如果Reference注册了ReferenceQueue，则会切换为Pending，并且Reference会加入pending链表中，如果没有注册ReferenceQueue，会切换为Inactive。</p>
+</li>
+<li><p>Pending: 在pending链表中的Reference的状态，这些Reference等待被ReferenceHandler内部线程加入ReferenceQueue中。</p>
+</li>
+<li><p>Enqueued: 在ReferenceQueue队列中的Reference的状态，如果Reference从队列中移除，会进入Inactive状态。未注册ReferenceQueue的实例不会到达该状态。</p>
+</li>
+<li><p>Inactive: Reference的最终状态，该状态不会再改变。</p>
+</li>
+</ul>
+<p>  其状态转换图如下：<br>  <img   class="lazyload" data-original="/article/40363/%E7%8A%B6%E6%80%81%E5%8F%98%E5%8C%96.jpeg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="img"></p>
+<h2 id="四种引用类型实现"><a href="#四种引用类型实现" class="headerlink" title="四种引用类型实现"></a>四种引用类型实现</h2><img   class="lazyload" data-original="/article/40363/%E4%B8%8D%E5%90%8C%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B%E7%9A%84UML%E7%B1%BB%E5%9B%BE.jpeg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="Reference UML类图">
+<h3 id="强引用FinalReference"><a href="#强引用FinalReference" class="headerlink" title="强引用FinalReference"></a>强引用FinalReference</h3><p>对象新建后默认为强引用类型的，是普遍对象引用的类型。查看FinalReference在JDK中的源码发现其只有一个空实现，这也说明强引用是“默认引用类型”。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Final references, used to implement finalization</span><br><span class="hljs-comment"> */</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FinalReference</span>&lt;<span class="hljs-title">T</span>&gt; <span class="hljs-keyword">extends</span> <span class="hljs-title">Reference</span>&lt;<span class="hljs-title">T</span>&gt; </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">FinalReference</span><span class="hljs-params">(T referent, ReferenceQueue&lt;? <span class="hljs-keyword">super</span> T&gt; q)</span> </span>&#123;<br>        <span class="hljs-keyword">super</span>(referent, q);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="软引用SoftReference"><a href="#软引用SoftReference" class="headerlink" title="软引用SoftReference"></a>软引用SoftReference</h3><p>软引用是用来描述一些“还有用但是非必须”的对象。软引用的回收策略在不同的JVM实现会略有不同，JVM不仅仅只会考虑当前内存情况，还会考虑软引用所指向的referent最近的使用情况和创建时间来综合决定是否回收该referent。软引用保存了两个变量：</p>
+<ul>
+<li>timestamp：每次调用get方法都会更新时间戳。JVM可以利用该字段来选择要清除的软引用，但不是必须要这样做。</li>
+<li>clock：时间锁，由垃圾收集器更新。    </li>
+</ul>
+<p>因此，任何GC都可以使用这些字段并定义清除软引用的策略，例如：最后清除最近创建的或最近使用的软引用。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 软引用对象由垃圾收集器根据内存需要决定是否清除。软引用经常用于实现内存敏感的缓存。</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * 假如垃圾收集器在某个时间确定对象是软可达的，此时它可以选择原地清除</span><br><span class="hljs-comment"> * 指向该对象的所有软引用，以及从该对象通过强引用链连接的其他软可达对象的所有软引用。</span><br><span class="hljs-comment"> * 与时同时或者之后的某个时间，它会将注册了reference queues的新清除的软引用加入队列。</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * 在虚拟机抛出OutOfMemoryError异常之前，将保证清除对软可达对象的所有软引用。</span><br><span class="hljs-comment"> * 不过，并没有对清除软引用的时间以及清除顺序施加强制约束。</span><br><span class="hljs-comment"> * 但是，鼓励虚拟机实现偏向不清除最近创建或最近使用的软引用。</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * 该类的直接实例可用于实现简单的缓存。</span><br><span class="hljs-comment"> * 该类或其派生子类也可用于更大的数据结构以实现更复杂的高速缓存。</span><br><span class="hljs-comment"> * 只要软引用的引用对象还是强可达的，即还在实际使用中，软引用就不会被清除。</span><br><span class="hljs-comment"> * 因此，复杂的高速缓存可以通过持有对最近使用缓存对象的强引用来防止其被清除，</span><br><span class="hljs-comment"> * 而不常使用的剩余缓存对象由垃圾收集器决定是否清除。</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SoftReference</span>&lt;<span class="hljs-title">T</span>&gt; <span class="hljs-keyword">extends</span> <span class="hljs-title">Reference</span>&lt;<span class="hljs-title">T</span>&gt; </span>&#123;<br><br>	<span class="hljs-comment">// 时间锁，由垃圾收集器更新。</span><br>    <span class="hljs-keyword">static</span> <span class="hljs-keyword">private</span> <span class="hljs-keyword">long</span> clock;<br><br>	<span class="hljs-comment">// 每次调用get方法都会更新该时间戳。JVM可能会在选择要清除的软引用时使用该字段，</span><br>	<span class="hljs-comment">// 但这不是强制必须的。</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">long</span> timestamp;<br>	<br>	<span class="hljs-comment">// 返回对象的引用。如果该引用对象已经被程序或者垃圾收集器清除，则返回null。</span><br>	<span class="hljs-comment">// 把最近一次垃圾回收时间赋值给timestamp</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> T <span class="hljs-title">get</span><span class="hljs-params">()</span> </span>&#123;<br>        T o = <span class="hljs-keyword">super</span>.get();<br>        <span class="hljs-keyword">if</span> (o != <span class="hljs-keyword">null</span> &amp;&amp; <span class="hljs-keyword">this</span>.timestamp != clock)<br>            <span class="hljs-keyword">this</span>.timestamp = clock;<br>        <span class="hljs-keyword">return</span> o;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="弱引用WeakReference"><a href="#弱引用WeakReference" class="headerlink" title="弱引用WeakReference"></a>弱引用WeakReference</h3><p>当一个对象没有被强引用或者软引用连接，但被弱引用连接时，则处于弱可达状态。只要发生GC，弱可达的对象就会被清除，同时会把弱引用加入到注册的引用队列中(如果存在的话)。弱引用对GC几乎是没有影响的，它不影响对应的referent被终结(finalized)和回收(reclaimed)。因此，弱引用最常用于实现规范化映射(canonicalizing mappings)，例如哈希表，如果它们在程序中未被引用，则其键和值将从映射中删除。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 弱引用对象不能阻止自身的引用被回收。</span><br><span class="hljs-comment"> * 弱引用常用于实现规范化映射(对象实例可以在程序的多个地方同时使用)。</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * 假如垃圾收集器在某个时间点确定对象是弱可达的。那时它将原子地清除对该对象的所有弱引用</span><br><span class="hljs-comment"> * 以及该引用通过强引用或者软引用连接的所有其他弱可达对象的所有弱引用。</span><br><span class="hljs-comment"> * 同时，它将表明前面所指的所有弱可达对象都可以执行finalize方法。</span><br><span class="hljs-comment"> * 与此同时或之后某一个时间，它将注册了reference queues的那些新清除弱引用加入队列。</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">WeakReference</span>&lt;<span class="hljs-title">T</span>&gt; <span class="hljs-keyword">extends</span> <span class="hljs-title">Reference</span>&lt;<span class="hljs-title">T</span>&gt; </span>&#123;<br><br>	<span class="hljs-comment">// 创建没有注册ReferenceQueue的弱引用</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">WeakReference</span><span class="hljs-params">(T referent)</span> </span>&#123;<br>        <span class="hljs-keyword">super</span>(referent);<br>    &#125;<br><br>	<span class="hljs-comment">// 创建注册了ReferenceQueue的弱引用</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">WeakReference</span><span class="hljs-params">(T referent, ReferenceQueue&lt;? <span class="hljs-keyword">super</span> T&gt; q)</span> </span>&#123;<br>        <span class="hljs-keyword">super</span>(referent, q);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="虚引用PhantomReference"><a href="#虚引用PhantomReference" class="headerlink" title="虚引用PhantomReference"></a>虚引用PhantomReference</h3><p>虚引用是所有引用类型中最弱的一种。一个对象是否关联到虚引用，完全不会影响该对象的生命周期，也无法通过虚引用来获取一个对象的实例。为对象设置一个虚引用的唯一目的是：能在此对象被垃圾收集器回收的时候收到一个系统通知，它就是利用ReferenceQueue实现的。当referent被gc回收时，JVM自动把虚引用对象本身加入到ReferenceQueue中，表明该reference指向的referent被回收。然后可以通过去queue中取到reference，可以通过这个来做额外的清理工作。可以用虚引用代替对象finalize方法来实现资源释放，这样更加灵活和安全。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 虚引用对象在被垃圾收集器检查到后加入reference queues队列，否则会被回收。</span><br><span class="hljs-comment"> * 虚引用最常用于实现比Java finalization机制更灵活的安排额外的清理工作。</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * 如果垃圾收集器在某个时间点确定虚引用对象是虚可达的，那么在那个时间或之后某个时间它会将引用加入reference queues队列。</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * 为了确保可回收对象保持不变，虚引用的引用无法使用：虚引用对象的get方法始终返回null。</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * 与软引用和弱引用不同，当虚引用加入reference queues队列后垃圾收集器不会被自动清除。</span><br><span class="hljs-comment"> * 只通过虚引用可达的对象将保持不变，直到所有此类引用都被清除或自已变为不可达。</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PhantomReference</span>&lt;<span class="hljs-title">T</span>&gt; <span class="hljs-keyword">extends</span> <span class="hljs-title">Reference</span>&lt;<span class="hljs-title">T</span>&gt; </span>&#123;<br><br>    <span class="hljs-comment">// 由于不能通过虚引用访问对象，因此此方法始终返回null。</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> T <span class="hljs-title">get</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;<br>    &#125;<br><br>  <span class="hljs-comment">// 使用空ReferenceQueue队列创建一个虚引用没有意义：它的get方法总是返回null，</span><br>	<span class="hljs-comment">// 并且由于它没有注册队列，所以也不会被加入队列有任何清理前的预处理操作。</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">PhantomReference</span><span class="hljs-params">(T referent, ReferenceQueue&lt;? <span class="hljs-keyword">super</span> T&gt; q)</span> </span>&#123;<br>        <span class="hljs-keyword">super</span>(referent, q);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+      </section>
+      <section class="extra">
+        
+          <ul class="copyright">
+  
+    <li><strong>本文作者：</strong>bobo</li>
+    <li><strong>本文链接：</strong><a href="https://boyolo.github.io/article/40363.html" title="https:&#x2F;&#x2F;boyolo.github.io&#x2F;article&#x2F;40363.html">https:&#x2F;&#x2F;boyolo.github.io&#x2F;article&#x2F;40363.html</a></li>
+    <li><strong>版权声明：</strong>本博客所有文章均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" title="BY-NC-SA" target="_blank" rel="noopener">BY-NC-SA</a> 许可协议，转载请注明出处！</li>
+  
+</ul>
+        
+        
+          <section class="donate">
+  <div id="qrcode-donate">
+    <img   class="lazyload" data-original="/images/theme/alipay.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" >
+  </div>
+  <div class="icon">
+    <a href="javascript:;" id="alipay"><i class="iconfont iconalipay"></i></a>
+    <a href="javascript:;" id="wechat"><i class="iconfont iconwechat-fill"></i></a>
+  </div>
+</section>
+        
+        
+  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/" rel="tag">Java,引用类型</a></li></ul> 
+
+        
+  <nav class="nav">
+    <a href="/article/58846.html"><i class="iconfont iconleft"></i>Java多线程</a>
+    <a href="/article/41380.html">谈谈循环不变量<i class="iconfont iconright"></i></a>
+  </nav>
+
+      </section>
+      
+        <section class="comments">
+  
+    <div class="btn" id="comments-btn">查看评论</div>
+  
+  
+<div id="valine"></div>
+<script defer src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+  window.onload = function () {
+    var loadValine = function () {
+      new Valine({
+        el: '#valine',
+        app_id: "4HVCPi93D54US1F0MCMcBQOl-gzGzoHsz",
+        app_key: "y5RbGV3BRqejIr3lLyGjMxAU",
+        placeholder: "雁过留痕",
+        avatar: "robohash",
+        pageSize: "10",
+        lang: "zh-CN",
+      });
+    }
+    if ( true ) {
+      $("#comments-btn").on("click", function () {
+        $(this).hide();
+        loadValine();
+      });
+    } else {
+      loadValine();
+    }
+  };
+</script>
+
+</section>
+      
+    </section>
+  </div>
+</article></div>
+      <div class="col-xl-3">
+        
+          
+  <aside class="toc-wrap">
+    <h3 class="toc-title">文章目录：</h3>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1%E5%8F%AF%E8%BE%BE%E6%80%A7%E5%88%A4%E6%96%AD"><span class="toc-text">对象可达性判断</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GC-Roots%E5%AF%B9%E8%B1%A1"><span class="toc-text">GC Roots对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%AF%E8%BE%BE%E6%80%A7%E5%88%A4%E6%96%AD"><span class="toc-text">可达性判断</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E8%BE%BE%E6%80%A7%E7%8A%B6%E6%80%81%E7%B1%BB%E5%9E%8B"><span class="toc-text">可达性状态类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E8%BE%BE%E6%80%A7%E5%88%A4%E6%96%AD%E8%A7%84%E5%88%99"><span class="toc-text">可达性判断规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E8%BD%AC%E6%8D%A2"><span class="toc-text">状态转换</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB%E5%AE%9A%E4%B9%89"><span class="toc-text">类定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E5%8F%98%E5%8C%96"><span class="toc-text">状态变化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E7%A7%8D%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B%E5%AE%9E%E7%8E%B0"><span class="toc-text">四种引用类型实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%BA%E5%BC%95%E7%94%A8FinalReference"><span class="toc-text">强引用FinalReference</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BD%AF%E5%BC%95%E7%94%A8SoftReference"><span class="toc-text">软引用SoftReference</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%B1%E5%BC%95%E7%94%A8WeakReference"><span class="toc-text">弱引用WeakReference</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%99%9A%E5%BC%95%E7%94%A8PhantomReference"><span class="toc-text">虚引用PhantomReference</span></a></li></ol></li></ol>
+  </aside>
+
+        
+      </div>
+    </div>
+  </div>
+</main>
+  
+
+<footer class="footer">
+  <div class="footer-social"><a 
+        href="tencent://message/?Menu=yes&uin=572643120 "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#12B7F5'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconQQ "></i>
+      </a><a 
+        href="weixin://dl/business/?ticket=bobo_liakeyou#wechat_redirect "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#09BB07'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconwechat-fill "></i>
+      </a><a 
+        href="https://github.com/boyolo "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#9f7be1'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  icongithub-fill "></i>
+      </a><a 
+        href="beau_renbo@163.com "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color=#FF3B00" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconmail"></i>
+      </a></div>
+  
+    <div class="footer-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a> |  website - <a target="_blank" href="https://boyolo.github.io/">bobo</a></p></div>
+  
+</footer>
+  
+      <div class="fab fab-plus">
+    <i class="iconfont iconplus"></i>
+  </div>
+  
+    <div class="fab fab-like">
+      <i class="iconfont iconheart"></i>
+    </div>
+  
+  
+  
+  <div class="fab fab-up">
+    <i class="iconfont iconcaret-up"></i>
+  </div>
+  
+  
+  
+    
+<script src="/js/color-mode.js"></script>
+
+  
+  
+    <div class="search">
+  <div class="search-container">
+    <div class="search-close">
+      <i class="iconfont iconbaseline-close-px"></i>
+    </div>
+    <div class="search-input-wrapper">
+      <i class="search-input-icon iconfont iconsearch"></i>
+      <input class="search-input" type="search" id="search-input" placeholder="Search..." autofocus autocomplete="off"
+        autocorrect="off" autocapitalize="off">
+    </div>
+    <div class="search-output" id="search-output"></div>
+  </div>
+</div>
+  
+</body>
+
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+
+
+
+
+
+  
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+
+
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+  
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
+
+
+
+
+<script src="/js/utils.js"></script>
+<script src="/js/script.js"></script>
+
+
+
+  <script>
+  $.getScript("//cdn.jsdelivr.net/npm/leancloud-storage@4.1.0/dist/av-min.js", () => {
+
+    AV.init({
+      appId: 'bUeKkITlp7tjPXHJVF6XYyFC-gzGzoHsz',
+      appKey: 'IaOs2Mc0ddmbLUeggtt9K0cT',
+      serverURLs: 'https://leancloud.cn/',
+    });
+
+    const Counter = AV.Object.extend("Counter");
+    const Like = AV.Object.extend("Like");
+
+    const showCount = (Counter) => {
+      const asyncLimit = new AsyncLimit(2);
+      $(".leancloud-counter").each(async (e) => {
+        const url = $(".leancloud-counter").eq(e).attr('id').trim();
+        const query = new AV.Query("Counter");
+        query.equalTo("words", url);
+        let count = await asyncLimit.run(() => query.count());
+        $(".leancloud-counter").eq(e).text(count ? count : 0);
+      });
+    }
+
+    const addCount = (Counter) => {
+      const url = $(".leancloud-counter").length === 1 ? $(".leancloud-counter").attr('id').trim() : 'https://boyolo.github.io';
+      var query = new Counter;
+      query.save({
+        words: url
+      });
+    }
+
+    const showLike = (Like) => {
+      const asyncLimit = new AsyncLimit(2);
+      $(".leancloud-like").each(async (e) => {
+        const url = $(".leancloud-like").eq(e).attr('id').trim();
+        const query = new AV.Query("Like");
+        query.equalTo("path", url);
+        let count = await asyncLimit.run(() => query.count());
+        $(".leancloud-like").eq(e).text(count ? count : 0);
+      });
+    }
+
+    const addLike = (Like) => {
+      const url = $(".leancloud-like").length === 1 ? $(".leancloud-like").attr('id').trim() : 'https://boyolo.github.io';
+      var query = new Like;
+      query.save({
+        path: url,
+        nickName: 'Anonymous'
+      });
+      $(".leancloud-like").addClass('islike');
+      $(".fab-like").children(".iconfont").removeClass("iconheart").addClass("iconheart-fill").css("color", "#eb3223");
+      ZHAOO.zui.message({ text: '爱你哦~', type: 'success' });
+      setTimeout(() => showLike(Like), 1000);
+    }
+
+    const handleLikeClick = () => {
+      const isLike = $(".leancloud-like").length === 1 && $(".leancloud-like").hasClass('islike') ? true : false;
+      if (isLike) {
+        ZHAOO.zui.message({ text: '小心心不可以收回呢~', type: 'warning' });
+      } else {
+        addLike(Like);
+      }
+    }
+
+    $(function () {
+      addCount(Counter);
+      showCount(Counter);
+      showLike(Like);
+      $(".fab-like").on("click", function () {
+        handleLikeClick();
+      });
+    });
+
+  });
+</script>
+
+
+
+
+
+  <script>
+    (function () {
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      } else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+  <script>
+    window.ga = window.ga || function () {
+      (ga.q = ga.q || []).push(arguments)
+    };
+    ga.l = +new Date;
+    ga('create', 'G-PS6Y34LRW9', 'auto');
+    ga('send', 'pageview');
+  </script>
+  <script defer src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</html>

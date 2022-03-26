@@ -1,0 +1,786 @@
+
+
+<!DOCTYPE html>
+<html lang="en" color-mode=light>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>HTTP的请求和响应 - Boyolo</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+  
+  <meta name="description" content="
+The perfect decks itself i...">
+  <meta name="author" content="bobo">
+  <link rel="icon" href="/images/icons/favicon-16x16.png" type="image/png" sizes="16x16">
+  <link rel="icon" href="/images/icons/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" sizes="180x180">
+  <meta rel="mask-icon" href="/images/icons/boyolo-logo.svg" color="#333333">
+  
+    <meta rel="msapplication-TileImage" content="/images/icons/favicon-144x144.png">
+    <meta rel="msapplication-TileColor" content="#000000">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+    
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1445822_p6ry5n7lrr.css">
+
+  
+
+  
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+    
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/xcode.min.css" name="highlight-style" mode="light">
+
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/solarized-dark.min.css" name="highlight-style" mode="dark">
+
+      
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {};
+    var ZHAOO = window.ZHAOO || {};
+    CONFIG = {
+      isHome: false,
+      fancybox: true,
+      pjax: false,
+      loading: {
+        gif: '/images/theme/loading.gif',
+        lottie: ''
+      },
+      lazyload: {
+        enable: true,
+        only_post: 'false',
+        loading: {
+          gif: '/images/theme/loading.gif',
+          lottie: ''
+        }
+      },
+      donate: {
+        enable: true,
+        alipay: '/images/theme/alipay.jpg',
+        wechat: '/images/theme/wechatpay.jpg'
+      },
+      galleries: {
+        enable: true
+      },
+      fab: {
+        enable: true,
+        always_show: false
+      },
+      carrier: {
+        enable: true
+      },
+      daovoice: {
+        enable: false
+      },
+      preview: {
+        background: {
+          default: '',
+          api: ''
+        },
+        motto: {
+          default: '我在开了灯的床头下，想问问自己的心啊。',
+          typing: true,
+          api: 'https://v1.hitokoto.cn/?encode=text&c=i',
+          data_contents: ''
+        },
+      },
+      qrcode: {
+        enable: true,
+        type: 'url',
+        image: '/images/theme/wechat',
+      },
+      toc: {
+        enable: true
+      },
+      scrollbar: {
+        type: 'default'
+      },
+      notification: {
+        enable: false,
+        delay: 4500,
+        list: '',
+        page_white_list: '',
+        page_black_list: ''
+      },
+      search: {
+        enable: true,
+        path: 'search.xml'
+      }
+    }
+  </script>
+
+  
+
+  
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="lock-screen">
+  <div class="loading" id="loading"></div>
+  
+    
+
+
+  <nav class="navbar">
+    <div class="left">
+      
+        <i class="iconfont iconhome j-navbar-back-home"></i>
+      
+      
+        <i class="iconfont iconqrcode j-navbar-qrcode"></i>
+      
+      
+        <i class="iconfont iconmoono" id="color-toggle" color-toggle="light"></i>
+      
+      
+        <i class="iconfont iconsearch j-navbar-search"></i>
+      
+    </div>
+    <div class="center">HTTP的请求和响应</div>
+    <div class="right">
+      <i class="iconfont iconmenu j-navbar-menu"></i>
+    </div>
+    
+      <div id="qrcode-navbar"></div>
+    
+  </nav>
+
+  
+  
+
+<nav class="menu">
+  <div class="menu-container">
+    <div class="menu-close">
+      <i class="iconfont iconbaseline-close-px"></i>
+    </div>
+    <ul class="menu-content"><li class="menu-item">
+        <a href="/" class="underline "> 首页</a>
+      </li><li class="menu-item">
+        <a href="/tags/" class="underline "> 标签</a>
+      </li><li class="menu-item">
+        <a href="/categories/" class="underline "> 分类</a>
+      </li><li class="menu-item">
+        <a href="/archives/" class="underline "> 归档</a>
+      </li><li class="menu-item">
+        <a href="/galleries/" class="underline "> 相册</a>
+      </li><li class="menu-item">
+        <a href="/about/ " class="underline "> 关于</a>
+      </li></ul>
+    
+      <div class="menu-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a> |  website - <a target="_blank" href="https://boyolo.github.io/">bobo</a></p></div>
+    
+  </div>
+</nav>
+  <main id="main">
+  <div class="article-wrap">
+    <div class="row container">
+      <div class="col-xl-3"></div>
+      <div class="col-xl-6"><article class="article">
+  <div class="wrap">
+    <section class="head">
+  <img   class="lazyload" data-original="/images/theme/coverphoto/Http%E8%AF%B7%E6%B1%82%E4%B8%8E%E5%93%8D%E5%BA%94.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title">HTTP的请求和响应</h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>December 31, 2021</span>
+      
+        <span class="post-info-item">
+          <i class="iconfont iconeye"></i><span id="/article/4338.html" class="leancloud-counter" data-flag-title="HTTP的请求和响应"></span>
+        </span>
+        <span class="post-info-item">
+          <i class="iconfont iconheart"></i><span id="/article/4338.html" class="leancloud-like" data-flag-title="HTTP的请求和响应"></span>
+        </span>
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>4685</span>
+    </div>
+  </div>
+</section>
+    <section class="main">
+      <section class="content">
+        
+        <blockquote>
+<p>The perfect decks itself in beauty for the love of the Imperfect.</p>
+<p>“完全”为了对“不全”的爱，把自己装饰得美丽。　　</p>
+</blockquote>
+<h2 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h2><p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/doc/1117">参考手册</a></p>
+<p>超文本传输协议（Hyper Text Transfer Protocol，HTTP）是一个简单的请求-响应协议，它通常运行在<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/TCP/33012">TCP</a>之上。它指定了客户端可能发送给服务器什么样的消息以及得到什么样的响应。请求和响应消息的头以<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/ASCII/309296">ASCII</a>形式给出；而消息内容则具有一个类似<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/MIME/2900607">MIME</a>的格式。这个简单模型是早期<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/Web/150564">Web</a>成功的有功之臣，因为它使开发和部署非常地直截了当。</p>
+<p><code>HTTP</code>是基于<strong>TCP/IP</strong>协议的，可以使用<code>http</code>进行内容的传输，比如图片，视频，音频，文档等等。</p>
+<p>客户端和服务端需要进行通信的话，通常会使用<code>request response cycle</code>的形式。</p>
+<p>客户端需要发送<strong>request请求</strong>，这样服务端才知道要通信；之后，服务端对请求进行<strong>response响应</strong>。</p>
+<ol>
+<li>HTTP是无连接的：在发出请求后，客户端和服务端断开连接，然后当响应准备就绪的时候，服务端再次重新建立连接并发送响应。</li>
+<li>HTTP可以提供任何类型的数据，只要客户端和服务端两边的电脑能够读取理解它。</li>
+<li>HTTP是无状态的：客户端和服务器只是在<strong>当前请求期间</strong>了解彼此。如果它关闭了，并且两台电脑想要再次连接，它们需要重新提供信息。</li>
+</ol>
+<h2 id="request请求"><a href="#request请求" class="headerlink" title="request请求"></a>request请求</h2><p><strong>HTTP请求信息由部分组成</strong></p>
+<ol>
+<li><p>请求方法（GET/POST）、<em>URI</em>、协议<em>/</em>版本</p>
+</li>
+<li><p>请求头<em>(Request Header)</em></p>
+</li>
+<li><p>请求正文</p>
+</li>
+</ol>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs http"><span class="hljs-keyword">GET</span> <span class="hljs-string">/5bU_dTmfKgQFm2e88IuM_a/union.gif</span> <span class="hljs-meta">HTTP/1.1</span><br>-------------------------------------------------<br><span class="hljs-attribute">Cookie</span><span class="hljs-punctuation">: </span>XXXxXxxxxxxxxxxxxxxxx<br><span class="hljs-attribute">Accept</span><span class="hljs-punctuation">: </span>image/webp,image/png,image/svg+xml,image/*;q=0.8,video/*;q=0.8,*/*;q=0.5<br><span class="hljs-attribute">Accept-Encoding</span><span class="hljs-punctuation">: </span>gzip, deflate, br<br><span class="hljs-attribute">Host</span><span class="hljs-punctuation">: </span>sp1.baidu.com<br><span class="hljs-attribute">User-Agent</span><span class="hljs-punctuation">: </span>Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.1 Safari/605.1.15<br><span class="hljs-attribute">Accept-Language</span><span class="hljs-punctuation">: </span>zh-CN,zh-Hans;q=0.9<br><span class="hljs-attribute">Referer</span><span class="hljs-punctuation">: </span>https://www.baidu.com/s?wd=baidu&amp;tn=84053098_3_dg&amp;ie=utf-8<br><span class="hljs-attribute">Connection</span><span class="hljs-punctuation">: </span>keep-alive<br></code></pre></td></tr></table></figure>
+<p><strong>请求方法、URI、协议版本</strong></p>
+<p>根据<em>HTTP</em>标准，HTTP请求可以使用多种请求方法。例如：<em>HTTP1.1</em>目前支持7种请求方</p>
+<table>
+<thead>
+<tr>
+<th>请求方法</th>
+<th>介绍</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GET</td>
+<td>请求获取由Request-URI所标识的资源</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>在Request-URI所标识的资源后附加新的数据</td>
+</tr>
+<tr>
+<td>HEAD</td>
+<td>请求获取由Request-URI所标识的资源的响应消息报头</td>
+</tr>
+<tr>
+<td>OPTIONS</td>
+<td>请求查询服务器的性能，或查询与资源相关的选项和需求</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td>请求服务器存储一个资源，并用Request-URI作为其标识</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>请求服务器删除由Request-URI所标识的资源</td>
+</tr>
+<tr>
+<td>TRACE</td>
+<td>请求服务器回送收到的请求信息，主要用语测试或诊断</td>
+</tr>
+</tbody>
+</table>
+<p><strong>请求头(Request Header)</strong></p>
+<p>请求头包含许多有关的客户端环境和请求正文的有用信息。</p>
+<table>
+<thead>
+<tr>
+<th>请求头</th>
+<th>介绍</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cookie</td>
+<td>这是最重要的请求头信息之一</td>
+</tr>
+<tr>
+<td>Accept</td>
+<td>浏览器可接受的MIME类型</td>
+</tr>
+<tr>
+<td>Accept-Encoding</td>
+<td>浏览器能够进行解码的数据编码方式，比如gzip。Servlet能够向支持gzip的浏览器返回经gzip编码的HTML页面。许多情形下这可以减少5到10倍的下载时间</td>
+</tr>
+<tr>
+<td>Host</td>
+<td>指定请求资源的Intenet主机和端口号，必须表示请求url的原始服务器或网关的位置。HTTP/1.1请求必须包含主机头域，否则系统会以400状态码返回</td>
+</tr>
+<tr>
+<td>User-Agent</td>
+<td>浏览器类型，如果Servlet返回的内容与浏览器类型有关则该值非常有用</td>
+</tr>
+<tr>
+<td>Accept-Language</td>
+<td>浏览器所希望的语言种类，当服务器能够提供一种以上的语言版本时要用到</td>
+</tr>
+<tr>
+<td>Referer</td>
+<td>包含一个URL，用户从该URL代表的页面出发访问当前请求的页面</td>
+</tr>
+<tr>
+<td>Connection</td>
+<td>表示是否需要持久连接。如果Servlet看到这里的值为“Keep- Alive”，或者看到请求使用的是HTTP1.1（HTTP 1.1默认进行持久连接），它就可以利用持久连接的优点，当页面包含多个元素时（例如Applet，图片），显著地减少下载所需要的时间。要实现这一点，Servlet需要在应答中发送一个Content-Length头，最简单的实现方法是：先把内容写入 ByteArrayOutputStream，然后在正式写出内容之前计算它的大小</td>
+</tr>
+<tr>
+<td>Referer</td>
+<td>包含一个URL，用户从该URL代表的页面出发访问当前请求的页面</td>
+</tr>
+<tr>
+<td>Accept-Charset</td>
+<td>浏览器可接受的字符集</td>
+</tr>
+<tr>
+<td>Authorization</td>
+<td>授权信息，通常出现在对服务器发送的WWW-Authenticate头的应答中</td>
+</tr>
+<tr>
+<td>From</td>
+<td>请求发送者的email地址，由一些特殊的Web客户程序使用，浏览器不会用到它</td>
+</tr>
+<tr>
+<td>If-Modified-Since</td>
+<td>只有当所请求的内容在指定的日期之后又经过修改才返回它，否则返回304“Not Modified”应答</td>
+</tr>
+<tr>
+<td>Pragma</td>
+<td>指定“no-cache”值表示服务器必须返回一个刷新后的文档，即使它是代理服务器而且已经有了页面的本地拷贝</td>
+</tr>
+</tbody>
+</table>
+<p><strong>请求正文</strong></p>
+<p>请求头和请求正文之间是一个空行，这个行非常重要，它表示请求头已经结束，接下来的是请求正文。请求正文中可以包含客户提交的查询字符串信息</p>
+<h2 id="Response响应"><a href="#Response响应" class="headerlink" title="Response响应"></a>Response响应</h2><p><em>HTTP</em>应答与<em>HTTP</em>请求相似，<em>HTTP</em>响应也由<em>3</em>个部分构成，分别是：</p>
+<ol>
+<li><p>状态行</p>
+</li>
+<li><p>响应头(Response Header)</p>
+</li>
+<li><p>响应正文</p>
+</li>
+</ol>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs http"><span class="hljs-meta">HTTP/1.1</span> <span class="hljs-number">200</span> OK<br>------------------------------------------------------<br><span class="hljs-attribute">Content-Type</span><span class="hljs-punctuation">: </span>image/gif<br><span class="hljs-attribute">Set-Cookie</span><span class="hljs-punctuation">: </span>BDORZ=FFFB88E999055A3F8A630C64834BD6D0; max-age=86400; domain=.baidu.com; path=/<br><span class="hljs-attribute">Last-Modified</span><span class="hljs-punctuation">: </span>Wed, 07 Nov 2012 16:00:00 GMT<br><span class="hljs-attribute">Cache-Control</span><span class="hljs-punctuation">: </span>max-age=315360000<br><span class="hljs-attribute">Connection</span><span class="hljs-punctuation">: </span>Keep-Alive<br><span class="hljs-attribute">Date</span><span class="hljs-punctuation">: </span>Fri, 31 Dec 2021 11:14:09 GMT<br><span class="hljs-attribute">Accept-Ranges</span><span class="hljs-punctuation">: </span>bytes<br><span class="hljs-attribute">Content-Length</span><span class="hljs-punctuation">: </span>0<br><span class="hljs-attribute">Expires</span><span class="hljs-punctuation">: </span>Mon, 29 Dec 2031 11:14:09 GMT<br><span class="hljs-attribute">ETag</span><span class="hljs-punctuation">: </span>&quot;0-0509a8580&quot;<br><span class="hljs-attribute">Server</span><span class="hljs-punctuation">: </span>Apache 2.0<br></code></pre></td></tr></table></figure>
+<p><strong>状态行</strong></p>
+<p>由协议版本、数字形式的状态代码、及相应的状态描述，各元素之间以空格分隔。</p>
+<ul>
+<li>状态代码：状态代码由<em>3</em>位数字组成，表示请求是否被理解或被满足。</li>
+<li>状态描述：状态描述给出了关于状态代码的简短的文字描述。</li>
+<li>状态代码的第一个数字定义了响应的类别，后面两位没有具体的分类。<ul>
+<li>第一个数字有五种可能的取值：<ul>
+<li><em>- 1xx:</em>  指示信息—表示请求已接收，继续处理。</li>
+<li><em>- 2xx:</em>  成功—表示请求已经被成功接收、理解、接受。</li>
+<li><em>- 3xx:</em>  重定向—要完成请求必须进行更进一步的操作。</li>
+<li><em>- 4xx:</em>  客户端错误—请求有语法错误或请求无法实现。</li>
+<li><em>- 5xx:</em> 服务器端错误—服务器未能实现合法的请求。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>状态代码</th>
+<th>状态描述</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td>OK</td>
+<td>客户端请求成功</td>
+</tr>
+<tr>
+<td>400</td>
+<td>Bad Request</td>
+<td>由于客户端请求有语法错误，不能被服务器所理解</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Unauthonzed</td>
+<td>请求未经授权。这个状态代码必须和<em>WWW-Authenticate</em>报头域一起使用</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Forbidden</td>
+<td>服务器收到请求，但是拒绝提供服务。服务器通常会在响应正文中给出不提供服务的原因</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Not Found</td>
+<td>请求的资源不存在，例如，输入了错误的<em>URL</em>。</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Internal Server Error</td>
+<td>服务器发生不可预期的错误，导致无法完成客户端的请求。</td>
+</tr>
+<tr>
+<td>503</td>
+<td>Service Unavailable</td>
+<td>服务器当前不能够处理客户端的请求，在一段时间之后，服务器可能会恢复正常</td>
+</tr>
+</tbody>
+</table>
+<p><strong>响应头</strong></p>
+<table>
+<thead>
+<tr>
+<th>请求头</th>
+<th>介绍</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content-Type</td>
+<td><em>Content-Type</em>实体报头域用语指明发送给接收者的实体正文的媒体类型</td>
+</tr>
+<tr>
+<td>Set-Cookie</td>
+<td>浏览器会在当前页面所在域名设置cookie字符串</td>
+</tr>
+<tr>
+<td>Last-Modified</td>
+<td><em>Last-Modified</em>实体报头域用于指示资源最后的修改日期及时间</td>
+</tr>
+<tr>
+<td>Cache-Control</td>
+<td>通用头字段用于指定在两个，请求和响应的缓存机制的指令。缓存指令是单向的，这意味着请求中的给定指令并不意味着将在响应中给出相同的指令</td>
+</tr>
+<tr>
+<td>Connection</td>
+<td>表示是否需要持久连接。如果Servlet看到这里的值为“Keep- Alive”，或者看到请求使用的是HTTP1.1（HTTP 1.1默认进行持久连接），它就可以利用持久连接的优点，当页面包含多个元素时（例如Applet，图片），显著地减少下载所需要的时间。要实现这一点，Servlet需要在应答中发送一个Content-Length头，最简单的实现方法是：先把内容写入 ByteArrayOutputStream，然后在正式写出内容之前计算它的大小</td>
+</tr>
+<tr>
+<td>Date</td>
+<td>通用 HTTP 报头包含在该消息起源的日期和时间。</td>
+</tr>
+<tr>
+<td>Accept-Ranges</td>
+<td>响应的 HTTP 标头是由服务器使用以通告其支持部分请求的标志物。此字段的值表示可用于定义范围的单位。</td>
+</tr>
+<tr>
+<td>Content-Length</td>
+<td>实体报头指示该实体主体的大小，以字节为单位的十进制数，发送到接收方</td>
+</tr>
+<tr>
+<td>Expires</td>
+<td>标头包含的日期/时间之后，响应被视为失效。</td>
+</tr>
+<tr>
+<td>ETag</td>
+<td>HTTP 响应报头为资源的特定版本的标识符。它允许缓存更高效，并节省带宽，因为如果内容没有改变，Web 服务器不需要发送完整的响应。另一方面，如果内容发生了变化，etags 有助于防止资源的同时更新互相覆盖（“空中冲突”）。 如果给定 URL 处的资源发生更改，则<code>Etag</code>必须生成新值。因此，Etags 与指纹相似，也可能用于某些服务器的跟踪目的。它们的比较可以快速确定资源的两个表示是否相同，但它们也可能被设置为无限期地由跟踪服务器持续存在。</td>
+</tr>
+<tr>
+<td>Server</td>
+<td>头包含有关用作原始服务器处理请求的软件信息。</td>
+</tr>
+</tbody>
+</table>
+
+      </section>
+      <section class="extra">
+        
+          <ul class="copyright">
+  
+    <li><strong>本文作者：</strong>bobo</li>
+    <li><strong>本文链接：</strong><a href="https://boyolo.github.io/article/4338.html" title="https:&#x2F;&#x2F;boyolo.github.io&#x2F;article&#x2F;4338.html">https:&#x2F;&#x2F;boyolo.github.io&#x2F;article&#x2F;4338.html</a></li>
+    <li><strong>版权声明：</strong>本博客所有文章均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" title="BY-NC-SA" target="_blank" rel="noopener">BY-NC-SA</a> 许可协议，转载请注明出处！</li>
+  
+</ul>
+        
+        
+          <section class="donate">
+  <div id="qrcode-donate">
+    <img   class="lazyload" data-original="/images/theme/alipay.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" >
+  </div>
+  <div class="icon">
+    <a href="javascript:;" id="alipay"><i class="iconfont iconalipay"></i></a>
+    <a href="javascript:;" id="wechat"><i class="iconfont iconwechat-fill"></i></a>
+  </div>
+</section>
+        
+        
+  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP%E7%9A%84%E8%AF%B7%E6%B1%82%E5%92%8C%E5%93%8D%E5%BA%94/" rel="tag">HTTP的请求和响应</a></li></ul> 
+
+        
+  <nav class="nav">
+    <a href="/article/37040.html"><i class="iconfont iconleft"></i>配置</a>
+    <a href="/article/45336.html">JDBC加载数据库驱动<i class="iconfont iconright"></i></a>
+  </nav>
+
+      </section>
+      
+        <section class="comments">
+  
+    <div class="btn" id="comments-btn">查看评论</div>
+  
+  
+<div id="valine"></div>
+<script defer src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+  window.onload = function () {
+    var loadValine = function () {
+      new Valine({
+        el: '#valine',
+        app_id: "4HVCPi93D54US1F0MCMcBQOl-gzGzoHsz",
+        app_key: "y5RbGV3BRqejIr3lLyGjMxAU",
+        placeholder: "雁过留痕",
+        avatar: "robohash",
+        pageSize: "10",
+        lang: "zh-CN",
+      });
+    }
+    if ( true ) {
+      $("#comments-btn").on("click", function () {
+        $(this).hide();
+        loadValine();
+      });
+    } else {
+      loadValine();
+    }
+  };
+</script>
+
+</section>
+      
+    </section>
+  </div>
+</article></div>
+      <div class="col-xl-3">
+        
+          
+  <aside class="toc-wrap">
+    <h3 class="toc-title">文章目录：</h3>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP"><span class="toc-text">HTTP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#request%E8%AF%B7%E6%B1%82"><span class="toc-text">request请求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Response%E5%93%8D%E5%BA%94"><span class="toc-text">Response响应</span></a></li></ol>
+  </aside>
+
+        
+      </div>
+    </div>
+  </div>
+</main>
+  
+
+<footer class="footer">
+  <div class="footer-social"><a 
+        href="tencent://message/?Menu=yes&uin=572643120 "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#12B7F5'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconQQ "></i>
+      </a><a 
+        href="weixin://dl/business/?ticket=bobo_liakeyou#wechat_redirect "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#09BB07'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconwechat-fill "></i>
+      </a><a 
+        href="https://github.com/boyolo "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#9f7be1'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  icongithub-fill "></i>
+      </a><a 
+        href="beau_renbo@163.com "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color=#FF3B00" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconmail"></i>
+      </a></div>
+  
+    <div class="footer-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a> |  website - <a target="_blank" href="https://boyolo.github.io/">bobo</a></p></div>
+  
+</footer>
+  
+      <div class="fab fab-plus">
+    <i class="iconfont iconplus"></i>
+  </div>
+  
+    <div class="fab fab-like">
+      <i class="iconfont iconheart"></i>
+    </div>
+  
+  
+  
+  <div class="fab fab-up">
+    <i class="iconfont iconcaret-up"></i>
+  </div>
+  
+  
+  
+    
+<script src="/js/color-mode.js"></script>
+
+  
+  
+    <div class="search">
+  <div class="search-container">
+    <div class="search-close">
+      <i class="iconfont iconbaseline-close-px"></i>
+    </div>
+    <div class="search-input-wrapper">
+      <i class="search-input-icon iconfont iconsearch"></i>
+      <input class="search-input" type="search" id="search-input" placeholder="Search..." autofocus autocomplete="off"
+        autocorrect="off" autocapitalize="off">
+    </div>
+    <div class="search-output" id="search-output"></div>
+  </div>
+</div>
+  
+</body>
+
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+
+
+
+
+
+  
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+
+
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+  
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
+
+
+
+
+<script src="/js/utils.js"></script>
+<script src="/js/script.js"></script>
+
+
+
+  <script>
+  $.getScript("//cdn.jsdelivr.net/npm/leancloud-storage@4.1.0/dist/av-min.js", () => {
+
+    AV.init({
+      appId: 'bUeKkITlp7tjPXHJVF6XYyFC-gzGzoHsz',
+      appKey: 'IaOs2Mc0ddmbLUeggtt9K0cT',
+      serverURLs: 'https://leancloud.cn/',
+    });
+
+    const Counter = AV.Object.extend("Counter");
+    const Like = AV.Object.extend("Like");
+
+    const showCount = (Counter) => {
+      const asyncLimit = new AsyncLimit(2);
+      $(".leancloud-counter").each(async (e) => {
+        const url = $(".leancloud-counter").eq(e).attr('id').trim();
+        const query = new AV.Query("Counter");
+        query.equalTo("words", url);
+        let count = await asyncLimit.run(() => query.count());
+        $(".leancloud-counter").eq(e).text(count ? count : 0);
+      });
+    }
+
+    const addCount = (Counter) => {
+      const url = $(".leancloud-counter").length === 1 ? $(".leancloud-counter").attr('id').trim() : 'https://boyolo.github.io';
+      var query = new Counter;
+      query.save({
+        words: url
+      });
+    }
+
+    const showLike = (Like) => {
+      const asyncLimit = new AsyncLimit(2);
+      $(".leancloud-like").each(async (e) => {
+        const url = $(".leancloud-like").eq(e).attr('id').trim();
+        const query = new AV.Query("Like");
+        query.equalTo("path", url);
+        let count = await asyncLimit.run(() => query.count());
+        $(".leancloud-like").eq(e).text(count ? count : 0);
+      });
+    }
+
+    const addLike = (Like) => {
+      const url = $(".leancloud-like").length === 1 ? $(".leancloud-like").attr('id').trim() : 'https://boyolo.github.io';
+      var query = new Like;
+      query.save({
+        path: url,
+        nickName: 'Anonymous'
+      });
+      $(".leancloud-like").addClass('islike');
+      $(".fab-like").children(".iconfont").removeClass("iconheart").addClass("iconheart-fill").css("color", "#eb3223");
+      ZHAOO.zui.message({ text: '爱你哦~', type: 'success' });
+      setTimeout(() => showLike(Like), 1000);
+    }
+
+    const handleLikeClick = () => {
+      const isLike = $(".leancloud-like").length === 1 && $(".leancloud-like").hasClass('islike') ? true : false;
+      if (isLike) {
+        ZHAOO.zui.message({ text: '小心心不可以收回呢~', type: 'warning' });
+      } else {
+        addLike(Like);
+      }
+    }
+
+    $(function () {
+      addCount(Counter);
+      showCount(Counter);
+      showLike(Like);
+      $(".fab-like").on("click", function () {
+        handleLikeClick();
+      });
+    });
+
+  });
+</script>
+
+
+
+
+
+  <script>
+    (function () {
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      } else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+  <script>
+    window.ga = window.ga || function () {
+      (ga.q = ga.q || []).push(arguments)
+    };
+    ga.l = +new Date;
+    ga('create', 'G-PS6Y34LRW9', 'auto');
+    ga('send', 'pageview');
+  </script>
+  <script defer src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</html>

@@ -1,0 +1,773 @@
+
+
+<!DOCTYPE html>
+<html lang="en" color-mode=light>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Typora-markdown 操作详解 - Boyolo</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+  
+  <meta name="description" content="
+ Stray birds of summer com...">
+  <meta name="author" content="bobo">
+  <link rel="icon" href="/images/icons/favicon-16x16.png" type="image/png" sizes="16x16">
+  <link rel="icon" href="/images/icons/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" sizes="180x180">
+  <meta rel="mask-icon" href="/images/icons/boyolo-logo.svg" color="#333333">
+  
+    <meta rel="msapplication-TileImage" content="/images/icons/favicon-144x144.png">
+    <meta rel="msapplication-TileColor" content="#000000">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+    
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1445822_p6ry5n7lrr.css">
+
+  
+
+  
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+    
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/xcode.min.css" name="highlight-style" mode="light">
+
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/solarized-dark.min.css" name="highlight-style" mode="dark">
+
+      
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {};
+    var ZHAOO = window.ZHAOO || {};
+    CONFIG = {
+      isHome: false,
+      fancybox: true,
+      pjax: false,
+      loading: {
+        gif: '/images/theme/loading.gif',
+        lottie: ''
+      },
+      lazyload: {
+        enable: true,
+        only_post: 'false',
+        loading: {
+          gif: '/images/theme/loading.gif',
+          lottie: ''
+        }
+      },
+      donate: {
+        enable: true,
+        alipay: '/images/theme/alipay.jpg',
+        wechat: '/images/theme/wechatpay.jpg'
+      },
+      galleries: {
+        enable: true
+      },
+      fab: {
+        enable: true,
+        always_show: false
+      },
+      carrier: {
+        enable: true
+      },
+      daovoice: {
+        enable: false
+      },
+      preview: {
+        background: {
+          default: '',
+          api: ''
+        },
+        motto: {
+          default: '我在开了灯的床头下，想问问自己的心啊。',
+          typing: true,
+          api: 'https://v1.hitokoto.cn/?encode=text&c=i',
+          data_contents: ''
+        },
+      },
+      qrcode: {
+        enable: true,
+        type: 'url',
+        image: '/images/theme/wechat',
+      },
+      toc: {
+        enable: true
+      },
+      scrollbar: {
+        type: 'default'
+      },
+      notification: {
+        enable: false,
+        delay: 4500,
+        list: '',
+        page_white_list: '',
+        page_black_list: ''
+      },
+      search: {
+        enable: true,
+        path: 'search.xml'
+      }
+    }
+  </script>
+
+  
+
+  
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="lock-screen">
+  <div class="loading" id="loading"></div>
+  
+    
+
+
+  <nav class="navbar">
+    <div class="left">
+      
+        <i class="iconfont iconhome j-navbar-back-home"></i>
+      
+      
+        <i class="iconfont iconqrcode j-navbar-qrcode"></i>
+      
+      
+        <i class="iconfont iconmoono" id="color-toggle" color-toggle="light"></i>
+      
+      
+        <i class="iconfont iconsearch j-navbar-search"></i>
+      
+    </div>
+    <div class="center">Typora-markdown 操作详解</div>
+    <div class="right">
+      <i class="iconfont iconmenu j-navbar-menu"></i>
+    </div>
+    
+      <div id="qrcode-navbar"></div>
+    
+  </nav>
+
+  
+  
+
+<nav class="menu">
+  <div class="menu-container">
+    <div class="menu-close">
+      <i class="iconfont iconbaseline-close-px"></i>
+    </div>
+    <ul class="menu-content"><li class="menu-item">
+        <a href="/" class="underline "> 首页</a>
+      </li><li class="menu-item">
+        <a href="/tags/" class="underline "> 标签</a>
+      </li><li class="menu-item">
+        <a href="/categories/" class="underline "> 分类</a>
+      </li><li class="menu-item">
+        <a href="/archives/" class="underline "> 归档</a>
+      </li><li class="menu-item">
+        <a href="/galleries/" class="underline "> 相册</a>
+      </li><li class="menu-item">
+        <a href="/about/ " class="underline "> 关于</a>
+      </li></ul>
+    
+      <div class="menu-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a> |  website - <a target="_blank" href="https://boyolo.github.io/">bobo</a></p></div>
+    
+  </div>
+</nav>
+  <main id="main">
+  <div class="article-wrap">
+    <div class="row container">
+      <div class="col-xl-3"></div>
+      <div class="col-xl-6"><article class="article">
+  <div class="wrap">
+    <section class="head">
+  <img   class="lazyload" data-original="/images/theme/coverphoto/%E5%B0%81%E9%9D%A2.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title">Typora-markdown 操作详解</h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>December 08, 2021</span>
+      
+        <span class="post-info-item">
+          <i class="iconfont iconeye"></i><span id="/article/44103.html" class="leancloud-counter" data-flag-title="Typora-markdown 操作详解"></span>
+        </span>
+        <span class="post-info-item">
+          <i class="iconfont iconheart"></i><span id="/article/44103.html" class="leancloud-like" data-flag-title="Typora-markdown 操作详解"></span>
+        </span>
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>1699</span>
+    </div>
+  </div>
+</section>
+    <section class="main">
+      <section class="content">
+        
+        <blockquote>
+<p> Stray birds of summer come to my window to sing and fly away.</p>
+<p>And yellow leaves of autumn, which have no songs, flutter and fallthere with a sign.</p>
+</blockquote>
+<h1 id="一、markdown-的简介"><a href="#一、markdown-的简介" class="headerlink" title="一、markdown 的简介"></a>一、markdown 的简介</h1><blockquote>
+<p>markdown是一种轻量级的标记语言</p>
+<p>理念：markdown致力于让创作或者阅读文档变得更加的容易</p>
+<p>hyper text markup language（html）超文本标记性语言</p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>（&lt; + 空格 – 引用）</p>
+</blockquote>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs text">导入文章顶部目录<br>代码：[TOC]<br></code></pre></td></tr></table></figure>
+<h1 id="二、标题"><a href="#二、标题" class="headerlink" title="二、标题"></a>二、标题</h1><h2 id="markdown的标题"><a href="#markdown的标题" class="headerlink" title="markdown的标题"></a>markdown的标题</h2><blockquote>
+<p>语法：</p>
+<!--#（一级标题）  ##（二级标题） ###（三级标题（四级标题） #####（五级标题）-->
+</blockquote>
+<blockquote>
+<p>代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs text">#（一级标题）<br>##（二级标题）<br>###（三级标题）<br>####（四级标题）<br>#####（五级标题）<br></code></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>效果：</p>
+<h1 id="这是一级标题"><a href="#这是一级标题" class="headerlink" title="这是一级标题"></a>这是一级标题</h1><h2 id="这是二级标题"><a href="#这是二级标题" class="headerlink" title="这是二级标题"></a>这是二级标题</h2><h3 id="这是三级标题"><a href="#这是三级标题" class="headerlink" title="这是三级标题"></a>这是三级标题</h3></blockquote>
+<blockquote>
+<p>快捷键：</p>
+<ul>
+<li>command + 数字 1-5   可以快速将选中文字转换为对应级别的标题</li>
+<li>command + 加号/减号   可以对标题级别进行加减</li>
+</ul>
+</blockquote>
+<h1 id="三、段落"><a href="#三、段落" class="headerlink" title="三、段落"></a>三、段落</h1><h2 id="1、段落"><a href="#1、段落" class="headerlink" title="1、段落"></a>1、段落</h2><blockquote>
+<p>语法：直接进行文字的编辑，如需新建下一段落，可以直接换行</p>
+<p>或者在段落的末尾加两个空格回车</p>
+</blockquote>
+<h2 id="2、字体"><a href="#2、字体" class="headerlink" title="2、字体"></a>2、字体</h2><blockquote>
+<p>语法：</p>
+<ol>
+<li>粗体   用一对 双星号 （**）包裹  </li>
+<li>删除线  用一对 波浪线 （~~）包裹</li>
+<li>下划线  用一对  u 标签（<u></u>）包裹</li>
+<li>斜体  用一对 单星号 （*）包裹</li>
+<li>斜粗体 用一对 三星号（***）包裹</li>
+</ol>
+</blockquote>
+<blockquote>
+<p>代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs text">**这是粗体**<br>~~这是删除线~~<br>&lt;u&gt;这是下划线&lt;/u&gt;<br>*这是斜体*<br>***这是斜粗体***<br></code></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>效果：</p>
+<p><strong>这是粗体</strong></p>
+<p><del>这是删除线</del></p>
+<p><u>这是下划线</u></p>
+<p><em>这是斜体</em></p>
+<p><strong><em>这是斜粗体</em></strong></p>
+</blockquote>
+<blockquote>
+<p>快捷键：</p>
+<ul>
+<li>command + B   粗体</li>
+<li>shift + control + `  删除线</li>
+<li>command + U   下划线</li>
+<li>command + I   斜体 </li>
+</ul>
+</blockquote>
+<h2 id="3-分隔符"><a href="#3-分隔符" class="headerlink" title="3.分隔符"></a>3.分隔符</h2><blockquote>
+<p>语法：</p>
+<p>分割线：三个 — 或 三个 ***</p>
+</blockquote>
+<blockquote>
+<p>代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">---<br></code></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>效果：</p>
+<hr>
+</blockquote>
+<h2 id="4-脚注"><a href="#4-脚注" class="headerlink" title="4.脚注"></a>4.脚注</h2><blockquote>
+<p>说明：脚注作用是对文本进行补充说明的</p>
+<p>为此文本添加脚注[^键入文本]</p>
+</blockquote>
+<blockquote>
+<p>代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs text">[^键入文本]<br>[^键入文本]:<br></code></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>效果：</p>
+<p>为此文本添加脚注[^键入文本]</p>
+</blockquote>
+<h1 id="四、列表"><a href="#四、列表" class="headerlink" title="四、列表"></a>四、列表</h1><h2 id="1-无序列表"><a href="#1-无序列表" class="headerlink" title="1.无序列表"></a>1.无序列表</h2><blockquote>
+<p>语法：星号 + 空格</p>
+</blockquote>
+<blockquote>
+<p>代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">&gt;* <br></code></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>效果：</p>
+<p>1、只有同一级别</p>
+<ul>
+<li></li>
+<li></li>
+</ul>
+<p>2、有子分类</p>
+<ul>
+<li>一级分类</li>
+<li>二级分类<ul>
+<li>三级分类</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h2 id="2-有序列表"><a href="#2-有序列表" class="headerlink" title="2.有序列表"></a>2.有序列表</h2><blockquote>
+<p>语法：数字 + . + 空格</p>
+</blockquote>
+<blockquote>
+<p>代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">&gt;1. <br></code></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>效果：</p>
+<ol>
+<li>这是第一个标题</li>
+<li>这是第二个标题</li>
+<li>这是第三个标题<ul>
+<li>这是嵌套内容</li>
+<li>这也是嵌套内容</li>
+</ul>
+<ol>
+<li>这是新的嵌套</li>
+<li>欧吼，又来一个嵌套</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<h1 id="五、区块显示"><a href="#五、区块显示" class="headerlink" title="五、区块显示"></a>五、区块显示</h1><blockquote>
+<p>代码：</p>
+</blockquote>
+<blockquote>
+<p>效果：</p>
+<blockquote>
+<p>这是最外层的区块</p>
+<blockquote>
+<p>这是第二层区块</p>
+<blockquote>
+<p>这是第三层区块</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+<ul>
+<li><p>spring boot 技术</p>
+<blockquote>
+<p>spring boot 技术</p>
+</blockquote>
+</li>
+<li><p>spring cloub技术</p>
+<blockquote>
+<p>spring cloub 技术</p>
+</blockquote>
+</li>
+</ul>
+<h1 id="六、代码块"><a href="#六、代码块" class="headerlink" title="六、代码块"></a>六、代码块</h1><blockquote>
+<p>代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">&gt;``` js /java/text<br>&gt;``` js<br></code></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>效果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">这就是代码块<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c#">public class Text()&#123;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+</blockquote>
+<h1 id="七、链接"><a href="#七、链接" class="headerlink" title="七、链接"></a>七、链接</h1><blockquote>
+<p>代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs text">www.baidu.com<br>[百度一下](https://www.baidu.com)<br></code></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>效果；</p>
+<p><a target="_blank" rel="noopener" href="http://www.baidu.com">www.baidu.com</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.baidu.com">百度一下</a></p>
+</blockquote>
+<h1 id="八、图片插入"><a href="#八、图片插入" class="headerlink" title="八、图片插入"></a>八、图片插入</h1><blockquote>
+<p>代码；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs tect">![自定义图片名称](图片路径)<br></code></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>效果：</p>
+<p><img   class="lazyload" data-original="/Users/pro/Downloads/文件名" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><span class="image-caption">This is picture!</span></p>
+</blockquote>
+<h1 id="九、表格"><a href="#九、表格" class="headerlink" title="九、表格"></a>九、表格</h1><blockquote>
+<p>代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs text">|表头|表中|表尾|<br>|----|----:|:----:|<br>|1|2|3|<br></code></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>效果：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>表头</th>
+<th style="text-align:right">表中</th>
+<th style="text-align:center">表尾</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td style="text-align:right">2</td>
+<td style="text-align:center">3</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<blockquote>
+<p>快捷键：</p>
+<ul>
+<li>插入表格：command + alt + T</li>
+</ul>
+</blockquote>
+<h1 id="十、其他操作"><a href="#十、其他操作" class="headerlink" title="十、其他操作"></a>十、其他操作</h1><blockquote>
+<p>代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs text">&lt;kbd&gt;&lt;/kbd&gt;<br>`内容`<br></code></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>效果：</p>
+<p><kbd>Control</kbd></p>
+<p><code>control</code></p>
+</blockquote>
+
+      </section>
+      <section class="extra">
+        
+          <ul class="copyright">
+  
+    <li><strong>本文作者：</strong>bobo</li>
+    <li><strong>本文链接：</strong><a href="https://boyolo.github.io/article/44103.html" title="https:&#x2F;&#x2F;boyolo.github.io&#x2F;article&#x2F;44103.html">https:&#x2F;&#x2F;boyolo.github.io&#x2F;article&#x2F;44103.html</a></li>
+    <li><strong>版权声明：</strong>本博客所有文章均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" title="BY-NC-SA" target="_blank" rel="noopener">BY-NC-SA</a> 许可协议，转载请注明出处！</li>
+  
+</ul>
+        
+        
+          <section class="donate">
+  <div id="qrcode-donate">
+    <img   class="lazyload" data-original="/images/theme/alipay.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" >
+  </div>
+  <div class="icon">
+    <a href="javascript:;" id="alipay"><i class="iconfont iconalipay"></i></a>
+    <a href="javascript:;" id="wechat"><i class="iconfont iconwechat-fill"></i></a>
+  </div>
+</section>
+        
+        
+  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E5%B7%A7%EF%BC%8Cmarkdown%EF%BC%8Ctypora/" rel="tag">技巧，markdown，typora</a></li></ul> 
+
+        
+  <nav class="nav">
+    <a href="/article/33685.html"><i class="iconfont iconleft"></i>Java：梦开始的地方</a>
+    <a href="/article/16107.html">Hello World<i class="iconfont iconright"></i></a>
+  </nav>
+
+      </section>
+      
+        <section class="comments">
+  
+    <div class="btn" id="comments-btn">查看评论</div>
+  
+  
+<div id="valine"></div>
+<script defer src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+  window.onload = function () {
+    var loadValine = function () {
+      new Valine({
+        el: '#valine',
+        app_id: "4HVCPi93D54US1F0MCMcBQOl-gzGzoHsz",
+        app_key: "y5RbGV3BRqejIr3lLyGjMxAU",
+        placeholder: "雁过留痕",
+        avatar: "robohash",
+        pageSize: "10",
+        lang: "zh-CN",
+      });
+    }
+    if ( true ) {
+      $("#comments-btn").on("click", function () {
+        $(this).hide();
+        loadValine();
+      });
+    } else {
+      loadValine();
+    }
+  };
+</script>
+
+</section>
+      
+    </section>
+  </div>
+</article></div>
+      <div class="col-xl-3">
+        
+          
+  <aside class="toc-wrap">
+    <h3 class="toc-title">文章目录：</h3>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81markdown-%E7%9A%84%E7%AE%80%E4%BB%8B"><span class="toc-text">一、markdown 的简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E6%A0%87%E9%A2%98"><span class="toc-text">二、标题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#markdown%E7%9A%84%E6%A0%87%E9%A2%98"><span class="toc-text">markdown的标题</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%99%E6%98%AF%E4%B8%80%E7%BA%A7%E6%A0%87%E9%A2%98"><span class="toc-text">这是一级标题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%99%E6%98%AF%E4%BA%8C%E7%BA%A7%E6%A0%87%E9%A2%98"><span class="toc-text">这是二级标题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%99%E6%98%AF%E4%B8%89%E7%BA%A7%E6%A0%87%E9%A2%98"><span class="toc-text">这是三级标题</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E6%AE%B5%E8%90%BD"><span class="toc-text">三、段落</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81%E6%AE%B5%E8%90%BD"><span class="toc-text">1、段落</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81%E5%AD%97%E4%BD%93"><span class="toc-text">2、字体</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%88%86%E9%9A%94%E7%AC%A6"><span class="toc-text">3.分隔符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E8%84%9A%E6%B3%A8"><span class="toc-text">4.脚注</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E5%88%97%E8%A1%A8"><span class="toc-text">四、列表</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%97%A0%E5%BA%8F%E5%88%97%E8%A1%A8"><span class="toc-text">1.无序列表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%9C%89%E5%BA%8F%E5%88%97%E8%A1%A8"><span class="toc-text">2.有序列表</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E5%8C%BA%E5%9D%97%E6%98%BE%E7%A4%BA"><span class="toc-text">五、区块显示</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E4%BB%A3%E7%A0%81%E5%9D%97"><span class="toc-text">六、代码块</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%83%E3%80%81%E9%93%BE%E6%8E%A5"><span class="toc-text">七、链接</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%AB%E3%80%81%E5%9B%BE%E7%89%87%E6%8F%92%E5%85%A5"><span class="toc-text">八、图片插入</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B9%9D%E3%80%81%E8%A1%A8%E6%A0%BC"><span class="toc-text">九、表格</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%81%E3%80%81%E5%85%B6%E4%BB%96%E6%93%8D%E4%BD%9C"><span class="toc-text">十、其他操作</span></a></li></ol>
+  </aside>
+
+        
+      </div>
+    </div>
+  </div>
+</main>
+  
+
+<footer class="footer">
+  <div class="footer-social"><a 
+        href="tencent://message/?Menu=yes&uin=572643120 "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#12B7F5'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconQQ "></i>
+      </a><a 
+        href="weixin://dl/business/?ticket=bobo_liakeyou#wechat_redirect "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#09BB07'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconwechat-fill "></i>
+      </a><a 
+        href="https://github.com/boyolo "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#9f7be1'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  icongithub-fill "></i>
+      </a><a 
+        href="beau_renbo@163.com "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color=#FF3B00" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconmail"></i>
+      </a></div>
+  
+    <div class="footer-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a> |  website - <a target="_blank" href="https://boyolo.github.io/">bobo</a></p></div>
+  
+</footer>
+  
+      <div class="fab fab-plus">
+    <i class="iconfont iconplus"></i>
+  </div>
+  
+    <div class="fab fab-like">
+      <i class="iconfont iconheart"></i>
+    </div>
+  
+  
+  
+  <div class="fab fab-up">
+    <i class="iconfont iconcaret-up"></i>
+  </div>
+  
+  
+  
+    
+<script src="/js/color-mode.js"></script>
+
+  
+  
+    <div class="search">
+  <div class="search-container">
+    <div class="search-close">
+      <i class="iconfont iconbaseline-close-px"></i>
+    </div>
+    <div class="search-input-wrapper">
+      <i class="search-input-icon iconfont iconsearch"></i>
+      <input class="search-input" type="search" id="search-input" placeholder="Search..." autofocus autocomplete="off"
+        autocorrect="off" autocapitalize="off">
+    </div>
+    <div class="search-output" id="search-output"></div>
+  </div>
+</div>
+  
+</body>
+
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+
+
+
+
+
+  
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+
+
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+  
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
+
+
+
+
+<script src="/js/utils.js"></script>
+<script src="/js/script.js"></script>
+
+
+
+  <script>
+  $.getScript("//cdn.jsdelivr.net/npm/leancloud-storage@4.1.0/dist/av-min.js", () => {
+
+    AV.init({
+      appId: 'bUeKkITlp7tjPXHJVF6XYyFC-gzGzoHsz',
+      appKey: 'IaOs2Mc0ddmbLUeggtt9K0cT',
+      serverURLs: 'https://leancloud.cn/',
+    });
+
+    const Counter = AV.Object.extend("Counter");
+    const Like = AV.Object.extend("Like");
+
+    const showCount = (Counter) => {
+      const asyncLimit = new AsyncLimit(2);
+      $(".leancloud-counter").each(async (e) => {
+        const url = $(".leancloud-counter").eq(e).attr('id').trim();
+        const query = new AV.Query("Counter");
+        query.equalTo("words", url);
+        let count = await asyncLimit.run(() => query.count());
+        $(".leancloud-counter").eq(e).text(count ? count : 0);
+      });
+    }
+
+    const addCount = (Counter) => {
+      const url = $(".leancloud-counter").length === 1 ? $(".leancloud-counter").attr('id').trim() : 'https://boyolo.github.io';
+      var query = new Counter;
+      query.save({
+        words: url
+      });
+    }
+
+    const showLike = (Like) => {
+      const asyncLimit = new AsyncLimit(2);
+      $(".leancloud-like").each(async (e) => {
+        const url = $(".leancloud-like").eq(e).attr('id').trim();
+        const query = new AV.Query("Like");
+        query.equalTo("path", url);
+        let count = await asyncLimit.run(() => query.count());
+        $(".leancloud-like").eq(e).text(count ? count : 0);
+      });
+    }
+
+    const addLike = (Like) => {
+      const url = $(".leancloud-like").length === 1 ? $(".leancloud-like").attr('id').trim() : 'https://boyolo.github.io';
+      var query = new Like;
+      query.save({
+        path: url,
+        nickName: 'Anonymous'
+      });
+      $(".leancloud-like").addClass('islike');
+      $(".fab-like").children(".iconfont").removeClass("iconheart").addClass("iconheart-fill").css("color", "#eb3223");
+      ZHAOO.zui.message({ text: '爱你哦~', type: 'success' });
+      setTimeout(() => showLike(Like), 1000);
+    }
+
+    const handleLikeClick = () => {
+      const isLike = $(".leancloud-like").length === 1 && $(".leancloud-like").hasClass('islike') ? true : false;
+      if (isLike) {
+        ZHAOO.zui.message({ text: '小心心不可以收回呢~', type: 'warning' });
+      } else {
+        addLike(Like);
+      }
+    }
+
+    $(function () {
+      addCount(Counter);
+      showCount(Counter);
+      showLike(Like);
+      $(".fab-like").on("click", function () {
+        handleLikeClick();
+      });
+    });
+
+  });
+</script>
+
+
+
+
+
+  <script>
+    (function () {
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      } else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+  <script>
+    window.ga = window.ga || function () {
+      (ga.q = ga.q || []).push(arguments)
+    };
+    ga.l = +new Date;
+    ga('create', 'G-PS6Y34LRW9', 'auto');
+    ga('send', 'pageview');
+  </script>
+  <script defer src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</html>

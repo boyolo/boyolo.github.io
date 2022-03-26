@@ -1,0 +1,850 @@
+
+
+<!DOCTYPE html>
+<html lang="en" color-mode=light>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Boyolo</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+  
+  
+  <meta name="author" content="bobo">
+  <link rel="icon" href="/images/icons/favicon-16x16.png" type="image/png" sizes="16x16">
+  <link rel="icon" href="/images/icons/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" sizes="180x180">
+  <meta rel="mask-icon" href="/images/icons/boyolo-logo.svg" color="#333333">
+  
+    <meta rel="msapplication-TileImage" content="/images/icons/favicon-144x144.png">
+    <meta rel="msapplication-TileColor" content="#000000">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+    
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1445822_p6ry5n7lrr.css">
+
+  
+
+  
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+    
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/xcode.min.css" name="highlight-style" mode="light">
+
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/solarized-dark.min.css" name="highlight-style" mode="dark">
+
+      
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {};
+    var ZHAOO = window.ZHAOO || {};
+    CONFIG = {
+      isHome: true,
+      fancybox: true,
+      pjax: false,
+      loading: {
+        gif: '/images/theme/loading.gif',
+        lottie: ''
+      },
+      lazyload: {
+        enable: true,
+        only_post: 'false',
+        loading: {
+          gif: '/images/theme/loading.gif',
+          lottie: ''
+        }
+      },
+      donate: {
+        enable: true,
+        alipay: '/images/theme/alipay.jpg',
+        wechat: '/images/theme/wechatpay.jpg'
+      },
+      galleries: {
+        enable: true
+      },
+      fab: {
+        enable: true,
+        always_show: false
+      },
+      carrier: {
+        enable: true
+      },
+      daovoice: {
+        enable: false
+      },
+      preview: {
+        background: {
+          default: '',
+          api: ''
+        },
+        motto: {
+          default: '我在开了灯的床头下，想问问自己的心啊。',
+          typing: true,
+          api: 'https://v1.hitokoto.cn/?encode=text&c=i',
+          data_contents: ''
+        },
+      },
+      qrcode: {
+        enable: true,
+        type: 'url',
+        image: '/images/theme/wechat',
+      },
+      toc: {
+        enable: true
+      },
+      scrollbar: {
+        type: 'default'
+      },
+      notification: {
+        enable: false,
+        delay: 4500,
+        list: '',
+        page_white_list: '',
+        page_black_list: ''
+      },
+      search: {
+        enable: true,
+        path: 'search.xml'
+      }
+    }
+  </script>
+
+  
+
+  
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="lock-screen">
+  <div class="loading" id="loading"></div>
+  
+    
+
+
+  <nav class="navbar">
+    <div class="left">
+      
+      
+        <i class="iconfont iconqrcode j-navbar-qrcode"></i>
+      
+      
+        <i class="iconfont iconmoono" id="color-toggle" color-toggle="light"></i>
+      
+      
+        <i class="iconfont iconsearch j-navbar-search"></i>
+      
+    </div>
+    <div class="center"> </div>
+    <div class="right">
+      <i class="iconfont iconmenu j-navbar-menu"></i>
+    </div>
+    
+      <div id="qrcode-navbar"></div>
+    
+  </nav>
+
+  
+  
+
+<nav class="menu">
+  <div class="menu-container">
+    <div class="menu-close">
+      <i class="iconfont iconbaseline-close-px"></i>
+    </div>
+    <ul class="menu-content"><li class="menu-item">
+        <a href="/" class="underline "> 首页</a>
+      </li><li class="menu-item">
+        <a href="/tags/" class="underline "> 标签</a>
+      </li><li class="menu-item">
+        <a href="/categories/" class="underline "> 分类</a>
+      </li><li class="menu-item">
+        <a href="/archives/" class="underline "> 归档</a>
+      </li><li class="menu-item">
+        <a href="/galleries/" class="underline "> 相册</a>
+      </li><li class="menu-item">
+        <a href="/about/ " class="underline "> 关于</a>
+      </li></ul>
+    
+      <div class="menu-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a> |  website - <a target="_blank" href="https://boyolo.github.io/">bobo</a></p></div>
+    
+  </div>
+</nav>
+  <main id="main">
+  
+    <div class="preview">
+  <!-- <nav class="navbar j-navbar-menu">
+    <i class="iconfont iconmenu"></i>
+  </nav> -->
+  <div class="preview-image">
+    
+        
+              <div class="preview-overlay">
+                <svg class="preview-waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                  viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+                  <defs>
+                    <path id="gentle-wave"
+                      d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+                  </defs>
+                  <g class="preview-parallax">
+                    <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(var(--color-background-rgb),0.7"></use>
+                    <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(var(--color-background-rgb),0.5)"></use>
+                    <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(var(--color-background-rgb),0.3)"></use>
+                    <use xlink:href="#gentle-wave" x="48" y="7" fill="var(--color-background)"></use>
+                  </g>
+                </svg>
+              </div>
+              
+  </div>
+  <div class="preview-motto-wrapper">
+    <h2 class="preview-motto" id="motto">
+      
+    </h2>
+    
+      <span class="preview-cursor">_</span>
+      
+  </div>
+  <div class="preview-scroll">
+    <a href="#container" class="smooth-scroll"><i class="iconfont iconMouse"></i></a>
+  </div>
+</div>
+  
+  <div class="container" id="container">
+    <section class="row post">
+  
+    
+
+<div class="col-lg-4 col-md-6 col-sm-12 post-item">
+  <div class="post-wrap">
+    
+    <a href="/article/13919.html" class="post-image">
+      <img   class="lazyload" data-original="/images/theme/coverphoto/Mybatis.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+    </a>
+    <div class="post-content">
+      <div class="post-content-wrap">
+        <h3 class="post-title"><a href="/article/13919.html" title="Mybatis" >Mybatis</a></h3>
+        <div class="post-excerpt">
+          <p class="substr-3">
+The woodcutter’s axe begged for its handle from the tree.The tree gave it.
+樵夫的斧头，问树要斧柄。　　　　　　　　　...</p>
+        </div>
+      </div>
+      <div class="post-info">
+        <span class="post-info-item"><i class="iconfont iconcalendar"></i>January 07, 2022</span>
+        
+          <span class="post-info-item">
+            <i class="iconfont iconeye"></i><span id="/article/13919.html" class="leancloud-counter" data-flag-title="Mybatis"></span>
+          </span>
+          <span class="post-info-item">
+            <i class="iconfont iconheart"></i><span id="/article/13919.html" class="leancloud-like" data-flag-title="Mybatis"></span>
+          </span>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+  
+    
+
+<div class="col-lg-4 col-md-6 col-sm-12 post-item">
+  <div class="post-wrap">
+    
+    <a href="/article/30326.html" class="post-image">
+      <img   class="lazyload" data-original="/images/theme/coverphoto/MVC%E4%B8%89%E5%B1%82%E6%9E%B6%E6%9E%84.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+    </a>
+    <div class="post-content">
+      <div class="post-content-wrap">
+        <h3 class="post-title"><a href="/article/30326.html" title="MVC三层架构" >MVC三层架构</a></h3>
+        <div class="post-excerpt">
+          <p class="substr-3">
+God says to man, “I heal you therefore I hurt, love you therefore punish.”
+神对人说：“我医治你所以伤害你，爱你所以惩...</p>
+        </div>
+      </div>
+      <div class="post-info">
+        <span class="post-info-item"><i class="iconfont iconcalendar"></i>January 04, 2022</span>
+        
+          <span class="post-info-item">
+            <i class="iconfont iconeye"></i><span id="/article/30326.html" class="leancloud-counter" data-flag-title="MVC三层架构"></span>
+          </span>
+          <span class="post-info-item">
+            <i class="iconfont iconheart"></i><span id="/article/30326.html" class="leancloud-like" data-flag-title="MVC三层架构"></span>
+          </span>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+  
+    
+
+<div class="col-lg-4 col-md-6 col-sm-12 post-item">
+  <div class="post-wrap">
+    
+    <a href="/article/6685.html" class="post-image">
+      <img   class="lazyload" data-original="/images/theme/coverphoto/JSP.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+    </a>
+    <div class="post-content">
+      <div class="post-content-wrap">
+        <h3 class="post-title"><a href="/article/6685.html" title="JSP" >JSP</a></h3>
+        <div class="post-excerpt">
+          <p class="substr-3">
+Take my wine in my own cup, friend.It loses its wreath of foam when poured into that of others.
+...</p>
+        </div>
+      </div>
+      <div class="post-info">
+        <span class="post-info-item"><i class="iconfont iconcalendar"></i>January 03, 2022</span>
+        
+          <span class="post-info-item">
+            <i class="iconfont iconeye"></i><span id="/article/6685.html" class="leancloud-counter" data-flag-title="JSP"></span>
+          </span>
+          <span class="post-info-item">
+            <i class="iconfont iconheart"></i><span id="/article/6685.html" class="leancloud-like" data-flag-title="JSP"></span>
+          </span>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+  
+    
+
+<div class="col-lg-4 col-md-6 col-sm-12 post-item">
+  <div class="post-wrap">
+    
+    <a href="/article/32177.html" class="post-image">
+      <img   class="lazyload" data-original="/images/theme/coverphoto/Cookie_Session.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+    </a>
+    <div class="post-content">
+      <div class="post-content-wrap">
+        <h3 class="post-title"><a href="/article/32177.html" title="cookie_Session" >cookie_Session</a></h3>
+        <div class="post-excerpt">
+          <p class="substr-3">
+Take my wine in my own cup, friend.
+It loses its wreath of foam when poured into that of others....</p>
+        </div>
+      </div>
+      <div class="post-info">
+        <span class="post-info-item"><i class="iconfont iconcalendar"></i>January 02, 2022</span>
+        
+          <span class="post-info-item">
+            <i class="iconfont iconeye"></i><span id="/article/32177.html" class="leancloud-counter" data-flag-title="cookie_Session"></span>
+          </span>
+          <span class="post-info-item">
+            <i class="iconfont iconheart"></i><span id="/article/32177.html" class="leancloud-like" data-flag-title="cookie_Session"></span>
+          </span>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+  
+    
+
+<div class="col-lg-4 col-md-6 col-sm-12 post-item">
+  <div class="post-wrap">
+    
+    <a href="/article/8368.html" class="post-image">
+      <img   class="lazyload" data-original="/images/theme/coverphoto/leetcode.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+    </a>
+    <div class="post-content">
+      <div class="post-content-wrap">
+        <h3 class="post-title"><a href="/article/8368.html" title="LeetCode小点心" >LeetCode小点心</a></h3>
+        <div class="post-excerpt">
+          <p class="substr-3">
+在我自己的杯中，饮了我的酒吧，朋友。　　　　　　　　　　　　　　　一倒在别人的杯里，这酒的腾跳的泡沫便要消失了。　　　　　　　　　　Take my wine in my own cup, fr...</p>
+        </div>
+      </div>
+      <div class="post-info">
+        <span class="post-info-item"><i class="iconfont iconcalendar"></i>January 01, 2022</span>
+        
+          <span class="post-info-item">
+            <i class="iconfont iconeye"></i><span id="/article/8368.html" class="leancloud-counter" data-flag-title="LeetCode小点心"></span>
+          </span>
+          <span class="post-info-item">
+            <i class="iconfont iconheart"></i><span id="/article/8368.html" class="leancloud-like" data-flag-title="LeetCode小点心"></span>
+          </span>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+  
+    
+
+<div class="col-lg-4 col-md-6 col-sm-12 post-item">
+  <div class="post-wrap">
+    
+    <a href="/article/55715.html" class="post-image">
+      <img   class="lazyload" data-original="/images/theme/coverphoto/Servlet.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+    </a>
+    <div class="post-content">
+      <div class="post-content-wrap">
+        <h3 class="post-title"><a href="/article/55715.html" title="Servlet" >Servlet</a></h3>
+        <div class="post-excerpt">
+          <p class="substr-3">
+The hurricane seeks the shortest road by the no-road, and suddenly ends its search in the Nowher...</p>
+        </div>
+      </div>
+      <div class="post-info">
+        <span class="post-info-item"><i class="iconfont iconcalendar"></i>January 01, 2022</span>
+        
+          <span class="post-info-item">
+            <i class="iconfont iconeye"></i><span id="/article/55715.html" class="leancloud-counter" data-flag-title="Servlet"></span>
+          </span>
+          <span class="post-info-item">
+            <i class="iconfont iconheart"></i><span id="/article/55715.html" class="leancloud-like" data-flag-title="Servlet"></span>
+          </span>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+  
+    
+
+<div class="col-lg-4 col-md-6 col-sm-12 post-item">
+  <div class="post-wrap">
+    
+    <a href="/article/60206.html" class="post-image">
+      <img   class="lazyload" data-original="/images/theme/coverphoto/Javaweb.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+    </a>
+    <div class="post-content">
+      <div class="post-content-wrap">
+        <h3 class="post-title"><a href="/article/60206.html" title="JavaWeb" >JavaWeb</a></h3>
+        <div class="post-excerpt">
+          <p class="substr-3">
+My day is done, and I am like a boat drawn on the beach,listening to the dance-music of the tide...</p>
+        </div>
+      </div>
+      <div class="post-info">
+        <span class="post-info-item"><i class="iconfont iconcalendar"></i>January 01, 2022</span>
+        
+          <span class="post-info-item">
+            <i class="iconfont iconeye"></i><span id="/article/60206.html" class="leancloud-counter" data-flag-title="JavaWeb"></span>
+          </span>
+          <span class="post-info-item">
+            <i class="iconfont iconheart"></i><span id="/article/60206.html" class="leancloud-like" data-flag-title="JavaWeb"></span>
+          </span>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+  
+    
+
+<div class="col-lg-4 col-md-6 col-sm-12 post-item">
+  <div class="post-wrap">
+    
+    <a href="/article/37040.html" class="post-image">
+      <img   class="lazyload" data-original="/images/theme/coverphoto/%E9%85%8D%E7%BD%AE.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+    </a>
+    <div class="post-content">
+      <div class="post-content-wrap">
+        <h3 class="post-title"><a href="/article/37040.html" title="配置" >配置</a></h3>
+        <div class="post-excerpt">
+          <p class="substr-3">
+You idol is shattered in the dust to prove that God’s dust is greaterthan your idol.
+你的偶像委散在尘土中了...</p>
+        </div>
+      </div>
+      <div class="post-info">
+        <span class="post-info-item"><i class="iconfont iconcalendar"></i>January 01, 2022</span>
+        
+          <span class="post-info-item">
+            <i class="iconfont iconeye"></i><span id="/article/37040.html" class="leancloud-counter" data-flag-title="配置"></span>
+          </span>
+          <span class="post-info-item">
+            <i class="iconfont iconheart"></i><span id="/article/37040.html" class="leancloud-like" data-flag-title="配置"></span>
+          </span>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+  
+    
+
+<div class="col-lg-4 col-md-6 col-sm-12 post-item">
+  <div class="post-wrap">
+    
+    <a href="/article/4338.html" class="post-image">
+      <img   class="lazyload" data-original="/images/theme/coverphoto/Http%E8%AF%B7%E6%B1%82%E4%B8%8E%E5%93%8D%E5%BA%94.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+    </a>
+    <div class="post-content">
+      <div class="post-content-wrap">
+        <h3 class="post-title"><a href="/article/4338.html" title="HTTP的请求和响应" >HTTP的请求和响应</a></h3>
+        <div class="post-excerpt">
+          <p class="substr-3">
+The perfect decks itself in beauty for the love of the Imperfect.
+“完全”为了对“不全”的爱，把自己装饰得美丽。　　
+
+HTT...</p>
+        </div>
+      </div>
+      <div class="post-info">
+        <span class="post-info-item"><i class="iconfont iconcalendar"></i>December 31, 2021</span>
+        
+          <span class="post-info-item">
+            <i class="iconfont iconeye"></i><span id="/article/4338.html" class="leancloud-counter" data-flag-title="HTTP的请求和响应"></span>
+          </span>
+          <span class="post-info-item">
+            <i class="iconfont iconheart"></i><span id="/article/4338.html" class="leancloud-like" data-flag-title="HTTP的请求和响应"></span>
+          </span>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+  
+    
+
+<div class="col-lg-4 col-md-6 col-sm-12 post-item">
+  <div class="post-wrap">
+    
+    <a href="/article/45336.html" class="post-image">
+      <img   class="lazyload" data-original="/images/theme/coverphoto/JDBC%E6%95%B0%E6%8D%AE%E5%BA%93%E9%A9%B1%E5%8A%A8.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+    </a>
+    <div class="post-content">
+      <div class="post-content-wrap">
+        <h3 class="post-title"><a href="/article/45336.html" title="JDBC加载数据库驱动" >JDBC加载数据库驱动</a></h3>
+        <div class="post-excerpt">
+          <p class="substr-3">
+My day is done, and I am like a boat drawn on the beach, listening to the dance-music of the tid...</p>
+        </div>
+      </div>
+      <div class="post-info">
+        <span class="post-info-item"><i class="iconfont iconcalendar"></i>December 29, 2021</span>
+        
+          <span class="post-info-item">
+            <i class="iconfont iconeye"></i><span id="/article/45336.html" class="leancloud-counter" data-flag-title="JDBC加载数据库驱动"></span>
+          </span>
+          <span class="post-info-item">
+            <i class="iconfont iconheart"></i><span id="/article/45336.html" class="leancloud-like" data-flag-title="JDBC加载数据库驱动"></span>
+          </span>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+  
+    
+
+<div class="col-lg-4 col-md-6 col-sm-12 post-item">
+  <div class="post-wrap">
+    
+    <a href="/article/33736.html" class="post-image">
+      <img   class="lazyload" data-original="/images/theme/coverphoto/Mysql.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+    </a>
+    <div class="post-content">
+      <div class="post-content-wrap">
+        <h3 class="post-title"><a href="/article/33736.html" title="Mysql基础" >Mysql基础</a></h3>
+        <div class="post-excerpt">
+          <p class="substr-3">
+I thank thee that I am none of the wheels of power but I am one with the living creatures that a...</p>
+        </div>
+      </div>
+      <div class="post-info">
+        <span class="post-info-item"><i class="iconfont iconcalendar"></i>December 26, 2021</span>
+        
+          <span class="post-info-item">
+            <i class="iconfont iconeye"></i><span id="/article/33736.html" class="leancloud-counter" data-flag-title="Mysql基础"></span>
+          </span>
+          <span class="post-info-item">
+            <i class="iconfont iconheart"></i><span id="/article/33736.html" class="leancloud-like" data-flag-title="Mysql基础"></span>
+          </span>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+  
+    
+
+<div class="col-lg-4 col-md-6 col-sm-12 post-item">
+  <div class="post-wrap">
+    
+    <a href="/article/1621.html" class="post-image">
+      <img   class="lazyload" data-original="/images/theme/coverphoto/%E6%B3%A8%E8%A7%A3%E4%B8%8E%E5%8F%8D%E5%B0%84.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+    </a>
+    <div class="post-content">
+      <div class="post-content-wrap">
+        <h3 class="post-title"><a href="/article/1621.html" title="注解与反射" >注解与反射</a></h3>
+        <div class="post-excerpt">
+          <p class="substr-3">
+Shadow, with her veil drawn, follows Light in secret meekness,with her silent steps of love.
+阴影戴...</p>
+        </div>
+      </div>
+      <div class="post-info">
+        <span class="post-info-item"><i class="iconfont iconcalendar"></i>December 24, 2021</span>
+        
+          <span class="post-info-item">
+            <i class="iconfont iconeye"></i><span id="/article/1621.html" class="leancloud-counter" data-flag-title="注解与反射"></span>
+          </span>
+          <span class="post-info-item">
+            <i class="iconfont iconheart"></i><span id="/article/1621.html" class="leancloud-like" data-flag-title="注解与反射"></span>
+          </span>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+  
+</section>
+    <section class="paginator">
+  
+    <a class="extend prev" rel="prev" href="/">&lt;</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">&gt;</a>
+  
+</section>
+  </div>
+</main>
+  
+
+<footer class="footer">
+  <div class="footer-social"><a 
+        href="tencent://message/?Menu=yes&uin=572643120 "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#12B7F5'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconQQ "></i>
+      </a><a 
+        href="weixin://dl/business/?ticket=bobo_liakeyou#wechat_redirect "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#09BB07'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconwechat-fill "></i>
+      </a><a 
+        href="https://github.com/boyolo "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#9f7be1'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  icongithub-fill "></i>
+      </a><a 
+        href="beau_renbo@163.com "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color=#FF3B00" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconmail"></i>
+      </a></div>
+  
+    <div class="footer-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a> |  website - <a target="_blank" href="https://boyolo.github.io/">bobo</a></p></div>
+  
+</footer>
+  
+      <div class="fab fab-plus">
+    <i class="iconfont iconplus"></i>
+  </div>
+  
+  
+  
+  <div class="fab fab-up">
+    <i class="iconfont iconcaret-up"></i>
+  </div>
+  
+  
+  
+    
+<script src="/js/color-mode.js"></script>
+
+  
+  
+    <div class="search">
+  <div class="search-container">
+    <div class="search-close">
+      <i class="iconfont iconbaseline-close-px"></i>
+    </div>
+    <div class="search-input-wrapper">
+      <i class="search-input-icon iconfont iconsearch"></i>
+      <input class="search-input" type="search" id="search-input" placeholder="Search..." autofocus autocomplete="off"
+        autocorrect="off" autocapitalize="off">
+    </div>
+    <div class="search-output" id="search-output"></div>
+  </div>
+</div>
+  
+</body>
+
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+
+
+
+
+
+  
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+
+
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+  
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
+
+
+
+
+<script src="/js/utils.js"></script>
+<script src="/js/script.js"></script>
+
+
+
+  <script>
+  $.getScript("//cdn.jsdelivr.net/npm/leancloud-storage@4.1.0/dist/av-min.js", () => {
+
+    AV.init({
+      appId: 'bUeKkITlp7tjPXHJVF6XYyFC-gzGzoHsz',
+      appKey: 'IaOs2Mc0ddmbLUeggtt9K0cT',
+      serverURLs: 'https://leancloud.cn/',
+    });
+
+    const Counter = AV.Object.extend("Counter");
+    const Like = AV.Object.extend("Like");
+
+    const showCount = (Counter) => {
+      const asyncLimit = new AsyncLimit(2);
+      $(".leancloud-counter").each(async (e) => {
+        const url = $(".leancloud-counter").eq(e).attr('id').trim();
+        const query = new AV.Query("Counter");
+        query.equalTo("words", url);
+        let count = await asyncLimit.run(() => query.count());
+        $(".leancloud-counter").eq(e).text(count ? count : 0);
+      });
+    }
+
+    const addCount = (Counter) => {
+      const url = $(".leancloud-counter").length === 1 ? $(".leancloud-counter").attr('id').trim() : 'https://boyolo.github.io';
+      var query = new Counter;
+      query.save({
+        words: url
+      });
+    }
+
+    const showLike = (Like) => {
+      const asyncLimit = new AsyncLimit(2);
+      $(".leancloud-like").each(async (e) => {
+        const url = $(".leancloud-like").eq(e).attr('id').trim();
+        const query = new AV.Query("Like");
+        query.equalTo("path", url);
+        let count = await asyncLimit.run(() => query.count());
+        $(".leancloud-like").eq(e).text(count ? count : 0);
+      });
+    }
+
+    const addLike = (Like) => {
+      const url = $(".leancloud-like").length === 1 ? $(".leancloud-like").attr('id').trim() : 'https://boyolo.github.io';
+      var query = new Like;
+      query.save({
+        path: url,
+        nickName: 'Anonymous'
+      });
+      $(".leancloud-like").addClass('islike');
+      $(".fab-like").children(".iconfont").removeClass("iconheart").addClass("iconheart-fill").css("color", "#eb3223");
+      ZHAOO.zui.message({ text: '爱你哦~', type: 'success' });
+      setTimeout(() => showLike(Like), 1000);
+    }
+
+    const handleLikeClick = () => {
+      const isLike = $(".leancloud-like").length === 1 && $(".leancloud-like").hasClass('islike') ? true : false;
+      if (isLike) {
+        ZHAOO.zui.message({ text: '小心心不可以收回呢~', type: 'warning' });
+      } else {
+        addLike(Like);
+      }
+    }
+
+    $(function () {
+      addCount(Counter);
+      showCount(Counter);
+      showLike(Like);
+      $(".fab-like").on("click", function () {
+        handleLikeClick();
+      });
+    });
+
+  });
+</script>
+
+
+
+
+
+  <script>
+    (function () {
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      } else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+  <script>
+    window.ga = window.ga || function () {
+      (ga.q = ga.q || []).push(arguments)
+    };
+    ga.l = +new Date;
+    ga('create', 'G-PS6Y34LRW9', 'auto');
+    ga('send', 'pageview');
+  </script>
+  <script defer src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</html>

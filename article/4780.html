@@ -1,0 +1,673 @@
+
+
+<!DOCTYPE html>
+<html lang="en" color-mode=light>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>SpringMVC - Boyolo</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+  
+  <meta name="description" content="
+In my solitude of heart I ...">
+  <meta name="author" content="bobo">
+  <link rel="icon" href="/images/icons/favicon-16x16.png" type="image/png" sizes="16x16">
+  <link rel="icon" href="/images/icons/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" sizes="180x180">
+  <meta rel="mask-icon" href="/images/icons/boyolo-logo.svg" color="#333333">
+  
+    <meta rel="msapplication-TileImage" content="/images/icons/favicon-144x144.png">
+    <meta rel="msapplication-TileColor" content="#000000">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+    
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1445822_p6ry5n7lrr.css">
+
+  
+
+  
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+    
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/xcode.min.css" name="highlight-style" mode="light">
+
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/solarized-dark.min.css" name="highlight-style" mode="dark">
+
+      
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {};
+    var ZHAOO = window.ZHAOO || {};
+    CONFIG = {
+      isHome: false,
+      fancybox: true,
+      pjax: false,
+      loading: {
+        gif: '/images/theme/loading.gif',
+        lottie: ''
+      },
+      lazyload: {
+        enable: true,
+        only_post: 'false',
+        loading: {
+          gif: '/images/theme/loading.gif',
+          lottie: ''
+        }
+      },
+      donate: {
+        enable: true,
+        alipay: '/images/theme/alipay.jpg',
+        wechat: '/images/theme/wechatpay.jpg'
+      },
+      galleries: {
+        enable: true
+      },
+      fab: {
+        enable: true,
+        always_show: false
+      },
+      carrier: {
+        enable: true
+      },
+      daovoice: {
+        enable: false
+      },
+      preview: {
+        background: {
+          default: '',
+          api: ''
+        },
+        motto: {
+          default: '我在开了灯的床头下，想问问自己的心啊。',
+          typing: true,
+          api: 'https://v1.hitokoto.cn/?encode=text&c=i',
+          data_contents: ''
+        },
+      },
+      qrcode: {
+        enable: true,
+        type: 'url',
+        image: '/images/theme/wechat',
+      },
+      toc: {
+        enable: true
+      },
+      scrollbar: {
+        type: 'default'
+      },
+      notification: {
+        enable: false,
+        delay: 4500,
+        list: '',
+        page_white_list: '',
+        page_black_list: ''
+      },
+      search: {
+        enable: true,
+        path: 'search.xml'
+      }
+    }
+  </script>
+
+  
+
+  
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="lock-screen">
+  <div class="loading" id="loading"></div>
+  
+    
+
+
+  <nav class="navbar">
+    <div class="left">
+      
+        <i class="iconfont iconhome j-navbar-back-home"></i>
+      
+      
+        <i class="iconfont iconqrcode j-navbar-qrcode"></i>
+      
+      
+        <i class="iconfont iconmoono" id="color-toggle" color-toggle="light"></i>
+      
+      
+        <i class="iconfont iconsearch j-navbar-search"></i>
+      
+    </div>
+    <div class="center">SpringMVC</div>
+    <div class="right">
+      <i class="iconfont iconmenu j-navbar-menu"></i>
+    </div>
+    
+      <div id="qrcode-navbar"></div>
+    
+  </nav>
+
+  
+  
+
+<nav class="menu">
+  <div class="menu-container">
+    <div class="menu-close">
+      <i class="iconfont iconbaseline-close-px"></i>
+    </div>
+    <ul class="menu-content"><li class="menu-item">
+        <a href="/" class="underline "> 首页</a>
+      </li><li class="menu-item">
+        <a href="/tags/" class="underline "> 标签</a>
+      </li><li class="menu-item">
+        <a href="/categories/" class="underline "> 分类</a>
+      </li><li class="menu-item">
+        <a href="/archives/" class="underline "> 归档</a>
+      </li><li class="menu-item">
+        <a href="/galleries/" class="underline "> 相册</a>
+      </li><li class="menu-item">
+        <a href="/about/ " class="underline "> 关于</a>
+      </li></ul>
+    
+      <div class="menu-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a> |  website - <a target="_blank" href="https://boyolo.github.io/">bobo</a></p></div>
+    
+  </div>
+</nav>
+  <main id="main">
+  <div class="article-wrap">
+    <div class="row container">
+      <div class="col-xl-3"></div>
+      <div class="col-xl-6"><article class="article">
+  <div class="wrap">
+    <section class="head">
+  <img   class="lazyload" data-original="/images/theme/coverphoto/SpringMVC.jpeg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title">SpringMVC</h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>January 24, 2022</span>
+      
+        <span class="post-info-item">
+          <i class="iconfont iconeye"></i><span id="/article/4780.html" class="leancloud-counter" data-flag-title="SpringMVC"></span>
+        </span>
+        <span class="post-info-item">
+          <i class="iconfont iconheart"></i><span id="/article/4780.html" class="leancloud-like" data-flag-title="SpringMVC"></span>
+        </span>
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>5831</span>
+    </div>
+  </div>
+</section>
+    <section class="main">
+      <section class="content">
+        
+        <blockquote>
+<p>In my solitude of heart I feel the sigh of this widowed evening veiled with mist and rain.</p>
+<p>这寡独的黄昏，幕着雾与雨，我在我的心的孤寂里，感觉到它的叹息。　</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://docs.spring.io/spring-framework/docs/current/reference/html/web.html">SpringMVC官方文档</a></p>
+<h2 id="Spring-MVC"><a href="#Spring-MVC" class="headerlink" title="Spring MVC"></a>Spring MVC</h2><p>Spring MVC 是 Spring 提供的一个基于 MVC 设计模式的轻量级 Web 开发框架，本质上相当于 Servlet。</p>
+<p><strong>Spring MVC 是结构最清晰的 Servlet+JSP+JavaBean 的实现</strong></p>
+<p>在 Spring MVC 框架中，Controller 替换 Servlet 来担负控制器的职责，用于接收请求，调用相应的 Model 进行处理，处理器完成业务处理后返回处理结果。Controller 调用相应的 View 并对处理结果进行视图渲染，最终客户端得到响应信息。</p>
+<p>Spring的模型-视图-控制器（MVC）框架是围绕一个<code>DispatcherServlet</code>来设计的，这个Servlet会把请求分发给各个处理器，并支持可配置的处理器映射、视图渲染、本地化、时区与主题渲染等，甚至还能支持文件上传。</p>
+<p>在Spring Web MVC中，你可以使用任何对象来作为命令对象或表单返回对象，而无须实现一个框架相关的接口或基类。</p>
+<p><strong>使用SpringMVC基础配置</strong></p>
+<a href="/article/37040.html" title="点击跳转springmvc">点击跳转springmvc</a>
+<h3 id="原生配置实现SpringMVC"><a href="#原生配置实现SpringMVC" class="headerlink" title="原生配置实现SpringMVC"></a>原生配置实现SpringMVC</h3><p><strong>SpringMVC执行原理</strong></p>
+<img   class="lazyload" data-original="/article/4780/1619751763609616.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="img">
+<p><code>DispatcherServlet</code>其实就是个<code>Servlet</code>（它继承自<code>HttpServlet</code>基类），同样也需要在你web应用的<code>web.xml</code>配置文件下声明。你需要在<code>web.xml</code>文件中把你希望<code>DispatcherServlet</code>处理的请求映射到对应的URL上去。</p>
+<blockquote>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">servlet</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>hello<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet-class</span>&gt;</span>com.bobo.servlet.helloServlet<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-class</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">servlet</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">servlet-mapping</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>hello<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">url-pattern</span>&gt;</span>/hello<span class="hljs-tag">&lt;/<span class="hljs-name">url-pattern</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">servlet-mapping</span>&gt;</span><br></code></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<img   class="lazyload" data-original="/article/4780/springmvc%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B%E8%A7%A3%E6%9E%90.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="springmvc执行流程解析">
+</blockquote>
+<img   class="lazyload" data-original="/article/4780/1066923-20190307172453210-409890354-20220125171300287.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="img">
+<p>实线表示SpringMVC框架提供的技术，不需要开发者实现，虚线表示需要开发者实现</p>
+<ol>
+<li><p>DispatcherServlet表示前置控制器，使整个SpringMVC的控制中心。用户发出请求，DispatcherServlet接收请求并拦截请求；</p>
+<ul>
+<li>假设请求为：<a target="_blank" rel="noopener" href="http://localhost:8080/SpringMVC/hello">http://localhost:8080/SpringMVC/hello</a></li>
+<li><a href="http://localhost:8080服务器域名">http://localhost:8080服务器域名</a></li>
+<li>SpringMVC表示部署在服务器上的web站点</li>
+<li>hello表示控制器</li>
+<li>通过分析，如上请求表示为：请求位于服务器localhost:8080上的SpringMVC站点的hello控制器</li>
+</ul>
+<blockquote>
+<img   class="lazyload" data-original="/article/4780/image-20220125170144231.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="image-20220125170144231">
+</blockquote>
+</li>
+<li><p>HandlerMapping为处理器映射，DispatcherServlet调用HandlerMapping，HandlerMapping根据请求查找Handler；</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!--Handler 处理器--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;/hello&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;com.bobo.Controller.HelloController&quot;</span>/&gt;</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>HandlerExecution表示具体的Handler，其主要作用是根据请求查找控制器，比如 <em>SpringMVC站点的hello控制器</em>；</p>
+</li>
+<li><p>HandlerExecution将解析后的信息传递给DispatcherServlet，如解析控制器映射等；</p>
+<blockquote>
+<img   class="lazyload" data-original="/article/4780/image-20220125170209664.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="image-20220125170209664">
+</blockquote>
+</li>
+<li><p>HandlerAdapter表示处理器适配器，其按照特定的规则去执行Handler；</p>
+</li>
+<li><p>Handler让具体的Controller执行；</p>
+<blockquote>
+<img   class="lazyload" data-original="/article/4780/image-20220125170358415.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="image-20220125170358415">
+</blockquote>
+</li>
+<li><p>controller将具体执行的信息返回给HandlerAdapter，如ModelAndView；</p>
+<blockquote>
+<img   class="lazyload" data-original="/article/4780/image-20220125170447409.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="image-20220125170447409">
+</blockquote>
+</li>
+<li><p>HandlerAdapter将视图逻辑名或模型传递给DispatcherServlet；</p>
+</li>
+<li><p>DispatcherServlet调用试图解析器（ViewResolver）来解析HandlerAdapter传递的逻辑视图名；</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!--视图解析器:DispatcherServlet给他的ModelAndView</span><br><span class="hljs-comment">    1。获取了ModelAndView中的数据</span><br><span class="hljs-comment">    2。解析ModelAndView中的视图名</span><br><span class="hljs-comment">    3。拼接视图名字，找到对应视图</span><br><span class="hljs-comment">    4。将数据渲染到视图上</span><br><span class="hljs-comment">--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;InternalResourceViewResolver&quot;</span>&gt;</span><br>  <span class="hljs-comment">&lt;!--前缀--&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;prefix&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;/WEB-INF/jsp/&quot;</span>/&gt;</span><br>  <span class="hljs-comment">&lt;!--后缀--&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;suffix&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;.jsp&quot;</span>/&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">bean</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<blockquote>
+<img   class="lazyload" data-original="/article/4780/image-20220125170532472.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="image-20220125170532472">
+</blockquote>
+</li>
+<li><p>视图解析器将解析的逻辑视图名传递给DispatcherServlet；</p>
+</li>
+<li><p>DispatcherServlet根据视图解析器解析的视图结果，调用具体的视图；</p>
+</li>
+<li><p>最终视图呈现给用户。</p>
+<blockquote>
+<img   class="lazyload" data-original="/article/4780/image-20220125170607589.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="image-20220125170607589">
+</blockquote>
+</li>
+</ol>
+<h3 id="注解开发SpringMVC"><a href="#注解开发SpringMVC" class="headerlink" title="注解开发SpringMVC"></a>注解开发SpringMVC</h3><p>首先，进行<a href="/article/37040.html" title="SpringMVC基础配置+注解配置">SpringMVC基础配置+注解配置</a></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!-- 自动扫描包，让指定包下的注解生效,由IOC容器统一管理 --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">context:component-scan</span> <span class="hljs-attr">base-package</span>=<span class="hljs-string">&quot;com.bobo.controller&quot;</span>/&gt;</span><br><br><span class="hljs-comment">&lt;!-- 让Spring MVC不处理静态资源    .css .js  .html .mp3 .mp4 --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">mvc:default-servlet-handler</span>/&gt;</span><br><br><span class="hljs-comment">&lt;!-- 支持mvc注解驱动</span><br><span class="hljs-comment">在spring中一般采用@RequestMapping注解来完成映射关系</span><br><span class="hljs-comment">要想使@RequestMapping注解生效</span><br><span class="hljs-comment">必须向上下文中注册DefaultAnnotationHandlerMapping</span><br><span class="hljs-comment">和一个AnnotationMethodHandlerAdapter实例</span><br><span class="hljs-comment">这两个实例分别在类级别和方法级别处理。</span><br><span class="hljs-comment">而annotation-driven配置帮助我们自动完成上述两个实例的注入。 --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">mvc:annotation-driven</span>/&gt;</span><br></code></pre></td></tr></table></figure>
+<p>pring 2.5以后引入了基于注解的编程模型，你可以在你的控制器实现上添加<code>@RequestMapping</code>、<code>@RequestParam</code>、<code>@ModelAttribute</code>等注解。</p>
+<a href="/article/37040.html" title="点击跳转注解，查看SpringMVC相关注解">点击跳转注解，查看SpringMVC相关注解</a>
+<p><strong>实例</strong></p>
+<blockquote>
+<p><code>HelloController</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.bobo.controller;<br><span class="hljs-keyword">import</span> org.springframework.stereotype.Controller;<br><span class="hljs-keyword">import</span> org.springframework.ui.Model;<br><span class="hljs-keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;<br><br><span class="hljs-meta">@Controller</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HelloController</span> </span>&#123;<br><br>    <span class="hljs-meta">@RequestMapping(&quot;/h1&quot;)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">hello</span><span class="hljs-params">(Model model)</span> </span>&#123;<br>        <span class="hljs-comment">//封装数据</span><br>        model.addAttribute(<span class="hljs-string">&quot;msg&quot;</span>, <span class="hljs-string">&quot;Hello,SpringMVCAnnotation&quot;</span>);<br><br>        <span class="hljs-comment">//会被视图解析器处理</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;hello&quot;</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><code>hello.jsp</code></p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;%--<br>  Created by IntelliJ IDEA.<br>  User: pro<br>  Date: <span class="hljs-number">2021</span>/<span class="hljs-number">10</span>/<span class="hljs-number">14</span><br>  Time: <span class="hljs-number">23</span>:<span class="hljs-number">10</span><br>  To change <span class="hljs-keyword">this</span> template use File | Settings | File Templates.<br>--%&gt;<br>&lt;%@ page contentType=<span class="hljs-string">&quot;text/html;charset=UTF-8&quot;</span> language=<span class="hljs-string">&quot;java&quot;</span> %&gt;<br>&lt;html&gt;<br>&lt;head&gt;<br>  &lt;title&gt;Title&lt;/title&gt;<br>&lt;/head&gt;<br>&lt;body&gt;<br>$&#123;msg&#125;<br>&lt;/body&gt;<br>&lt;/html&gt;<br></code></pre></td></tr></table></figure>
+</blockquote>
+<p><strong>控制器Controller</strong></p>
+<ol>
+<li>控制器负责提供访问应用程序的行为，通常通过接口定义或注解定义两种方法实现；</li>
+<li>控制器负责解析用户的请求并将其转换为一个模型；</li>
+<li>在Spring MVC中一个控制器类可以包含多个方法；</li>
+<li>在SpringMVC中，对Controller的配置方法有很多种。</li>
+</ol>
+<h3 id="Spring-MVC-视图重定向"><a href="#Spring-MVC-视图重定向" class="headerlink" title="Spring MVC 视图重定向"></a>Spring MVC 视图重定向</h3><p>控制器通常都会返回一个逻辑视图名，然后视图解析器会把它解析到一个具体的视图技术上去渲染。</p>
+<p><strong>重定向前缀——redirect:</strong></p>
+<p><code>redirect:</code>。如果返回的视图名中含有<code>redirect:</code>前缀，那么<code>UrlBasedViewResolver</code>（及它的所有子类）就会接受到这个信号，意识到这里需要发生重定向。然后视图名剩下的部分会被解析成重定向URL。</p>
+<p>这种方式与通过控制器返回一个重定向视图<code>RedirectView</code>所达到的效果是一样的，不过这样一来控制器就可以只专注于处理并返回逻辑视图名了。</p>
+<p><strong>重定向前缀——forward:</strong></p>
+<p>对于最终会被<code>UrlBasedViewResolver</code>或其子类解析的视图名，你可以使用一个特殊的前缀：<code>forward:</code>。这会导致一个<code>InternalResourceView</code>视图对象的创建（它最终会调用<code>RequestDispatcher.forward()</code>方法），后者会认为视图名剩下的部分是一个URL</p>
+<h2 id="RestFul风格"><a href="#RestFul风格" class="headerlink" title="RestFul风格"></a>RestFul风格</h2><p>一种软件架构风格、设计风格，而<strong>不是</strong>标准，只是提供了一组设计原则和约束条件。它主要用于客户端和服务器交互类的软件。基于这个风格设计的软件可以更简洁，更有层次，更易于实现缓存等机制。</p>
+<p><strong>特性</strong></p>
+<ol>
+<li><p><strong>表现层(Representation)</strong>：把资源具体呈现出来的形式，叫做它的表现层(Representation)。</p>
+</li>
+<li><p><strong>状态转换(State Transfer)</strong>：每发出一个请求，就代表了客户端和服务器的一次交互过程。</p>
+<p>HTTP协议，是一个无状态协议，即所有的状态都保存在服务器端。因此，如果客户端想要操作服务器，必须通过某种手段，让服务器端发生“状态转换”(State Transfer)。</p>
+<p>而这种转换是建立在表现层之上的，所以就是“表现层状态转换”。</p>
+<p>具体说，就是HTTP协议里面，四个表示操作方式的动词：<strong>GET、POST、PUT、DELETE</strong>。他们分别对应四种基本操作：GET用来获取资源，POST用来新建资源，PUT用来更新资源，DELETE用来删除资源。</p>
+<blockquote>
+<p>传统方式操作资源</p>
+<p><a target="_blank" rel="noopener" href="http://127.0.0.1/item/queryUser.action?id=1">http://127.0.0.1/item/queryUser.action?id=1</a>   查询,GET<br><a target="_blank" rel="noopener" href="http://127.0.0.1/item/saveUser.action">http://127.0.0.1/item/saveUser.action</a>         新增,POST<br><a target="_blank" rel="noopener" href="http://127.0.0.1/item/updateUser.action">http://127.0.0.1/item/updateUser.action</a>       更新,POST<br><a target="_blank" rel="noopener" href="http://127.0.0.1/item/deleteUser.action?id=1">http://127.0.0.1/item/deleteUser.action?id=1</a>  删除,GET或POST</p>
+<p>使用RESTful操作资源</p>
+<p><a target="_blank" rel="noopener" href="http://127.0.0.1/item/1">http://127.0.0.1/item/1</a>     查询,GET</p>
+<p><a target="_blank" rel="noopener" href="http://127.0.0.1/item">http://127.0.0.1/item</a>       新增,POST </p>
+<p><a target="_blank" rel="noopener" href="http://127.0.0.1/item">http://127.0.0.1/item</a>       更新,POST </p>
+<p><a target="_blank" rel="noopener" href="http://127.0.0.1/item/1">http://127.0.0.1/item/1</a>     删除,GET或POST</p>
+</blockquote>
+</li>
+</ol>
+<p><strong>SpringMVC对RESTful的支持</strong></p>
+<a href="/article/37040.html" title="点击跳转SpringMVC对RESTful的支持">点击跳转SpringMVC对RESTful的支持</a>
+<ol>
+<li>使路径变得更加简洁</li>
+<li>获得参数更加方便，框架会自动进行类型转换</li>
+<li>通过路径变量的类型可以约束访问参数，如果类型不一样，则访问不到对应的请求</li>
+<li>安全</li>
+</ol>
+<p><strong>API设计风格基本规则</strong></p>
+<ol>
+<li><p>使用名词而不是动词</p>
+</li>
+<li><p>Get方法和查询参数不应该涉及状态改变</p>
+<p>使用<strong>PUT, POST</strong> 和<strong>DELETE</strong> 方法 而不是 <strong>GET</strong> 方法来改变状态，不要使用<strong>GET</strong> 进行状态改变:</p>
+</li>
+<li><p>使用复数名词</p>
+<p>不要混淆名词单数和复数，为了保持简单，只对所有资源使用复数。</p>
+</li>
+<li><p>使用子资源表达关系</p>
+<p>如果一个资源与另外一个资源有关系，使用子资源</p>
+</li>
+<li><p>使用Http头声明序列化格式</p>
+<p>在客户端和服务端，双方都要知道通讯的格式，格式在HTTP-Header中指定</p>
+</li>
+<li><p>为集合提供<strong>过滤 排序 选择和分页等功能</strong></p>
+</li>
+<li><p>使用Http状态码处理错误</p>
+</li>
+</ol>
+
+      </section>
+      <section class="extra">
+        
+          <ul class="copyright">
+  
+    <li><strong>本文作者：</strong>bobo</li>
+    <li><strong>本文链接：</strong><a href="https://boyolo.github.io/article/4780.html" title="https:&#x2F;&#x2F;boyolo.github.io&#x2F;article&#x2F;4780.html">https:&#x2F;&#x2F;boyolo.github.io&#x2F;article&#x2F;4780.html</a></li>
+    <li><strong>版权声明：</strong>本博客所有文章均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" title="BY-NC-SA" target="_blank" rel="noopener">BY-NC-SA</a> 许可协议，转载请注明出处！</li>
+  
+</ul>
+        
+        
+          <section class="donate">
+  <div id="qrcode-donate">
+    <img   class="lazyload" data-original="/images/theme/alipay.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" >
+  </div>
+  <div class="icon">
+    <a href="javascript:;" id="alipay"><i class="iconfont iconalipay"></i></a>
+    <a href="javascript:;" id="wechat"><i class="iconfont iconwechat-fill"></i></a>
+  </div>
+</section>
+        
+        
+  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringMVC-Java/" rel="tag">SpringMVC,Java</a></li></ul> 
+
+        
+  <nav class="nav">
+    <a href="/article/3410.html"><i class="iconfont iconleft"></i>JSON</a>
+    <a href="/article/18155.html">Spring<i class="iconfont iconright"></i></a>
+  </nav>
+
+      </section>
+      
+        <section class="comments">
+  
+    <div class="btn" id="comments-btn">查看评论</div>
+  
+  
+<div id="valine"></div>
+<script defer src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+  window.onload = function () {
+    var loadValine = function () {
+      new Valine({
+        el: '#valine',
+        app_id: "4HVCPi93D54US1F0MCMcBQOl-gzGzoHsz",
+        app_key: "y5RbGV3BRqejIr3lLyGjMxAU",
+        placeholder: "雁过留痕",
+        avatar: "robohash",
+        pageSize: "10",
+        lang: "zh-CN",
+      });
+    }
+    if ( true ) {
+      $("#comments-btn").on("click", function () {
+        $(this).hide();
+        loadValine();
+      });
+    } else {
+      loadValine();
+    }
+  };
+</script>
+
+</section>
+      
+    </section>
+  </div>
+</article></div>
+      <div class="col-xl-3">
+        
+          
+  <aside class="toc-wrap">
+    <h3 class="toc-title">文章目录：</h3>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring-MVC"><span class="toc-text">Spring MVC</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E7%94%9F%E9%85%8D%E7%BD%AE%E5%AE%9E%E7%8E%B0SpringMVC"><span class="toc-text">原生配置实现SpringMVC</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91SpringMVC"><span class="toc-text">注解开发SpringMVC</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Spring-MVC-%E8%A7%86%E5%9B%BE%E9%87%8D%E5%AE%9A%E5%90%91"><span class="toc-text">Spring MVC 视图重定向</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RestFul%E9%A3%8E%E6%A0%BC"><span class="toc-text">RestFul风格</span></a></li></ol>
+  </aside>
+
+        
+      </div>
+    </div>
+  </div>
+</main>
+  
+
+<footer class="footer">
+  <div class="footer-social"><a 
+        href="tencent://message/?Menu=yes&uin=572643120 "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#12B7F5'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconQQ "></i>
+      </a><a 
+        href="weixin://dl/business/?ticket=bobo_liakeyou#wechat_redirect "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#09BB07'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconwechat-fill "></i>
+      </a><a 
+        href="https://github.com/boyolo "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#9f7be1'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  icongithub-fill "></i>
+      </a><a 
+        href="beau_renbo@163.com "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color=#FF3B00" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconmail"></i>
+      </a></div>
+  
+    <div class="footer-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a> |  website - <a target="_blank" href="https://boyolo.github.io/">bobo</a></p></div>
+  
+</footer>
+  
+      <div class="fab fab-plus">
+    <i class="iconfont iconplus"></i>
+  </div>
+  
+    <div class="fab fab-like">
+      <i class="iconfont iconheart"></i>
+    </div>
+  
+  
+  
+  <div class="fab fab-up">
+    <i class="iconfont iconcaret-up"></i>
+  </div>
+  
+  
+  
+    
+<script src="/js/color-mode.js"></script>
+
+  
+  
+    <div class="search">
+  <div class="search-container">
+    <div class="search-close">
+      <i class="iconfont iconbaseline-close-px"></i>
+    </div>
+    <div class="search-input-wrapper">
+      <i class="search-input-icon iconfont iconsearch"></i>
+      <input class="search-input" type="search" id="search-input" placeholder="Search..." autofocus autocomplete="off"
+        autocorrect="off" autocapitalize="off">
+    </div>
+    <div class="search-output" id="search-output"></div>
+  </div>
+</div>
+  
+</body>
+
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+
+
+
+
+
+  
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+
+
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+  
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
+
+
+
+
+<script src="/js/utils.js"></script>
+<script src="/js/script.js"></script>
+
+
+
+  <script>
+  $.getScript("//cdn.jsdelivr.net/npm/leancloud-storage@4.1.0/dist/av-min.js", () => {
+
+    AV.init({
+      appId: 'bUeKkITlp7tjPXHJVF6XYyFC-gzGzoHsz',
+      appKey: 'IaOs2Mc0ddmbLUeggtt9K0cT',
+      serverURLs: 'https://leancloud.cn/',
+    });
+
+    const Counter = AV.Object.extend("Counter");
+    const Like = AV.Object.extend("Like");
+
+    const showCount = (Counter) => {
+      const asyncLimit = new AsyncLimit(2);
+      $(".leancloud-counter").each(async (e) => {
+        const url = $(".leancloud-counter").eq(e).attr('id').trim();
+        const query = new AV.Query("Counter");
+        query.equalTo("words", url);
+        let count = await asyncLimit.run(() => query.count());
+        $(".leancloud-counter").eq(e).text(count ? count : 0);
+      });
+    }
+
+    const addCount = (Counter) => {
+      const url = $(".leancloud-counter").length === 1 ? $(".leancloud-counter").attr('id').trim() : 'https://boyolo.github.io';
+      var query = new Counter;
+      query.save({
+        words: url
+      });
+    }
+
+    const showLike = (Like) => {
+      const asyncLimit = new AsyncLimit(2);
+      $(".leancloud-like").each(async (e) => {
+        const url = $(".leancloud-like").eq(e).attr('id').trim();
+        const query = new AV.Query("Like");
+        query.equalTo("path", url);
+        let count = await asyncLimit.run(() => query.count());
+        $(".leancloud-like").eq(e).text(count ? count : 0);
+      });
+    }
+
+    const addLike = (Like) => {
+      const url = $(".leancloud-like").length === 1 ? $(".leancloud-like").attr('id').trim() : 'https://boyolo.github.io';
+      var query = new Like;
+      query.save({
+        path: url,
+        nickName: 'Anonymous'
+      });
+      $(".leancloud-like").addClass('islike');
+      $(".fab-like").children(".iconfont").removeClass("iconheart").addClass("iconheart-fill").css("color", "#eb3223");
+      ZHAOO.zui.message({ text: '爱你哦~', type: 'success' });
+      setTimeout(() => showLike(Like), 1000);
+    }
+
+    const handleLikeClick = () => {
+      const isLike = $(".leancloud-like").length === 1 && $(".leancloud-like").hasClass('islike') ? true : false;
+      if (isLike) {
+        ZHAOO.zui.message({ text: '小心心不可以收回呢~', type: 'warning' });
+      } else {
+        addLike(Like);
+      }
+    }
+
+    $(function () {
+      addCount(Counter);
+      showCount(Counter);
+      showLike(Like);
+      $(".fab-like").on("click", function () {
+        handleLikeClick();
+      });
+    });
+
+  });
+</script>
+
+
+
+
+
+  <script>
+    (function () {
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      } else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+  <script>
+    window.ga = window.ga || function () {
+      (ga.q = ga.q || []).push(arguments)
+    };
+    ga.l = +new Date;
+    ga('create', 'G-PS6Y34LRW9', 'auto');
+    ga('send', 'pageview');
+  </script>
+  <script defer src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</html>
