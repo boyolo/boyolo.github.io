@@ -209,7 +209,7 @@
           <i class="iconfont iconheart"></i><span id="/article/46662.html" class="leancloud-like" data-flag-title="Mysql45讲-实践（一）"></span>
         </span>
       
-      <span class="post-info-item"><i class="iconfont iconfont-size"></i>12474</span>
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>17556</span>
     </div>
   </div>
 </section>
@@ -526,7 +526,10 @@
 <h3 id="第二类：查询慢"><a href="#第二类：查询慢" class="headerlink" title="第二类：查询慢"></a>第二类：查询慢</h3><p>一致性读导致回滚日志过大引起的一致性读慢，当前读快</p>
 <h2 id="幻读是什么，幻读有什么问题？"><a href="#幻读是什么，幻读有什么问题？" class="headerlink" title="幻读是什么，幻读有什么问题？"></a>幻读是什么，幻读有什么问题？</h2><h3 id="幻读是什么？"><a href="#幻读是什么？" class="headerlink" title="幻读是什么？"></a>幻读是什么？</h3><p>幻读指的是一个事务在前后两次查询同一个范围的时候，后一次查询看到了前一次查询没有看到的行。</p>
 <p>在可重复读隔离级别下，普通的查询是快照读，是不会看到别的事务插入的数据的。因此，<strong>幻读在“当前读”下才会出现。</strong></p>
-<h3 id="幻读有什么问题？"><a href="#幻读有什么问题？" class="headerlink" title="幻读有什么问题？"></a>幻读有什么问题？</h3><ol>
+<h3 id="幻读有什么问题？"><a href="#幻读有什么问题？" class="headerlink" title="幻读有什么问题？"></a>幻读有什么问题？</h3><blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs mysql">CREATE TABLE `t` (<br>  `id` int(11) NOT NULL,<br>  `c` int(11) DEFAULT NULL,<br>  `d` int(11) DEFAULT NULL,<br>  PRIMARY KEY (`id`),<br>  KEY `c` (`c`)<br>) ENGINE=InnoDB;<br><br>insert into t values(0,0,0),(5,5,5),<br>(10,10,10),(15,15,15),(20,20,20),(25,25,25);<br></code></pre></td></tr></table></figure>
+</blockquote>
+<ol>
 <li><p>首先是语义上的。</p>
 <blockquote>
 <p><img   class="lazyload" data-original="/article/假设只在 id=5 这一行加行锁 -- 语义被破坏.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><span class="image-caption">假设只在 id=5 这一行加行锁 -- 语义被破坏</span></p>
@@ -553,10 +556,123 @@
 </li>
 </ol>
 <hr>
-<p>为了解决上面数据不一致的问题，假设把扫描过程中碰到的行都加锁，</p>
+<p>为了解决上面数据不一致的问题，假设把扫描过程中碰到的行都加锁</p>
+<img   class="lazyload" data-original="/article/46662/%E5%81%87%E8%AE%BE%E6%89%AB%E6%8F%8F%E5%88%B0%E7%9A%84%E8%A1%8C%E9%83%BD%E8%A2%AB%E5%8A%A0%E4%B8%8A%E4%BA%86%E8%A1%8C%E9%94%81.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="假设扫描到的行都被加上了行锁">
+<p>由于 session A 把所有的行都加了写锁，所以 session B 在执行第一个 update 语句的时候就被锁住了。需要等到 T6 时刻 session A 提交以后，session B 才能继续执行。</p>
+<p>binlog:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs mysql">insert into t values(1,1,5); /*(1,1,5)*/<br>update t set c=5 where id=1; /*(1,5,5)*/<br><br>update t set d=100 where d=5;/*所有d=5的行，d改成100*/<br><br>update t set d=5 where id=0; /*(0,0,5)*/<br>update t set c=5 where id=0; /*(0,5,5)*/<br></code></pre></td></tr></table></figure>
+<p>按照日志顺序执行，id=0 这一行的最终结果也是 (0,5,5)。所以，id=0 这一行的问题解决了。</p>
+<p>id=1 这一行，在数据库里面的结果是 (1,5,5)，而根据 binlog 的执行结果是 (1,5,100)，也就是说幻读的问题还是没有解决。(因为：在 T3 时刻，我们给所有行加锁的时候，id=1 这一行还不存在，不存在也就加不上锁。)</p>
 </blockquote>
 </li>
 </ol>
+<p><strong>即使把所有的记录都加上锁，还是阻止不了新插入的记录</strong></p>
+<h3 id="如何解决幻读？"><a href="#如何解决幻读？" class="headerlink" title="如何解决幻读？"></a>如何解决幻读？</h3><p>产生幻读的原因是，<strong>行锁只能锁住行，但是新插入记录这个动作，要更新的是记录之间的“间隙”。</strong></p>
+<p><strong>为了解决幻读问题，InnoDB 只好引入新的锁，也就是间隙锁 (Gap Lock)。</strong></p>
+<p><strong>间隙锁，锁的就是两个值之间的空隙。</strong></p>
+<blockquote>
+<p>初始化插入了 6 个记录，这就产生了 7 个间隙</p>
+<img   class="lazyload" data-original="/article/46662/%E4%B8%BB%E9%94%AE%E7%B4%A2%E5%BC%95%E4%B8%8A%E7%9A%84%E8%A1%8C%E9%94%81%E5%92%8C%E9%97%B4%E9%9A%99%E9%94%81.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="主键索引上的行锁和间隙锁">
+<p>当你执行 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select * from t where d=5 for update<br></code></pre></td></tr></table></figure>
+<p>就不止是给数据库中已有的 6 个记录加上了行锁，还同时加了 7 个间隙锁。这样就确保了无法再插入新的记录。</p>
+</blockquote>
+<p><strong>在一行行扫描的过程中，不仅将给行加上了行锁，还给行两边的空隙，也加上了间隙锁。</strong></p>
+<p>数据行是可以加上锁的实体，数据行之间的间隙，也是可以加上锁的实体。</p>
+<p><strong>跟间隙锁存在冲突关系的，是“往这个间隙中插入一个记录”这个操作。</strong>间隙锁之间都不存在冲突关系。</p>
+<p>间隙锁和行锁合称 <strong>next-key lock</strong>，每个 next-key lock 是<strong>前开后闭区间</strong>。</p>
+<blockquote>
+<p>也就是说，我们的表 t 初始化以后，如果用 select * from t for update 要把整个表所有记录锁起来，就形成了 7 个 next-key lock，分别是 (-∞,0]、(0,5]、(5,10]、(10,15]、(15,20]、(20, 25]、(25, +supremum]。</p>
+</blockquote>
+<p><strong>间隙锁的引入，可能会导致同样的语句锁住更大的范围，这其实是影响了并发度的。</strong></p>
+<blockquote>
+<p><strong>只有在可重复读的隔离级别下，才会有间隙锁。读提交的隔离级别下不会有间隙锁</strong></p>
+</blockquote>
+<h2 id="为什么我只改一行的语句，锁这么多？"><a href="#为什么我只改一行的语句，锁这么多？" class="headerlink" title="为什么我只改一行的语句，锁这么多？"></a>为什么我只改一行的语句，锁这么多？</h2><p><strong>加锁规则</strong>：两个“原则”、两个“优化”和一个“bug”</p>
+<ol>
+<li>原则 1：加锁的基本单位是 <strong>next-key lock</strong>。next-key lock 是前开后闭区间。</li>
+<li>原则 2：查找过程中访问到的对象才会加锁。</li>
+<li>优化 1：索引上的等值查询，给唯一索引加锁的时候，next-key lock 退化为行锁。</li>
+<li>优化 2：索引上的等值查询，向右遍历时且最后一个值不满足等值条件的时候，next-key lock 退化为间隙锁。</li>
+<li>一个 bug：唯一索引上的范围查询会访问到不满足条件的第一个值为止。</li>
+</ol>
+<blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs mysql">CREATE TABLE `t` (<br>  `id` int(11) NOT NULL,<br>  `c` int(11) DEFAULT NULL,<br>  `d` int(11) DEFAULT NULL,<br>  PRIMARY KEY (`id`),<br>  KEY `c` (`c`)<br>) ENGINE=InnoDB;<br><br>insert into t values(0,0,0),(5,5,5),<br>(10,10,10),(15,15,15),(20,20,20),(25,25,25);<br></code></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="等值查询间隙锁"><a href="#等值查询间隙锁" class="headerlink" title="等值查询间隙锁"></a>等值查询间隙锁</h3><blockquote>
+<img   class="lazyload" data-original="/article/46662/%E7%AD%89%E5%80%BC%E6%9F%A5%E8%AF%A2%E7%9A%84%E9%97%B4%E9%9A%99%E9%94%81.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="等值查询的间隙锁">
+<p>由于表 t 中没有 id=7 的记录</p>
+<ol>
+<li>根据原则 1，加锁单位是 next-key lock，session A 加锁范围就是 (5,10]；</li>
+<li>同时根据优化 2，这是一个等值查询 (id=7)，而 id=10 不满足查询条件，next-key lock 退化成间隙锁，因此最终加锁的范围是 (5,10)。</li>
+</ol>
+<p><strong>session B 要往这个间隙里面插入 id=8 的记录会被锁住，但是 session C 修改 id=10 这行是可以的。</strong></p>
+</blockquote>
+<h3 id="非唯一索引等值锁"><a href="#非唯一索引等值锁" class="headerlink" title="非唯一索引等值锁"></a>非唯一索引等值锁</h3><blockquote>
+<img   class="lazyload" data-original="/article/46662/%E5%8F%AA%E5%8A%A0%E5%9C%A8%E9%9D%9E%E5%94%AF%E4%B8%80%E7%B4%A2%E5%BC%95%E4%B8%8A%E7%9A%84%E9%94%81.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="只加在非唯一索引上的锁">
+<ol>
+<li>根据原则 1，加锁单位是 next-key lock，因此会给 (0,5]加上 next-key lock。</li>
+<li>要注意 c 是普通索引，因此仅访问 c=5 这一条记录是不能马上停下来的，需要向右遍历，查到 c=10 才放弃。根据原则 2，访问到的都要加锁，因此要给 (5,10]加 next-key lock。</li>
+<li>但是同时这个符合优化 2：等值判断，向右遍历，最后一个值不满足 c=5 这个等值条件，因此退化成间隙锁 (5,10)。</li>
+<li>根据原则 2 ，只有访问到的对象才会加锁，这个查询使用覆盖索引，并不需要访问主键索引，所以主键索引上没有加任何锁，这就是为什么 session B 的 update 语句可以执行完成。(加锁，是加在索引上的。 列上，有索引，就加在索引上； 列上，没有索引，就加在主键上；)</li>
+</ol>
+<p>但 session C 要插入一个 (7,7,7) 的记录，就会被 session A 的间隙锁 (5,10) 锁住。</p>
+<p><strong>lock in share mode 只锁覆盖索引，但是如果是 for update 就不一样了。 执行 for update 时，系统会认为你接下来要更新数据，因此会顺便给主键索引上满足条件的行加上行锁</strong>。</p>
+<p>这个例子说明，<strong>锁是加在索引上的</strong>；同时，它给我们的指导是，如果你要用 lock in share mode 来给行加读锁避免数据被更新的话，就必须得绕过覆盖索引的优化，在查询字段中加入索引中不存在的字段。比如，将 session A 的查询语句改成 select d from t where c=5 lock in share mode。（改为select d ，因为索引c，并没有d列的值，需要回表，查主键，这样就会把id=5这行数据加锁。session B会被锁住。 session C 还是会因为session A 在C列上的间隙锁(0,5},(5,10)而不能插入。 实际加锁范围是：id=5的行锁，普通索引c上锁范围(0,5},(5,10)）</p>
+</blockquote>
+<h3 id="主键索引范围锁"><a href="#主键索引范围锁" class="headerlink" title="主键索引范围锁"></a>主键索引范围锁</h3><blockquote>
+<p>这两条查询语句，加锁范围相同吗？</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql">mysql&gt; select * from t where id=10 for update;<br>mysql&gt; select * from t where id&gt;=10 and id&lt;11 for update;<br></code></pre></td></tr></table></figure>
+<img   class="lazyload" data-original="/article/46662/%E4%B8%BB%E9%94%AE%E7%B4%A2%E5%BC%95%E4%B8%8A%E8%8C%83%E5%9B%B4%E6%9F%A5%E8%AF%A2%E7%9A%84%E9%94%81.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="主键索引上范围查询的锁">
+<ol>
+<li>开始执行的时候，要找到第一个 id=10 的行，因此本该是 next-key lock(5,10]。 根据优化 1， 主键 id 上的等值条件，退化成行锁，只加了 id=10 这一行的行锁。</li>
+<li>范围查找就往后继续找，找到 id=15 这一行停下来，因此需要加 next-key lock(10,15]。</li>
+</ol>
+<p>所以，session A 这时候锁的范围就是主键索引上，行锁 id=10 和 next-key lock(10,15]。</p>
+<p>注意：首次 session A 定位查找 id=10 的行的时候，是当做等值查询来判断的，而向右扫描到 id=15 的时候，用的是范围查询判断。</p>
+</blockquote>
+<h3 id="非唯一索引范围锁"><a href="#非唯一索引范围锁" class="headerlink" title="非唯一索引范围锁"></a>非唯一索引范围锁</h3><blockquote>
+<img   class="lazyload" data-original="/article/46662/%E9%9D%9E%E5%94%AF%E4%B8%80%E7%B4%A2%E5%BC%95%E8%8C%83%E5%9B%B4%E9%94%81.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="非唯一索引范围锁">
+<p>这次 session A 用字段 c 来判断</p>
+<p>加锁规则跟主键索引范围锁唯一的不同是：在第一次用 c=10 定位记录的时候，索引 c 上加了 (5,10]这个 next-key lock 后，由于索引 c 是非唯一索引，没有优化规则，也就是说不会蜕变为行锁，因此最终 sesion A 加的锁是，索引 c 上的 (5,10] 和 (10,15] 这两个 next-key lock。</p>
+</blockquote>
+<h3 id="唯一索引范围锁-bug"><a href="#唯一索引范围锁-bug" class="headerlink" title="唯一索引范围锁 bug"></a>唯一索引范围锁 bug</h3><blockquote>
+<p><img   class="lazyload" data-original="/article/唯一索引范围锁的 bug.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><span class="image-caption">唯一索引范围锁的 bug</span></p>
+<p>session A 是一个范围查询，按照原则 1 的话，应该是索引 id 上只加 (10,15]这个 next-key lock，并且因为 id 是唯一键，所以循环判断到 id=15 这一行就应该停止了</p>
+<p>但是实现上，InnoDB 会往前扫描到第一个不满足条件的行为止，也就是 id=20。而且由于这是个范围扫描，因此索引 id 上的 (15,20]这个 next-key lock 也会被锁上。</p>
+</blockquote>
+<h3 id="非唯一索引上存在”等值”的例子"><a href="#非唯一索引上存在”等值”的例子" class="headerlink" title="非唯一索引上存在”等值”的例子"></a>非唯一索引上存在”等值”的例子</h3><blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">mysql&gt; insert into t values(30,10,30);<br></code></pre></td></tr></table></figure>
+<p>新插入的这一行 c=10，也就是说现在表里有两个 c=10 的行。</p>
+<p>由于非唯一索引上包含主键的值，所以是不可能存在“相同”的两行的。</p>
+<img   class="lazyload" data-original="/article/46662/%E9%9D%9E%E5%94%AF%E4%B8%80%E7%B4%A2%E5%BC%95%E7%AD%89%E5%80%BC%E7%9A%84%E4%BE%8B%E5%AD%90.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="非唯一索引等值的例子">
+<p>可以看到，虽然有两个 c=10，但是它们的主键值 id 是不同的（分别是 10 和 30），因此这两个 c=10 的记录之间，也是有间隙的。</p>
+<p><img   class="lazyload" data-original="/article/delete 示例.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><span class="image-caption">delete 示例</span></p>
+<ol>
+<li>session A 在遍历的时候，先访问第一个 c=10 的记录。同样地，根据原则 1，这里加的是 (c=5,id=5) 到 (c=10,id=10) 这个 next-key lock。</li>
+<li>session A 向右查找，直到碰到 (c=15,id=15) 这一行，循环才结束。根据优化 2，这是一个等值查询，向右查找到了不满足条件的行，所以会退化成 (c=10,id=10) 到 (c=15,id=15) 的间隙锁。</li>
+</ol>
+<p>也就是说，这个 delete 语句在索引 c 上的加锁范围，就是下图中蓝色区域覆盖的部分。</p>
+<p><img   class="lazyload" data-original="/article/delete 加锁效果示例.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><span class="image-caption">delete 加锁效果示例</span></p>
+</blockquote>
+<h3 id="limit-语句加锁"><a href="#limit-语句加锁" class="headerlink" title="limit 语句加锁"></a>limit 语句加锁</h3><blockquote>
+<p><img   class="lazyload" data-original="/article/limit 语句加锁.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><span class="image-caption">limit 语句加锁</span></p>
+<p>session A 的 delete 语句加了 limit 2。你知道表 t 里 c=10 的记录其实只有两条，因此加不加 limit 2，删除的效果都是一样的，但是加锁的效果却不同。可以看到，session B 的 insert 语句执行通过了。</p>
+<p>这是因为， delete 语句明确加了 limit 2 的限制，因此在遍历到 (c=10, id=30) 这一行之后，满足条件的语句已经有两条，循环就结束了。</p>
+<p>因此，索引 c 上的加锁范围就变成了从（c=5,id=5) 到（c=10,id=30) 这个前开后闭区间。</p>
+<p><img   class="lazyload" data-original="/article/带 limit 2 的加锁效果.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><span class="image-caption">带 limit 2 的加锁效果</span></p>
+<p><strong>在删除数据的时候尽量加 limit</strong>。这样不仅可以控制删除数据的条数，让操作更安全，还可以减小加锁的范围。</p>
+</blockquote>
+<h3 id="一个死锁的例子"><a href="#一个死锁的例子" class="headerlink" title="一个死锁的例子"></a>一个死锁的例子</h3><blockquote>
+<img   class="lazyload" data-original="/article/46662/%E6%93%8D%E4%BD%9C%E5%BA%8F%E5%88%97.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="操作序列">
+<ol>
+<li>session A 启动事务后执行查询语句加 lock in share mode，在索引 c 上加了 next-key lock(5,10] 和间隙锁 (10,15)；</li>
+<li>session B 的 update 语句也要在索引 c 上加 next-key lock(5,10] ，进入锁等待；</li>
+<li>然后 session A 要再插入 (8,8,8) 这一行，被 session B 的间隙锁锁住。由于出现了死锁，InnoDB 让 session B 回滚。</li>
+</ol>
+<p>session B 的“加 next-key lock(5,10] ”操作，实际上分成了两步，先是加 (5,10) 的间隙锁，加锁成功；然后加 c=10 的行锁，这时候才被锁住的。</p>
+<p><strong>也就是说，我们在分析加锁规则的时候可以用 next-key lock 来分析。但是要知道，具体执行的时候，是要分成间隙锁和行锁两段来执行的。</strong></p>
+</blockquote>
 
       </section>
       <section class="extra">
@@ -632,7 +748,7 @@
           
   <aside class="toc-wrap">
     <h3 class="toc-title">文章目录：</h3>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%99%AE%E9%80%9A%E7%B4%A2%E5%BC%95%E5%92%8C%E5%94%AF%E4%B8%80%E7%B4%A2%E5%BC%95%EF%BC%8C%E5%BA%94%E8%AF%A5%E6%80%8E%E4%B9%88%E9%80%89%E6%8B%A9%EF%BC%9F"><span class="toc-text">普通索引和唯一索引，应该怎么选择？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9B%B4%E6%96%B0%E8%BF%87%E7%A8%8B"><span class="toc-text">更新过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E9%80%89%E6%8B%A9%E5%92%8C%E5%AE%9E%E8%B7%B5"><span class="toc-text">索引选择和实践</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#change-buffer-%E5%92%8C-redo-log"><span class="toc-text">change buffer 和 redo log</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MySQL%E4%B8%BA%E4%BB%80%E4%B9%88%E6%9C%89%E6%97%B6%E5%80%99%E4%BC%9A%E9%80%89%E9%94%99%E7%B4%A2%E5%BC%95%EF%BC%9F"><span class="toc-text">MySQL为什么有时候会选错索引？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E5%8C%96%E5%99%A8%E7%9A%84%E9%80%BB%E8%BE%91"><span class="toc-text">优化器的逻辑</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%AB%E6%8F%8F%E8%A1%8C%E6%95%B0%E6%98%AF%E6%80%8E%E4%B9%88%E5%88%A4%E6%96%AD%E7%9A%84%EF%BC%9F"><span class="toc-text">扫描行数是怎么判断的？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E9%80%89%E6%8B%A9%E5%BC%82%E5%B8%B8%E5%92%8C%E5%A4%84%E7%90%86"><span class="toc-text">索引选择异常和处理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%8E%E4%B9%88%E7%BB%99%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%AD%97%E6%AE%B5%E5%8A%A0%E7%B4%A2%E5%BC%95%EF%BC%9F"><span class="toc-text">怎么给字符串字段加索引？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E7%BC%80%E7%B4%A2%E5%BC%95%E5%AF%B9%E8%A6%86%E7%9B%96%E7%B4%A2%E5%BC%95%E7%9A%84%E5%BD%B1%E5%93%8D"><span class="toc-text">前缀索引对覆盖索引的影响</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E6%96%B9%E5%BC%8F"><span class="toc-text">其他方式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E7%9A%84MySQL%E4%BC%9A%E2%80%9C%E6%8A%96%E2%80%9D%E4%B8%80%E4%B8%8B%EF%BC%9F"><span class="toc-text">为什么我的MySQL会“抖”一下？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#InnoDB-%E5%88%B7%E8%84%8F%E9%A1%B5%E7%9A%84%E6%8E%A7%E5%88%B6%E7%AD%96%E7%95%A5"><span class="toc-text">InnoDB 刷脏页的控制策略</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A1%A8%E6%95%B0%E6%8D%AE%E5%88%A0%E6%8E%89%E4%B8%80%E5%8D%8A%EF%BC%8C%E8%A1%A8%E6%96%87%E4%BB%B6%E5%A4%A7%E5%B0%8F%E4%B8%8D%E5%8F%98%EF%BC%9F"><span class="toc-text">为什么表数据删掉一半，表文件大小不变？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%88%A0%E9%99%A4%E6%B5%81%E7%A8%8B"><span class="toc-text">数据删除流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E5%BB%BA%E8%A1%A8"><span class="toc-text">重建表</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#count-%E8%BF%99%E4%B9%88%E6%85%A2%EF%BC%8C%E6%88%91%E8%AF%A5%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F"><span class="toc-text">count(*)这么慢，我该怎么办？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E7%BC%93%E5%AD%98%E7%B3%BB%E7%BB%9F%E4%BF%9D%E5%AD%98%E8%AE%A1%E6%95%B0"><span class="toc-text">用缓存系统保存计数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BF%9D%E5%AD%98%E8%AE%A1%E6%95%B0"><span class="toc-text">在数据库保存计数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8D%E5%90%8C%E7%9A%84-count-%E7%94%A8%E6%B3%95"><span class="toc-text">不同的 count 用法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%80%9Corder-by%E2%80%9D%E6%98%AF%E6%80%8E%E4%B9%88%E5%B7%A5%E4%BD%9C%E7%9A%84%EF%BC%9F"><span class="toc-text">“order by”是怎么工作的？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%A8%E5%AD%97%E6%AE%B5%E6%8E%92%E5%BA%8F"><span class="toc-text">全字段排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#rowid-%E6%8E%92%E5%BA%8F"><span class="toc-text">rowid 排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%A8%E5%AD%97%E6%AE%B5%E6%8E%92%E5%BA%8F-VS-rowid-%E6%8E%92%E5%BA%8F"><span class="toc-text">全字段排序 VS rowid 排序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E6%AD%A3%E7%A1%AE%E5%9C%B0%E6%98%BE%E7%A4%BA%E9%9A%8F%E6%9C%BA%E6%B6%88%E6%81%AF%EF%BC%9F"><span class="toc-text">如何正确地显示随机消息？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E4%B8%B4%E6%97%B6%E8%A1%A8"><span class="toc-text">内存临时表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A3%81%E7%9B%98%E4%B8%B4%E6%97%B6%E8%A1%A8"><span class="toc-text">磁盘临时表</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E5%8F%AA%E6%9F%A5%E4%B8%80%E8%A1%8C%E7%9A%84%E8%AF%AD%E5%8F%A5%EF%BC%8C%E4%B9%9F%E6%89%A7%E8%A1%8C%E8%BF%99%E4%B9%88%E6%85%A2%EF%BC%9F"><span class="toc-text">为什么我只查一行的语句，也执行这么慢？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%B1%BB%EF%BC%9A%E6%9F%A5%E8%AF%A2%E9%95%BF%E6%97%B6%E9%97%B4%E4%B8%8D%E8%BF%94%E5%9B%9E"><span class="toc-text">第一类：查询长时间不返回</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E7%B1%BB%EF%BC%9A%E6%9F%A5%E8%AF%A2%E6%85%A2"><span class="toc-text">第二类：查询慢</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%BB%E8%AF%BB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%8C%E5%B9%BB%E8%AF%BB%E6%9C%89%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%EF%BC%9F"><span class="toc-text">幻读是什么，幻读有什么问题？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%BB%E8%AF%BB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">幻读是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%BB%E8%AF%BB%E6%9C%89%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%EF%BC%9F"><span class="toc-text">幻读有什么问题？</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%99%AE%E9%80%9A%E7%B4%A2%E5%BC%95%E5%92%8C%E5%94%AF%E4%B8%80%E7%B4%A2%E5%BC%95%EF%BC%8C%E5%BA%94%E8%AF%A5%E6%80%8E%E4%B9%88%E9%80%89%E6%8B%A9%EF%BC%9F"><span class="toc-text">普通索引和唯一索引，应该怎么选择？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9B%B4%E6%96%B0%E8%BF%87%E7%A8%8B"><span class="toc-text">更新过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E9%80%89%E6%8B%A9%E5%92%8C%E5%AE%9E%E8%B7%B5"><span class="toc-text">索引选择和实践</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#change-buffer-%E5%92%8C-redo-log"><span class="toc-text">change buffer 和 redo log</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MySQL%E4%B8%BA%E4%BB%80%E4%B9%88%E6%9C%89%E6%97%B6%E5%80%99%E4%BC%9A%E9%80%89%E9%94%99%E7%B4%A2%E5%BC%95%EF%BC%9F"><span class="toc-text">MySQL为什么有时候会选错索引？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E5%8C%96%E5%99%A8%E7%9A%84%E9%80%BB%E8%BE%91"><span class="toc-text">优化器的逻辑</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%AB%E6%8F%8F%E8%A1%8C%E6%95%B0%E6%98%AF%E6%80%8E%E4%B9%88%E5%88%A4%E6%96%AD%E7%9A%84%EF%BC%9F"><span class="toc-text">扫描行数是怎么判断的？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E9%80%89%E6%8B%A9%E5%BC%82%E5%B8%B8%E5%92%8C%E5%A4%84%E7%90%86"><span class="toc-text">索引选择异常和处理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%8E%E4%B9%88%E7%BB%99%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%AD%97%E6%AE%B5%E5%8A%A0%E7%B4%A2%E5%BC%95%EF%BC%9F"><span class="toc-text">怎么给字符串字段加索引？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E7%BC%80%E7%B4%A2%E5%BC%95%E5%AF%B9%E8%A6%86%E7%9B%96%E7%B4%A2%E5%BC%95%E7%9A%84%E5%BD%B1%E5%93%8D"><span class="toc-text">前缀索引对覆盖索引的影响</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E6%96%B9%E5%BC%8F"><span class="toc-text">其他方式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E7%9A%84MySQL%E4%BC%9A%E2%80%9C%E6%8A%96%E2%80%9D%E4%B8%80%E4%B8%8B%EF%BC%9F"><span class="toc-text">为什么我的MySQL会“抖”一下？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#InnoDB-%E5%88%B7%E8%84%8F%E9%A1%B5%E7%9A%84%E6%8E%A7%E5%88%B6%E7%AD%96%E7%95%A5"><span class="toc-text">InnoDB 刷脏页的控制策略</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A1%A8%E6%95%B0%E6%8D%AE%E5%88%A0%E6%8E%89%E4%B8%80%E5%8D%8A%EF%BC%8C%E8%A1%A8%E6%96%87%E4%BB%B6%E5%A4%A7%E5%B0%8F%E4%B8%8D%E5%8F%98%EF%BC%9F"><span class="toc-text">为什么表数据删掉一半，表文件大小不变？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%88%A0%E9%99%A4%E6%B5%81%E7%A8%8B"><span class="toc-text">数据删除流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E5%BB%BA%E8%A1%A8"><span class="toc-text">重建表</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#count-%E8%BF%99%E4%B9%88%E6%85%A2%EF%BC%8C%E6%88%91%E8%AF%A5%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F"><span class="toc-text">count(*)这么慢，我该怎么办？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E7%BC%93%E5%AD%98%E7%B3%BB%E7%BB%9F%E4%BF%9D%E5%AD%98%E8%AE%A1%E6%95%B0"><span class="toc-text">用缓存系统保存计数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BF%9D%E5%AD%98%E8%AE%A1%E6%95%B0"><span class="toc-text">在数据库保存计数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8D%E5%90%8C%E7%9A%84-count-%E7%94%A8%E6%B3%95"><span class="toc-text">不同的 count 用法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%80%9Corder-by%E2%80%9D%E6%98%AF%E6%80%8E%E4%B9%88%E5%B7%A5%E4%BD%9C%E7%9A%84%EF%BC%9F"><span class="toc-text">“order by”是怎么工作的？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%A8%E5%AD%97%E6%AE%B5%E6%8E%92%E5%BA%8F"><span class="toc-text">全字段排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#rowid-%E6%8E%92%E5%BA%8F"><span class="toc-text">rowid 排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%A8%E5%AD%97%E6%AE%B5%E6%8E%92%E5%BA%8F-VS-rowid-%E6%8E%92%E5%BA%8F"><span class="toc-text">全字段排序 VS rowid 排序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E6%AD%A3%E7%A1%AE%E5%9C%B0%E6%98%BE%E7%A4%BA%E9%9A%8F%E6%9C%BA%E6%B6%88%E6%81%AF%EF%BC%9F"><span class="toc-text">如何正确地显示随机消息？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E4%B8%B4%E6%97%B6%E8%A1%A8"><span class="toc-text">内存临时表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A3%81%E7%9B%98%E4%B8%B4%E6%97%B6%E8%A1%A8"><span class="toc-text">磁盘临时表</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E5%8F%AA%E6%9F%A5%E4%B8%80%E8%A1%8C%E7%9A%84%E8%AF%AD%E5%8F%A5%EF%BC%8C%E4%B9%9F%E6%89%A7%E8%A1%8C%E8%BF%99%E4%B9%88%E6%85%A2%EF%BC%9F"><span class="toc-text">为什么我只查一行的语句，也执行这么慢？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%B1%BB%EF%BC%9A%E6%9F%A5%E8%AF%A2%E9%95%BF%E6%97%B6%E9%97%B4%E4%B8%8D%E8%BF%94%E5%9B%9E"><span class="toc-text">第一类：查询长时间不返回</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E7%B1%BB%EF%BC%9A%E6%9F%A5%E8%AF%A2%E6%85%A2"><span class="toc-text">第二类：查询慢</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%BB%E8%AF%BB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%8C%E5%B9%BB%E8%AF%BB%E6%9C%89%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%EF%BC%9F"><span class="toc-text">幻读是什么，幻读有什么问题？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%BB%E8%AF%BB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">幻读是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%BB%E8%AF%BB%E6%9C%89%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%EF%BC%9F"><span class="toc-text">幻读有什么问题？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E5%B9%BB%E8%AF%BB%EF%BC%9F"><span class="toc-text">如何解决幻读？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E5%8F%AA%E6%94%B9%E4%B8%80%E8%A1%8C%E7%9A%84%E8%AF%AD%E5%8F%A5%EF%BC%8C%E9%94%81%E8%BF%99%E4%B9%88%E5%A4%9A%EF%BC%9F"><span class="toc-text">为什么我只改一行的语句，锁这么多？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AD%89%E5%80%BC%E6%9F%A5%E8%AF%A2%E9%97%B4%E9%9A%99%E9%94%81"><span class="toc-text">等值查询间隙锁</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%9E%E5%94%AF%E4%B8%80%E7%B4%A2%E5%BC%95%E7%AD%89%E5%80%BC%E9%94%81"><span class="toc-text">非唯一索引等值锁</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BB%E9%94%AE%E7%B4%A2%E5%BC%95%E8%8C%83%E5%9B%B4%E9%94%81"><span class="toc-text">主键索引范围锁</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%9E%E5%94%AF%E4%B8%80%E7%B4%A2%E5%BC%95%E8%8C%83%E5%9B%B4%E9%94%81"><span class="toc-text">非唯一索引范围锁</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%94%AF%E4%B8%80%E7%B4%A2%E5%BC%95%E8%8C%83%E5%9B%B4%E9%94%81-bug"><span class="toc-text">唯一索引范围锁 bug</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%9E%E5%94%AF%E4%B8%80%E7%B4%A2%E5%BC%95%E4%B8%8A%E5%AD%98%E5%9C%A8%E2%80%9D%E7%AD%89%E5%80%BC%E2%80%9D%E7%9A%84%E4%BE%8B%E5%AD%90"><span class="toc-text">非唯一索引上存在”等值”的例子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#limit-%E8%AF%AD%E5%8F%A5%E5%8A%A0%E9%94%81"><span class="toc-text">limit 语句加锁</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E4%B8%AA%E6%AD%BB%E9%94%81%E7%9A%84%E4%BE%8B%E5%AD%90"><span class="toc-text">一个死锁的例子</span></a></li></ol></li></ol>
   </aside>
 
         
