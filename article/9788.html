@@ -365,7 +365,7 @@
 <p>但如果只有单线程压测，那就只能一个事务对应一次持久化操作。</p>
 <blockquote>
 <p>为了让一次 fsync 带的组员更多，MySQL 有一个很有趣的优化：拖时间</p>
-<img   class="lazyload" data-original="/article/undefined/%E4%B8%A4%E9%98%B6%E6%AE%B5%E6%8F%90%E4%BA%A4%E7%BB%86%E5%8C%96.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="两阶段提交细化">
+<img   class="lazyload" data-original="/article/9788/%E4%B8%A4%E9%98%B6%E6%AE%B5%E6%8F%90%E4%BA%A4%E7%BB%86%E5%8C%96.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="两阶段提交细化">
 <p>把 redo log 做 fsync 的时间拖到了步骤 1 之后</p>
 <p>在执行第 4 步把 binlog fsync 到磁盘时，如果有多个事务的 binlog 已经写完了，也是一起持久化的，这样也可以减少 IOPS 的消耗。</p>
 <p>不过通常情况下第 3 步执行得会很快，所以 binlog 的 write 和 fsync 间的间隔时间短，导致能集合到一起持久化的 binlog 比较少，因此 binlog 的组提交的效果通常不如 redo log 的效果那么好。</p>
@@ -411,7 +411,7 @@
 <blockquote>
 <p><strong>节点 A 到 B 这条线的内部流程是什么样的?</strong></p>
 <p>一个 update 语句在节点 A 执行，然后同步到节点 B 的完整流程图</p>
-<img   class="lazyload" data-original="/article/undefined/%E4%B8%BB%E5%A4%87%E6%B5%81%E7%A8%8B%E5%9B%BE.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="主备流程图">
+<img   class="lazyload" data-original="/article/9788/%E4%B8%BB%E5%A4%87%E6%B5%81%E7%A8%8B%E5%9B%BE.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="主备流程图">
 <p>主库接收到客户端的更新请求后，执行内部事务的更新逻辑，同时写 binlog</p>
 <p>备库 B 跟主库 A 之间维持了一个长连接。主库 A 内部有一个线程，专门用于服务备库 B 的这个长连接。一个事务日志同步的完整过程是这样的：</p>
 <ol>
@@ -544,7 +544,7 @@
 <li>主备切换的可用性优先策略会导致数据不一致。因此，大多数情况下，建议使用可靠性优先策略。毕竟对数据服务来说的话，数据的可靠性一般还是要优于可用性的。</li>
 </ol>
 <h2 id="备库为什么会延迟好几个小时？"><a href="#备库为什么会延迟好几个小时？" class="headerlink" title="备库为什么会延迟好几个小时？"></a>备库为什么会延迟好几个小时？</h2><blockquote>
-<img   class="lazyload" data-original="/article/undefined/%E4%B8%BB%E5%A4%87%E6%B5%81%E7%A8%8B%E5%9B%BE1.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="主备流程图1">
+<img   class="lazyload" data-original="/article/9788/%E4%B8%BB%E5%A4%87%E6%B5%81%E7%A8%8B%E5%9B%BE1.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="主备流程图1">
 <p>一个箭头代表了客户端写入主库，另一箭头代表的是备库上 sql_thread 执行中转日志（relay log）。</p>
 <p>如果用箭头的粗细来代表并行度的话，第一个箭头要明显粗于第二个箭头。</p>
 <p>日志在备库上的执行，就是图中备库上 sql_thread 更新数据 (DATA) 的逻辑。如果是用单线程的话，就会导致备库应用日志不够快，造成<strong>主备延迟</strong>。</p>
@@ -553,7 +553,7 @@
 <p>在官方的 5.6 版本之前，MySQL 只支持单线程复制，由此在主库并发高、TPS 高时就会出现严重的主备延迟问题。</p>
 </blockquote>
 <p><strong>MySQL 多线程复制</strong></p>
-<img   class="lazyload" data-original="/article/undefined/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="多线程模型">
+<img   class="lazyload" data-original="/article/9788/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="多线程模型">
 <p>把只有一个线程的 sql_thread，拆成多个线程。</p>
 <p>coordinator 就是原来的 sql_thread, 不过现在它不再直接更新数据了，只负责读取中转日志和分发事务。真正更新日志的，变成了 worker 线程。而 work 线程的个数，就是由参数 <code>slave_parallel_workers</code> 决定的。</p>
 <p>coordinator 在分发的时候，需要满足以下这两个基本要求：</p>
@@ -561,7 +561,7 @@
 <li>不能造成更新覆盖。这就要求更新同一行的两个事务，必须被分发到同一个 worker 中。</li>
 <li>同一个事务不能被拆开，必须放到同一个 worker 中。</li>
 </ol>
-<h3 id="按表分发策略"><a href="#按表分发策略" class="headerlink" title="按表分发策略"></a>按表分发策略</h3><img   class="lazyload" data-original="/article/undefined/%E6%8C%89%E8%A1%A8%E5%B9%B6%E8%A1%8C%E5%A4%8D%E5%88%B6%E7%A8%8B%E6%A8%A1%E5%9E%8B.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="按表并行复制程模型">
+<h3 id="按表分发策略"><a href="#按表分发策略" class="headerlink" title="按表分发策略"></a>按表分发策略</h3><img   class="lazyload" data-original="/article/9788/%E6%8C%89%E8%A1%A8%E5%B9%B6%E8%A1%8C%E5%A4%8D%E5%88%B6%E7%A8%8B%E6%A8%A1%E5%9E%8B.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="按表并行复制程模型">
 <p>每个 worker 线程对应一个 hash 表，用于保存当前正在这个 worker 的“执行队列”里的事务所涉及的表。<strong>hash 表的 key 是“库名. 表名”，value 是一个数字，表示队列中有多少个事务修改这个表。</strong></p>
 <p>每个事务在分发的时候，跟所有 worker 的冲突关系包括以下三种情况：</p>
 <ol>
@@ -575,7 +575,7 @@
 <p>基于行的策略，事务 hash 表中还需要考虑唯一键，即 <strong>key 应该是“库名 + 表名 + 索引名 + 该索引的值”。</strong></p>
 <blockquote>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs mysql">CREATE TABLE `t1` (<br>  `id` int(11) NOT NULL,<br>  `a` int(11) DEFAULT NULL,<br>  `b` int(11) DEFAULT NULL,<br>  PRIMARY KEY (`id`),<br>  UNIQUE KEY `a` (`a`)<br>) ENGINE=InnoDB;<br><br>insert into t1 values(1,1,1),(2,2,2),(3,3,3),(4,4,4),(5,5,5);<br></code></pre></td></tr></table></figure>
-<img   class="lazyload" data-original="/article/undefined/%E5%94%AF%E4%B8%80%E9%94%AE%E5%86%B2%E7%AA%81%E7%A4%BA%E4%BE%8B.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="唯一键冲突示例">
+<img   class="lazyload" data-original="/article/9788/%E5%94%AF%E4%B8%80%E9%94%AE%E5%86%B2%E7%AA%81%E7%A4%BA%E4%BE%8B.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="唯一键冲突示例">
 <ol>
 <li>key=hash_func(db1+t1+“PRIMARY”+2), value=2; 这里 value=2 是因为修改前后的行 id 值不变，出现了两次。</li>
 <li>key=hash_func(db1+t1+“a”+2), value=1，表示会影响到这个表 a=2 的行。</li>
@@ -628,7 +628,7 @@
 <p><strong>约束：</strong></p>
 <p>对于“表上没主键”和“外键约束”的场景，WRITESET 策略是没法并行的，也会暂时退化为单线程模型。</p>
 <h2 id="主库出问题了，从库怎么办？"><a href="#主库出问题了，从库怎么办？" class="headerlink" title="主库出问题了，从库怎么办？"></a>主库出问题了，从库怎么办？</h2><blockquote>
-<img   class="lazyload" data-original="/article/undefined/%E4%B8%80%E4%B8%BB%E5%A4%9A%E4%BB%8E%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="一主多从基本结构">
+<img   class="lazyload" data-original="/article/9788/%E4%B8%80%E4%B8%BB%E5%A4%9A%E4%BB%8E%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="一主多从基本结构">
 <p>虚线箭头表示的是主备关系，也就是 A 和 A’互为主备， 从库 B、C、D 指向的是主库 A。一主多从的设置，一般用于读写分离，主库负责所有的写入和一部分读，其他的读请求则由从库分担。</p>
 </blockquote>
 <blockquote>
@@ -712,7 +712,7 @@
 <p>在基于 GTID 的主备关系里，系统认为只要建立主备关系，就必须保证主库发给备库的日志是完整的。</p>
 <h2 id="读写分离有哪些坑？"><a href="#读写分离有哪些坑？" class="headerlink" title="读写分离有哪些坑？"></a>读写分离有哪些坑？</h2><blockquote>
 <p><strong>读写分离基本结构</strong></p>
-<img   class="lazyload" data-original="/article/undefined/%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="读写分离基本结构">
+<img   class="lazyload" data-original="/article/9788/%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="读写分离基本结构">
 <p><strong>带 proxy 的读写分离架构</strong></p>
 <p><img   class="lazyload" data-original="/article/带 proxy 的读写分离架构.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><span class="image-caption">带 proxy 的读写分离架构</span></p>
 </blockquote>

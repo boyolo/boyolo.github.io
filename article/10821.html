@@ -471,7 +471,7 @@
 <li>如果发送成功，就清空 net_buffer，然后继续取下一行，并写入 net_buffer。</li>
 <li>如果发送函数返回 EAGAIN 或 WSAEWOULDBLOCK，就表示本地网络栈（socket send buffer）写满了，进入等待。直到网络栈重新可写，再继续发送。</li>
 </ol>
-<img   class="lazyload" data-original="/article/undefined/%E6%9F%A5%E8%AF%A2%E7%BB%93%E6%9E%9C%E5%8F%91%E9%80%81%E6%B5%81%E7%A8%8B.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="查询结果发送流程">
+<img   class="lazyload" data-original="/article/10821/%E6%9F%A5%E8%AF%A2%E7%BB%93%E6%9E%9C%E5%8F%91%E9%80%81%E6%B5%81%E7%A8%8B.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="查询结果发送流程">
 <ol>
 <li>一个查询在发送过程中，占用的 MySQL 内部的内存最大就是 net_buffer_length 这么大，并不会达到 200G；</li>
 <li>socket send buffer 也不可能达到 200G（默认定义 /proc/sys/net/core/wmem_default），如果 socket send buffer 被写满，就会暂停读数据的流程。</li>
@@ -636,7 +636,7 @@
 <blockquote>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select * from t1 where a&gt;=1 and a&lt;=100;<br></code></pre></td></tr></table></figure>
 <p>主键索引是一棵 B+ 树，在这棵树上，每次只能根据一个主键 id 查到一行数据。因此，回表肯定是一行行搜索主键索引的，基本流程如图所示</p>
-<img   class="lazyload" data-original="/article/undefined/%E5%9F%BA%E6%9C%AC%E5%9B%9E%E8%A1%A8%E6%B5%81%E7%A8%8B.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="基本回表流程">
+<img   class="lazyload" data-original="/article/10821/%E5%9F%BA%E6%9C%AC%E5%9B%9E%E8%A1%A8%E6%B5%81%E7%A8%8B.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="基本回表流程">
 <p>如果随着 a 的值递增顺序查询的话，id 的值就变成随机的，那么就会出现随机访问，性能相对较差。(a虽然是倒叙存放在表中，但a上有B+tree索引，是顺序存储的，但是a索引的叶子节点存放的id的值是倒叙的，a索引的范围查询通过id回表查询，b+tree索引都是顺序存储的，那么通过a索引获取到的ID是倒序的，不是按照索引顺序查询就变成了随机查询。)</p>
 </blockquote>
 <p><strong>因为大多数的数据都是按照主键递增顺序插入得到的，所以我们可以认为，如果按照主键的递增顺序查询的话，对磁盘的读比较接近顺序读，能够提升读性能。</strong></p>
@@ -762,7 +762,7 @@
 <h3 id="临时表的应用"><a href="#临时表的应用" class="headerlink" title="临时表的应用"></a>临时表的应用</h3><p>由于不用担心线程之间的重名冲突，临时表经常会被用在<strong>复杂查询的优化过程</strong>中。其中，分库分表系统的跨库查询就是一个典型的使用场景。</p>
 <blockquote>
 <p>一般分库分表的场景，就是要把一个逻辑上的大表分散到不同的数据库实例上。比如。将一个大表 ht，按照字段 f，拆分成 1024 个分表，然后分布到 32 个数据库实例上。如下图所示：</p>
-<img   class="lazyload" data-original="/article/undefined/%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%E7%AE%80%E5%9B%BE.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="分库分表简图">
+<img   class="lazyload" data-original="/article/10821/%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%E7%AE%80%E5%9B%BE.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="分库分表简图">
 <p>一般情况下，这种分库分表系统都有一个中间层 proxy。不过，也有一些方案会让客户端直接连接数据库，也就是没有 proxy 这一层。</p>
 <p>在这个架构中，分区 key 的选择是以“减少跨库和跨表查询”为依据的。如果大部分的语句都会包含 f 的等值条件，那么就要用 f 做分区键。这样，在 proxy 这一层解析完 SQL 语句以后，就能确定将这条语句路由到哪个分表做查询。</p>
 <p>比如下面这条语句：</p>
@@ -793,7 +793,7 @@
 <li><p>得到结果。</p>
 </li>
 </ol>
-<img   class="lazyload" data-original="/article/undefined/%E8%B7%A8%E5%BA%93%E6%9F%A5%E8%AF%A2%E6%B5%81%E7%A8%8B%E7%A4%BA%E6%84%8F%E5%9B%BE.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="跨库查询流程示意图">
+<img   class="lazyload" data-original="/article/10821/%E8%B7%A8%E5%BA%93%E6%9F%A5%E8%AF%A2%E6%B5%81%E7%A8%8B%E7%A4%BA%E6%84%8F%E5%9B%BE.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="跨库查询流程示意图">
 <p>在实践中，我们往往会发现每个分库的计算量都不饱和，所以会直接把临时表 temp_ht 放到 32 个分库中的某一个上。</p>
 </blockquote>
 <h3 id="为什么临时表可以重名？-1"><a href="#为什么临时表可以重名？-1" class="headerlink" title="为什么临时表可以重名？"></a>为什么临时表可以重名？</h3><blockquote>
@@ -878,7 +878,7 @@
 </ol>
 <p><img   class="lazyload" data-original="/article/group by 执行流程.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><span class="image-caption">group by 执行流程</span></p>
 <p>图中最后一步，对内存临时表的排序</p>
-<img   class="lazyload" data-original="/article/undefined/%E5%86%85%E5%AD%98%E4%B8%B4%E6%97%B6%E8%A1%A8%E6%8E%92%E5%BA%8F%E6%B5%81%E7%A8%8B.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="内存临时表排序流程">
+<img   class="lazyload" data-original="/article/10821/%E5%86%85%E5%AD%98%E4%B8%B4%E6%97%B6%E8%A1%A8%E6%8E%92%E5%BA%8F%E6%B5%81%E7%A8%8B.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="内存临时表排序流程">
 </blockquote>
 <h3 id="group-by-优化方法-–-索引"><a href="#group-by-优化方法-–-索引" class="headerlink" title="group by 优化方法 – 索引"></a>group by 优化方法 – 索引</h3><p>group by 逻辑需要构造一个带唯一索引的表，执行代价是比较高的</p>
 <blockquote>

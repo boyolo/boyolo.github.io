@@ -235,7 +235,7 @@
 </blockquote>
 <p><strong>所有代码的执行时间 T(n) 与每行代码的执行次数 f(n) 成正比</strong></p>
 <p><strong>大 O 时间复杂度表示法</strong></p>
-<img   class="lazyload" data-original="/article/undefined/%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90%E5%85%AC%E5%BC%8F.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="复杂度分析公式">
+<img   class="lazyload" data-original="/article/54635/%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90%E5%85%AC%E5%BC%8F.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="复杂度分析公式">
 <ol>
 <li>T(n) 表示代码执行的时间；</li>
 <li>n 表示数据规模的大小；</li>
@@ -255,7 +255,7 @@
 <p>如果 T1(n)=O(f(n))，T2(n)=O(g(n))，那么 T(n)=T1(n)<em>T2(n)=O(f(n))</em>O(g(n))=O(f(n)*g(n))</p>
 </li>
 </ol>
-<h3 id="几种常见时间复杂度实例分析"><a href="#几种常见时间复杂度实例分析" class="headerlink" title="几种常见时间复杂度实例分析"></a>几种常见时间复杂度实例分析</h3><img   class="lazyload" data-original="/article/undefined/%E5%A4%8D%E6%9D%82%E5%BA%A6%E9%87%8F%E7%BA%A7.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="复杂度量级">
+<h3 id="几种常见时间复杂度实例分析"><a href="#几种常见时间复杂度实例分析" class="headerlink" title="几种常见时间复杂度实例分析"></a>几种常见时间复杂度实例分析</h3><img   class="lazyload" data-original="/article/54635/%E5%A4%8D%E6%9D%82%E5%BA%A6%E9%87%8F%E7%BA%A7.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="复杂度量级">
 <p>多项式量级和非多项式量级，其中，非多项式量级只有两个：O(2<sup>n</sup>) 和 O(n!)</p>
 <p><strong>越高阶复杂度的算法，执行效率越低</strong></p>
 <p>时间复杂度为非多项式量级的算法问题叫作 NP（Non-Deterministic Polynomial，非确定多项式）问题</p>
@@ -304,14 +304,14 @@
 <h3 id="平均情况时间复杂度"><a href="#平均情况时间复杂度" class="headerlink" title="平均情况时间复杂度"></a>平均情况时间复杂度</h3><blockquote>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// n表示数组array的长度</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">find</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] array, <span class="hljs-keyword">int</span> n, <span class="hljs-keyword">int</span> x)</span> </span>&#123;<br>  <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;<br>  <span class="hljs-keyword">int</span> pos = -<span class="hljs-number">1</span>;<br>  <span class="hljs-keyword">for</span> (; i &lt; n; ++i) &#123;<br>    <span class="hljs-keyword">if</span> (array[i] == x) &#123;<br>       pos = i;<br>       <span class="hljs-keyword">break</span>;<br>    &#125;<br>  &#125;<br>  <span class="hljs-keyword">return</span> pos;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>要查找的变量 x 在数组中的位置，有 n+1 种情况：在数组的 0～n-1 位置中和不在数组中。我们把每种情况下，查找需要遍历的元素个数累加起来，然后再除以 n+1，就可以得到需要遍历的元素个数的平均值，即：</p>
-<img   class="lazyload" data-original="/article/undefined/%E5%B9%B3%E5%9D%87%E6%83%85%E5%86%B5.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="平均情况">
+<img   class="lazyload" data-original="/article/54635/%E5%B9%B3%E5%9D%87%E6%83%85%E5%86%B5.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="平均情况">
 <p>时间复杂度的大 O 标记法中，可以省略掉系数、低阶、常量，所以，这个公式简化之后，得到的平均时间复杂度就是 O(n)</p>
 </blockquote>
 <p><strong>加权平均时间复杂度</strong>或者<strong>期望时间复杂度</strong></p>
 <blockquote>
 <p>要查找的变量 x，要么在数组里，要么就不在数组里。</p>
 <p>假设在数组中与不在数组中的概率都为 1/2。另外，要查找的数据出现在 0～n-1 这 n 个位置的概率也是一样的，为 1/n。所以，根据概率乘法法则，要查找的数据出现在 0～n-1 中任意位置的概率就是 1/(2n)。</p>
-<img   class="lazyload" data-original="/article/undefined/%E5%8A%A0%E6%9D%83%E5%B9%B3%E5%9D%87%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="加权平均时间复杂度">
+<img   class="lazyload" data-original="/article/54635/%E5%8A%A0%E6%9D%83%E5%B9%B3%E5%9D%87%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="加权平均时间复杂度">
 <p>这个值就是概率论中的<strong>加权平均值</strong>，也叫作<strong>期望值</strong>，所以平均时间复杂度的全称应该叫加权平均时间复杂度或者<strong>期望时间复杂度</strong>。</p>
 <p>引入概率之后，前面那段代码的加权平均值为 (3n+1)/4。用大 O 表示法来表示，去掉系数和常量，这段代码的加权平均时间复杂度仍然是 O(n)。</p>
 </blockquote>
@@ -322,7 +322,7 @@
 <p><strong>最好情况时间复杂度:</strong>最理想的情况下，数组中有空闲空间，我们只需要将数据插入到数组下标为 count 的位置就可以了，所以最好情况时间复杂度为 O(1)。</p>
 <p><strong>最坏情况时间复杂度:</strong>最坏的情况下，数组中没有空闲空间了，我们需要先做一次数组的遍历求和，然后再将数据插入，所以最坏情况时间复杂度为 O(n)。</p>
 <p><strong>平均情况时间复杂度：</strong>假设数组的长度是 n，根据数据插入的位置的不同，我们可以分为 n 种情况，每种情况的时间复杂度是 O(1)。除此之外，还有一种“额外”的情况，就是在数组没有空闲空间时插入一个数据，这个时候的时间复杂度是 O(n)。而且，这 n+1 种情况发生的概率一样，都是 1/(n+1)。所以，根据加权平均的计算方法，我们求得的平均时间复杂度就是：</p>
-<img   class="lazyload" data-original="/article/undefined/%E6%95%B0%E7%BB%84%E4%B8%AD%E6%8F%92%E5%85%A5%E6%95%B0%E6%8D%AE.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="数组中插入数据">
+<img   class="lazyload" data-original="/article/54635/%E6%95%B0%E7%BB%84%E4%B8%AD%E6%8F%92%E5%85%A5%E6%95%B0%E6%8D%AE.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="数组中插入数据">
 </blockquote>
 <p><strong>摊还分析法</strong>，通过摊还分析得到的时间复杂度我们起了一个名字，叫<strong>均摊时间复杂度</strong></p>
 <blockquote>

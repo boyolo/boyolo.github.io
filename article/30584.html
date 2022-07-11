@@ -210,7 +210,7 @@ Redis 知识全景图包括“两大维度，三大主线”...">
           <i class="iconfont iconheart"></i><span id="/article/30584.html" class="leancloud-like" data-flag-title="Redis核心技术与实战"></span>
         </span>
       
-      <span class="post-info-item"><i class="iconfont iconfont-size"></i>3290</span>
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>49077</span>
     </div>
   </div>
 </section>
@@ -221,28 +221,28 @@ Redis 知识全景图包括“两大维度，三大主线”...">
 <p><strong>Redis 知识全景图包括“两大维度，三大主线”</strong></p>
 <p><img   class="lazyload" data-original="/article/Redis 知识全景图.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><span class="image-caption">Redis 知识全景图</span></p>
 <p><strong>Redis问题画像</strong></p>
-<img   class="lazyload" data-original="/article/undefined/Redis%E9%97%AE%E9%A2%98%E7%94%BB%E5%83%8F.jpeg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="Redis问题画像">
+<img   class="lazyload" data-original="/article/30584/Redis%E9%97%AE%E9%A2%98%E7%94%BB%E5%83%8F.jpeg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="Redis问题画像">
 <h2 id="Redis数据结构"><a href="#Redis数据结构" class="headerlink" title="Redis数据结构"></a>Redis数据结构</h2><blockquote>
 <p><strong>Redis 的快，到底是快在哪里呢？</strong></p>
 <p><strong>一方面</strong>，这是因为它是内存数据库，所有操作都在内存上完成，内存的访问速度本身就很快。</p>
 <p><strong>另一方面</strong>，这要归功于它的数据结构。这是因为，键值对是按一定的数据结构来组织的，操作键值对最终就是对数据结构进行增删改查操作，所以高效的数据结构是 Redis 快速处理数据的基础。</p>
 </blockquote>
 <p>底层数据结构一共有 6 种，分别是<strong>简单动态字符串、双向链表、压缩列表、哈希表、跳表和整数数组</strong></p>
-<img   class="lazyload" data-original="/article/undefined/%E5%BA%95%E5%B1%82%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="底层数据结构">
+<img   class="lazyload" data-original="/article/30584/%E5%BA%95%E5%B1%82%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="底层数据结构">
 <p>List、Hash、Set 和 Sorted Set 这四种数据类型，都有两种底层实现结构。通常情况下称为集合类型，它们的特点是<strong>一个键对应了一个集合的数据</strong>。</p>
 <p><strong>压缩列表</strong>实际上类似于一个数组，数组中的每一个元素都对应保存一个数据。和数组不同的是，压缩列表在表头有三个字段 <strong>zlbytes、zltail 和 zllen</strong>，分别表示列表长度、列表尾的偏移量和列表中的 entry 个数；压缩列表在表尾还有一个 <strong>zlend</strong>，表示列表结束。</p>
-<img   class="lazyload" data-original="/article/undefined/%E5%8E%8B%E7%BC%A9%E5%88%97%E8%A1%A8.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="压缩列表">
+<img   class="lazyload" data-original="/article/30584/%E5%8E%8B%E7%BC%A9%E5%88%97%E8%A1%A8.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="压缩列表">
 <p><strong>跳表</strong>在链表的基础上，增加了多级索引，通过索引位置的几个跳转，实现数据的快速定位</p>
-<img   class="lazyload" data-original="/article/undefined/%E8%B7%B3%E8%A1%A8.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="跳表">
+<img   class="lazyload" data-original="/article/30584/%E8%B7%B3%E8%A1%A8.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="跳表">
 <h3 id="键和值用什么结构组织？"><a href="#键和值用什么结构组织？" class="headerlink" title="键和值用什么结构组织？"></a>键和值用什么结构组织？</h3><p><strong>Redis 使用了一个哈希表来保存所有键值对：</strong>一个哈希表，其实就是一个数组，数组的每个元素称为一个哈希桶，哈希桶中的元素保存的并不是值本身，而是<strong>指向具体值的指针</strong>。</p>
 <p>哈希桶中的 entry 元素中保存了<em>key和</em>value指针，分别指向了实际的键和值</p>
-<img   class="lazyload" data-original="/article/undefined/%E5%85%A8%E5%B1%80%E5%93%88%E5%B8%8C%E8%A1%A8.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="全局哈希表">
+<img   class="lazyload" data-original="/article/30584/%E5%85%A8%E5%B1%80%E5%93%88%E5%B8%8C%E8%A1%A8.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="全局哈希表">
 <p>可以用 <strong>O(1) 的时间复杂度</strong>来快速查找到键值对——只需要计算键的哈希值，就可以知道它所对应的哈希桶位置，然后就可以访问相应的 entry 元素</p>
 <h3 id="哈希冲突"><a href="#哈希冲突" class="headerlink" title="哈希冲突"></a>哈希冲突</h3><p>两个 key 的哈希值和哈希桶计算对应关系时，正好落在了同一个哈希桶中</p>
 <ol>
 <li><p>链式哈希</p>
 <p>Redis 解决哈希冲突的方式，就是链式哈希。<strong>指同一个哈希桶中的多个元素用一个链表来保存，它们之间依次用指针连接。</strong></p>
-<img   class="lazyload" data-original="/article/undefined/%E9%93%BE%E8%A1%A8%E6%B3%95.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="链表法">
+<img   class="lazyload" data-original="/article/30584/%E9%93%BE%E8%A1%A8%E6%B3%95.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="链表法">
 </li>
 <li><p>rehash</p>
 <p>如果哈希表里写入的数据越来越多，哈希冲突可能也会越来越多，这就会导致某些哈希冲突链过长，进而导致这个链上的元素查找耗时长，效率降低</p>
@@ -262,12 +262,361 @@ Redis 知识全景图包括“两大维度，三大主线”...">
 <p><img   class="lazyload" data-original="/article/渐进式 rehash.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><span class="image-caption">渐进式 rehash</span></p>
 </li>
 </ol>
-<h3 id="不同数据结构查找的时间复杂度"><a href="#不同数据结构查找的时间复杂度" class="headerlink" title="不同数据结构查找的时间复杂度"></a>不同数据结构查找的时间复杂度</h3><img   class="lazyload" data-original="/article/undefined/%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="时间复杂度">
+<h3 id="不同数据结构查找的时间复杂度"><a href="#不同数据结构查找的时间复杂度" class="headerlink" title="不同数据结构查找的时间复杂度"></a>不同数据结构查找的时间复杂度</h3><img   class="lazyload" data-original="/article/30584/%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="时间复杂度">
 <ol>
 <li>单元素操作，是指每一种集合类型对单个数据实现的增删改查操作，复杂度都是 O(1)</li>
 <li>范围操作，是指集合类型中的遍历操作，可以返回集合中的所有数据。这类操作的复杂度一般是 O(N)，比较耗时，我们应该尽量避免。</li>
 <li>统计操作，是指集合类型对集合中所有元素个数的记录。这类操作复杂度只有 O(1)。</li>
 <li>例外情况，是指某些数据结构的特殊记录，例如压缩列表和双向链表都会记录表头和表尾的偏移量。这样一来，对于 List 类型的 LPOP、RPOP、LPUSH、RPUSH 这四个操作来说，它们是在列表的头尾增删元素，这就可以通过偏移量直接定位，所以它们的复杂度也只有 O(1)，可以实现快速操作。</li>
+</ol>
+<h3 id="String-类型数据结构"><a href="#String-类型数据结构" class="headerlink" title="String 类型数据结构"></a>String 类型数据结构</h3><p>String 类型提供的“一个键对应一个值的数据”</p>
+<p>String 类型并不是适用于所有场合的，它有一个明显的短板，就是它<strong>保存数据时所消耗的内存空间较多。</strong></p>
+<h4 id="为什么-String-类型内存开销大？"><a href="#为什么-String-类型内存开销大？" class="headerlink" title="为什么 String 类型内存开销大？"></a>为什么 String 类型内存开销大？</h4><hr>
+<p>元数据 + 实际数据</p>
+<p>除了<strong>记录实际数据</strong>，String 类型还需要额外的内存空间记录数据长度、空间使用等信息，这些信息也叫作<strong>元数据</strong>。</p>
+<p>当你保存 64 位<strong>有符号整数</strong>时，String 类型会把它保存为一个 8 字节的 Long 类型整数，这种保存方式通常也叫作 int 编码方式。</p>
+<p>但是，当你保存的数据中<strong>包含字符</strong>时，String 类型就会用简单动态字符串（Simple Dynamic String，SDS）结构体来保存，如下图所示：</p>
+<img   class="lazyload" data-original="/article/30584/SDS%E7%BB%93%E6%9E%84%E4%BD%93.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="SDS结构体">
+<ol>
+<li>buf：字节数组，保存实际数据。为了表示字节数组的结束，Redis 会自动在数组最后加一个“\0”，这就会额外占用 1 个字节的开销。</li>
+<li>len：占 4 个字节，表示 buf 的已用长度。</li>
+<li>alloc：也占个 4 字节，表示 buf 的实际分配长度，一般大于 len。</li>
+</ol>
+<p>在 SDS 中，buf 保存实际数据，而 len 和 alloc 本身其实是 SDS 结构体的额外开销。</p>
+<hr>
+<p>对于 String 类型来说，除了 SDS 的额外开销，还有一个来自于 <strong>RedisObject</strong> 结构体的开销。</p>
+<p>因为 Redis 的数据类型有很多，而且，不同数据类型都有些相同的元数据要记录（比如最后一次访问的时间、被引用的次数等），所以，Redis 会用一个 RedisObject 结构体来统一记录这些元数据，同时指向实际数据。</p>
+<p>一个 RedisObject 包含了 8 字节的元数据和一个 8 字节指针，这个指针再进一步指向具体数据类型的实际数据所在</p>
+<img   class="lazyload" data-original="/article/30584/RedisObject%E7%BB%93%E6%9E%84%E4%BD%93.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="RedisObject结构体">
+<hr>
+<p>为了节省内存空间，Redis 还对 Long 类型整数和 SDS 的内存布局做了专门的设计。</p>
+<ol>
+<li>当保存的是 Long 类型整数时，RedisObject 中的指针就直接赋值为整数数据了，这样就不用额外的指针再指向整数了，节省了指针的空间开销。</li>
+<li>当保存的是字符串数据，并且字符串<strong>小于等于 44 字节</strong>时，RedisObject 中的元数据、指针和 SDS 是一块连续的内存区域，这样就可以避免内存碎片。</li>
+<li>当字符串大于 44 字节时，SDS 的数据量就开始变多了，Redis 就不再把 SDS 和 RedisObject 布局在一起了，而是会给 SDS 分配独立的空间，并用指针指向 SDS 结构。这种布局方式被称为 <strong>raw 编码模式</strong>。</li>
+</ol>
+<p><img   class="lazyload" data-original="/article/int、embstr 和 raw 三种编码模式.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><span class="image-caption">int、embstr 和 raw 三种编码模式</span></p>
+<hr>
+<p>Redis 使用的内存分配库 jemalloc</p>
+<p>jemalloc 在分配内存时，会根据我们申请的字节数 N，找一个比 N 大，但是最接近 N 的 2 的幂次数作为分配的空间，这样可以减少频繁分配的次数。</p>
+<hr>
+<h3 id="压缩列表"><a href="#压缩列表" class="headerlink" title="压缩列表"></a>压缩列表</h3><p>Redis 有一种底层数据结构，叫压缩列表（ziplist），这是一种非常节省内存的结构。</p>
+<p>压缩列表的构成：表头有三个字段 <strong>zlbytes、zltail 和 zllen</strong>，分别表示列表长度、列表尾的偏移量，以及列表中的 entry 个数。压缩列表尾还有一个 <strong>zlend</strong>，表示列表结束。</p>
+<img   class="lazyload" data-original="/article/30584/%E5%8E%8B%E7%BC%A9%E5%88%97%E8%A1%A8%E7%9A%84%E6%9E%84%E6%88%90.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="压缩列表的构成">
+<p>压缩列表之所以能节省内存，就在于它是用一系列连续的 entry 保存数据。每个 entry 的元数据包括下面几部分。</p>
+<ol>
+<li><strong>prev_len</strong>，表示前一个 entry 的长度。prev_len 有两种取值情况：<strong>1 字节或 5 字节</strong>。取值 1 字节时，表示上一个 entry 的长度小于 254 字节。虽然 1 字节的值能表示的数值范围是 0 到 255，但是压缩列表中 zlend 的取值默认是 255，因此，就默认用 255 表示整个压缩列表的结束，其他表示长度的地方就不能再用 255 这个值了。所以，当上一个 entry 长度小于 254 字节时，prev_len 取值为 1 字节，否则，就取值为 5 字节。</li>
+<li>len：表示自身长度，4 字节；</li>
+<li>encoding：表示编码方式，1 字节；</li>
+<li>content：保存实际数据。</li>
+</ol>
+<p>这些 entry 会挨个儿放置在内存中，不需要再用额外的指针进行连接，这样就可以节省指针所占用的空间。</p>
+<p>Redis 基于压缩列表实现了 <strong>List、Hash 和 Sorted Set</strong> 这样的集合类型，这样做的最大好处就是节省了 dictEntry 的开销。当你用 String 类型时，一个键值对就有一个 dictEntry，要用 32 字节空间。但采用集合类型时，一个 key 就对应一个集合的数据，能保存的数据多了很多，但也只用了一个 dictEntry，这样就节省了内存。</p>
+<h4 id="如何用集合类型保存单值的键值对？"><a href="#如何用集合类型保存单值的键值对？" class="headerlink" title="如何用集合类型保存单值的键值对？"></a>如何用集合类型保存单值的键值对？</h4><p>在保存单值的键值对时，可以采用基于 Hash 类型的二级编码方法。这里说的二级编码，就是把一个单值的数据拆分成两部分，前一部分作为 Hash 集合的 key，后一部分作为 Hash 集合的 value。</p>
+<blockquote>
+<p>以图片 ID 1101000060 和图片存储对象 ID 3302000080 为例</p>
+<p>可以把图片 ID 的前 7 位（1101000）作为 Hash 类型的键，把图片 ID 的最后 3 位（060）和图片存储对象 ID 分别作为 Hash 类型值中的 key 和 value。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs shell">127.0.0.1:6379&gt; info memory<br><span class="hljs-meta">#</span><span class="bash"> Memory</span><br>used_memory:1039120<br>127.0.0.1:6379&gt; hset 1101000 060 3302000080<br>(integer) 1<br>127.0.0.1:6379&gt; info memory<br><span class="hljs-meta">#</span><span class="bash"> Memory</span><br>used_memory:1039136<br></code></pre></td></tr></table></figure>
+<p>增加一条记录后，内存占用只增加了 16 字节</p>
+</blockquote>
+<p><strong>二级编码方法中采用的 ID 长度</strong></p>
+<p>hash 类型设置了用压缩列表保存数据时的两个阈值，一旦超过了阈值，Hash 类型就会用哈希表来保存数据了。</p>
+<p>这两个阈值分别对应以下两个配置项：</p>
+<ol>
+<li><code>hash-max-ziplist-entries</code>：表示用压缩列表保存时哈希集合中的最大元素个数。</li>
+<li><code>hash-max-ziplist-value</code>：表示用压缩列表保存时哈希集合中单个元素的最大长度。</li>
+</ol>
+<p>如果 Hash 集合中写入的元素个数超过了 <code>hash-max-ziplist-entries</code>并且写入的单个元素大小超过了 <code>hash-max-ziplist-value</code>，Redis 就会自动把 Hash 类型的实现结构由压缩列表转为哈希表。</p>
+<p>一旦从压缩列表转为了哈希表，Hash 类型就会一直用哈希表进行保存，而不会再转回压缩列表了。</p>
+<p><strong>为了能充分使用压缩列表的精简内存布局，我们一般要控制保存在 Hash 集合中的元素个数。</strong></p>
+<blockquote>
+<p>所以，在二级编码中，只用图片 ID <strong>最后 3 位作为 Hash 集合的 key</strong>，也就<strong>保证了 Hash 集合的元素个数不超过 1000</strong>，同时，我们把 <code>hash-max-ziplist-entries</code>设置为 1000，这样一来，Hash 集合就可以一直使用压缩列表来节省内存空间了。</p>
+</blockquote>
+<h3 id="集合统计模式"><a href="#集合统计模式" class="headerlink" title="集合统计模式"></a>集合统计模式</h3><p>常见的四种统计模式，包括<strong>聚合统计、排序统计、二值状态统计和基数统计</strong></p>
+<img   class="lazyload" data-original="/article/30584/%E9%9B%86%E5%90%88%E7%BB%9F%E8%AE%A1%E6%A8%A1%E5%BC%8F.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="集合统计模式">
+<h4 id="聚合统计"><a href="#聚合统计" class="headerlink" title="聚合统计"></a>聚合统计</h4><blockquote>
+<p>在移动应用中，需要统计每天的新增用户数和第二天的留存用户数；</p>
+</blockquote>
+<p>所谓的<strong>聚合统计</strong>，就是指统计多个集合元素的聚合结果，包括：统计多个集合的共有元素（交集统计）；把两个集合相比，统计其中一个集合独有的元素（差集统计）；统计多个集合的所有元素（并集统计）。</p>
+<blockquote>
+<p>可以用一个集合记录所有登录过 App 的用户 ID，同时，用另一个集合记录每一天登录过 App 的用户 ID。然后，再对这两个集合做聚合统计。</p>
+<p>记录所有登录过 App 的用户 ID 可以直接使用 Set 类型</p>
+<ol>
+<li>key 是 user:id 以及当天日期；</li>
+<li>value 是 Set 集合，记录当天登录的用户 ID。</li>
+</ol>
+<p>这个 Set 叫作每日用户 Set，如下图所示：</p>
+<img   class="lazyload" data-original="/article/30584/%E6%AF%8F%E6%97%A5%E7%94%A8%E6%88%B7set.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="每日用户set">
+<ol>
+<li><p>在统计每天的新增用户时，我们只用计算每日用户 Set 和累计用户 Set 的差集就行</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">SDIFFSTORE  user:new  user:id:20200804 user:id  <br></code></pre></td></tr></table></figure>
+<p><code>SDIFFSTORE</code> 命令计算累计用户 Set 和 20200804 Set 的差集，结果保存在 key 为 user:new 的 Set 中</p>
+</li>
+<li><p>计算 8 月 4 日的留存用户</p>
+<p>计算 20200803 和 20200804 两个 Set 的交集，就可以得到同时在这两个集合中的用户 ID</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">SINTERSTORE user:id:rem user:id:20200803 user:id:20200804<br></code></pre></td></tr></table></figure>
+</li>
+</ol>
+</blockquote>
+<p><strong>Set 的差集、并集和交集的计算复杂度较高</strong>，在数据量较大的情况下，如果直接执行这些计算，会导致 Redis 实例阻塞。</p>
+<p>所以，可以从主从集群中选择一个从库，让它专门负责聚合计算，或者是把数据读取到客户端，在客户端来完成聚合统计，这样就可以规避阻塞主库实例和其他从库实例的风险了。</p>
+<p><strong>注意：</strong></p>
+<ol>
+<li><p><strong>“Set数据类型，使用 <code>SUNIONSTORE</code>、<code>SDIFFSTORE</code>、<code>SINTERSTORE</code> 做并集、差集、交集时，选择一个从库进行聚合计算”。这3个命令都会在Redis中生成一个新key，而从库默认是readonly不可写的，所以这些命令只能在主库使用。想在从库上操作，可以使用 <code>SUNION</code>、<code>SDIFF</code>、<code>SINTER</code> ，这些命令可以计算出结果，但不会生成新key。</strong></p>
+</li>
+<li><p><strong>如果是在集群模式使用多个key聚合计算的命令，一定要注意，因为这些key可能分布在不同的实例上，多个实例之间是无法做聚合运算的，这样操作可能会直接报错或者得到的结果是错误的！</strong></p>
+</li>
+</ol>
+<h4 id="排序统计"><a href="#排序统计" class="headerlink" title="排序统计"></a>排序统计</h4><blockquote>
+<p>在电商网站的商品评论中，需要统计评论列表中的最新评论；</p>
+</blockquote>
+<p>要求集合类型能对元素保序，也就是说，集合中的元素可以按序排列，这种对元素保序的集合类型叫作有序集合。</p>
+<p>在 Redis 常用的 4 个集合类型中（List、Hash、Set、Sorted Set），<strong>List 和 Sorted Set</strong> 就属于有序集合。</p>
+<p><strong>List 是按照元素进入 List 的顺序进行排序的，而 Sorted Set 可以根据元素的权重来排序，我们可以自己来决定每个元素的权重值。</strong></p>
+<p><strong>使用List</strong></p>
+<blockquote>
+<p>每个商品对应一个 List，这个 List 包含了对这个商品的所有评论，而且会按照评论时间保存这些评论，每来一个新评论，就用 LPUSH 命令把它插入 List 的队头。</p>
+<p>在只有一页评论的时候，我们可以很清晰地看到最新的评论，但是，在实际应用中，网站一般会分页显示最新的评论列表，一旦涉及到分页操作，List 就可能会出现问题了。</p>
+<blockquote>
+<p>假设当前的评论 List 是{A, B, C, D, E, F}（其中，A 是最新的评论，以此类推，F 是最早的评论），在展示第一页的 3 个评论时，可以用下面的命令，得到最新的三条评论 A、B、C：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell">LRANGE product1 0 2<br>1) &quot;A&quot;<br>2) &quot;B&quot;<br>3) &quot;C&quot;<br></code></pre></td></tr></table></figure>
+<p>但是，如果在展示第二页前，又产生了一个新评论 G，评论 G 就会被 LPUSH 命令插入到评论 List 的队头，评论 List 就变成了{G, A, B, C, D, E, F}。此时，再用刚才的命令获取第二页评论时，就会发现，评论 C 又被展示出来了，也就是 C、D、E。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sh">LRANGE product1 3 5<br>1) <span class="hljs-string">&quot;C&quot;</span><br>2) <span class="hljs-string">&quot;D&quot;</span><br>3) <span class="hljs-string">&quot;E&quot;</span><br></code></pre></td></tr></table></figure>
+</blockquote>
+</blockquote>
+<p>List 是通过元素在 List 中的位置来排序的，当有一个新元素插入时，原先的元素在 List 中的位置都后移了一位，比如说原来在第 1 位的元素现在排在了第 2 位。</p>
+<blockquote>
+<p>所以，对比新元素插入前后，List 相同位置上的元素就会发生变化，用 <code>LRANGE</code> 读取时，就会读到旧元素。</p>
+</blockquote>
+<p><strong>使用 Sorted Set</strong></p>
+<p>Sorted Set是根据元素的实际权重来排序和获取数据的</p>
+<blockquote>
+<p>按评论时间的先后给每条评论设置一个权重值，然后再把评论保存到 Sorted Set 中。Sorted Set 的 <code>ZRANGEBYSCORE</code> 命令就可以按权重排序后返回元素。这样的话，即使集合中的元素频繁更新，Sorted Set 也能通过 <code>ZRANGEBYSCORE</code> 命令准确地获取到按序排列的数据。</p>
+<p>假设越新的评论权重越大，目前最新评论的权重是 N，我们执行下面的命令时，就可以获得最新的 10 条评论：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">ZRANGEBYSCORE comments N-9 N<br></code></pre></td></tr></table></figure>
+</blockquote>
+<h4 id="二值状态统计"><a href="#二值状态统计" class="headerlink" title="二值状态统计"></a>二值状态统计</h4><blockquote>
+<p>用户在手机 App 上的签到打卡信息：一天对应一系列用户的签到记录</p>
+</blockquote>
+<p>二值状态就是指集合元素的取值就<strong>只有 0 和 1 两种</strong></p>
+<blockquote>
+<p>在签到统计时，每个用户一天的签到用 1 个 bit 位就能表示，一个月（假设是 31 天）的签到情况用 31 个 bit 位就可以，而一年的签到也只需要用 365 个 bit 位，根本不用太复杂的集合类型。这个时候，我们就可以选择 <strong>Bitmap</strong>。这是 Redis 提供的扩展数据类型。</p>
+</blockquote>
+<p>Bitmap 本身是<strong>用 String 类型作为底层数据结构</strong>实现的一种统计二值状态的数据类型。String 类型是会保存为二进制的字节数组，所以，Redis 就把字节数组的每个 bit 位利用起来，用来表示一个元素的二值状态。可以把 Bitmap 看作是一个 bit 数组。</p>
+<p>Bitmap 提供了 <code>GETBIT/SETBIT</code> 操作，使用一个偏移值 <strong>offset</strong> 对 bit 数组的某一个 bit 位进行读和写。</p>
+<p>Bitmap 的偏移量是从 0 开始算的，也就是说 offset 的最小值是 0。当使用 <code>SETBIT</code> 对一个 bit 位进行写操作时，这个 bit 位会被设置为 1。Bitmap 还提供了 <code>BITCOUNT</code> 操作，用来统计这个 bit 数组中所有“1”的个数。</p>
+<blockquote>
+<p>统计 ID 3000 的用户在 2020 年 8 月份的签到情况</p>
+<ol>
+<li><p>执行命令，记录该用户 8 月 3 号已签到</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">SETBIT uid:sign:3000:202008 2 1 <br></code></pre></td></tr></table></figure>
+<p>offset = 2 (从0开始 0、1、2)</p>
+</li>
+<li><p>检查该用户 8 月 3 日是否签到</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">GETBIT uid:sign:3000:202008 2 <br></code></pre></td></tr></table></figure>
+</li>
+<li><p>统计该用户在 8 月份的签到次数</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">BITCOUNT uid:sign:3000:202008<br></code></pre></td></tr></table></figure>
+</li>
+</ol>
+</blockquote>
+<blockquote>
+<p>如果记录了 1 亿个用户 10 天的签到情况，统计出这 10 天连续签到的用户总数吗？</p>
+</blockquote>
+<p>Bitmap 支持用 <code>BITOP</code> 命令对多个 Bitmap 按位做“与”“或”“异或”的操作，操作的结果会保存到一个新的 Bitmap 中</p>
+<blockquote>
+<p>对应 bit 位做“与”操作，结果保存到了一个新的 Bitmap 中</p>
+<ol>
+<li>在统计 1 亿个用户连续 10 天的签到情况时，把每天的日期作为 key，每个 key 对应一个 1 亿位的 Bitmap，每一个 bit 对应一个用户当天的签到情况</li>
+<li>对 10 个 Bitmap 做“与”操作，得到的结果也是一个 Bitmap。在这个 Bitmap 中，只有 10 天都签到的用户对应的 bit 位上的值才会是 1。</li>
+<li>最后，我们可以用 <code>BITCOUNT</code> 统计下 Bitmap 中的 1 的个数，这就是连续签到 10 天的用户总数了。</li>
+</ol>
+</blockquote>
+<h4 id="基数统计"><a href="#基数统计" class="headerlink" title="基数统计"></a>基数统计</h4><blockquote>
+<p>在网页访问记录中，需要统计独立访客（Unique Visitor，UV）量</p>
+</blockquote>
+<p>基数统计就是指统计一个集合中不重复的元素个数</p>
+<blockquote>
+<p>网页 UV 的统计有个独特的地方，就是需要去重，一个用户一天内的多次访问只能算作一次。</p>
+</blockquote>
+<p><strong>使用 set</strong></p>
+<blockquote>
+<p>有一个用户 user1 访问 page1 时，把这个信息加到 Set 中：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">SADD page1:uv user1<br></code></pre></td></tr></table></figure>
+<p>用户 1 再来访问时，Set 的去重功能就保证了不会重复记录用户 1 的访问次数，这样，用户 1 就算是一个独立访客。当需要统计 UV 时，可以直接用 <code>SCARD</code> 命令，这个命令会返回一个集合中的元素个数。</p>
+<p>但是，如果 page1 非常火爆，UV 达到了千万，这个时候，一个 Set 就要记录千万个用户 ID。对于一个搞大促的电商网站而言，这样的页面可能有成千上万个，如果每个页面都用这样的一个 Set，就会<strong>消耗很大的内存空间</strong>。</p>
+</blockquote>
+<p><strong>使用 Hash</strong></p>
+<blockquote>
+<p>可以把用户 ID 作为 Hash 集合的 key，当用户访问页面时，就用 <code>HSET</code> 命令（用于设置 Hash 集合元素的值），对这个用户 ID 记录一个值“1”，表示一个独立访客，用户 1 访问 page1 后，我们就记录为 1 个独立访客，如下所示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">HSET page1:uv user1 1<br></code></pre></td></tr></table></figure>
+<p>即使用户 1 多次访问页面，重复执行这个 HSET 命令，也只会把 user1 的值设置为 1，仍然只记为 1 个独立访客。当要统计 UV 时，我们可以用 <code>HLEN</code> 命令统计 Hash 集合中的所有元素个数。</p>
+<p>当页面很多时，Hash 类型也会<strong>消耗很大的内存空间</strong></p>
+</blockquote>
+<p><strong>使用 HyperLogLog</strong></p>
+<p><strong>HyperLogLog 是一种用于统计基数的数据集合类型，它的最大优势就在于，当集合元素数量非常多时，它计算基数所需的空间总是固定的，而且还很小。</strong></p>
+<p>在 Redis 中，每个 HyperLogLog 只需要花费 12 KB 内存，就可以计算接近 2^64 个元素的基数。</p>
+<blockquote>
+<p>可以用 <code>PFADD</code> 命令（用于向 HyperLogLog 中添加新元素）把访问页面的每个用户都添加到 HyperLogLog 中。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">PFADD page1:uv user1 user2 user3 user4 user5<br></code></pre></td></tr></table></figure>
+<p>接下来，就可以用 <code>PFCOUNT</code> 命令直接获得 page1 的 UV 值了，这个命令的作用就是返回 HyperLogLog 的统计结果。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">PFCOUNT page1:uv<br></code></pre></td></tr></table></figure>
+</blockquote>
+<p><strong>HyperLogLog 的统计规则是基于概率完成的，所以它给出的统计结果是有一定误差的</strong>，标准误算率是 0.81%</p>
+<h3 id="GEO数据类型"><a href="#GEO数据类型" class="headerlink" title="GEO数据类型"></a>GEO数据类型</h3><p><strong>GEO 的底层结构</strong>:GEO 类型的底层数据结构就是用 Sorted Set 来实现的</p>
+<p><strong>GeoHash 的编码方法</strong></p>
+<p>为了能高效地对经纬度进行比较，Redis 采用了业界广泛使用的 GeoHash 编码方法，这个方法的基本原理就是“二分区间，区间编码”。</p>
+<p>要对一组经纬度进行 GeoHash 编码时，要先对经度和纬度分别编码，然后再把经纬度各自的编码组合成一个最终编码。</p>
+<p>对于一个地理位置信息来说，它的经度范围是[-180,180]。GeoHash 编码会把一个经度值编码成一个 N 位的二进制值，我们来对经度范围[-180,180]做 N 次的二分区操作，其中 N 可以自定义。<br>在进行第一次二分区时，经度范围[-180,180]会被分成两个子区间：[-180,0) 和[0,180]（称之为左、右分区）。此时，可以查看一下要编码的经度值落在了左分区还是右分区。如果是落在左分区，我们就用 0 表示；如果落在右分区，就用 1 表示。这样一来，每做完一次二分区，就可以得到 1 位编码值。<br>然后，再对经度值所属的分区再做一次二分区，同时再次查看经度值落在了二分区后的左分区还是右分区，按照刚才的规则再做 1 位编码。当做完 N 次的二分区后，经度值就可以用一个 N bit 的数来表示了。</p>
+<blockquote>
+<p>对（116.37，39.86）进行编码</p>
+<img   class="lazyload" data-original="/article/30584/%E7%BB%8F%E5%BA%A6%E7%BC%96%E7%A0%81.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="经度编码">
+<img   class="lazyload" data-original="/article/30584/%E7%BA%AC%E5%BA%A6%E7%BC%96%E7%A0%81.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="纬度编码">
+<p>当一组经纬度值都编完码后，再把它们的各自编码值组合在一起，组合的规则是：最终编码值的<strong>偶数位上依次是经度的编码值，奇数位上依次是纬度的编码值</strong>，其中，偶数位从 0 开始，奇数位从 1 开始。</p>
+<img   class="lazyload" data-original="/article/30584/%E6%9C%80%E7%BB%88%E7%BC%96%E7%A0%81%E5%80%BC.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="最终编码值">
+</blockquote>
+<p>使用 GeoHash 编码后，相当于把整个地理空间划分成了一个个方格，每个方格对应了 GeoHash 中的一个分区。</p>
+<p>每个方格覆盖了一定范围内的经纬度值，分区越多，每个方格能覆盖到的地理空间就越小，也就越精准。</p>
+<p><img   class="lazyload" data-original="/article/4 个方格.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><span class="image-caption">4 个方格</span></p>
+<p>有的编码值虽然在大小上接近，但实际对应的方格却距离比较远</p>
+<blockquote>
+<p><img   class="lazyload" data-original="/article/16 个方格.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><span class="image-caption">16 个方格</span></p>
+</blockquote>
+<p>为了避免查询不准确问题，可以同时查询给定经纬度所在的方格周围的 4 个或 8 个方格。</p>
+<h4 id="操作-GEO-类型"><a href="#操作-GEO-类型" class="headerlink" title="操作 GEO 类型"></a>操作 GEO 类型</h4><ol>
+<li><code>GEOADD</code> 命令：用于把一组经纬度信息和相对应的一个 ID 记录到 GEO 类型集合中；</li>
+<li><code>GEORADIUS</code> 命令：会根据输入的经纬度位置，查找以这个经纬度为中心的一定范围内的其他元素。当然，我们可以自己定义这个范围。</li>
+</ol>
+<blockquote>
+<p>假设车辆 ID 是 33，经纬度位置是（116.034579，39.030452），可以用一个 GEO 集合保存所有车辆的经纬度，集合 key 是 cars:locations。执行下面的这个命令，就可以把 ID 号为 33 的车辆的当前经纬度位置存入 GEO 集合中：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">GEOADD cars:locations 116.034579 39.030452 33<br></code></pre></td></tr></table></figure>
+<p>LBS 位置信息服务（Location-Based Service，LBS）应用执行下面的命令时，Redis 会根据输入的用户的经纬度信息（116.054579，39.030452 ），查找以这个经纬度为中心的 5 公里内的车辆信息，并返回给 LBS 应用。可以修改“5”这个参数，来返回更大或更小范围内的车辆信息。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">GEORADIUS cars:locations 116.054579 39.030452 5 km ASC COUNT 10<br></code></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="自定义数据类型"><a href="#自定义数据类型" class="headerlink" title="自定义数据类型"></a>自定义数据类型</h3><p><strong>Redis 键值对中的每一个值都是用 RedisObject 保存的</strong></p>
+<p>RedisObject 包括元数据和指针。其中，元数据的一个功能就是用来区分不同的数据类型，指针用来指向具体的数据类型的值。</p>
+<h4 id="Redis-的基本对象结构"><a href="#Redis-的基本对象结构" class="headerlink" title="Redis 的基本对象结构"></a>Redis 的基本对象结构</h4><p>RedisObject 的内部组成包括了 type、encoding、lru 和 refcount 4 个元数据，以及 1 个 *ptr 指针。</p>
+<ol>
+<li>type：表示值的类型，涵盖五大基本类型；</li>
+<li>encoding：是值的编码方式，用来表示 Redis 中实现各个基本类型的底层数据结构，例如 SDS、压缩列表、哈希表、跳表等；</li>
+<li>lru：记录了这个对象最后一次被访问的时间，用于淘汰过期的键值对；</li>
+<li>refcount：记录了对象的引用计数；</li>
+<li>*ptr：是指向数据的指针。</li>
+</ol>
+<p><img   class="lazyload" data-original="/article/Redis 的基本对象结构.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><span class="image-caption">Redis 的基本对象结构</span></p>
+<p>RedisObject 结构借助 *ptr 指针，就可以指向不同的数据类型</p>
+<h4 id="开发一个新的数据类型"><a href="#开发一个新的数据类型" class="headerlink" title="开发一个新的数据类型"></a>开发一个新的数据类型</h4><p>首先，需要为新数据类型定义好它的底层结构、type 和 encoding 属性值，然后再实现新数据类型的创建、释放函数和基本命令。</p>
+<img   class="lazyload" data-original="/article/30584/%E5%BC%80%E5%8F%91%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="开发一个新的数据类型">
+<ol>
+<li><p>定义新数据类型的底层结构</p>
+<p>用 newtype.h 文件来保存这个新类型的定义</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">NewTypeObject</span> &#123;</span><br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">NewTypeNode</span> *<span class="hljs-title">head</span>;</span> <br>    <span class="hljs-keyword">size_t</span> len; <br>&#125;NewTypeObject; <br></code></pre></td></tr></table></figure>
+<p>其中，NewTypeNode 结构就是我们自定义的新类型的底层结构。为底层结构设计两个成员变量：一个是 Long 类型的 value 值，用来保存实际数据；一个是*next指针，指向下一个 NewTypeNode 结构。</p>
+</li>
+<li><p>在 RedisObject 的 type 属性中，增加这个新类型的定义</p>
+<p>在 Redis 的 server.h 文件中</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> OBJ_STRING 0    <span class="hljs-comment">/* String object. */</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> OBJ_LIST 1      <span class="hljs-comment">/* List object. */</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> OBJ_SET 2       <span class="hljs-comment">/* Set object. */</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> OBJ_ZSET 3      <span class="hljs-comment">/* Sorted set object. */</span></span><br>…<br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> OBJ_NEWTYPE 7</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>开发新类型的创建和释放函数</p>
+<p>Redis 把数据类型的创建和释放函数都定义在了 object.c 文件中</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-function">robj *<span class="hljs-title">createNewTypeObject</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span></span>&#123;<br>   NewTypeObject *h = newtypeNew(); <br>   robj *o = createObject(OBJ_NEWTYPE,h);<br>   <span class="hljs-keyword">return</span> o;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>newtypeNew 函数,它是用来为新数据类型初始化内存结构的。这个初始化过程主要是用 zmalloc 做底层结构分配空间，以便写入数据。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-function">NewTypeObject *<span class="hljs-title">newtypeNew</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span></span>&#123;<br>    NewTypeObject *n = zmalloc(<span class="hljs-keyword">sizeof</span>(*n));<br>    n-&gt;head = <span class="hljs-literal">NULL</span>;<br>    n-&gt;len = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">return</span> n;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>newtypeNew 函数涉及到新数据类型的具体创建，而 Redis 默认会为每个数据类型定义一个单独文件，实现这个类型的创建和命令操作。按照 Redis 的惯例，把 newtypeNew 函数定义在名为 t_newtype.c 的文件中。</p>
+<p>createObject 是 Redis 本身提供的 RedisObject 创建函数，它的参数是数据类型的 type 和指向数据类型实现的指针*ptr。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-function">robj *<span class="hljs-title">createObject</span><span class="hljs-params">(<span class="hljs-keyword">int</span> type, <span class="hljs-keyword">void</span> *ptr)</span> </span>&#123;<br>    robj *o = zmalloc(<span class="hljs-keyword">sizeof</span>(*o));<br>    o-&gt;type = type;<br>    o-&gt;ptr = ptr;<br>    ...<br>    <span class="hljs-keyword">return</span> o;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>对于释放函数来说，它是创建函数的反过程，是用 zfree 命令把新结构的内存空间释放掉。</p>
+</li>
+<li><p>开发新类型的命令操作</p>
+<ol>
+<li><p>在 t_newtype.c 文件中增加命令操作的实现。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">ntinsertCommand</span><span class="hljs-params">(client *c)</span></span>&#123;<br>  <span class="hljs-comment">//基于客户端传递的参数，实现在NewTypeObject链表头插入元素</span><br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>在 server.h 文件中，声明我们已经实现的命令，以便在 server.c 文件引用这个命令</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">ntinsertCommand</span><span class="hljs-params">(client *c)</span></span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>在 server.c 文件中的 redisCommandTable 里面，把新增命令和实现函数关联起来</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">redisCommand</span> <span class="hljs-title">redisCommandTable</span>[] =</span> &#123; <br>...<br>&#123;<span class="hljs-string">&quot;ntinsert&quot;</span>,ntinsertCommand,<span class="hljs-number">2</span>,<span class="hljs-string">&quot;m&quot;</span>,...&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="时间序列数据"><a href="#时间序列数据" class="headerlink" title="时间序列数据"></a>时间序列数据</h3><p><strong>时间序列数据的读写特点</strong></p>
+<ol>
+<li><p>写</p>
+<p>时间序列数据通常是持续高并发写入的。</p>
+<p>这种数据的写入特点很简单，就是插入数据快，这就要求选择的数据类型，在进行数据插入时，复杂度要低，尽量不要阻塞。</p>
+</li>
+<li><p>读</p>
+<p>时间序列数据的“读”，查询模式多，比如范围查询、聚合查询等</p>
+</li>
+</ol>
+<h4 id="基于-Hash-和-Sorted-Set-保存时间序列数据"><a href="#基于-Hash-和-Sorted-Set-保存时间序列数据" class="headerlink" title="基于 Hash 和 Sorted Set 保存时间序列数据"></a>基于 Hash 和 Sorted Set 保存时间序列数据</h4><p><strong>好处：</strong>是 Redis 内在的数据类型，代码成熟和性能稳定。所以，基于这两个数据类型保存时间序列数据，系统稳定性是可以预期的。</p>
+<p>用 Hash 类型来实现单键的查询很简单。但是，Hash 类型有个短板：它并不支持对数据进行范围查询。</p>
+<blockquote>
+<p>虽然时间序列数据是按时间递增顺序插入 Hash 集合中的，但 Hash 类型的底层结构是哈希表，并没有对数据进行有序索引。所以，如果要对 Hash 类型进行范围查询的话，就需要扫描 Hash 集合中的所有数据，再把这些数据取回到客户端进行排序，然后，才能在客户端得到所查询范围内的数据。显然，查询效率很低。</p>
+</blockquote>
+<p>为了能同时支持按时间戳范围的查询，可以用 Sorted Set 来保存时间序列数据，因为它能够根据元素的权重分数来排序。可以把时间戳作为 Sorted Set 集合的元素分数，把时间点上记录的数据作为元素本身。</p>
+<p><strong>保证写入 Hash 和 Sorted Set 是一个原子性的操作</strong></p>
+<p>涉及到了 Redis 用来实现简单的事务的 <code>MULTI</code> 和 <code>EXEC</code> 命令。当多个命令及其参数本身无误时，<code>MULTI</code> 和 <code>EXEC</code> 命令可以保证执行这些命令时的原子性。</p>
+<ol>
+<li><code>MULTI</code> 命令：表示一系列原子性操作的开始。收到这个命令后，Redis 就知道，接下来再收到的命令需要放到一个内部队列中，后续一起执行，保证原子性。</li>
+<li><code>EXEC</code> 命令：表示一系列原子性操作的结束。一旦 Redis 收到了这个命令，就表示所有要保证原子性的命令操作都已经发送完成了。此时，Redis 开始执行刚才放到内部队列中的所有命令操作。</li>
+</ol>
+<blockquote>
+<img   class="lazyload" data-original="/article/30584/%E5%8E%9F%E5%AD%90%E6%80%A7%E7%9A%84%E6%93%8D%E4%BD%9C.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="原子性的操作">
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs sh">127.0.0.1:6379&gt; MULTI<br>OK<br><br>127.0.0.1:6379&gt; HSET device:temperature 202008030911 26.8<br>QUEUED<br><br>127.0.0.1:6379&gt; ZADD device:temperature 202008030911 26.8<br>QUEUED<br><br>127.0.0.1:6379&gt; EXEC<br>1) (<span class="hljs-built_in">integer</span>) 1<br>2) (<span class="hljs-built_in">integer</span>) 1<br></code></pre></td></tr></table></figure>
+</blockquote>
+<p><strong>对时间序列数据进行聚合计算</strong></p>
+<blockquote>
+<p>Sorted Set 只支持范围查询，无法直接进行聚合计算，所以，只能先把时间范围内的数据取回到客户端，然后在客户端自行完成聚合计算。这个方法虽然能完成聚合计算但是会带来一定的潜在风险，也就是大量数据在 Redis 实例和客户端间频繁传输，这会和其他操作命令竞争网络资源，导致其他操作变慢。</p>
+</blockquote>
+<p>为了避免客户端和 Redis 实例间频繁的大量数据传输，<strong>使用 RedisTimeSeries 来保存时间序列数据。</strong></p>
+<p>RedisTimeSeries 支持直接在 Redis 实例上进行聚合计算。</p>
+<h4 id="基于-RedisTimeSeries-模块保存时间序列数据"><a href="#基于-RedisTimeSeries-模块保存时间序列数据" class="headerlink" title="基于 RedisTimeSeries 模块保存时间序列数据"></a>基于 RedisTimeSeries 模块保存时间序列数据</h4><p><strong>RedisTimeSeries</strong> 是 Redis 的一个扩展模块。它专门面向时间序列数据提供了数据类型和访问接口，并且支持在 Redis 实例上直接对数据进行按时间范围的聚合计算以及按标签属性过滤查询数据集合。</p>
+<blockquote>
+<p>因为 RedisTimeSeries 不属于 Redis 的内建功能模块，在使用时，需要先把它的源码单独编译成动态链接库 redistimeseries.so，再使用 loadmodule 命令进行加载，如下所示：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">loadmodule redistimeseries.so<br></code></pre></td></tr></table></figure>
+</blockquote>
+<p>RedisTimeSeries 的底层数据结构使用了链表，它的范围查询的复杂度是 O(N) 级别的，同时，它的 <code>TS.GET</code> 查询只能返回最新的数据，没有办法像 Hash 类型一样，可以返回任一时间点的数据。</p>
+<p>当用于时间序列数据存取时，RedisTimeSeries 的操作主要有 5 个：</p>
+<ol>
+<li><p>用 <code>TS.CREATE</code> 命令创建时间序列数据集合；</p>
+<p>需要设置时间序列数据集合的 key 和数据的过期时间（以毫秒为单位）。此外，还可以为数据集合设置标签，来表示数据集合的属性。</p>
+<blockquote>
+<p>创建一个 key 为 device:temperature、数据有效期为 600s 的时间序列数据集合。也就是说，这个集合中的数据创建了 600s 后，就会被自动删除。最后，给这个集合设置了一个标签属性{device_id:1}，表明这个数据集合中记录的是属于设备 ID 号为 1 的数据。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sh">TS.CREATE device:temperature RETENTION 600000 LABELS device_id 1<br>OK<br></code></pre></td></tr></table></figure>
+</blockquote>
+</li>
+<li><p>用 <code>TS.ADD</code> 命令插入数据；</p>
+<p><code>TS.ADD</code> 命令往时间序列集合中插入数据，包括时间戳和具体的数值</p>
+<blockquote>
+<p>往 device:temperature 集合中插入了一条数据，记录的是设备在 2020 年 8 月 3 日 9 时 5 分的设备温度</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sh">TS.ADD device:temperature 1596416700 25.1<br>1596416700<br></code></pre></td></tr></table></figure>
+</blockquote>
+</li>
+<li><p>用 <code>TS.GET</code> 命令读取最新数据；</p>
+<p>使用 <code>TS.GET</code> 命令读取数据集合中的最新一条数据</p>
+<blockquote>
+<p>把刚刚插入的最新数据读取出来\</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sh">TS.GET device:temperature<br>25.1<br></code></pre></td></tr></table></figure>
+</blockquote>
+</li>
+<li><p>用 <code>TS.MGET</code> 命令按标签过滤查询数据集合；</p>
+<p>使用 <code>TS.MGET</code> 命令，按照标签查询部分集合中的最新数据</p>
+<p>在使用 <code>TS.CREATE</code> 创建数据集合时，可以给集合设置标签属性。进行查询时，就可以在查询条件中对集合标签属性进行匹配，最后的查询结果里只返回匹配上的集合中的最新数据。</p>
+<blockquote>
+<p>一共用 4 个集合为 4 个设备保存时间序列数据，设备的 ID 号是 1、2、3、4，在创建数据集合时，把 device_id 设置为每个集合的标签。此时，就可以使用下列 <code>TS.MGET</code> 命令，以及 FILTER 设置（这个配置项用来设置集合标签的过滤条件），查询 device_id 不等于 2 的所有其他设备的数据集合，并返回各自集合中的最新的一条数据。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs sh">TS.MGET FILTER device_id!=2 <br>1) 1) <span class="hljs-string">&quot;device:temperature:1&quot;</span><br>   2) (empty list or <span class="hljs-built_in">set</span>)<br>   3) 1) (<span class="hljs-built_in">integer</span>) 1596417000<br>      2) <span class="hljs-string">&quot;25.3&quot;</span><br>2) 1) <span class="hljs-string">&quot;device:temperature:3&quot;</span><br>   2) (empty list or <span class="hljs-built_in">set</span>)<br>   3) 1) (<span class="hljs-built_in">integer</span>) 1596417000<br>      2) <span class="hljs-string">&quot;29.5&quot;</span><br>3) 1) <span class="hljs-string">&quot;device:temperature:4&quot;</span><br>   2) (empty list or <span class="hljs-built_in">set</span>)<br>   3) 1) (<span class="hljs-built_in">integer</span>) 1596417000<br>      2) <span class="hljs-string">&quot;30.1&quot;</span><br></code></pre></td></tr></table></figure>
+</blockquote>
+</li>
+<li><p>用 <code>TS.RANGE</code> 支持聚合计算的范围查询。</p>
+<p>在对时间序列数据进行聚合计算时，可以使用 <code>TS.RANGE</code> 命令指定要查询的数据的时间范围，同时用 <code>AGGREGATION</code> 参数指定要执行的聚合计算类型。</p>
+<blockquote>
+<p>按照每 180s 的时间窗口，对 2020 年 8 月 3 日 9 时 5 分和 2020 年 8 月 3 日 9 时 12 分这段时间内的数据进行均值计算</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sh">TS.RANGE device:temperature 1596416700 1596417120 AGGREGATION avg 180000<br>1) 1) (<span class="hljs-built_in">integer</span>) 1596416700<br>   2) <span class="hljs-string">&quot;25.6&quot;</span><br>2) 1) (<span class="hljs-built_in">integer</span>) 1596416880<br>   2) <span class="hljs-string">&quot;25.8&quot;</span><br>3) 1) (<span class="hljs-built_in">integer</span>) 1596417060<br>   2) <span class="hljs-string">&quot;26.1&quot;</span><br></code></pre></td></tr></table></figure>
+</blockquote>
+</li>
 </ol>
 <h2 id="Redis：高性能IO模型"><a href="#Redis：高性能IO模型" class="headerlink" title="Redis：高性能IO模型"></a>Redis：高性能IO模型</h2><p><strong>Redis 是单线程，主要是指 Redis 的<u>网络 IO 和键值对读写</u>是由一个线程来完成的，这也是 Redis 对外提供键值存储服务的主要流程。</strong></p>
 <p><strong>采用单线程的一个核心原因是避免多线程开发的并发控制问题</strong></p>
@@ -275,22 +624,977 @@ Redis 知识全景图包括“两大维度，三大主线”...">
 <p>另一方面，就是 Redis 采用了多路复用机制，使其在网络 IO 操作中能并发处理大量的客户端请求，实现高吞吐率。</p>
 <h3 id="Socket-网络模型的非阻塞模式"><a href="#Socket-网络模型的非阻塞模式" class="headerlink" title="Socket 网络模型的非阻塞模式"></a>Socket 网络模型的非阻塞模式</h3><blockquote>
 <p>以 Get 请求为例，需要监听客户端请求（bind/listen），和客户端建立连接（accept），从 socket 中读取请求（recv），解析客户端发送请求（parse），根据请求类型读取键值数据（get），最后给客户端返回结果，即向 socket 中写回数据（send）。</p>
-<img   class="lazyload" data-original="/article/undefined/Redis%E5%9F%BA%E6%9C%ACIO%E6%A8%A1%E5%9E%8B.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="Redis基本IO模型">
+<img   class="lazyload" data-original="/article/30584/Redis%E5%9F%BA%E6%9C%ACIO%E6%A8%A1%E5%9E%8B.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="Redis基本IO模型">
 <p>但是，在这里的网络 IO 操作中，有潜在的阻塞点，分别是 accept() 和 recv()。当 Redis 监听到一个客户端有连接请求，但一直未能成功建立起连接时，会阻塞在 accept() 函数这里，导致其他客户端无法和 Redis 建立连接。类似的，当 Redis 通过 recv() 从一个客户端读取数据时，如果数据一直没有到达，Redis 也会一直阻塞在 recv()。</p>
 </blockquote>
 <p>在 socket 模型中，不同操作调用后会返回不同的套接字类型。socket() 方法会返回主动套接字，然后调用 listen() 方法，将主动套接字转化为监听套接字，此时，可以监听来自客户端的连接请求。最后，调用 accept() 方法接收到达的客户端连接，并返回已连接套接字。</p>
-<img   class="lazyload" data-original="/article/undefined/Redis%E5%A5%97%E6%8E%A5%E5%AD%97%E7%B1%BB%E5%9E%8B%E4%B8%8E%E9%9D%9E%E9%98%BB%E5%A1%9E%E8%AE%BE%E7%BD%AE.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="Redis套接字类型与非阻塞设置">
+<img   class="lazyload" data-original="/article/30584/Redis%E5%A5%97%E6%8E%A5%E5%AD%97%E7%B1%BB%E5%9E%8B%E4%B8%8E%E9%9D%9E%E9%98%BB%E5%A1%9E%E8%AE%BE%E7%BD%AE.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="Redis套接字类型与非阻塞设置">
 <p>针对监听套接字，我们可以设置非阻塞模式：当 Redis 调用 accept() 但一直未有连接请求到达时，Redis 线程可以返回处理其他操作，而不用一直等待。但是，你要注意的是，调用 accept() 时，已经存在监听套接字了。</p>
 <blockquote>
 <p>要有机制继续监听监听套接字或已连接套接字，并在有数据达到时通知 Redis。</p>
 </blockquote>
 <h3 id="基于多路复用的高性能-I-O-模型"><a href="#基于多路复用的高性能-I-O-模型" class="headerlink" title="基于多路复用的高性能 I/O 模型"></a>基于多路复用的高性能 I/O 模型</h3><p>Linux 中的 IO 多路复用机制是指<strong>一个线程处理多个 IO 流</strong>，就是select/epoll 机制。</p>
 <p>在 Redis 只运行单线程的情况下，该机制允许内核中，同时存在多个监听套接字和已连接套接字。内核会一直监听这些套接字上的连接请求或数据请求。一旦有请求到达，就会交给 Redis 线程处理，这就实现了一个 Redis 线程处理多个 IO 流的效果。</p>
-<img   class="lazyload" data-original="/article/undefined/%E5%9F%BA%E4%BA%8E%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E7%9A%84Redis%E9%AB%98%E6%80%A7%E8%83%BDIO%E6%A8%A1%E5%9E%8B.webp" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="基于多路复用的Redis高性能IO模型">
+<img   class="lazyload" data-original="/article/30584/%E5%9F%BA%E4%BA%8E%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E7%9A%84Redis%E9%AB%98%E6%80%A7%E8%83%BDIO%E6%A8%A1%E5%9E%8B.webp" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="基于多路复用的Redis高性能IO模型">
 <p>图中的多个 FD 就是多个套接字。Redis 网络框架调用 epoll 机制，让内核监听这些套接字。此时，Redis 线程不会阻塞在某一个特定的监听或已连接套接字上，也就是说，不会阻塞在某一个特定的客户端请求处理上。正因为此，Redis 可以同时和多个客户端连接并处理请求，从而提升并发性。</p>
 <p><strong>回调机制</strong></p>
 <p>为了在请求到达时能通知到 Redis 线程，<strong>select/epoll 提供了基于事件的回调机制，即针对不同事件的发生，调用相应的处理函数</strong>。</p>
 <p>select/epoll 一旦监测到 FD 上有请求到达时，就会触发相应的事件。这些事件会被放进一个事件队列，Redis 单线程对该事件队列不断进行处理。Redis 无需一直轮询是否有请求实际发生，这就可以避免造成 CPU 资源浪费。同时，Redis 在对事件队列中的事件进行处理时，会调用相应的处理函数，这就实现了基于事件的回调。因为 Redis 一直在对事件队列进行处理，所以能及时响应客户端请求，提升 Redis 的响应性能。</p>
+<h2 id="Redis-的持久化（AOF）"><a href="#Redis-的持久化（AOF）" class="headerlink" title="Redis 的持久化（AOF）"></a>Redis 的持久化（AOF）</h2><h3 id="AOF-日志"><a href="#AOF-日志" class="headerlink" title="AOF 日志"></a>AOF 日志</h3><p>AOF（Append Only File） 日志是写后日志，“写后”的意思是 Redis 是先执行命令，把数据写入内存，然后才记录日志，如下图所示：</p>
+<p><img   class="lazyload" data-original="/article/Redis AOF操作过程.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><span class="image-caption">Redis AOF操作过程</span></p>
+<p>AOF 里记录的是 Redis 收到的每一条命令，这些命令是以文本形式保存的。</p>
+<p><strong>优点：</strong></p>
+<ol>
+<li><strong>写后日志</strong>这种方式，就是先让系统执行命令，只有命令能执行成功，才会被记录到日志中，否则，系统就会直接向客户端报错。所以，Redis 使用写后日志这一方式的一大好处是，可以避免出现记录错误命令的情况。</li>
+<li>它是在命令执行后才记录日志，所以不会阻塞当前的写操作。</li>
+</ol>
+<p><strong>风险：</strong></p>
+<ol>
+<li>首先，如果刚执行完一个命令，还没有来得及记日志就宕机了，那么这个命令和相应的数据就有丢失的风险。如果此时 Redis 是用作缓存，还可以从后端数据库重新读入数据进行恢复，但是，如果 Redis 是直接用作数据库的话，此时，因为命令没有记入日志，所以就无法用日志进行恢复了。</li>
+<li>其次，AOF 虽然避免了对当前命令的阻塞，但可能会给下一个操作带来阻塞风险。这是因为，AOF 日志也是在主线程中执行的，如果在把日志文件写入磁盘时，磁盘写压力大，就会导致写盘很慢，进而导致后续的操作也无法执行了。</li>
+</ol>
+<p><strong>AOF 文件过大带来的性能问题：</strong></p>
+<ol>
+<li>一是，文件系统本身对文件大小有限制，无法保存过大的文件；</li>
+<li>二是，如果文件太大，之后再往里面追加命令记录的话，效率也会变低；</li>
+<li>三是，如果发生宕机，AOF 中记录的命令要一个个被重新执行，用于故障恢复，如果日志文件太大，整个恢复过程就会非常缓慢，这就会影响到 Redis 的正常使用</li>
+</ol>
+<h3 id="AOF-三种写回策略"><a href="#AOF-三种写回策略" class="headerlink" title="AOF 三种写回策略"></a>AOF 三种写回策略</h3><p>AOF 配置项 <code>appendfsync</code> 三个可选值</p>
+<ol>
+<li><p>Always，同步写回：每个写命令执行完，立马同步地将日志写回磁盘；</p>
+<p>“同步写回”可以做到基本不丢数据，但是它在每一个写命令后都有一个慢速的落盘操作，不可避免地会影响主线程性能；</p>
+</li>
+<li><p>Everysec，每秒写回：每个写命令执行完，只是先把日志写到 AOF 文件的内存缓冲区，每隔一秒把缓冲区中的内容写入磁盘；</p>
+<p>“每秒写回”采用一秒写回一次的频率，避免了“同步写回”的性能开销，虽然减少了对系统性能的影响，但是如果发生宕机，上一秒内未落盘的命令操作仍然会丢失。所以，这只能算是，在避免影响主线程性能和避免数据丢失两者间取了个折中。</p>
+</li>
+<li><p>No，操作系统控制的写回：每个写命令执行完，只是先把日志写到 AOF 文件的内存缓冲区，由操作系统决定何时将缓冲区内容写回磁盘。</p>
+<p>虽然“操作系统控制的写回”在写完缓冲区后，就可以继续执行后续的命令，但是落盘的时机已经不在 Redis 手中了，只要 AOF 记录没有写回磁盘，一旦宕机对应的数据就丢失了；</p>
+</li>
+</ol>
+<img   class="lazyload" data-original="/article/30584/%E4%B8%89%E7%A7%8D%E7%AD%96%E7%95%A5%E7%9A%84%E5%86%99%E5%9B%9E%E6%97%B6%E6%9C%BA%EF%BC%8C%E4%BB%A5%E5%8F%8A%E4%BC%98%E7%BC%BA%E7%82%B9.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="三种策略的写回时机，以及优缺点">
+<h3 id="AOF-重写机制"><a href="#AOF-重写机制" class="headerlink" title="AOF 重写机制"></a>AOF 重写机制</h3><p>AOF 重写机制就是在重写时，Redis 根据数据库的现状创建一个新的 AOF 文件，也就是说，读取数据库中的所有键值对，然后对每一个键值对用一条命令记录它的写入。</p>
+<p>旧日志文件中的多条命令，在重写后的新日志中变成了一条命令。</p>
+<blockquote>
+<img   class="lazyload" data-original="/article/30584/AOF%E9%87%8D%E5%86%99%E5%87%8F%E5%B0%91%E6%97%A5%E5%BF%97%E5%A4%A7%E5%B0%8F.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="AOF重写减少日志大小">
+</blockquote>
+<p>有两个配置项在控制AOF重写的<strong>触发时机</strong>：</p>
+<ol>
+<li><code>auto-aof-rewrite-min-size</code>: 表示运行AOF重写时文件的最小大小，默认为64MB</li>
+<li><code>auto-aof-rewrite-percentage</code>: 这个值的计算方法是：当前AOF文件大小和上一次重写后AOF文件大小的差值，再除以上一次重写后AOF文件大小。也就是当前AOF文件比上一次重写后AOF文件的增量大小，和上一次重写后AOF文件大小的比值。 </li>
+</ol>
+<p>AOF文件大小同时超出上面这两个配置项时，会触发AOF重写。</p>
+<p>和 AOF 日志由主线程写回不同，<strong>重写过程是由后台子进程 <em>bgrewriteaof</em> 来完成的</strong>，这也是为了避免阻塞主线程，导致数据库性能下降。</p>
+<p><strong>一个拷贝，两处日志</strong></p>
+<ol>
+<li><p>“一个拷贝”就是指，每次执行重写时，主线程 fork 出后台的 <strong>bgrewriteaof</strong> 子进程。此时，fork 会把主线程的内存拷贝一份给 bgrewriteaof 子进程，这里面就包含了数据库的最新数据。然后，bgrewriteaof 子进程就可以在不影响主线程的情况下，逐一把拷贝的数据写成操作，记入重写日志。</p>
+<p>fork采用操作系统提供的<strong>写时复制(Copy On Write)机制</strong>，就是为了避免一次性拷贝大量内存数据给子进程造成的长时间阻塞问题</p>
+<p>fork子进程时，子进程是会拷贝父进程的页表，即虚实映射关系，而不会拷贝物理内存。子进程复制了父进程页表，也能共享访问父进程的内存数据了，此时，类似于有了父进程的所有内存数据。</p>
+</li>
+<li><p>“两处日志”</p>
+<ol>
+<li>因为主线程未阻塞，仍然可以处理新来的操作。此时，如果有写操作，第一处日志就是指正在使用的 AOF 日志，Redis 会把这个操作写到它的缓冲区。这样一来，即使宕机了，这个 AOF 日志的操作仍然是齐全的，可以用于恢复。</li>
+<li>新的 AOF 重写日志。这个操作也会被写到重写日志的缓冲区。这样，重写日志也不会丢失最新的操作。等到拷贝数据的所有操作记录重写完成后，重写日志记录的这些最新操作也会写入新的 AOF 文件，以保证数据库最新状态的记录。此时，就可以用新的 AOF 文件替代旧文件了。</li>
+</ol>
+</li>
+</ol>
+<img   class="lazyload" data-original="/article/30584/AOF%E9%9D%9E%E9%98%BB%E5%A1%9E%E7%9A%84%E9%87%8D%E5%86%99%E8%BF%87%E7%A8%8B.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="AOF非阻塞的重写过程">
+<h2 id="Redis宕机快速恢复（RDB）"><a href="#Redis宕机快速恢复（RDB）" class="headerlink" title="Redis宕机快速恢复（RDB）"></a>Redis宕机快速恢复（RDB）</h2><p><strong>内存快照</strong>。所谓内存快照，就是指内存中的数据在某一个时刻的状态记录</p>
+<p>对 Redis 来说，就是把某一时刻的状态以文件的形式写到磁盘上，也就是快照。这样一来，即使宕机，快照文件也不会丢失，数据的可靠性也就得到了保证。这个快照文件就称为 <strong>RDB 文件</strong>，其中，RDB 就是 Redis DataBase 的缩写。</p>
+<p>和 AOF 相比，RDB 记录的是某一时刻的数据，并不是操作，所以，在做数据恢复时，可以直接把 RDB 文件读入内存，很快地完成恢复。</p>
+<p>Redis 提供了两个命令来生成 RDB 文件：</p>
+<ol>
+<li>save：在主线程中执行，会导致阻塞；</li>
+<li>bgsave：创建一个子进程，专门用于写入 RDB 文件，避免了主线程的阻塞，这也是 Redis RDB 文件生成的默认配置。</li>
+</ol>
+<p><strong>关键问题：</strong></p>
+<ol>
+<li><p>对哪些数据做快照？这关系到快照的执行效率问题</p>
+<p>Redis 的数据都在内存中，为了提供所有数据的可靠性保证，它执行的是<strong>全量快照</strong>，也就是说，把内存中的所有数据都记录到磁盘中。</p>
+</li>
+<li><p>做快照时，数据还能被增删改吗？这关系到 Redis 是否被阻塞，能否同时正常处理请求。</p>
+<p><strong>避免阻塞和正常处理写操作并不是一回事</strong>。主线程没有阻塞，可以正常接收请求，但是，为了保证快照完整性，它只能处理读操作，因为不能修改正在执行快照的数据。</p>
+<p>Redis 就会借助操作系统提供的<strong>写时复制技术（Copy-On-Write, COW），在执行快照的同时，正常处理写操作。</strong></p>
+<blockquote>
+<p>bgsave 子进程是由主线程 fork 生成的，可以共享主线程的所有内存数据。bgsave 子进程运行后，开始读取主线程的内存数据，并把它们写入 RDB 文件。</p>
+<p>如果主线程要修改一块数据，那么，这块数据就会被复制一份，生成该数据的副本。然后，主线程在这个数据副本上进行修改。同时，bgsave 子进程可以继续把原来的数据写入 RDB 文件。</p>
+<img   class="lazyload" data-original="/article/30584/%E5%86%99%E6%97%B6%E5%A4%8D%E5%88%B6%E6%9C%BA%E5%88%B6%E4%BF%9D%E8%AF%81%E5%BF%AB%E7%85%A7%E6%9C%9F%E9%97%B4%E6%95%B0%E6%8D%AE%E5%8F%AF%E4%BF%AE%E6%94%B9.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="写时复制机制保证快照期间数据可修改">
+</blockquote>
+<p>既保证了快照的完整性，也允许主线程同时对数据进行修改，避免了对正常业务的影响。</p>
+</li>
+<li><p>多久做一次快照？</p>
+<p>虽然 bgsave 执行时不阻塞主线程，但是，如果频繁地执行全量快照，也会带来两方面的开销。</p>
+<ol>
+<li>频繁将全量数据写入磁盘，会给磁盘带来很大压力，多个快照竞争有限的磁盘带宽，前一个快照还没有做完，后一个又开始做了，容易造成恶性循环。</li>
+<li>bgsave 子进程需要通过 fork 操作从主线程创建出来。虽然，子进程在创建后不会再阻塞主线程，但是，<strong>fork 这个创建过程本身会阻塞主线程</strong>，而且主线程的内存越大，阻塞时间越长。如果频繁 fork 出 bgsave 子进程，这就会频繁阻塞主线程了（所以，在 Redis 中如果有一个 bgsave 在运行，就不会再启动第二个 bgsave 子进程）</li>
+</ol>
+</li>
+</ol>
+<p><strong>增量快照</strong>：做了一次全量快照后，后续的快照只对修改的数据进行快照记录，这样可以避免每次全量快照的开销。<strong>需要记住哪些数据被修改了</strong>，需要使用额外的元数据信息去记录哪些数据被修改了，这会带来额外的空间开销问题。</p>
+<p>Redis 4.0 中提出了一个<strong>混合使用 AOF 日志和内存快照</strong>的方法。</p>
+<p>简单来说，内存快照以一定的频率执行，在两次快照之间，使用 AOF 日志记录这期间的所有命令操作。这样一来，快照不用很频繁地执行，这就避免了频繁 fork 对主线程的影响。而且，AOF 日志也只用记录两次快照间的操作，也就是说，不需要记录所有操作了，因此，就不会出现文件过大的情况了，也可以避免重写开销。</p>
+<p><strong>AOF 和 RDB 的选择问题：</strong></p>
+<ol>
+<li>数据不能丢失时，选择内存快照和 AOF 的混合使用；</li>
+<li>如果允许分钟级别的数据丢失，可以只使用 RDB；</li>
+<li>如果只用 AOF，优先使用 everysec 的配置选项，因为它在可靠性和性能之间取了一个平衡。</li>
+</ol>
+<h2 id="Redis数据同步"><a href="#Redis数据同步" class="headerlink" title="Redis数据同步"></a><a target="_blank" rel="noopener" href="https://juejin.cn/post/6981744631000072205">Redis数据同步</a></h2><p>Redis 具有高可靠性：</p>
+<ol>
+<li><p>一是数据尽量少丢失</p>
+<p>AOF 和 RDB 保证</p>
+</li>
+<li><p>二是服务尽量少中断</p>
+<p>增加副本冗余量，将一份数据同时保存在多个实例上。即使有一个实例出现了故障，需要过一段时间才能恢复，其他实例也可以对外提供服务，不会影响业务使用。</p>
+</li>
+</ol>
+<p>Redis 提供了主从库模式，以保证数据副本的一致，主从库之间采用的是读写分离的方式</p>
+<ol>
+<li>读操作：主库、从库都可以接收；</li>
+<li>写操作：首先到主库执行，然后，主库将写操作同步给从库。</li>
+</ol>
+<img   class="lazyload" data-original="/article/30584/Redis%E4%B8%BB%E4%BB%8E%E5%BA%93%E5%92%8C%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="Redis主从库和读写分离">
+<h3 id="主从库间进行第一次同步"><a href="#主从库间进行第一次同步" class="headerlink" title="主从库间进行第一次同步"></a>主从库间进行第一次同步</h3><p>当我们启动多个 Redis 实例的时候，它们相互之间就可以通过 <code>replicaof</code>（Redis 5.0 之前使用 slaveof）命令形成主库和从库的关系，之后会按照三个阶段完成数据的第一次同步。</p>
+<blockquote>
+<p>实例 1（ip：172.16.19.3）和实例 2（ip：172.16.19.5），在实例 2 上执行以下这个命令后，实例 2 就变成了实例 1 的从库，并从实例 1 上复制数据：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">replicaof  172.16.19.3  6379<br></code></pre></td></tr></table></figure>
+</blockquote>
+<img   class="lazyload" data-original="/article/30584/%E4%B8%BB%E4%BB%8E%E5%BA%93%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%90%8C%E6%AD%A5%E7%9A%84%E6%B5%81%E7%A8%8B.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="主从库第一次同步的流程">
+<ol>
+<li><p>第一阶段是主从库间建立连接、协商同步的过程，主要是为全量复制做准备。在这一步，从库和主库建立起连接，并告诉主库即将进行同步，主库确认回复后，主从库间就可以开始同步了。</p>
+<p>从库给主库发送 <code>psync</code> 命令，表示要进行数据同步，主库根据这个命令的参数来启动复制。<code>psync</code> 命令包含了主库的 <code>runID</code> 和复制进度 <code>offset</code> 两个参数。</p>
+<ol>
+<li>runID，是每个 Redis 实例启动时都会自动生成的一个随机 ID，用来唯一标记这个实例。当从库和主库第一次复制时，因为不知道主库的 runID，所以将 runID 设为“？”。</li>
+<li>offset，此时设为 -1，表示第一次复制。</li>
+</ol>
+<p>主库收到 <code>psync</code> 命令后，会用 FULLRESYNC 响应命令带上两个参数：主库 <code>runID</code>和主库目前的复制进度 <code>offset</code>，返回给从库。从库收到响应后，会记录下这两个参数。</p>
+<p><strong>FULLRESYNC 响应表示第一次复制采用的全量复制</strong>，也就是说，主库会把当前所有的数据都复制给从库。</p>
+</li>
+<li><p>在第二阶段，主库将所有数据同步给从库。从库收到数据后，在本地完成数据加载。这个过程依赖于内存快照生成的 RDB 文件。</p>
+<p>主库执行 <code>bgsave</code> 命令，生成 RDB 文件，接着将文件发给从库。从库接收到 RDB 文件后，会先清空当前数据库，然后加载 RDB 文件。这是因为从库在通过 <code>replicaof</code> 命令开始和主库同步前，可能保存了其他数据。为了避免之前数据的影响，从库需要先把当前数据库清空。</p>
+<p>在主库将数据同步给从库的过程中，主库不会被阻塞，仍然可以正常接收请求。否则，Redis 的服务就被中断了。但是，这些请求中的写操作并没有记录到刚刚生成的 RDB 文件中。为了保证主从库的数据一致性，主库会在内存中用专门的 <strong>replication buffer</strong>，记录 RDB 文件生成后收到的所有写操作。</p>
+</li>
+<li><p>第三个阶段，主库会把第二阶段执行过程中新收到的写命令，再发送给从库。具体的操作是，当主库完成 RDB 文件发送后，就会把此时 <strong>replication buffer</strong> 中的修改操作发给从库，从库再重新执行这些操作。</p>
+</li>
+</ol>
+<h3 id="主从级联模式分担全量复制时的主库压力"><a href="#主从级联模式分担全量复制时的主库压力" class="headerlink" title="主从级联模式分担全量复制时的主库压力"></a>主从级联模式分担全量复制时的主库压力</h3><blockquote>
+<p><strong>问题：</strong>一次全量复制中，对于主库来说，需要完成两个耗时的操作：<strong>生成 RDB 文件和传输 RDB 文件</strong>。如果从库数量很多，而且都要和主库进行全量复制的话，就会导致主库忙于 fork 子进程生成 RDB 文件，进行数据全量同步。<u>fork 这个操作会阻塞主线程处理正常请求，从而导致主库响应应用程序的请求速度变慢</u>。<u>此外，传输 RDB 文件也会占用主库的网络带宽，同样会给主库的资源使用带来压力</u>。</p>
+</blockquote>
+<p>通过<strong>“主 - 从 - 从”</strong>模式将主库生成 RDB 和传输 RDB 的压力，以级联的方式分散到从库上。</p>
+<p>在部署主从集群的时候，可以手动选择一个从库（比如选择内存资源配置较高的从库），用于级联其他的从库。然后，可以再选择一些从库（例如三分之一的从库），在这些从库上执行如下命令，让它们和刚才所选的从库，建立起主从关系。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">replicaof  所选从库的IP 6379<br></code></pre></td></tr></table></figure>
+<p>在进行同步时，不用再和主库进行交互了，只要和级联的从库进行写操作同步就行了，这就可以减轻主库上的压力</p>
+<img   class="lazyload" data-original="/article/30584/%E7%BA%A7%E8%81%94%E7%9A%84%E2%80%9C%E4%B8%BB-%E4%BB%8E-%E4%BB%8E%E2%80%9D%E6%A8%A1%E5%BC%8F.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="级联的“主-从-从”模式">
+<h3 id="主从库间网络中断"><a href="#主从库间网络中断" class="headerlink" title="主从库间网络中断"></a>主从库间网络中断</h3><blockquote>
+<p>在 Redis 2.8 之前，如果主从库在命令传播时出现了网络闪断，那么，从库就会和主库重新进行一次全量复制，开销非常大。</p>
+</blockquote>
+<p>从 Redis 2.8 开始，网络断了之后，主从库会采用增量复制的方式继续同步，只会把主从库网络断连期间主库收到的命令，同步给从库。</p>
+<p>当主从库断连后，主库会把断连期间收到的写操作命令，写入 <strong>replication buffer</strong>，同时也会把这些操作命令也写入 <strong>repl_backlog_buffer</strong>这个缓冲区。</p>
+<p>只要有从库存在，这个 <strong>repl_backlog_buffer</strong> 就会存在。主库的所有写命令除了传播给从库之外，都会在这个 <strong>repl_backlog_buffer</strong> 中记录一份，缓存起来，只有预先缓存了这些命令，当从库断连后，从库重新发送 <code>psync <svg xmlns:xlink="http://www.w3.org/1999/xlink" width="13.049ex" height="2.509ex" style="vertical-align: -0.671ex;" viewbox="0 -791.3 5618.3 1080.4" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-1-Title">
+<title id="MathJax-SVG-1-Title">master_runid </title>
+<defs aria-hidden="true">
+<path stroke-width="1" id="E1-MJMATHI-6D" d="M21 287Q22 293 24 303T36 341T56 388T88 425T132 442T175 435T205 417T221 395T229 376L231 369Q231 367 232 367L243 378Q303 442 384 442Q401 442 415 440T441 433T460 423T475 411T485 398T493 385T497 373T500 364T502 357L510 367Q573 442 659 442Q713 442 746 415T780 336Q780 285 742 178T704 50Q705 36 709 31T724 26Q752 26 776 56T815 138Q818 149 821 151T837 153Q857 153 857 145Q857 144 853 130Q845 101 831 73T785 17T716 -10Q669 -10 648 17T627 73Q627 92 663 193T700 345Q700 404 656 404H651Q565 404 506 303L499 291L466 157Q433 26 428 16Q415 -11 385 -11Q372 -11 364 -4T353 8T350 18Q350 29 384 161L420 307Q423 322 423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 181Q151 335 151 342Q154 357 154 369Q154 405 129 405Q107 405 92 377T69 316T57 280Q55 278 41 278H27Q21 284 21 287Z"/>
+<path stroke-width="1" id="E1-MJMATHI-61" d="M33 157Q33 258 109 349T280 441Q331 441 370 392Q386 422 416 422Q429 422 439 414T449 394Q449 381 412 234T374 68Q374 43 381 35T402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487Q506 153 506 144Q506 138 501 117T481 63T449 13Q436 0 417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157ZM351 328Q351 334 346 350T323 385T277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q217 26 254 59T298 110Q300 114 325 217T351 328Z"/>
+<path stroke-width="1" id="E1-MJMATHI-73" d="M131 289Q131 321 147 354T203 415T300 442Q362 442 390 415T419 355Q419 323 402 308T364 292Q351 292 340 300T328 326Q328 342 337 354T354 372T367 378Q368 378 368 379Q368 382 361 388T336 399T297 405Q249 405 227 379T204 326Q204 301 223 291T278 274T330 259Q396 230 396 163Q396 135 385 107T352 51T289 7T195 -10Q118 -10 86 19T53 87Q53 126 74 143T118 160Q133 160 146 151T160 120Q160 94 142 76T111 58Q109 57 108 57T107 55Q108 52 115 47T146 34T201 27Q237 27 263 38T301 66T318 97T323 122Q323 150 302 164T254 181T195 196T148 231Q131 256 131 289Z"/>
+<path stroke-width="1" id="E1-MJMATHI-74" d="M26 385Q19 392 19 395Q19 399 22 411T27 425Q29 430 36 430T87 431H140L159 511Q162 522 166 540T173 566T179 586T187 603T197 615T211 624T229 626Q247 625 254 615T261 596Q261 589 252 549T232 470L222 433Q222 431 272 431H323Q330 424 330 420Q330 398 317 385H210L174 240Q135 80 135 68Q135 26 162 26Q197 26 230 60T283 144Q285 150 288 151T303 153H307Q322 153 322 145Q322 142 319 133Q314 117 301 95T267 48T216 6T155 -11Q125 -11 98 4T59 56Q57 64 57 83V101L92 241Q127 382 128 383Q128 385 77 385H26Z"/>
+<path stroke-width="1" id="E1-MJMATHI-65" d="M39 168Q39 225 58 272T107 350T174 402T244 433T307 442H310Q355 442 388 420T421 355Q421 265 310 237Q261 224 176 223Q139 223 138 221Q138 219 132 186T125 128Q125 81 146 54T209 26T302 45T394 111Q403 121 406 121Q410 121 419 112T429 98T420 82T390 55T344 24T281 -1T205 -11Q126 -11 83 42T39 168ZM373 353Q367 405 305 405Q272 405 244 391T199 357T170 316T154 280T149 261Q149 260 169 260Q282 260 327 284T373 353Z"/>
+<path stroke-width="1" id="E1-MJMATHI-72" d="M21 287Q22 290 23 295T28 317T38 348T53 381T73 411T99 433T132 442Q161 442 183 430T214 408T225 388Q227 382 228 382T236 389Q284 441 347 441H350Q398 441 422 400Q430 381 430 363Q430 333 417 315T391 292T366 288Q346 288 334 299T322 328Q322 376 378 392Q356 405 342 405Q286 405 239 331Q229 315 224 298T190 165Q156 25 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 114 189T154 366Q154 405 128 405Q107 405 92 377T68 316T57 280Q55 278 41 278H27Q21 284 21 287Z"/>
+<path stroke-width="1" id="E1-MJMATHI-75" d="M21 287Q21 295 30 318T55 370T99 420T158 442Q204 442 227 417T250 358Q250 340 216 246T182 105Q182 62 196 45T238 27T291 44T328 78L339 95Q341 99 377 247Q407 367 413 387T427 416Q444 431 463 431Q480 431 488 421T496 402L420 84Q419 79 419 68Q419 43 426 35T447 26Q469 29 482 57T512 145Q514 153 532 153Q551 153 551 144Q550 139 549 130T540 98T523 55T498 17T462 -8Q454 -10 438 -10Q372 -10 347 46Q345 45 336 36T318 21T296 6T267 -6T233 -11Q189 -11 155 7Q103 38 103 113Q103 170 138 262T173 379Q173 380 173 381Q173 390 173 393T169 400T158 404H154Q131 404 112 385T82 344T65 302T57 280Q55 278 41 278H27Q21 284 21 287Z"/>
+<path stroke-width="1" id="E1-MJMATHI-6E" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"/>
+<path stroke-width="1" id="E1-MJMATHI-69" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"/>
+<path stroke-width="1" id="E1-MJMATHI-64" d="M366 683Q367 683 438 688T511 694Q523 694 523 686Q523 679 450 384T375 83T374 68Q374 26 402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487H491Q506 153 506 145Q506 140 503 129Q490 79 473 48T445 8T417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157Q33 205 53 255T101 341Q148 398 195 420T280 442Q336 442 364 400Q369 394 369 396Q370 400 396 505T424 616Q424 629 417 632T378 637H357Q351 643 351 645T353 664Q358 683 366 683ZM352 326Q329 405 277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q233 26 290 98L298 109L352 326Z"/>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
+ <use xlink:href="#E1-MJMATHI-6D" x="0" y="0"/>
+ <use xlink:href="#E1-MJMATHI-61" x="878" y="0"/>
+ <use xlink:href="#E1-MJMATHI-73" x="1408" y="0"/>
+ <use xlink:href="#E1-MJMATHI-74" x="1877" y="0"/>
+ <use xlink:href="#E1-MJMATHI-65" x="2239" y="0"/>
+<g transform="translate(2705,0)">
+ <use xlink:href="#E1-MJMATHI-72" x="0" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E1-MJMATHI-72" x="638" y="-213"/>
+</g>
+ <use xlink:href="#E1-MJMATHI-75" x="3576" y="0"/>
+ <use xlink:href="#E1-MJMATHI-6E" x="4148" y="0"/>
+ <use xlink:href="#E1-MJMATHI-69" x="4749" y="0"/>
+ <use xlink:href="#E1-MJMATHI-64" x="5094" y="0"/>
+</g>
+</svg>offset</code>，主库才能通过 <code><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="65.473ex" height="3.343ex" style="vertical-align: -1.171ex;" viewbox="0 -934.9 28189.8 1439.2" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-1-Title">
+<title id="MathJax-SVG-1-Title">offset` 在 **repl_backlog_buffer** 中找到从库断开的位置，只发送`</title>
+<defs aria-hidden="true">
+<path stroke-width="1" id="E1-MJMATHI-6F" d="M201 -11Q126 -11 80 38T34 156Q34 221 64 279T146 380Q222 441 301 441Q333 441 341 440Q354 437 367 433T402 417T438 387T464 338T476 268Q476 161 390 75T201 -11ZM121 120Q121 70 147 48T206 26Q250 26 289 58T351 142Q360 163 374 216T388 308Q388 352 370 375Q346 405 306 405Q243 405 195 347Q158 303 140 230T121 120Z"/>
+<path stroke-width="1" id="E1-MJMATHI-66" d="M118 -162Q120 -162 124 -164T135 -167T147 -168Q160 -168 171 -155T187 -126Q197 -99 221 27T267 267T289 382V385H242Q195 385 192 387Q188 390 188 397L195 425Q197 430 203 430T250 431Q298 431 298 432Q298 434 307 482T319 540Q356 705 465 705Q502 703 526 683T550 630Q550 594 529 578T487 561Q443 561 443 603Q443 622 454 636T478 657L487 662Q471 668 457 668Q445 668 434 658T419 630Q412 601 403 552T387 469T380 433Q380 431 435 431Q480 431 487 430T498 424Q499 420 496 407T491 391Q489 386 482 386T428 385H372L349 263Q301 15 282 -47Q255 -132 212 -173Q175 -205 139 -205Q107 -205 81 -186T55 -132Q55 -95 76 -78T118 -61Q162 -61 162 -103Q162 -122 151 -136T127 -157L118 -162Z"/>
+<path stroke-width="1" id="E1-MJMATHI-73" d="M131 289Q131 321 147 354T203 415T300 442Q362 442 390 415T419 355Q419 323 402 308T364 292Q351 292 340 300T328 326Q328 342 337 354T354 372T367 378Q368 378 368 379Q368 382 361 388T336 399T297 405Q249 405 227 379T204 326Q204 301 223 291T278 274T330 259Q396 230 396 163Q396 135 385 107T352 51T289 7T195 -10Q118 -10 86 19T53 87Q53 126 74 143T118 160Q133 160 146 151T160 120Q160 94 142 76T111 58Q109 57 108 57T107 55Q108 52 115 47T146 34T201 27Q237 27 263 38T301 66T318 97T323 122Q323 150 302 164T254 181T195 196T148 231Q131 256 131 289Z"/>
+<path stroke-width="1" id="E1-MJMATHI-65" d="M39 168Q39 225 58 272T107 350T174 402T244 433T307 442H310Q355 442 388 420T421 355Q421 265 310 237Q261 224 176 223Q139 223 138 221Q138 219 132 186T125 128Q125 81 146 54T209 26T302 45T394 111Q403 121 406 121Q410 121 419 112T429 98T420 82T390 55T344 24T281 -1T205 -11Q126 -11 83 42T39 168ZM373 353Q367 405 305 405Q272 405 244 391T199 357T170 316T154 280T149 261Q149 260 169 260Q282 260 327 284T373 353Z"/>
+<path stroke-width="1" id="E1-MJMATHI-74" d="M26 385Q19 392 19 395Q19 399 22 411T27 425Q29 430 36 430T87 431H140L159 511Q162 522 166 540T173 566T179 586T187 603T197 615T211 624T229 626Q247 625 254 615T261 596Q261 589 252 549T232 470L222 433Q222 431 272 431H323Q330 424 330 420Q330 398 317 385H210L174 240Q135 80 135 68Q135 26 162 26Q197 26 230 60T283 144Q285 150 288 151T303 153H307Q322 153 322 145Q322 142 319 133Q314 117 301 95T267 48T216 6T155 -11Q125 -11 98 4T59 56Q57 64 57 83V101L92 241Q127 382 128 383Q128 385 77 385H26Z"/>
+<path stroke-width="1" id="E1-MJMAIN-2018" d="M64 494Q64 548 86 597T131 670T160 694Q163 694 172 685T182 672Q182 669 170 656T144 625T116 573T101 501Q101 489 102 489T107 491T120 497T138 500Q163 500 180 483T198 440T181 397T139 379Q110 379 87 405T64 494Z"/>
+<path stroke-width="1" id="E1-MJMAIN-2217" d="M229 286Q216 420 216 436Q216 454 240 464Q241 464 245 464T251 465Q263 464 273 456T283 436Q283 419 277 356T270 286L328 328Q384 369 389 372T399 375Q412 375 423 365T435 338Q435 325 425 315Q420 312 357 282T289 250L355 219L425 184Q434 175 434 161Q434 146 425 136T401 125Q393 125 383 131T328 171L270 213Q283 79 283 63Q283 53 276 44T250 35Q231 35 224 44T216 63Q216 80 222 143T229 213L171 171Q115 130 110 127Q106 124 100 124Q87 124 76 134T64 161Q64 166 64 169T67 175T72 181T81 188T94 195T113 204T138 215T170 230T210 250L74 315Q65 324 65 338Q65 353 74 363T98 374Q106 374 116 368T171 328L229 286Z"/>
+<path stroke-width="1" id="E1-MJMATHI-72" d="M21 287Q22 290 23 295T28 317T38 348T53 381T73 411T99 433T132 442Q161 442 183 430T214 408T225 388Q227 382 228 382T236 389Q284 441 347 441H350Q398 441 422 400Q430 381 430 363Q430 333 417 315T391 292T366 288Q346 288 334 299T322 328Q322 376 378 392Q356 405 342 405Q286 405 239 331Q229 315 224 298T190 165Q156 25 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 114 189T154 366Q154 405 128 405Q107 405 92 377T68 316T57 280Q55 278 41 278H27Q21 284 21 287Z"/>
+<path stroke-width="1" id="E1-MJMATHI-70" d="M23 287Q24 290 25 295T30 317T40 348T55 381T75 411T101 433T134 442Q209 442 230 378L240 387Q302 442 358 442Q423 442 460 395T497 281Q497 173 421 82T249 -10Q227 -10 210 -4Q199 1 187 11T168 28L161 36Q160 35 139 -51T118 -138Q118 -144 126 -145T163 -148H188Q194 -155 194 -157T191 -175Q188 -187 185 -190T172 -194Q170 -194 161 -194T127 -193T65 -192Q-5 -192 -24 -194H-32Q-39 -187 -39 -183Q-37 -156 -26 -148H-6Q28 -147 33 -136Q36 -130 94 103T155 350Q156 355 156 364Q156 405 131 405Q109 405 94 377T71 316T59 280Q57 278 43 278H29Q23 284 23 287ZM178 102Q200 26 252 26Q282 26 310 49T356 107Q374 141 392 215T411 325V331Q411 405 350 405Q339 405 328 402T306 393T286 380T269 365T254 350T243 336T235 326L232 322Q232 321 229 308T218 264T204 212Q178 106 178 102Z"/>
+<path stroke-width="1" id="E1-MJMATHI-6C" d="M117 59Q117 26 142 26Q179 26 205 131Q211 151 215 152Q217 153 225 153H229Q238 153 241 153T246 151T248 144Q247 138 245 128T234 90T214 43T183 6T137 -11Q101 -11 70 11T38 85Q38 97 39 102L104 360Q167 615 167 623Q167 626 166 628T162 632T157 634T149 635T141 636T132 637T122 637Q112 637 109 637T101 638T95 641T94 647Q94 649 96 661Q101 680 107 682T179 688Q194 689 213 690T243 693T254 694Q266 694 266 686Q266 675 193 386T118 83Q118 81 118 75T117 65V59Z"/>
+<path stroke-width="1" id="E1-MJMATHI-62" d="M73 647Q73 657 77 670T89 683Q90 683 161 688T234 694Q246 694 246 685T212 542Q204 508 195 472T180 418L176 399Q176 396 182 402Q231 442 283 442Q345 442 383 396T422 280Q422 169 343 79T173 -11Q123 -11 82 27T40 150V159Q40 180 48 217T97 414Q147 611 147 623T109 637Q104 637 101 637H96Q86 637 83 637T76 640T73 647ZM336 325V331Q336 405 275 405Q258 405 240 397T207 376T181 352T163 330L157 322L136 236Q114 150 114 114Q114 66 138 42Q154 26 178 26Q211 26 245 58Q270 81 285 114T318 219Q336 291 336 325Z"/>
+<path stroke-width="1" id="E1-MJMATHI-61" d="M33 157Q33 258 109 349T280 441Q331 441 370 392Q386 422 416 422Q429 422 439 414T449 394Q449 381 412 234T374 68Q374 43 381 35T402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487Q506 153 506 144Q506 138 501 117T481 63T449 13Q436 0 417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157ZM351 328Q351 334 346 350T323 385T277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q217 26 254 59T298 110Q300 114 325 217T351 328Z"/>
+<path stroke-width="1" id="E1-MJMATHI-63" d="M34 159Q34 268 120 355T306 442Q362 442 394 418T427 355Q427 326 408 306T360 285Q341 285 330 295T319 325T330 359T352 380T366 386H367Q367 388 361 392T340 400T306 404Q276 404 249 390Q228 381 206 359Q162 315 142 235T121 119Q121 73 147 50Q169 26 205 26H209Q321 26 394 111Q403 121 406 121Q410 121 419 112T429 98T420 83T391 55T346 25T282 0T202 -11Q127 -11 81 37T34 159Z"/>
+<path stroke-width="1" id="E1-MJMATHI-6B" d="M121 647Q121 657 125 670T137 683Q138 683 209 688T282 694Q294 694 294 686Q294 679 244 477Q194 279 194 272Q213 282 223 291Q247 309 292 354T362 415Q402 442 438 442Q468 442 485 423T503 369Q503 344 496 327T477 302T456 291T438 288Q418 288 406 299T394 328Q394 353 410 369T442 390L458 393Q446 405 434 405H430Q398 402 367 380T294 316T228 255Q230 254 243 252T267 246T293 238T320 224T342 206T359 180T365 147Q365 130 360 106T354 66Q354 26 381 26Q429 26 459 145Q461 153 479 153H483Q499 153 499 144Q499 139 496 130Q455 -11 378 -11Q333 -11 305 15T277 90Q277 108 280 121T283 145Q283 167 269 183T234 206T200 217T182 220H180Q168 178 159 139T145 81T136 44T129 20T122 7T111 -2Q98 -11 83 -11Q66 -11 57 -1T48 16Q48 26 85 176T158 471L195 616Q196 629 188 632T149 637H144Q134 637 131 637T124 640T121 647Z"/>
+<path stroke-width="1" id="E1-MJMATHI-67" d="M311 43Q296 30 267 15T206 0Q143 0 105 45T66 160Q66 265 143 353T314 442Q361 442 401 394L404 398Q406 401 409 404T418 412T431 419T447 422Q461 422 470 413T480 394Q480 379 423 152T363 -80Q345 -134 286 -169T151 -205Q10 -205 10 -137Q10 -111 28 -91T74 -71Q89 -71 102 -80T116 -111Q116 -121 114 -130T107 -144T99 -154T92 -162L90 -164H91Q101 -167 151 -167Q189 -167 211 -155Q234 -144 254 -122T282 -75Q288 -56 298 -13Q311 35 311 43ZM384 328L380 339Q377 350 375 354T369 368T359 382T346 393T328 402T306 405Q262 405 221 352Q191 313 171 233T151 117Q151 38 213 38Q269 38 323 108L331 118L384 328Z"/>
+<path stroke-width="1" id="E1-MJMATHI-75" d="M21 287Q21 295 30 318T55 370T99 420T158 442Q204 442 227 417T250 358Q250 340 216 246T182 105Q182 62 196 45T238 27T291 44T328 78L339 95Q341 99 377 247Q407 367 413 387T427 416Q444 431 463 431Q480 431 488 421T496 402L420 84Q419 79 419 68Q419 43 426 35T447 26Q469 29 482 57T512 145Q514 153 532 153Q551 153 551 144Q550 139 549 130T540 98T523 55T498 17T462 -8Q454 -10 438 -10Q372 -10 347 46Q345 45 336 36T318 21T296 6T267 -6T233 -11Q189 -11 155 7Q103 38 103 113Q103 170 138 262T173 379Q173 380 173 381Q173 390 173 393T169 400T158 404H154Q131 404 112 385T82 344T65 302T57 280Q55 278 41 278H27Q21 284 21 287Z"/>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
+ <use xlink:href="#E1-MJMATHI-6F" x="0" y="0"/>
+ <use xlink:href="#E1-MJMATHI-66" x="485" y="0"/>
+ <use xlink:href="#E1-MJMATHI-66" x="1036" y="0"/>
+ <use xlink:href="#E1-MJMATHI-73" x="1586" y="0"/>
+ <use xlink:href="#E1-MJMATHI-65" x="2056" y="0"/>
+ <use xlink:href="#E1-MJMATHI-74" x="2522" y="0"/>
+ <use xlink:href="#E1-MJMAIN-2018" x="2884" y="0"/>
+<g transform="translate(3162,0)">
+<text font-family="monospace" stroke="none" transform="scale(71.759) matrix(1 0 0 -1 0 0)">在</text>
+</g>
+ <use xlink:href="#E1-MJMAIN-2217" x="4317" y="0"/>
+ <use xlink:href="#E1-MJMAIN-2217" x="5040" y="0"/>
+ <use xlink:href="#E1-MJMATHI-72" x="5540" y="0"/>
+ <use xlink:href="#E1-MJMATHI-65" x="5992" y="0"/>
+ <use xlink:href="#E1-MJMATHI-70" x="6458" y="0"/>
+<g transform="translate(6962,0)">
+ <use xlink:href="#E1-MJMATHI-6C" x="0" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E1-MJMATHI-62" x="422" y="-213"/>
+</g>
+ <use xlink:href="#E1-MJMATHI-61" x="7664" y="0"/>
+ <use xlink:href="#E1-MJMATHI-63" x="8194" y="0"/>
+ <use xlink:href="#E1-MJMATHI-6B" x="8627" y="0"/>
+ <use xlink:href="#E1-MJMATHI-6C" x="9149" y="0"/>
+ <use xlink:href="#E1-MJMATHI-6F" x="9447" y="0"/>
+<g transform="translate(9933,0)">
+ <use xlink:href="#E1-MJMATHI-67" x="0" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E1-MJMATHI-62" x="675" y="-213"/>
+</g>
+ <use xlink:href="#E1-MJMATHI-75" x="10814" y="0"/>
+ <use xlink:href="#E1-MJMATHI-66" x="11386" y="0"/>
+ <use xlink:href="#E1-MJMATHI-66" x="11937" y="0"/>
+ <use xlink:href="#E1-MJMATHI-65" x="12487" y="0"/>
+ <use xlink:href="#E1-MJMATHI-72" x="12954" y="0"/>
+ <use xlink:href="#E1-MJMAIN-2217" x="13627" y="0"/>
+ <use xlink:href="#E1-MJMAIN-2217" x="14350" y="0"/>
+<g transform="translate(14851,0)">
+<text font-family="monospace" stroke="none" transform="scale(71.759) matrix(1 0 0 -1 0 0)">中</text>
+</g>
+<g transform="translate(15784,0)">
+<text font-family="monospace" stroke="none" transform="scale(71.759) matrix(1 0 0 -1 0 0)">找</text>
+</g>
+<g transform="translate(16716,0)">
+<text font-family="monospace" stroke="none" transform="scale(71.759) matrix(1 0 0 -1 0 0)">到</text>
+</g>
+<g transform="translate(17649,0)">
+<text font-family="monospace" stroke="none" transform="scale(71.759) matrix(1 0 0 -1 0 0)">从</text>
+</g>
+<g transform="translate(18582,0)">
+<text font-family="monospace" stroke="none" transform="scale(71.759) matrix(1 0 0 -1 0 0)">库</text>
+</g>
+<g transform="translate(19515,0)">
+<text font-family="monospace" stroke="none" transform="scale(71.759) matrix(1 0 0 -1 0 0)">断</text>
+</g>
+<g transform="translate(20448,0)">
+<text font-family="monospace" stroke="none" transform="scale(71.759) matrix(1 0 0 -1 0 0)">开</text>
+</g>
+<g transform="translate(21381,0)">
+<text font-family="monospace" stroke="none" transform="scale(71.759) matrix(1 0 0 -1 0 0)">的</text>
+</g>
+<g transform="translate(22314,0)">
+<text font-family="monospace" stroke="none" transform="scale(71.759) matrix(1 0 0 -1 0 0)">位</text>
+</g>
+<g transform="translate(23246,0)">
+<text font-family="monospace" stroke="none" transform="scale(71.759) matrix(1 0 0 -1 0 0)">置</text>
+</g>
+<g transform="translate(24179,0)">
+<text font-family="monospace" stroke="none" transform="scale(71.759) matrix(1 0 0 -1 0 0)">，</text>
+</g>
+<g transform="translate(25112,0)">
+<text font-family="monospace" stroke="none" transform="scale(71.759) matrix(1 0 0 -1 0 0)">只</text>
+</g>
+<g transform="translate(26045,0)">
+<text font-family="monospace" stroke="none" transform="scale(71.759) matrix(1 0 0 -1 0 0)">发</text>
+</g>
+<g transform="translate(26978,0)">
+<text font-family="monospace" stroke="none" transform="scale(71.759) matrix(1 0 0 -1 0 0)">送</text>
+</g>
+ <use xlink:href="#E1-MJMAIN-2018" x="27911" y="0"/>
+</g>
+</svg>offset</code> 之后的增量数据给从库即可。</p>
+<p><strong>注意连接没有断开的时候，这两个缓冲区是同时存在，如果连接断开，那么对应Slave的replication buffer缓冲区就会被删除</strong>。</p>
+<p><strong>repl_backlog_buffer</strong> 是一个环形缓冲区，主库会记录自己写到的位置，从库则会记录自己已经读到的位置。</p>
+<ol>
+<li>开始时，主库和从库的写读位置在一起，这算是它们的起始位置。随着主库不断接收新的写操作，它在缓冲区中的写位置会逐步偏离起始位置，通常用<strong>偏移量</strong>来衡量这个偏移距离的大小，对主库来说，对应的偏移量就是 <code>master_repl_offset</code>。主库接收的新写操作越多，这个值就会越大。</li>
+<li>同样，从库在复制完写操作命令后，它在缓冲区中的读位置也开始逐步偏移刚才的起始位置，此时，从库已复制的偏移量 <code>slave_repl_offset</code> 也在不断增加。正常情况下，这两个偏移量基本相等。</li>
+<li>主从库的连接恢复之后，从库首先会给主库发送 <code>psync</code> 命令，并把自己当前的 <code>slave_repl_offset</code> 发给主库，主库会判断自己的 <code>master_repl_offset</code> 和 <code>slave_repl_offset</code> 之间的差距。 </li>
+</ol>
+<blockquote>
+<ol>
+<li><p><strong>repl_backlog_buffer</strong>：是为了从库断开之后，如何找到主从差异数据而设计的环形缓冲区，从而避免全量同步带来的性能开销。如果从库断开时间太久， <strong>repl_backlog_buffer</strong> 环形缓冲区被主库的写命令覆盖了，那么从库连上主库后只能乖乖地进行一次全量同步，所以 <strong>repl_backlog_buffer</strong> 配置尽量大一些，可以降低主从断开后全量同步的概率。</p>
+</li>
+<li><p><strong>replication buffer</strong>：Redis和客户端通信也好，和从库通信也好，Redis都需要给分配一个内存 buffer 进行数据交互，客户端是一个 client，从库也是一个 client，我们每个 client 连上 Redis 后，Redis 都会分配一个 <strong>client buffer</strong>，所有数据交互都是通过这个 buffer 进行的：Redis先把数据写到这个buffer中，然后再把 buffer 中的数据发到 client socket 中再通过网络发送出去，这样就完成了数据交互。</p>
+<p>所以主从在增量同步时，从库作为一个 client，也会分配一个 buffer，只不过这个 buffer 专门用来传播用户的写命令到从库，保证主从数据一致，我们通常把它叫做 replication buffer</p>
+</li>
+<li><p>既然有这个内存 buffer 存在，那么这个 buffer 有没有限制呢？</p>
+<p>如果主从在传播命令时，因为某些原因从库处理得非常慢，那么主库上的这个 buffer 就会持续增长，消耗大量的内存资源，甚至 OOM。所以Redis提供了<code>client-output-buffer-limit</code>参数限制这个 buffer 的大小，如果超过限制，主库会强制断开这个client的连接，也就是说从库处理慢导致主库内存buffer 的积压达到限制后，主库会强制断开从库的连接，此时主从复制会中断，中断后如果从库再次发起复制请求，那么此时可能会导致恶性循环，引发复制风暴，这种情况需要格外注意。</p>
+</li>
+</ol>
+</blockquote>
+<p>因为 <strong>repl_backlog_buffer</strong> 是一个环形缓冲区，所以在缓冲区写满后，主库会继续写入，此时，就会覆盖掉之前写入的操作。如果从库的读取速度比较慢，就有可能导致从库还未读取的操作被主库新写的操作覆盖了，这会导致主从库间的数据不一致。</p>
+<p>可以调整 <code>repl_backlog_size</code> 这个参数。这个参数和所需的缓冲空间大小有关。缓冲空间的计算公式是：<strong>缓冲空间大小 = 主库写入命令速度 <em> 操作大小 - 主从库间网络传输命令速度 </em> 操作大小</strong>。在实际应用中，考虑到可能存在一些突发的请求压力，我们通常需要把这个缓冲空间扩大一倍，即 <strong>repl_backlog_size = 缓冲空间大小 * 2</strong>，这也就是 <code>repl_backlog_size</code> 的最终值。</p>
+<blockquote>
+<p>如果主库每秒写入 2000 个操作，每个操作的大小为 2KB，网络每秒能传输 1000 个操作，那么，有 1000 个操作需要缓冲起来，这就至少需要 2MB 的缓冲空间。否则，新写的命令就会覆盖掉旧操作了。为了应对可能的突发压力，我们最终把 repl_backlog_size 设为 4MB。</p>
+</blockquote>
+<h2 id="Redis哨兵机制"><a href="#Redis哨兵机制" class="headerlink" title="Redis哨兵机制"></a>Redis哨兵机制</h2><img   class="lazyload" data-original="/article/30584/%E4%B8%BB%E5%BA%93%E6%95%85%E9%9A%9C%E5%90%8E%E4%BB%8E%E5%BA%93%E6%97%A0%E6%B3%95%E6%9C%8D%E5%8A%A1%E5%86%99%E6%93%8D%E4%BD%9C.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="主库故障后从库无法服务写操作">
+<h3 id="哨兵机制的基本流程"><a href="#哨兵机制的基本流程" class="headerlink" title="哨兵机制的基本流程"></a>哨兵机制的基本流程</h3><p>哨兵主要负责的就是三个任务：<strong>监控、选择主库和通知</strong></p>
+<ol>
+<li>监控是指哨兵进程在运行时，周期性地给所有的主从库发送 PING 命令，检测它们是否仍然在线运行。如果从库没有在规定时间内响应哨兵的 PING 命令，哨兵就会把它标记为“下线状态”；同样，如果主库也没有在规定时间内响应哨兵的 PING 命令，哨兵就会判定主库下线，然后开始自动切换主库的流程。</li>
+<li>选择主库是主库挂了以后，哨兵就需要从很多个从库里，按照一定的规则选择一个从库实例，把它作为新的主库。</li>
+<li>通知是指哨兵会把新主库的连接信息发给其他从库，让它们执行 <code>replicaof</code> 命令，和新主库建立连接，并进行数据复制。同时，哨兵会把新主库的连接信息通知给客户端，让它们把请求操作发到新主库上。</li>
+</ol>
+<img   class="lazyload" data-original="/article/30584/%E5%93%A8%E5%85%B5%E6%9C%BA%E5%88%B6%E7%9A%84%E4%B8%89%E9%A1%B9%E4%BB%BB%E5%8A%A1%E4%B8%8E%E7%9B%AE%E6%A0%87.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="哨兵机制的三项任务与目标">
+<p><strong>主观下线和客观下线</strong></p>
+<ol>
+<li><p>主观下线</p>
+<p>哨兵进程会使用 PING 命令检测它自己和主、从库的网络连接情况，用来判断实例的状态。如果哨兵发现主库或从库对 PING 命令的响应超时了，那么，哨兵就会先把它标记为“<strong>主观下线</strong>”。</p>
+<ol>
+<li>如果检测的是从库，那么，哨兵简单地把它标记为“主观下线”</li>
+<li>如果检测的是主库，那么，哨兵还不能简单地把它标记为“主观下线”，开启主从切换。因为很有可能存在这么一个情况：那就是哨兵误判了，其实主库并没有故障。可是，一旦启动了主从切换，后续的选主和通知操作都会带来额外的计算和通信开销。</li>
+</ol>
+</li>
+</ol>
+<p>哨兵机制通常会采用多实例组成的集群模式进行部署，这也被称为哨兵集群。引入多个哨兵实例一起来判断，就可以避免单个哨兵因为自身网络状况不好，而误判主库下线的情况。同时，多个哨兵的网络同时不稳定的概率较小，由它们一起做决策，误判率也能降低。</p>
+<ol start="2">
+<li><p>客观下线</p>
+<p>在判断主库是否下线时，只有大多数的哨兵实例，都判断主库已经“主观下线”了，主库才会被标记为“客观下线”，这个叫法也是表明主库下线成为一个客观事实了。这个判断原则就是：少数服从多数。</p>
+<p>“客观下线”的标准就是，当有 N 个哨兵实例时，最好要有 N/2 + 1 个实例判断主库为“主观下线”，才能最终判定主库为“客观下线”。</p>
+</li>
+</ol>
+<p><strong>选定新主库</strong></p>
+<p>筛选 + 打分</p>
+<img   class="lazyload" data-original="/article/30584/%E6%96%B0%E4%B8%BB%E5%BA%93%E7%9A%84%E9%80%89%E6%8B%A9%E8%BF%87%E7%A8%8B.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="新主库的选择过程">
+<ol>
+<li><p>筛选的条件</p>
+<ol>
+<li><p>检查从库的当前在线状态</p>
+</li>
+<li><p>判断它之前的网络连接状态</p>
+<blockquote>
+<p>使用配置项 <code>down-after-milliseconds * 10</code>。其中，down-after-milliseconds 是认定主从库断连的最大连接超时时间。</p>
+<p>如果在 <code>down-after-milliseconds</code> 毫秒内，主从节点都没有通过网络联系上，就可以认为主从节点断连了。</p>
+<p>如果发生断连的次数超过了 10 次，就说明这个从库的网络状况不好，不适合作为新主库。</p>
+</blockquote>
+</li>
+</ol>
+</li>
+<li><p>从库打分</p>
+<p>分别按照三个规则依次进行三轮打分，这三个规则分别是从库优先级、从库复制进度以及从库 ID 号。只要在某一轮中，有从库得分最高，那么它就是主库了，选主过程到此结束。如果没有出现得分最高的从库，那么就继续进行下一轮。</p>
+<ol>
+<li><p>第一轮：优先级最高的从库得分高</p>
+<blockquote>
+<p>用户可以通过 <code>slave-priority</code> 配置项，给不同的从库设置不同优先级。</p>
+</blockquote>
+</li>
+<li><p>第二轮：和旧主库同步程度最接近的从库得分高</p>
+<blockquote>
+<p>有从库的 slave_repl_offset 最接近 master_repl_offset，那么它的得分就最高，可以作为新主库</p>
+</blockquote>
+</li>
+<li><p>第三轮：ID 号小的从库得分高</p>
+<blockquote>
+<p>每个实例都会有一个 ID，这个 ID 就类似于这里的从库的编号。目前，Redis 在选主库时，有一个默认的规定：在优先级和复制进度都相同的情况下，ID 号最小的从库得分最高，会被选为新主库。</p>
+</blockquote>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="哨兵集群"><a href="#哨兵集群" class="headerlink" title="哨兵集群"></a>哨兵集群</h3><p>一旦多个实例组成了<strong>哨兵集群</strong>，即使有哨兵实例出现故障挂掉了，其他哨兵还能继续协作完成主从库切换的工作，包括判定主库是不是处于下线状态，选择新主库，以及通知从库和客户端。</p>
+<h4 id="基于-pub-sub-机制的哨兵集群组成"><a href="#基于-pub-sub-机制的哨兵集群组成" class="headerlink" title="基于 pub/sub 机制的哨兵集群组成"></a>基于 pub/sub 机制的哨兵集群组成</h4><p>哨兵实例之间可以相互发现，要归功于 Redis 提供的 <strong>pub/sub 机制</strong>，也就是发布 / 订阅机制。</p>
+<p>哨兵只要和主库建立起了连接，就可以在主库上发布消息了，比如说发布它自己的连接信息（IP 和端口）。同时，它也可以从主库上订阅消息，获得其他哨兵发布的连接信息。当多个哨兵实例都在主库上做了发布和订阅操作后，它们之间就能知道彼此的 IP 地址和端口。</p>
+<p>只有订阅了同一个频道的应用，才能通过发布的消息进行信息交换。</p>
+<img   class="lazyload" data-original="/article/30584/%E5%93%A8%E5%85%B5%E4%B9%8B%E9%97%B4%E5%BB%BA%E7%AB%8B%E8%BF%9E%E6%8E%A5.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="哨兵之间建立连接">
+<h4 id="哨兵获取从库的-IP-地址和端口"><a href="#哨兵获取从库的-IP-地址和端口" class="headerlink" title="哨兵获取从库的 IP 地址和端口"></a>哨兵获取从库的 IP 地址和端口</h4><p><strong>哨兵向主库发送 <code>INFO</code> 命令来获取从库的 IP 地址和端口</strong></p>
+<p><img   class="lazyload" data-original="/article/哨兵获取从库的 IP 地址和端口.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><span class="image-caption">哨兵获取从库的 IP 地址和端口</span></p>
+<p>哨兵 2 给主库发送 INFO 命令，主库接受到这个命令后，就会把从库列表返回给哨兵。接着，哨兵就可以根据从库列表中的连接信息，和每个从库建立连接，并在这个连接上持续地对从库进行监控。哨兵 1 和 3 可以通过相同的方法和从库建立连接。</p>
+<h4 id="基于-pub-sub-机制的客户端事件通知"><a href="#基于-pub-sub-机制的客户端事件通知" class="headerlink" title="基于 pub/sub 机制的客户端事件通知"></a>基于 pub/sub 机制的客户端事件通知</h4><p>从本质上说，哨兵就是一个运行在特定模式下的 Redis 实例，只不过它并不服务请求操作，只是完成监控、选主和通知的任务。所以，每个哨兵实例也提供 pub/sub 机制，客户端可以从哨兵订阅消息。哨兵提供的消息订阅频道有很多，不同频道包含了主从库切换过程中的不同关键事件。</p>
+<img   class="lazyload" data-original="/article/30584/%E5%85%B3%E9%94%AE%E4%BA%8B%E4%BB%B6.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="关键事件">
+<p>客户端读取哨兵的配置文件后，可以获得哨兵的地址和端口，和哨兵建立网络连接。</p>
+<blockquote>
+<p>订阅“所有实例进入客观下线状态的事件”：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">SUBSCRIBE +odown<br></code></pre></td></tr></table></figure>
+<p>订阅所有的事件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">PSUBSCRIBE  *<br></code></pre></td></tr></table></figure>
+</blockquote>
+<p>当哨兵把新主库选择出来后，客户端就会看到下面的 switch-master 事件。这个事件表示主库已经切换了，新主库的 IP 地址和端口信息已经有了。这个时候，客户端就可以用这里面的新主库地址和端口进行通信了。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">switch-master &lt;master name&gt; &lt;oldip&gt; &lt;oldport&gt; &lt;newip&gt; &lt;newport&gt;<br></code></pre></td></tr></table></figure>
+<h4 id="由哪个哨兵执行主从切换？"><a href="#由哪个哨兵执行主从切换？" class="headerlink" title="由哪个哨兵执行主从切换？"></a>由哪个哨兵执行主从切换？</h4><p>哨兵集群要判定主库“客观下线”，需要有一定数量的实例都认为该主库已经“主观下线”了。</p>
+<p>任何一个实例只要自身判断主库“主观下线”后，就会给其他实例发送 <code>is-master-down-by-addr</code> 命令。接着，其他实例会根据自己和主库的连接情况，做出 Y 或 N 的响应，Y 相当于赞成票，N 相当于反对票。</p>
+<img   class="lazyload" data-original="/article/30584/%E5%8F%91%E9%80%81%E4%B8%8B%E7%BA%BF%E6%8A%95%E7%A5%A8.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="发送下线投票">
+<p>一个哨兵获得了仲裁所需的赞成票数后，就可以标记主库为“客观下线”。这个所需的赞成票数是通过哨兵配置文件中的 <strong>quorum 配置</strong>项设定的。</p>
+<p>此时，这个哨兵就可以再给其他哨兵发送命令，表明希望由自己来执行主从切换，并让所有其他哨兵进行投票。这个投票过程称为<strong>“Leader 选举”</strong>。因为最终执行主从切换的哨兵称为 Leader，投票过程就是确定 Leader。</p>
+<p>在投票过程中，任何一个想成为 Leader 的哨兵，要满足两个条件：</p>
+<ol>
+<li>第一，<strong>拿到半数以上的赞成票；</strong></li>
+<li>第二，拿到的票数同时还需要大于等于哨兵配置文件中的 <strong>quorum 值</strong>。</li>
+</ol>
+<blockquote>
+<p>需要注意的是，如果哨兵集群只有 2 个实例，此时，一个哨兵要想成为 Leader，必须获得 2 票，而不是 1 票。所以，如果有个哨兵挂掉了，那么，此时的集群是无法进行主从库切换的。因此，<strong>通常至少会配置 3 个哨兵实例</strong>。</p>
+</blockquote>
+<h2 id="Redis切片集群"><a href="#Redis切片集群" class="headerlink" title="Redis切片集群"></a>Redis切片集群</h2><p><strong>切片集群，也叫分片集群</strong>，就是指启动多个 Redis 实例组成一个集群，然后按照一定的规则，把收到的数据划分成多份，每一份用一个实例来保存。</p>
+<p>采用多个实例保存数据切片后，我们既能保存大量数据，又避免了 fork 子进程阻塞主线程而导致的响应突然变慢。</p>
+<p>Redis 应对数据量增多的两种方案：纵向扩展（scale up）和横向扩展（scale out）。</p>
+<ol>
+<li><p>纵向扩展：升级单个 Redis 实例的资源配置，包括增加内存容量、增加磁盘容量、使用更高配置的 CPU。</p>
+<blockquote>
+<p>优点：实施起来简单、直接</p>
+<p>缺点：</p>
+<ol>
+<li>当使用 RDB 对数据进行持久化时，如果数据量增加，需要的内存也会增加，主线程 fork 子进程时就可能会阻塞</li>
+<li>纵向扩展会受到硬件和成本的限制</li>
+</ol>
+</blockquote>
+</li>
+<li><p>横向扩展：横向增加当前 Redis 实例的个数。</p>
+</li>
+</ol>
+<img   class="lazyload" data-original="/article/30584/%E7%BA%B5%E5%90%91%E6%89%A9%E5%B1%95%E5%92%8C%E6%A8%AA%E5%90%91%E6%89%A9%E5%B1%95.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="纵向扩展和横向扩展">
+<h3 id="数据切片和实例的对应分布关系（Redis-Cluster）"><a href="#数据切片和实例的对应分布关系（Redis-Cluster）" class="headerlink" title="数据切片和实例的对应分布关系（Redis Cluster）"></a>数据切片和实例的对应分布关系（Redis Cluster）</h3><p>切片集群是一种保存大量数据的通用机制，从 Redis 3.0 开始，官方提供了一个名为 <strong>Redis Cluster</strong> 的方案，用于实现切片集群。</p>
+<p>Redis Cluster 方案采用哈希槽（Hash Slot），来处理数据和实例之间的映射关系。</p>
+<p>在 Redis Cluster 方案中，一个切片集群共有 16384 个哈希槽，这些哈希槽类似于数据分区，每个键值对都会根据它的 key，被映射到一个哈希槽中。</p>
+<p>具体的映射过程：</p>
+<ol>
+<li>首先根据键值对的 key，按照CRC16 算法计算一个 16 bit 的值；</li>
+<li>然后，再用这个 16bit 值对 16384 取模，得到 0~16383 范围内的模数，每个模数代表一个相应编号的哈希槽。</li>
+</ol>
+<p>哈希槽如何被映射到具体的 Redis 实例：</p>
+<ol>
+<li><p>在部署 Redis Cluster 方案时，可以使用 <code>cluster create</code> 命令创建集群，此时，Redis 会自动把这些槽平均分布在集群实例上。</p>
+</li>
+<li><p>也可以使用 <code>cluster meet</code> 命令手动建立实例间的连接，形成集群，再使用 <code>cluster addslots</code> 命令，指定每个实例上的哈希槽个数。</p>
+<blockquote>
+<img   class="lazyload" data-original="/article/30584/%E6%89%8B%E5%8A%A8%E5%88%86%E9%85%8D%E5%93%88%E5%B8%8C%E6%A7%BD.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="手动分配哈希槽">
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">redis-cli -h 172.16.19.3 –p 6379 cluster addslots 0,1<br>redis-cli -h 172.16.19.4 –p 6379 cluster addslots 2,3<br>redis-cli -h 172.16.19.5 –p 6379 cluster addslots 4<br></code></pre></td></tr></table></figure>
+</blockquote>
+<p><strong>在手动分配哈希槽时，需要把 16384 个槽都分配完，否则 Redis 集群无法正常工作。</strong></p>
+</li>
+</ol>
+<h3 id="客户端定位数据"><a href="#客户端定位数据" class="headerlink" title="客户端定位数据"></a>客户端定位数据</h3><p>在定位键值对数据时，它所处的哈希槽是可以通过计算得到的，这个计算可以在客户端发送请求时来执行。但是，要进一步定位到实例，还需要知道哈希槽分布在哪个实例上。</p>
+<p>一般来说，客户端和集群实例建立连接后，实例就会把哈希槽的分配信息发给客户端。但是，在集群刚刚创建的时候，每个实例只知道自己被分配了哪些哈希槽，是不知道其他实例拥有的哈希槽信息的。<strong>Redis 实例会把自己的哈希槽信息发给和它相连接的其它实例，来完成哈希槽分配信息的扩散。当实例之间相互连接后，每个实例就有所有哈希槽的映射关系了。</strong></p>
+<p>客户端收到哈希槽信息后，会把哈希槽信息缓存在本地。当客户端请求键值对时，会先计算键所对应的哈希槽，然后就可以给相应的实例发送请求了。</p>
+<p><strong>实例和哈希槽的对应关系会发生变化：</strong></p>
+<ol>
+<li>在集群中，实例有新增或删除，Redis 需要重新分配哈希槽；</li>
+<li>为了负载均衡，Redis 需要把哈希槽在所有实例上重新分布一遍。</li>
+</ol>
+<blockquote>
+<p><strong>问题：实例和哈希槽的对应关系会发生变化后，实例之间还可以通过相互传递消息，获得最新的哈希槽分配信息，但是，客户端是无法主动感知这些变化的。这就会导致，它缓存的分配信息和最新的分配信息就不一致了</strong></p>
+<p><strong>Redis Cluster</strong> 方案提供了一种<strong>重定向机制</strong>，所谓的“重定向”，就是指，客户端给一个实例发送数据读写操作时，这个实例上并没有相应的数据，客户端要再给一个新实例发送操作命令。</p>
+<p>当客户端把一个键值对的操作请求发给一个实例时，如果这个实例上并没有这个键值对映射的哈希槽，那么，这个实例就会给客户端返回下面的 <strong>MOVED 命令响应结果</strong>，这个结果中就包含了新实例的访问地址。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sh">GET hello:key<br>(error) MOVED 13320 172.16.19.5:6379<br></code></pre></td></tr></table></figure>
+<p>其中，MOVED 命令表示，客户端请求的键值对所在的哈希槽 13320，实际是在 172.16.19.5 这个实例上。通过返回的 MOVED 命令，就相当于把哈希槽所在的新实例的信息告诉给客户端了。</p>
+<img   class="lazyload" data-original="/article/30584/%E5%AE%A2%E6%88%B7%E7%AB%AFMOVED%E9%87%8D%E5%AE%9A%E5%90%91%E5%91%BD%E4%BB%A4.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="客户端MOVED重定向命令">
+<blockquote>
+<p><strong>问题：如果 Slot 2 中的数据比较多，就可能会出现一种情况：客户端向实例 2 发送请求，但此时，Slot 2 中的数据只有一部分迁移到了实例 3，还有部分数据没有迁移</strong></p>
+<p>在这种迁移部分完成的情况下，客户端就会收到一条 <strong>ASK 报错信息</strong>，如下所示：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sh">GET hello:key<br>(error) ASK 13320 172.16.19.5:6379<br></code></pre></td></tr></table></figure>
+<p>这个结果中的 ASK 命令就表示，客户端请求的键值对所在的哈希槽 13320，在 172.16.19.5 这个实例上，但是这个哈希槽正在迁移。此时，客户端需要先给 172.16.19.5 这个实例发送一个 ASKING 命令。这个命令的意思是，让这个实例允许执行客户端接下来发送的命令。然后，客户端再向这个实例发送 GET 命令，以读取数据。</p>
+<img   class="lazyload" data-original="/article/30584/%E5%AE%A2%E6%88%B7%E7%AB%AFASK%E9%87%8D%E5%AE%9A%E5%90%91%E5%91%BD%E4%BB%A4.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="客户端ASK重定向命令">
+<p><strong>ASK 命令表示两层含义</strong>：第一，表明 Slot 数据还在迁移中；第二，ASK 命令把客户端所请求数据的最新实例地址返回给客户端</p>
+<p><strong>和 MOVED 命令不同，ASK 命令并不会更新客户端缓存的哈希槽分配信息。</strong></p>
+<p>如果客户端再次请求 Slot 2 中的数据，它还是会给实例 2 发送请求。这也就是说，<strong>ASK 命令的作用只是让客户端能给新实例发送一次请求</strong>，而不像 <strong>MOVED 命令那样，会更改本地缓存，让后续所有命令都发往新实例。</strong></p>
+</blockquote>
+</blockquote>
+<h2 id="Redis消息队列"><a href="#Redis消息队列" class="headerlink" title="Redis消息队列"></a>Redis消息队列</h2><p>在分布式系统中，当两个组件要基于消息队列进行通信时，一个组件会把要处理的数据以消息的形式传递给消息队列，然后，这个组件就可以继续执行其他操作了；远端的另一个组件从消息队列中把消息读取出来，再在本地进行处理。</p>
+<p><strong>消息队列在存取消息时，必须要满足三个需求：</strong></p>
+<ol>
+<li>消息保序</li>
+<li>处理重复的消息</li>
+<li>保证消息可靠性</li>
+</ol>
+<p><img   class="lazyload" data-original="/article/List 和 Streams 实现消息队列的特点和区别.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><span class="image-caption">List 和 Streams 实现消息队列的特点和区别</span></p>
+<h3 id="基于-List-的消息队列解决方案"><a href="#基于-List-的消息队列解决方案" class="headerlink" title="基于 List 的消息队列解决方案"></a>基于 List 的消息队列解决方案</h3><p><strong>顺序读取</strong></p>
+<p>List 本身就是按先进先出的顺序对数据进行存取的</p>
+<p>生产者可以使用 <code>LPUSH</code> 命令把要发送的消息依次写入 List，而消费者则可以使用 <code>RPOP</code> 命令，从 List 的另一端按照消息的写入顺序，依次读取消息并进行处理。</p>
+<blockquote>
+<p><strong>性能风险:</strong></p>
+<p>在生产者往 List 中写入数据时，List 并不会主动地通知消费者有新消息写入，如果消费者想要及时处理消息，就需要在程序中不停地调用 <code>RPOP</code> 命令（比如使用一个 while(1) 循环）。如果有新消息写入，<code>RPOP</code> 命令就会返回结果，否则，<code>RPOP</code> 命令返回空值，再继续循环。</p>
+<p>所以，即使没有新消息写入 List，消费者也要不停地调用 <code>RPOP</code> 命令，这就会导致消费者程序的 CPU 一直消耗在执行 <code>RPOP</code> 命令上，带来不必要的性能损失。</p>
+</blockquote>
+<p>Redis 提供了 <code>BRPOP</code> 命令。<code>BRPOP</code> 命令也称为阻塞式读取，客户端在没有读到队列数据时，自动阻塞，直到有新的数据写入队列，再开始读取新数据。</p>
+<p><strong>重复消息判断</strong></p>
+<ol>
+<li><p>消息队列要能给每一个消息提供全局唯一的 ID 号</p>
+</li>
+<li><p>消费者程序要把已经处理过的消息的 ID 号记录下来</p>
+<p>幂等性就是指，对于同一条消息，消费者收到一次的处理结果和收到多次的处理结果是一致的。</p>
+</li>
+</ol>
+<blockquote>
+<p>List 本身是不会为每个消息生成 ID 号的，所以，消息的全局唯一 ID 号就需要生产者程序在发送消息前自行生成。生成之后，用 <code>LPUSH</code> 命令把消息插入 List 时，需要在消息中包含这个全局唯一 ID。</p>
+</blockquote>
+<p><strong>消息可靠性</strong></p>
+<p>List 类型提供了 <code>BRPOPLPUSH</code> 命令，这个命令的作用是让消费者程序从一个 List 中读取消息，同时，Redis 会把这个消息再插入到另一个 List（可以叫作备份 List）留存。这样一来，如果消费者程序读了消息但没能正常处理，等它重启后，就可以从备份 List 中重新读取消息并进行处理了。</p>
+<p><img   class="lazyload" data-original="/article/List 类型BRPOPLPUSH命令.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><span class="image-caption">List 类型BRPOPLPUSH命令</span></p>
+<blockquote>
+<p><strong>问题：</strong>生产者消息发送很快，而消费者处理消息的速度比较慢，这就导致 List 中的消息越积越多，给 Redis 的内存带来很大压力。</p>
+</blockquote>
+<h3 id="基于-Streams-的消息队列解决方案"><a href="#基于-Streams-的消息队列解决方案" class="headerlink" title="基于 Streams 的消息队列解决方案"></a>基于 Streams 的消息队列解决方案</h3><p>Streams 是 Redis 专门为消息队列设计的数据类型</p>
+<ol>
+<li><p><code>XADD</code>：插入消息，保证有序，可以自动生成全局唯一 ID；</p>
+<p>消息的格式是<strong>键 - 值</strong>对形式。对于插入的每一条消息，Streams 可以自动为其生成一个全局唯一的 ID。</p>
+<blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sh">XADD mqstream * repo 5<br><span class="hljs-string">&quot;1599203861727-0&quot;</span><br></code></pre></td></tr></table></figure>
+</blockquote>
+<p><strong>消息队列名称后面的*，表示让 Redis 为插入的数据自动生成一个全局唯一的 ID</strong></p>
+<blockquote>
+<p>消息的全局唯一 ID 由两部分组成</p>
+<p>第一部分“1599203861727”是数据插入时，以毫秒为单位计算的当前服务器时间</p>
+<p>第二部分表示插入消息在当前毫秒内的消息序号，这是从 0 开始编号的。例如，“1599203861727-0”就表示在“1599203861727”毫秒内的第 1 条消息。</p>
+</blockquote>
+</li>
+<li><p><code>XREAD</code>：用于读取消息，可以按 ID 读取数据；</p>
+<p>读取消息时，可以指定一个消息 ID，并从这个消息 ID 的下一条消息开始进行读取。</p>
+<blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs sh">XREAD BLOCK 100 STREAMS  mqstream 1599203861727-0<br>1) 1) <span class="hljs-string">&quot;mqstream&quot;</span><br>   2) 1) 1) <span class="hljs-string">&quot;1599274912765-0&quot;</span><br>         2) 1) <span class="hljs-string">&quot;repo&quot;</span><br>            2) <span class="hljs-string">&quot;3&quot;</span><br>      2) 1) <span class="hljs-string">&quot;1599274925823-0&quot;</span><br>         2) 1) <span class="hljs-string">&quot;repo&quot;</span><br>            2) <span class="hljs-string">&quot;2&quot;</span><br>      3) 1) <span class="hljs-string">&quot;1599274927910-0&quot;</span><br>         2) 1) <span class="hljs-string">&quot;repo&quot;</span><br>            2) <span class="hljs-string">&quot;1&quot;</span><br></code></pre></td></tr></table></figure>
+<p>从 ID 号为 1599203861727-0 的消息开始，读取后续的所有消息</p>
+</blockquote>
+<p>在调用 <code>XRAED</code> 时设定 block 配置项，实现类似于 <code>BRPOP</code> 的阻塞读取操作。当消息队列中没有消息时，一旦设置了 block 配置项，<code>XREAD</code> 就会阻塞，阻塞的时长可以在 block 配置项进行设置。</p>
+<blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sh">XREAD block 10000 streams mqstream $<br>(nil)<br>(10.00s)<br></code></pre></td></tr></table></figure>
+<p>设置了 block 10000 的配置项，10000 的单位是毫秒，表明 <code>XREAD</code> 在读取最新消息时，如果没有消息到来，<code>XREAD</code> 将阻塞 10000 毫秒（即 10 秒），然后再返回</p>
+</blockquote>
+<p>命令最后的“$”符号表示读取最新的消息</p>
+</li>
+<li><p><code>XREADGROUP</code>：按消费组形式读取消息；</p>
+<p>创建消费组之后，Streams 可以使用 <code>XREADGROUP</code> 命令让消费组内的消费者读取消息</p>
+<blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sh">XGROUP create mqstream group1 0<br>OK<br></code></pre></td></tr></table></figure>
+<p>创建一个名为 group1 的消费组，这个消费组消费的消息队列是 mqstream</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs sh">XREADGROUP group group1 consumer1 streams mqstream &gt;<br>1) 1) <span class="hljs-string">&quot;mqstream&quot;</span><br>   2) 1) 1) <span class="hljs-string">&quot;1599203861727-0&quot;</span><br>         2) 1) <span class="hljs-string">&quot;repo&quot;</span><br>            2) <span class="hljs-string">&quot;5&quot;</span><br>      2) 1) <span class="hljs-string">&quot;1599274912765-0&quot;</span><br>         2) 1) <span class="hljs-string">&quot;repo&quot;</span><br>            2) <span class="hljs-string">&quot;3&quot;</span><br>      3) 1) <span class="hljs-string">&quot;1599274925823-0&quot;</span><br>         2) 1) <span class="hljs-string">&quot;repo&quot;</span><br>            2) <span class="hljs-string">&quot;2&quot;</span><br>      4) 1) <span class="hljs-string">&quot;1599274927910-0&quot;</span><br>         2) 1) <span class="hljs-string">&quot;repo&quot;</span><br>            2) <span class="hljs-string">&quot;1&quot;</span><br></code></pre></td></tr></table></figure>
+<p>group1 消费组里的消费者 consumer1 从 mqstream 中读取所有消息，其中，命令最后的参数“&gt;”，表示从第一条尚未被消费的消息开始读取</p>
+</blockquote>
+<p><strong>消息队列中的消息一旦被消费组里的一个消费者读取了，就不能再被该消费组内的其他消费者读取了</strong></p>
+<blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs sh">XREADGROUP group group2 consumer1 count 1 streams mqstream &gt;<br>1) 1) <span class="hljs-string">&quot;mqstream&quot;</span><br>   2) 1) 1) <span class="hljs-string">&quot;1599203861727-0&quot;</span><br>         2) 1) <span class="hljs-string">&quot;repo&quot;</span><br>            2) <span class="hljs-string">&quot;5&quot;</span><br><br>XREADGROUP group group2 consumer2 count 1 streams mqstream &gt;<br>1) 1) <span class="hljs-string">&quot;mqstream&quot;</span><br>   2) 1) 1) <span class="hljs-string">&quot;1599274912765-0&quot;</span><br>         2) 1) <span class="hljs-string">&quot;repo&quot;</span><br>            2) <span class="hljs-string">&quot;3&quot;</span><br><br>XREADGROUP group group2 consumer3 count 1 streams mqstream &gt;<br>1) 1) <span class="hljs-string">&quot;mqstream&quot;</span><br>   2) 1) 1) <span class="hljs-string">&quot;1599274925823-0&quot;</span><br>         2) 1) <span class="hljs-string">&quot;repo&quot;</span><br>            2) <span class="hljs-string">&quot;2&quot;</span><br></code></pre></td></tr></table></figure>
+<p>group2 中的 consumer1、2、3 各自读取一条消息</p>
+</blockquote>
+</li>
+<li><p><code>XPENDING</code> 和 <code>XACK</code>：<code>XPENDING</code> 命令可以用来查询每个消费组内所有消费者已读取但尚未确认的消息，而 <code>XACK</code> 命令用于向消息队列确认消息处理已完成。</p>
+<p>为了保证消费者在发生故障或宕机再次重启后，仍然可以读取未处理完的消息，Streams 会自动使用内部队列（也称为 PENDING List）留存消费组里每个消费者读取的消息，直到消费者使用 <code>XACK</code> 命令通知 Streams“消息已经处理完成”。</p>
+<p>如果消费者没有成功处理消息，它就不会给 Streams 发送 <code>XACK</code> 命令，消息仍然会留存。此时，消费者可以在重启后，用 <code>XPENDING</code> 命令查看已读取、但尚未确认处理完成的消息。</p>
+<blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs sh">XPENDING mqstream group2<br>1) (<span class="hljs-built_in">integer</span>) 3<br>2) <span class="hljs-string">&quot;1599203861727-0&quot;</span><br>3) <span class="hljs-string">&quot;1599274925823-0&quot;</span><br>4) 1) 1) <span class="hljs-string">&quot;consumer1&quot;</span><br>      2) <span class="hljs-string">&quot;1&quot;</span><br>   2) 1) <span class="hljs-string">&quot;consumer2&quot;</span><br>      2) <span class="hljs-string">&quot;1&quot;</span><br>   3) 1) <span class="hljs-string">&quot;consumer3&quot;</span><br>      2) <span class="hljs-string">&quot;1&quot;</span><br></code></pre></td></tr></table></figure>
+<p>查看 group2 中各个消费者已读取、但尚未确认的消息个数</p>
+<p><code>XPENDING</code> 返回结果的第二、三行分别表示 group2 中所有消费者读取的消息最小 ID 和最大 ID。</p>
+</blockquote>
+<blockquote>
+<p>进一步查看某个消费者具体读取了哪些数据</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sh">XPENDING mqstream group2 - + 10 consumer2<br>1) 1) <span class="hljs-string">&quot;1599274912765-0&quot;</span><br>   2) <span class="hljs-string">&quot;consumer2&quot;</span><br>   3) (<span class="hljs-built_in">integer</span>) 513336<br>   4) (<span class="hljs-built_in">integer</span>) 1<br></code></pre></td></tr></table></figure>
+<p>consumer2 已读取的消息的 ID 是 1599274912765-0</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="Redis性能影响因素"><a href="#Redis性能影响因素" class="headerlink" title="Redis性能影响因素"></a>Redis性能影响因素</h2><h3 id="Redis-内部的阻塞式操作-以及-异步机制"><a href="#Redis-内部的阻塞式操作-以及-异步机制" class="headerlink" title="Redis 内部的阻塞式操作 以及 异步机制"></a>Redis 内部的阻塞式操作 以及 异步机制</h3><h4 id="Redis-内部的阻塞式操作"><a href="#Redis-内部的阻塞式操作" class="headerlink" title="Redis 内部的阻塞式操作"></a>Redis 内部的阻塞式操作</h4><p><strong>Redis 实例交互的对象，以及交互时会发生的操作：</strong></p>
+<ol>
+<li>客户端：网络 IO，键值对增删改查操作，数据库操作；</li>
+<li>磁盘：生成 RDB 快照，记录 AOF 日志，AOF 日志重写；</li>
+<li>主从节点：主库生成、传输 RDB 文件，从库接收 RDB 文件、清空数据库、加载 RDB 文件；</li>
+<li>切片集群实例：向其他实例传输哈希槽信息，数据迁移。</li>
+</ol>
+<p><img   class="lazyload" data-original="/article/Redis 实例交互的对象，以及交互时会发生的操作.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><span class="image-caption">Redis 实例交互的对象，以及交互时会发生的操作</span></p>
+<p><strong>Redis 实例阻塞点：</strong></p>
+<ol>
+<li><p>和客户端交互时的阻塞点</p>
+<p>键值对的增删改查操作是 Redis 和客户端交互的主要部分，<strong>复杂度高的增删改查操作</strong>肯定会阻塞 Redis。</p>
+<p>最基本的标准，就是看操作的复杂度是否为 O(N)。</p>
+<ol>
+<li><p>集合全量查询和聚合操作</p>
+</li>
+<li><p>bigkey 删除操作</p>
+<p>删除操作的<strong>本质是要释放键值对占用的内存空间</strong>。首先释放内存，为了更加高效地管理内存空间，在应用程序释放内存时，操作系统需要把释放掉的内存块插入一个空闲内存块的链表，以便后续进行管理和再分配。这个过程本身需要一定时间，而且会阻塞当前释放内存的应用程序，所以，如果一下子释放了大量内存，空闲内存块链表操作时间就会增加，相应地就会造成 Redis 主线程的阻塞。</p>
+</li>
+<li><p>清空数据库</p>
+<p>涉及到删除和释放所有的键值对</p>
+</li>
+</ol>
+</li>
+<li><p>和磁盘交互时的阻塞点</p>
+<p>AOF 日志同步写</p>
+</li>
+<li><p>主从节点交互时的阻塞点</p>
+<ol>
+<li>主从库同步，从库在接收了 RDB 文件后，需要使用 <code>FLUSHDB</code> 命令<strong>清空当前数据库</strong></li>
+<li>从库在清空当前数据库后，还需要把 <strong>RDB 文件加载到内存</strong>，这个过程的快慢和 RDB 文件的大小密切相关，RDB 文件越大，加载过程越慢</li>
+</ol>
+</li>
+</ol>
+<h4 id="异步机制"><a href="#异步机制" class="headerlink" title="异步机制"></a>异步机制</h4><p>为了避免阻塞式操作，Redis 提供了异步线程机制，启动一些子线程，然后把一些任务交给这些子线程，让它们在后台完成，而不再由主线程来执行这些任务。</p>
+<blockquote>
+<ol>
+<li><p>集合全量查询和聚合操作都涉及到了<strong>读操作</strong>，<strong>不能进行异步操作</strong></p>
+<p>读操作是典型的关键路径操作，因为客户端发送了读操作之后，就会等待读取的数据返回，以便进行后续的数据处理。</p>
+<blockquote>
+<p>可以使用 SCAN 命令，分批读取数据，再在客户端进行聚合计算；</p>
+</blockquote>
+</li>
+<li><p>从库加载 RDB 文件，<strong>不能进行异步操作</strong></p>
+<p>从库要想对客户端提供数据存取服务，就必须把 RDB 文件加载完成。所以，这个操作也属于关键路径上的操作。</p>
+<blockquote>
+<p>从库加载 RDB 文件，把主库的数据量大小控制在 2~4GB 左右，以保证 RDB 文件能以较快的速度加载。</p>
+</blockquote>
+</li>
+</ol>
+</blockquote>
+<ol>
+<li><p>bigkey 删除操作</p>
+</li>
+<li><p>清空数据库</p>
+<p>删除操作与清空数据库并不需要给客户端返回具体的数据结果，所以不算是关键路径操作</p>
+</li>
+<li><p>AOF 日志同步写</p>
+<p>不会返回具体的数据结果给实例，可以启动一个子线程来执行 AOF 日志的同步写</p>
+</li>
+</ol>
+<p><strong>异步的子线程机制</strong></p>
+<p>Redis 主线程启动后，会使用操作系统提供的 pthread_create 函数创建 3 个子线程，分别由它们负责 AOF 日志写操作、键值对删除以及文件关闭的异步执行。</p>
+<img   class="lazyload" data-original="/article/30584/%E5%BC%82%E6%AD%A5%E7%9A%84%E5%AD%90%E7%BA%BF%E7%A8%8B%E6%9C%BA%E5%88%B6.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="异步的子线程机制">
+<p>主线程通过一个链表形式的任务队列和子线程进行交互。当收到<strong>键值对删除和清空数据库的操作</strong>时，主线程会把这个操作封装成一个任务，放入到任务队列中，然后给客户端返回一个完成信息，表明删除已经完成。但实际上，这个时候删除还没有执行，等到后台子线程从任务队列中读取任务后，才开始<strong>实际删除键值对</strong>，并释放相应的内存空间。因此，我们把这种异步删除也称为惰性删除（lazy free）。</p>
+<p><strong>AOF 日志同步写</strong>，AOF 日志配置成 everysec 选项后，主线程会把 AOF 写日志操作封装成一个任务，也放到任务队列中。后台子线程读取任务后，开始自行写入 AOF 日志，这样主线程就不用一直等待 AOF 日志写完了。</p>
+<p>异步的键值对删除和数据库清空操作是 Redis 4.0 后提供的功能：</p>
+<ol>
+<li>键值对删除：当集合类型中有大量元素需要删除时，建议使用 <code>UNLINK</code> 命令。</li>
+<li>清空数据库：可以在 <code>FLUSHDB</code> 和 <code>FLUSHALL</code> 命令后加上 <code>ASYNC</code> 选项，这样就可以让后台子线程异步地清空数据库</li>
+</ol>
+<h3 id="CPU结构影响性能"><a href="#CPU结构影响性能" class="headerlink" title="CPU结构影响性能"></a>CPU结构影响性能</h3><p><strong>主流的 CPU 架构</strong></p>
+<p>一个 CPU 处理器中一般有多个运行核心，一个运行核心称为一个物理核，每个物理核都可以运行应用程序。每个物理核都拥有私有的一级缓存（Level 1 cache，简称 L1 cache），包括一级指令缓存和一级数据缓存，以及私有的二级缓存（Level 2 cache，简称 L2 cache）。</p>
+<p><strong>物理核的私有缓存。它其实是指缓存空间只能被当前的这个物理核使用，其他的物理核无法对这个核的缓存空间进行数据存取。</strong></p>
+<p><img   class="lazyload" data-original="/article/CPU 物理核的架构.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><span class="image-caption">CPU 物理核的架构</span></p>
+<p>L1 和 L2 缓存的大小受限于处理器的制造技术，一般只有 KB 级别</p>
+<p>不同的物理核还会共享一个共同的三级缓存（Level 3 cache，简称为 L3 cache）。L3 缓存能够使用的存储资源比较多，能达到几 MB 到几十 MB，这就能让应用程序缓存更多的数据。当 L1、L2 缓存中没有数据缓存时，可以访问 L3，尽可能避免访问内存。</p>
+<p>每个物理核通常都会运行两个超线程，也叫作逻辑核。同一个物理核的逻辑核会共享使用 L1、L2 缓存。</p>
+<img   class="lazyload" data-original="/article/30584/%E7%89%A9%E7%90%86%E6%A0%B8%E5%92%8C%E9%80%BB%E8%BE%91%E6%A0%B8.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="物理核和逻辑核">
+<p><strong>多 CPU Socket 架构</strong></p>
+<p><img   class="lazyload" data-original="/article/多 CPU Socket 架构.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><span class="image-caption">多 CPU Socket 架构</span></p>
+<p>在多 CPU 架构上，应用程序可以在不同的处理器上运行</p>
+<p>在多 CPU 架构下，一个应用程序访问所在 Socket 的本地内存和访问远端内存的延迟并不一致，所以，我们也把这个架构称为<strong>非统一内存访问架构（</strong>Non-Uniform Memory Access，NUMA 架构）。</p>
+<h4 id="CPU-多核对-Redis-性能的影响"><a href="#CPU-多核对-Redis-性能的影响" class="headerlink" title="CPU 多核对 Redis 性能的影响"></a>CPU 多核对 Redis 性能的影响</h4><p>在一个 CPU 核上运行时，应用程序需要记录自身使用的软硬件资源信息（例如栈指针、CPU 核的寄存器值等），这些信息称为<strong>运行时信息</strong>。同时，应用程序访问最频繁的指令和数据还会被缓存到 L1、L2 缓存上，以便提升执行速度。</p>
+<p>在多核 CPU 的场景下，一旦应用程序<strong>调度</strong>在一个新的 CPU 核上运行，那么，运行时信息就需要重新加载到新的 CPU 核上。而且，新的 CPU 核的 L1、L2 缓存也需要重新加载数据和指令，这会导致程序的运行时间增加。</p>
+<p><strong>每调度一次，一些请求就会受到运行时信息、指令和数据重新加载过程的影响，这就会导致某些请求的延迟明显高于其他请求。</strong></p>
+<p>可以使用 <code>taskset</code> 命令把一个程序绑定在一个核上运行</p>
+<blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">taskset -c 0 ./redis-server<br></code></pre></td></tr></table></figure>
+<p>把 Redis 实例绑在了 0 号核上，其中，“-c”选项用于设置要绑定的核编号。</p>
+</blockquote>
+<h4 id="NUMA-架构对-Redis-性能的影响"><a href="#NUMA-架构对-Redis-性能的影响" class="headerlink" title="NUMA 架构对 Redis 性能的影响"></a>NUMA 架构对 Redis 性能的影响</h4><p>Redis 实例和网络中断程序的数据交互：网络中断处理程序从网卡硬件中读取数据，并把数据写入到操作系统内核维护的一块内存缓冲区。内核会通过 epoll 机制触发事件，通知 Redis 实例，Redis 实例再把数据从内核的内存缓冲区拷贝到自己的内存空间，如下图所示：</p>
+<p><img   class="lazyload" data-original="/article/Redis 实例和网络中断程序的数据交互.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><span class="image-caption">Redis 实例和网络中断程序的数据交互</span></p>
+<p>在 CPU 的 NUMA 架构下，当网络中断处理程序、Redis 实例分别和 CPU 核绑定后，就会有一个<strong>潜在的风险</strong>：如果网络中断处理程序和 Redis 实例各自所绑的 CPU 核不在同一个 CPU Socket 上，那么，Redis 实例读取网络数据时，就需要跨 CPU Socket 访问内存，这个过程会花费较多时间。</p>
+<p><strong>为了避免 Redis 跨 CPU Socket 访问网络数据，最好把网络中断程序和 Redis 实例绑在同一个 CPU Socket 上</strong></p>
+<p><strong>NUMA 架构下，CPU 核的编号规则：</strong>先给每个 CPU Socket 中每个物理核的第一个逻辑核依次编号，再给每个 CPU Socket 中的物理核的第二个逻辑核依次编号。</p>
+<blockquote>
+<p>假设有 2 个 CPU Socket，每个 Socket 上有 6 个物理核，每个物理核又有 2 个逻辑核，总共 24 个逻辑核。可以执行 <code>lscpu</code> 命令，查看到这些核的编号：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs sh">lscpu<br>Architecture: x86_64<br>...<br>NUMA node0 CPU(s): 0-5,12-17<br>NUMA node1 CPU(s): 6-11,18-23<br>...<br></code></pre></td></tr></table></figure>
+<p>NUMA node0 的 CPU 核编号是 0 到 5、12 到 17。其中，0 到 5 是 node0 上的 6 个物理核中的第一个逻辑核的编号，12 到 17 是相应物理核中的第二个逻辑核编号。NUMA node1 的 CPU 核编号规则和 node0 一样。</p>
+</blockquote>
+<p><strong>在 CPU 多核的场景下，用 taskset 命令把 Redis 实例和一个核绑定，可以减少 Redis 实例在不同核上被来回调度执行的开销，避免较高的尾延迟；</strong></p>
+<p><strong>在多 CPU 的 NUMA 架构下，建议同时把 Redis 实例和网络中断程序绑在同一个 CPU Socket 的不同核上，这样可以避免 Redis 跨 Socket 访问内存中的网络数据的时间开销。</strong></p>
+<h4 id="绑核的风险和解决方案"><a href="#绑核的风险和解决方案" class="headerlink" title="绑核的风险和解决方案"></a>绑核的风险和解决方案</h4><p><strong>风险：</strong>把 Redis 实例绑到一个 CPU 逻辑核上时，就会导致子进程、后台线程和 Redis 主线程竞争 CPU 资源，一旦子进程或后台线程占用 CPU 时，主线程就会被阻塞，导致 Redis 请求延迟增加。</p>
+<p><strong>解决方案：</strong></p>
+<ol>
+<li><p>一个 Redis 实例对应绑一个物理核</p>
+<p>在给 Redis 实例绑核时，不要把一个实例和一个逻辑核绑定，而要和一个物理核绑定，把一个物理核的 2 个逻辑核都用上。</p>
+<blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">taskset -c 0,12 ./redis-server<br></code></pre></td></tr></table></figure>
+<p>把 Redis 实例绑定到了逻辑核 0 和 12 上，而这两个核正好都属于物理核 1</p>
+</blockquote>
+</li>
+<li><p>优化 Redis 源码</p>
+<p>通过修改 Redis 源码，把子进程和后台线程绑到不同的 CPU 核上</p>
+<blockquote>
+<p>1 个数据结构 cpu_set_t 和 3 个函数 CPU_ZERO、CPU_SET 和 sched_setaffinity</p>
+<ol>
+<li>cpu_set_t 数据结构：是一个位图，每一位用来表示服务器上的一个 CPU 逻辑核</li>
+<li>CPU_ZERO 函数：以 cpu_set_t 结构的位图为输入参数，把位图中所有的位设置为 0</li>
+<li>CPU_SET 函数：以 CPU 逻辑核编号和 cpu_set_t 位图为参数，把位图中和输入的逻辑核编号对应的位设置为 1</li>
+<li>sched_setaffinity 函数：以进程 / 线程 ID 号和 cpu_set_t 为参数，检查 cpu_set_t 中哪一位为 1，就把输入的 ID 号所代表的进程 / 线程绑在对应的逻辑核上</li>
+</ol>
+</blockquote>
+<ol>
+<li>创建一个 cpu_set_t 结构的位图变量；</li>
+<li>使用 CPU_ZERO 函数，把 cpu_set_t 结构的位图所有的位都设置为 0；</li>
+<li>根据要绑定的逻辑核编号，使用 CPU_SET 函数，把 cpu_set_t 结构的位图相应位设置为 1；</li>
+<li>使用 sched_setaffinity 函数，把程序绑定在 cpu_set_t 结构位图中为 1 的逻辑核上。</li>
+</ol>
+<p>对于 Redis 来说，生成 RDB 和 AOF 日志重写的子进程分别是下面两个文件的函数中实现的。</p>
+<ol>
+<li>rdb.c 文件：rdbSaveBackground 函数；</li>
+<li>aof.c 文件：rewriteAppendOnlyFileBackground 函数。</li>
+</ol>
+<p>这两个函数中都调用了 fork 创建子进程，可以在子进程代码部分加上绑核的四步操作。</p>
+</li>
+</ol>
+<h3 id="波动的响应延迟"><a href="#波动的响应延迟" class="headerlink" title="波动的响应延迟"></a>波动的响应延迟</h3><h4 id="判断-Redis-是否变慢"><a href="#判断-Redis-是否变慢" class="headerlink" title="判断 Redis 是否变慢"></a>判断 Redis 是否变慢</h4><ol>
+<li><p>查看 Redis 的响应延迟，是看 Redis 延迟的绝对值，不同的硬件环境条件不同</p>
+</li>
+<li><p>基于当前环境下的 Redis 基线性能（一个系统在低压力、无干扰下的基本性能）判断</p>
+<p>从 2.8.7 版本开始，<code>redis-cli</code> 命令提供了 <code>–intrinsic-latency</code> 选项，可以用来监测和统计测试期间内的最大延迟，这个延迟可以作为 Redis 的基线性能。</p>
+</li>
+</ol>
+<p>如果 Redis 运行时延迟是其基线性能的 2 倍及以上，就可以认定 Redis 变慢了。</p>
+<blockquote>
+<p>用 iPerf 工具，测量从 Redis 客户端到服务器端的网络延迟。如果这个延迟有几十毫秒甚至是几百毫秒，就说明，Redis 运行的网络环境中很可能有大流量的其他应用程序在运行，导致网络拥塞了。这个时候，就需要协调网络运维，调整网络的流量分配了。</p>
+</blockquote>
+<h4 id="如何应对-Redis-变慢？"><a href="#如何应对-Redis-变慢？" class="headerlink" title="如何应对 Redis 变慢？"></a>如何应对 Redis 变慢？</h4><p><img   class="lazyload" data-original="/article/影响 Redis 性能的三大要素.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><span class="image-caption">影响 Redis 性能的三大要素</span></p>
+<h5 id="Redis-自身操作特性的影响"><a href="#Redis-自身操作特性的影响" class="headerlink" title="Redis 自身操作特性的影响"></a><strong>Redis 自身操作特性的影响</strong></h5><ol>
+<li><p>慢查询命令</p>
+<p>慢查询命令，就是指在 Redis 中执行速度慢的命令，这会导致 Redis 延迟增加。</p>
+<blockquote>
+<p>可以通过 Redis 日志，或者是 latency monitor 工具，查询变慢的请求，根据请求对应的具体命令以及官方文档，确认下是否采用了复杂度高的慢查询命令。</p>
+</blockquote>
+<p><strong>处理方式：</strong></p>
+<ol>
+<li>用其他高效命令代替。</li>
+<li>需要执行排序、交集、并集操作时，可以在客户端完成，而不要用 SORT、SUNION、SINTER 这些命令，以免拖慢 Redis 实例。</li>
+</ol>
+</li>
+<li><p>过期 key 操作</p>
+<p>是 Redis 用来回收内存空间的常用机制，本身就会引起 Redis 操作阻塞，导致性能变慢</p>
+<p>默认情况下，Redis 每 100 毫秒会删除一些过期 key，具体的算法如下：</p>
+<ol>
+<li>采样 <code>ACTIVE_EXPIRE_CYCLE_LOOKUPS_PER_LOOP</code>(默认是 20，一秒内基本有 200 个过期 key 会被删除) 个数的 key，并将其中过期的 key 全部删除；</li>
+<li>如果超过 25% 的 key 过期了，则重复删除的过程，直到过期 key 的比例降至 25% 以下。</li>
+</ol>
+<p><strong>处理方式：</strong></p>
+<p>检查业务代码在使用 <code>EXPIREAT</code> 命令设置 key 过期时间时，是否使用了相同的 UNIX 时间戳，有没有使用 <code>EXPIRE</code> 命令给批量的 key 设置相同的过期秒数。因为，这都会造成大量 key 在同一时间过期，导致性能变慢。</p>
+</li>
+</ol>
+<h5 id="文件系统：AOF-模式"><a href="#文件系统：AOF-模式" class="headerlink" title="文件系统：AOF 模式"></a><strong>文件系统：AOF 模式</strong></h5><p>AOF 日志提供了三种日志写回策略：no、everysec、always。这三种写回策略依赖文件系统的两个系统调用完成，也就是 write 和 fsync。</p>
+<ol>
+<li>write 只要把日志记录写到内核缓冲区，就可以返回了，并不需要等待日志实际写回到磁盘；</li>
+<li>fsync 需要把日志记录写回到磁盘后才能返回，时间较长。</li>
+</ol>
+<blockquote>
+<p>使用 everysec 时，Redis 允许丢失一秒的操作记录，所以，Redis 主线程并不需要确保每个操作记录日志都写回磁盘。而且，fsync 的执行时间很长，如果是在 Redis 主线程中执行 fsync，就容易阻塞主线程。所以，当写回策略配置为 everysec 时，Redis 会使用<strong>后台的子线程异步完成 fsync 的操作。</strong></p>
+</blockquote>
+<p>对于 always 策略来说，Redis 需要确保每个操作记录日志都写回磁盘，如果用后台子线程异步完成，主线程就无法及时地知道每个操作是否已经完成了，就不符合 always 策略的要求了。所以，<strong>always 策略并不使用后台子线程来执行。</strong></p>
+<blockquote>
+<p>使用 AOF 日志时，为了避免日志文件不断增大，Redis 会执行 AOF 重写，生成体量缩小的新的 AOF 日志文件。AOF 重写本身需要的时间很长，也容易阻塞 Redis 主线程，所以，<strong>Redis 使用子进程来进行 AOF 重写。</strong></p>
+<p><strong>潜在的风险点：</strong>AOF 重写会对磁盘进行大量 IO 操作，同时，fsync 又需要等到数据写到磁盘后才能返回，所以，当 AOF 重写的压力比较大时，就会导致 fsync 被阻塞。虽然 fsync 是由后台子线程负责执行的，但是，主线程会监控 fsync 的执行进度。</p>
+<p>当主线程使用后台子线程执行了一次 fsync，需要再次把新接收的操作记录写回磁盘时，如果主线程发现上一次的 fsync 还没有执行完，那么它就会阻塞。所以，如果后台子线程执行的 fsync 频繁阻塞的话（比如 AOF 重写占用了大量的磁盘 IO 带宽），主线程也会阻塞，导致 Redis 性能变慢。</p>
+</blockquote>
+<p><strong>排查和解决建议</strong></p>
+<p>检查下 Redis 配置文件中的 appendfsync 配置项，该配置项的取值表明了 Redis 实例使用的是哪种 AOF 日志写回策略。</p>
+<ol>
+<li><p>如果 AOF 写回策略使用了 everysec 或 always 配置，请先确认下业务方对数据可靠性的要求，明确是否需要每一秒或每一个操作都记日志。</p>
+</li>
+<li><p>如果业务应用对延迟非常敏感，但同时允许一定量的数据丢失，那么，可以把配置项 no-appendfsync-on-rewrite 设置为 yes</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">no-appendfsync-on-rewrite yes<br></code></pre></td></tr></table></figure>
+<p>这个配置项设置为 yes 时，表示在 AOF 重写时，不进行 fsync 操作。Redis 实例把写命令写到内存后，不调用后台线程进行 fsync 操作，就可以直接返回了。<strong>如果此时实例发生宕机，就会导致数据丢失。</strong></p>
+<p>如果这个配置项设置为 no（也是默认配置），在 AOF 重写时，Redis 实例仍然会调用后台线程进行 fsync 操作，这就会给实例带来阻塞。</p>
+</li>
+</ol>
+<p>如果的确需要高性能，同时也需要高可靠数据保证，考虑采用<strong>高速的固态硬盘</strong>作为 AOF 日志的写入设备。</p>
+<h5 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h5><ol>
+<li><p>Swap</p>
+<p>内存 swap 是操作系统里将内存数据在内存和磁盘间来回换入和换出的机制，涉及到磁盘的读写，所以，一旦触发 swap（swap 触发后影响的是 Redis 主 IO 线程），无论是被换入数据的进程，还是被换出数据的进程，其性能都会受到慢速磁盘读写的影响。</p>
+<p><strong>触发 swap 的原因主要是物理机器内存不足</strong></p>
+<ol>
+<li>Redis 实例自身使用了大量的内存，导致物理机器的可用内存不足；</li>
+<li>Redis 实例在同一台机器上运行的其他进程，在进行大量的文件读写操作。文件读写本身会占用系统内存，这会导致分配给 Redis 实例的内存量变少，进而触发 Redis 发生 swap。</li>
+</ol>
+<p><strong>增加机器的内存或者使用 Redis 集群</strong></p>
+</li>
+<li><p>内存大页</p>
+<p>内存大页机制（Transparent Huge Page, THP）</p>
+<p>Linux 内核从 2.6.38 开始支持内存大页机制，该机制支持 2MB 大小的内存页分配，而常规的内存页分配是按 4KB 的粒度来执行的。</p>
+<blockquote>
+<p>Redis 为了提供数据可靠性保证，需要将数据做持久化保存。这个写入过程由额外的线程执行，所以，Redis 主线程仍然可以接收客户端写请求。客户端的写请求可能会修改正在进行持久化的数据。在这一过程中，Redis 就会采用写时复制机制，也就是说，一旦有数据要被修改，Redis 并不会直接修改内存中的数据，而是将这些数据拷贝一份，然后再进行修改。</p>
+<p>如果采用了内存大页，即使客户端请求只修改很小的数据，Redis 也需要拷贝 2MB 的大页。当客户端请求修改或新写入数据较多时，内存大页机制将导致大量的拷贝，这就会影响 Redis 正常的访存操作，最终导致性能变慢。</p>
+</blockquote>
+<p><strong>关闭内存大页</strong></p>
+<blockquote>
+<p>排查下内存大页</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">cat /sys/kernel/mm/transparent_hugepage/enabled<br></code></pre></td></tr></table></figure>
+<p>如果执行结果是 always，就表明内存大页机制被启动了；如果是 never，就表示，内存大页机制被禁止。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh\">echo never /sys/kernel/mm/transparent_hugepage/enabled<br></code></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="Redis-性能变慢-9-个检查点"><a href="#Redis-性能变慢-9-个检查点" class="headerlink" title="Redis 性能变慢 9 个检查点:"></a><strong>Redis 性能变慢 9 个检查点:</strong></h3><blockquote>
+<ol>
+<li>获取 Redis 实例在当前环境下的基线性能。</li>
+<li>是否用了慢查询命令？如果是的话，就使用其他命令替代慢查询命令，或者把聚合计算命令放在客户端做。</li>
+<li>是否对过期 key 设置了相同的过期时间？对于批量删除的 key，可以在每个 key 的过期时间上加一个随机数，避免同时删除。</li>
+<li>是否存在 bigkey？ 对于 bigkey 的删除操作，如果你的 Redis 是 4.0 及以上的版本，可以直接利用异步线程机制减少主线程阻塞；如果是 Redis 4.0 以前的版本，可以使用 SCAN 命令迭代删除；对于 bigkey 的集合查询和聚合操作，可以使用 SCAN 命令在客户端完成。</li>
+<li>Redis AOF 配置级别是什么？业务层面是否的确需要这一可靠性级别？如果我们需要高性能，同时也允许数据丢失，可以将配置项 no-appendfsync-on-rewrite 设置为 yes，避免 AOF 重写和 fsync 竞争磁盘 IO 资源，导致 Redis 延迟增加。当然， 如果既需要高性能又需要高可靠性，最好使用高速固态盘作为 AOF 日志的写入盘。</li>
+<li>Redis 实例的内存使用是否过大？发生 swap 了吗？如果是的话，就增加机器内存，或者是使用 Redis 集群，分摊单机 Redis 的键值对数量和内存压力。同时，要避免出现 Redis 和其他内存需求大的应用共享机器的情况。在 Redis 实例的运行环境中，是否启用了透明大页机制？如果是的话，直接关闭内存大页机制就行了。</li>
+<li>是否运行了 Redis 主从集群？如果是的话，把主库实例的数据量大小控制在 2~4GB，以免主从复制时，从库因加载大的 RDB 文件而阻塞。</li>
+<li>是否使用了多核 CPU 或 NUMA 架构的机器运行 Redis 实例？使用多核 CPU 时，可以给 Redis 实例绑定物理核；使用 NUMA 架构时，注意把 Redis 实例和网络中断处理程序运行在同一个 CPU Socket 上。</li>
+</ol>
+</blockquote>
+<h2 id="Redis-的内存空间存储效率"><a href="#Redis-的内存空间存储效率" class="headerlink" title="Redis 的内存空间存储效率"></a>Redis 的内存空间存储效率</h2><p>当数据删除后，Redis 释放的内存空间会由内存分配器管理，并不会立即返回给操作系统。所以，操作系统仍然会记录着给 Redis 分配了大量内存</p>
+<p><strong>潜在的风险点：</strong>Redis 释放的内存空间可能并不是连续的，那么，这些不连续的内存空间很有可能处于一种闲置的状态。虽然有空闲空间，Redis 却无法用来保存数据，不仅会减少 Redis 能够实际保存的数据量，还会降低 Redis 运行机器的成本回报率。</p>
+<h3 id="内存碎片的形成"><a href="#内存碎片的形成" class="headerlink" title="内存碎片的形成"></a>内存碎片的形成</h3><ol>
+<li><p>内因：内存分配器的分配策略</p>
+<p>内存分配器一般是按固定大小来分配内存，而不是完全按照应用程序申请的内存空间大小给程序分配。</p>
+</li>
+<li><p>外因：键值对大小不一样和删改操作</p>
+</li>
+</ol>
+<h3 id="判断是否有内存碎片"><a href="#判断是否有内存碎片" class="headerlink" title="判断是否有内存碎片"></a>判断是否有内存碎片</h3><p>Redis 自身提供了 INFO 命令</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs sh">INFO memory<br><span class="hljs-comment"># Memory</span><br>used_memory:1073741736<br>used_memory_human:1024.00M<br>used_memory_rss:1997159792<br>used_memory_rss_human:1.86G<br>…<br>mem_fragmentation_ratio:1.86<br></code></pre></td></tr></table></figure>
+<p>mem_fragmentation_ratio 指标，表示的就是 Redis 当前的内存碎片率</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">mem_fragmentation_ratio = used_memory_rss/ used_memory<br></code></pre></td></tr></table></figure>
+<p>used_memory_rss 是操作系统实际分配给 Redis 的物理内存空间，里面就包含了碎片；</p>
+<p>used_memory 是 Redis 为了保存数据实际申请使用的空间。</p>
+<ol>
+<li><p>mem_fragmentation_ratio 大于 1 但小于 1.5</p>
+<p><strong>合理</strong></p>
+</li>
+<li><p>mem_fragmentation_ratio 大于 1.5</p>
+<p>表明内存碎片率已经超过了 50%，需要采取措施来降低内存碎片率</p>
+</li>
+</ol>
+<h3 id="清理内存碎片"><a href="#清理内存碎片" class="headerlink" title="清理内存碎片"></a>清理内存碎片</h3><ol>
+<li><p>重启 Redis 实例</p>
+<ol>
+<li>如果 Redis 中的数据没有持久化，就会丢失数据；</li>
+<li>即使 Redis 数据持久化了，还需要通过 AOF 或 RDB 进行恢复，恢复时长取决于 AOF 或 RDB 的大小，如果只有一个 Redis 实例，恢复阶段无法提供服务。</li>
+</ol>
+</li>
+<li><p>4.0-RC3 版本以后，Redis 自身提供了一种内存碎片自动清理的方法</p>
+<img   class="lazyload" data-original="/article/30584/%E7%A2%8E%E7%89%87%E6%B8%85%E7%90%86.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="碎片清理">
+<p>Redis 是单线程，在数据拷贝时，Redis 只能等着，这就导致 Redis 无法及时处理请求，性能就会降低。</p>
+<p>可以通过设置参数，来控制碎片清理的开始和结束时机，以及占用的 CPU 比例，从而减少碎片清理对 Redis 本身请求处理的性能影响。</p>
+<ol>
+<li><p>Redis 需要启用自动内存碎片清理， activedefrag 配置项设置为 yes</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">config <span class="hljs-built_in">set</span> activedefrag yes<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>内存碎片的字节数达到 XXMB 时，开始清理；</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">active-defrag-ignore-bytes XXmb<br></code></pre></td></tr></table></figure>
+<p>内存碎片空间占操作系统分配给 Redis 的总空间比例达到 XX% 时，开始清理</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">active-defrag-threshold-lower XX<br></code></pre></td></tr></table></figure>
+<p><strong>同时满足这两个条件，就开始清理。在清理的过程中，只要有一个条件不满足了，就停止自动清理</strong></p>
+</li>
+<li><p>自动清理过程所用 CPU 时间的比例不低于 25%，清理能正常开展</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">active-defrag-cycle-min 25<br></code></pre></td></tr></table></figure>
+<p>自动清理过程所用 CPU 时间的比例不高于 75%，一旦超过，就停止清理，从而避免在清理时，大量的内存拷贝阻塞 Redis，导致响应延迟升高</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">active-defrag-cycle-max 75<br></code></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="Redis-缓冲区"><a href="#Redis-缓冲区" class="headerlink" title="Redis 缓冲区"></a>Redis 缓冲区</h2><h3 id="客户端输入和输出缓冲区"><a href="#客户端输入和输出缓冲区" class="headerlink" title="客户端输入和输出缓冲区"></a>客户端输入和输出缓冲区</h3><p>为了避免客户端和服务器端的请求发送和处理速度不匹配，服务器端给每个连接的客户端都设置了一个输入缓冲区和输出缓冲区，称之为客户端输入缓冲区和输出缓冲区。</p>
+<p>输入缓冲区会先把客户端发送过来的命令暂存起来，Redis 主线程再从输入缓冲区中读取命令，进行处理。当 Redis 主线程处理完数据后，会把结果写入到输出缓冲区，再通过输出缓冲区返回给客户端</p>
+<img   class="lazyload" data-original="/article/30584/%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E7%BC%93%E5%86%B2%E5%8C%BA.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="客户端输入和输出缓冲区">
+<h4 id="输入缓冲区"><a href="#输入缓冲区" class="headerlink" title="输入缓冲区"></a><strong>输入缓冲区</strong></h4><p><strong>输入缓冲区溢出</strong></p>
+<ol>
+<li>写入了 bigkey</li>
+<li>服务器端处理请求的速度过慢</li>
+</ol>
+<p><strong>查看输入缓冲区的内存使用情况</strong></p>
+<p><code>CLIENT LIST</code> 命令</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sh">CLIENT LIST<br>id=5 addr=127.0.0.1:50487 fd=9 name= age=4 idle=0 flags=N db=0 sub=0 psub=0 multi=-1 qbuf=26 qbuf-free=32742 obl=0 oll=0 omem=0 events=r cmd=client<br></code></pre></td></tr></table></figure>
+<ol>
+<li>一类是与服务器端连接的客户端的信息</li>
+<li>一类是与输入缓冲区相关的三个参数<ol>
+<li>cmd，表示客户端最新执行的命令</li>
+<li>qbuf，表示输入缓冲区已经使用的大小</li>
+<li>qbuf-free，表示输入缓冲区尚未使用的大小</li>
+</ol>
+</li>
+</ol>
+<p><strong>避免输入缓冲区溢出</strong></p>
+<blockquote>
+<p>把缓冲区调大</p>
+<p>Redis 服务器端允许为每个客户端最多暂存 1GB 的命令和数据，Redis 并没有提供参数让我们调节客户端输入p缓冲区的大小</p>
+</blockquote>
+<p>数据命令的发送和处理速度：避免客户端写入 bigkey，以及避免 Redis 主线程阻塞</p>
+<h4 id="输出缓冲区"><a href="#输出缓冲区" class="headerlink" title="输出缓冲区"></a>输出缓冲区</h4><p>Redis 的输出缓冲区暂存的是 Redis 主线程要返回给客户端的数据</p>
+<p>Redis 为每个客户端设置的输出缓冲区包括两部分：</p>
+<ol>
+<li>一个大小为 16KB 的固定缓冲空间，用来暂存 OK 响应和出错信息；</li>
+<li>一个可以动态增加的缓冲空间，用来暂存大小可变的响应结果。</li>
+</ol>
+<p><strong>输出缓冲区溢出</strong></p>
+<ol>
+<li><p>服务器端返回 bigkey 的大量结果；</p>
+</li>
+<li><p>执行了 <code>MONITOR</code> 命令；</p>
+<p><code>MONITOR</code> 命令是用来监测 Redis 执行的，持续输出监测到的各个命令操作</p>
+<p><code>MONITOR</code> 的输出结果会持续占用输出缓冲区，并越占越多，最后的结果就是发生溢出</p>
+<blockquote>
+<p>MONITOR 命令主要用在调试环境中，不要在线上生产环境中持续使用 MONITOR</p>
+</blockquote>
+</li>
+<li><p>缓冲区大小设置得不合理</p>
+<p>通过 <code>client-output-buffer-limit</code> 配置项，来设置缓冲区的大小</p>
+<ol>
+<li>设置缓冲区大小的上限阈值；</li>
+<li>设置输出缓冲区持续写入数据的数量上限阈值，和持续写入数据的时间的上限阈值。</li>
+</ol>
+<blockquote>
+<p>和 Redis 实例进行交互的应用程序来说，主要使用两类客户端和 Redis 服务器端交互</p>
+<ol>
+<li>常规和 Redis 服务器端进行读写命令交互的普通客户端</li>
+<li>订阅了 Redis 频道的订阅客户端</li>
+<li>主节点上用来和从节点进行数据同步的客户端</li>
+</ol>
+</blockquote>
+<ol>
+<li><p>常规和 Redis 服务器端进行读写命令交互的普通客户端</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">client-output-buffer-limit normal 0 0 0<br></code></pre></td></tr></table></figure>
+<p>normal 表示当前设置的是普通客户端，第 1 个 0 设置的是缓冲区大小限制，第 2 个 0 和第 3 个 0 分别表示缓冲区持续写入量限制和持续写入时间限制</p>
+<blockquote>
+<p>对于普通客户端来说，它每发送完一个请求，会等到请求结果返回后，再发送下一个请求，这种发送方式称为<strong>阻塞式发送</strong>。在这种情况下，如果不是读取体量特别大的 bigkey，服务器端的输出缓冲区一般不会被阻塞的。</p>
+</blockquote>
+<p>0 表示 不做限制 </p>
+</li>
+<li><p>订阅了 Redis 频道的订阅客户端</p>
+<blockquote>
+<p>对于订阅客户端来说，一旦订阅的 Redis 频道有消息了，服务器端都会通过输出缓冲区把消息发给客户端。所以，订阅客户端和服务器间的消息发送方式，不属于阻塞式发送。</p>
+</blockquote>
+<p>给订阅客户端设置缓冲区大小限制、缓冲区持续写入量限制，以及持续写入时间限制</p>
+<blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">client-output-buffer-limit pubsub 8mb 2mb 60<br></code></pre></td></tr></table></figure>
+<p>pubsub 参数表示当前是对订阅客户端进行设置</p>
+<p>8mb 表示输出缓冲区的大小上限为 8MB，一旦实际占用的缓冲区大小要超过 8MB，服务器端就会直接关闭客户端的连接；2mb 和 60 表示，如果连续 60 秒内对输出缓冲区的写入量超过 2MB 的话，服务器端也会关闭客户端连接。</p>
+</blockquote>
+</li>
+</ol>
+</li>
+</ol>
+<p><strong>避免输出缓冲区溢出</strong></p>
+<ol>
+<li>避免 bigkey 操作返回大量数据结果；</li>
+<li>避免在线上环境中持续使用 MONITOR 命令。</li>
+<li>使用 <code>client-output-buffer-limit</code> 设置合理的缓冲区大小上限，或是缓冲区连续写入时间和写入量上限。</li>
+</ol>
+<h3 id="主从集群中的缓冲区"><a href="#主从集群中的缓冲区" class="headerlink" title="主从集群中的缓冲区"></a>主从集群中的缓冲区</h3><p>主从集群间的数据复制包括全量复制和增量复制两种，无论在哪种形式的复制中，为了保证主从节点的数据一致，都会用到缓冲区</p>
+<h4 id="复制缓冲区的溢出问题（全量复制）"><a href="#复制缓冲区的溢出问题（全量复制）" class="headerlink" title="复制缓冲区的溢出问题（全量复制）"></a>复制缓冲区的溢出问题（全量复制）</h4><p>在全量复制过程中，主节点在向从节点传输 RDB 文件的同时，会继续接收客户端发送的写命令请求。这些写命令就会先保存在复制缓冲区中，等 RDB 文件传输完成后，再发送给从节点去执行。主节点上会为每个从节点都维护一个复制缓冲区，来保证主从节点间的数据同步。</p>
+<img   class="lazyload" data-original="/article/30584/%E5%A4%8D%E5%88%B6%E7%BC%93%E5%86%B2%E5%8C%BA.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="复制缓冲区">
+<p>在全量复制时，从节点接收和加载 RDB 较慢，同时主节点接收到了大量的写命令，写命令在复制缓冲区中就会越积越多，最终导致溢出。</p>
+<p><strong>避免复制缓冲区溢出</strong></p>
+<ol>
+<li><p>控制主节点保存的数据量大小</p>
+<p>一般把主节点的数据量控制在 2~4GB，这样可以让全量同步执行得更快些，避免复制缓冲区累积过多命令。</p>
+</li>
+<li><p>使用 <code>client-output-buffer-limit</code> 配置项，设置合理的复制缓冲区大小</p>
+<blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">config <span class="hljs-built_in">set</span> client-output-buffer-limit slave 512mb 128mb 60<br></code></pre></td></tr></table></figure>
+<p>slave 参数表明该配置项是针对复制缓冲区的</p>
+<p>512mb 代表将缓冲区大小的上限设置为 512MB；128mb 和 60 代表的设置是，如果连续 60 秒内的写入量超过 128MB 的话，也会触发缓冲区溢出。</p>
+</blockquote>
+<p>实际应用中设置复制缓冲区的大小时，可以根据写命令数据的大小和应用的实际负载情况（也就是写命令速率），来粗略估计缓冲区中会累积的写命令数据量；然后，再和所设置的复制缓冲区大小进行比较，判断设置的缓冲区大小是否足够支撑累积的写命令数据量。</p>
+</li>
+<li><p>控制和主节点连接的从节点个数</p>
+<p>主节点上复制缓冲区的内存开销，会是每个从节点客户端输出缓冲区占用内存的总和</p>
+<p>如果集群中的从节点数非常多的话，主节点的内存开销就会非常大</p>
+</li>
+</ol>
+<h4 id="复制积压缓冲区的溢出问题-增量复制"><a href="#复制积压缓冲区的溢出问题-增量复制" class="headerlink" title="复制积压缓冲区的溢出问题(增量复制)"></a>复制积压缓冲区的溢出问题(增量复制)</h4><p>主节点在把接收到的写命令同步给从节点时，同时会把这些写命令写入复制积压缓冲区。一旦从节点发生网络闪断，再次和主节点恢复连接后，从节点就会从复制积压缓冲区中，读取断连期间主节点接收到的写命令，进而进行增量同步</p>
+<img   class="lazyload" data-original="/article/30584/aedc9b41b31860e283c5d140bdb3318f.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="img">
+<ol>
+<li>复制积压缓冲区(repl_backlog_buffer)是一个大小有限的环形缓冲区。当主节点把复制积压缓冲区写满后，会覆盖缓冲区中的旧命令数据。如果从节点还没有同步这些旧命令数据，就会造成主从节点间重新开始执行全量复制。</li>
+<li>为了应对复制积压缓冲区的溢出问题，我们可以调整复制积压缓冲区的大小，也就是设置 repl_backlog_size 这个参数的值</li>
+</ol>
 
       </section>
       <section class="extra">
@@ -366,7 +1670,7 @@ Redis 知识全景图包括“两大维度，三大主线”...">
           
   <aside class="toc-wrap">
     <h3 class="toc-title">文章目录：</h3>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-text">Redis数据结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%94%AE%E5%92%8C%E5%80%BC%E7%94%A8%E4%BB%80%E4%B9%88%E7%BB%93%E6%9E%84%E7%BB%84%E7%BB%87%EF%BC%9F"><span class="toc-text">键和值用什么结构组织？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%93%88%E5%B8%8C%E5%86%B2%E7%AA%81"><span class="toc-text">哈希冲突</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8D%E5%90%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%9F%A5%E6%89%BE%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="toc-text">不同数据结构查找的时间复杂度</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis%EF%BC%9A%E9%AB%98%E6%80%A7%E8%83%BDIO%E6%A8%A1%E5%9E%8B"><span class="toc-text">Redis：高性能IO模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Socket-%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B%E7%9A%84%E9%9D%9E%E9%98%BB%E5%A1%9E%E6%A8%A1%E5%BC%8F"><span class="toc-text">Socket 网络模型的非阻塞模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E7%9A%84%E9%AB%98%E6%80%A7%E8%83%BD-I-O-%E6%A8%A1%E5%9E%8B"><span class="toc-text">基于多路复用的高性能 I&#x2F;O 模型</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-text">Redis数据结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%94%AE%E5%92%8C%E5%80%BC%E7%94%A8%E4%BB%80%E4%B9%88%E7%BB%93%E6%9E%84%E7%BB%84%E7%BB%87%EF%BC%9F"><span class="toc-text">键和值用什么结构组织？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%93%88%E5%B8%8C%E5%86%B2%E7%AA%81"><span class="toc-text">哈希冲突</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8D%E5%90%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%9F%A5%E6%89%BE%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="toc-text">不同数据结构查找的时间复杂度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#String-%E7%B1%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-text">String 类型数据结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%8B%E7%BC%A9%E5%88%97%E8%A1%A8"><span class="toc-text">压缩列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9B%86%E5%90%88%E7%BB%9F%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="toc-text">集合统计模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GEO%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">GEO数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">自定义数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E6%95%B0%E6%8D%AE"><span class="toc-text">时间序列数据</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis%EF%BC%9A%E9%AB%98%E6%80%A7%E8%83%BDIO%E6%A8%A1%E5%9E%8B"><span class="toc-text">Redis：高性能IO模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Socket-%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B%E7%9A%84%E9%9D%9E%E9%98%BB%E5%A1%9E%E6%A8%A1%E5%BC%8F"><span class="toc-text">Socket 网络模型的非阻塞模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E7%9A%84%E9%AB%98%E6%80%A7%E8%83%BD-I-O-%E6%A8%A1%E5%9E%8B"><span class="toc-text">基于多路复用的高性能 I&#x2F;O 模型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis-%E7%9A%84%E6%8C%81%E4%B9%85%E5%8C%96%EF%BC%88AOF%EF%BC%89"><span class="toc-text">Redis 的持久化（AOF）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#AOF-%E6%97%A5%E5%BF%97"><span class="toc-text">AOF 日志</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AOF-%E4%B8%89%E7%A7%8D%E5%86%99%E5%9B%9E%E7%AD%96%E7%95%A5"><span class="toc-text">AOF 三种写回策略</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AOF-%E9%87%8D%E5%86%99%E6%9C%BA%E5%88%B6"><span class="toc-text">AOF 重写机制</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis%E5%AE%95%E6%9C%BA%E5%BF%AB%E9%80%9F%E6%81%A2%E5%A4%8D%EF%BC%88RDB%EF%BC%89"><span class="toc-text">Redis宕机快速恢复（RDB）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5"><span class="toc-text">Redis数据同步</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BB%E4%BB%8E%E5%BA%93%E9%97%B4%E8%BF%9B%E8%A1%8C%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%90%8C%E6%AD%A5"><span class="toc-text">主从库间进行第一次同步</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BB%E4%BB%8E%E7%BA%A7%E8%81%94%E6%A8%A1%E5%BC%8F%E5%88%86%E6%8B%85%E5%85%A8%E9%87%8F%E5%A4%8D%E5%88%B6%E6%97%B6%E7%9A%84%E4%B8%BB%E5%BA%93%E5%8E%8B%E5%8A%9B"><span class="toc-text">主从级联模式分担全量复制时的主库压力</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BB%E4%BB%8E%E5%BA%93%E9%97%B4%E7%BD%91%E7%BB%9C%E4%B8%AD%E6%96%AD"><span class="toc-text">主从库间网络中断</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis%E5%93%A8%E5%85%B5%E6%9C%BA%E5%88%B6"><span class="toc-text">Redis哨兵机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%93%A8%E5%85%B5%E6%9C%BA%E5%88%B6%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%B5%81%E7%A8%8B"><span class="toc-text">哨兵机制的基本流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%93%A8%E5%85%B5%E9%9B%86%E7%BE%A4"><span class="toc-text">哨兵集群</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis%E5%88%87%E7%89%87%E9%9B%86%E7%BE%A4"><span class="toc-text">Redis切片集群</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%88%87%E7%89%87%E5%92%8C%E5%AE%9E%E4%BE%8B%E7%9A%84%E5%AF%B9%E5%BA%94%E5%88%86%E5%B8%83%E5%85%B3%E7%B3%BB%EF%BC%88Redis-Cluster%EF%BC%89"><span class="toc-text">数据切片和实例的对应分布关系（Redis Cluster）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%AE%9A%E4%BD%8D%E6%95%B0%E6%8D%AE"><span class="toc-text">客户端定位数据</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97"><span class="toc-text">Redis消息队列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E-List-%E7%9A%84%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-text">基于 List 的消息队列解决方案</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E-Streams-%E7%9A%84%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-text">基于 Streams 的消息队列解决方案</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis%E6%80%A7%E8%83%BD%E5%BD%B1%E5%93%8D%E5%9B%A0%E7%B4%A0"><span class="toc-text">Redis性能影响因素</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Redis-%E5%86%85%E9%83%A8%E7%9A%84%E9%98%BB%E5%A1%9E%E5%BC%8F%E6%93%8D%E4%BD%9C-%E4%BB%A5%E5%8F%8A-%E5%BC%82%E6%AD%A5%E6%9C%BA%E5%88%B6"><span class="toc-text">Redis 内部的阻塞式操作 以及 异步机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CPU%E7%BB%93%E6%9E%84%E5%BD%B1%E5%93%8D%E6%80%A7%E8%83%BD"><span class="toc-text">CPU结构影响性能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A2%E5%8A%A8%E7%9A%84%E5%93%8D%E5%BA%94%E5%BB%B6%E8%BF%9F"><span class="toc-text">波动的响应延迟</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Redis-%E6%80%A7%E8%83%BD%E5%8F%98%E6%85%A2-9-%E4%B8%AA%E6%A3%80%E6%9F%A5%E7%82%B9"><span class="toc-text">Redis 性能变慢 9 个检查点:</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis-%E7%9A%84%E5%86%85%E5%AD%98%E7%A9%BA%E9%97%B4%E5%AD%98%E5%82%A8%E6%95%88%E7%8E%87"><span class="toc-text">Redis 的内存空间存储效率</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E7%A2%8E%E7%89%87%E7%9A%84%E5%BD%A2%E6%88%90"><span class="toc-text">内存碎片的形成</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E6%9C%89%E5%86%85%E5%AD%98%E7%A2%8E%E7%89%87"><span class="toc-text">判断是否有内存碎片</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B8%85%E7%90%86%E5%86%85%E5%AD%98%E7%A2%8E%E7%89%87"><span class="toc-text">清理内存碎片</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis-%E7%BC%93%E5%86%B2%E5%8C%BA"><span class="toc-text">Redis 缓冲区</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E7%BC%93%E5%86%B2%E5%8C%BA"><span class="toc-text">客户端输入和输出缓冲区</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BB%E4%BB%8E%E9%9B%86%E7%BE%A4%E4%B8%AD%E7%9A%84%E7%BC%93%E5%86%B2%E5%8C%BA"><span class="toc-text">主从集群中的缓冲区</span></a></li></ol></li></ol>
   </aside>
 
         
