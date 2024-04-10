@@ -211,7 +211,7 @@ The official w...">
           <i class="iconfont iconheart"></i><span id="/article/53105.html" class="leancloud-like" data-flag-title="Mysql45讲"></span>
         </span>
       
-      <span class="post-info-item"><i class="iconfont iconfont-size"></i>15694</span>
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>15695</span>
     </div>
   </div>
 </section>
@@ -546,12 +546,12 @@ The official w...">
 <li>如果你在从库上备份，那么备份期间从库不能执行主库同步过来的 binlog，会导致主从延迟。</li>
 </ol>
 </blockquote>
-<p>官方自带的逻辑备份工具是 <strong>mysqldump</strong>。当 mysqldump 使用参数–<code>single-transaction</code> 的时候，导数据之前就会启动一个事务，来确保拿到一致性视图。而由于 MVCC 的支持，这个过程中数据是可以正常更新的。</p>
+<p>官方自带的逻辑备份工具是 <strong>mysqldump</strong>。当 mysqldump 使用参数<code>–single-transaction</code> 的时候，导数据之前就会启动一个事务，来确保拿到一致性视图。而由于 MVCC 的支持，这个过程中数据是可以正常更新的。</p>
 <blockquote>
 <p><strong>问题：有了mysqldump功能，为什么还需要 FTWRL 呢？</strong></p>
 <p>一致性读是好，但前提是引擎要支持<strong>可重复读</strong>隔离级别。比如，对于 MyISAM 这种不支持事务的引擎，如果备份过程中有更新，总是只能取到最新的数据，那么就破坏了备份的一致性。这时，我们就需要使用 FTWRL 命令了。</p>
 </blockquote>
-<p><strong><code>single-transaction</code> 方法只适用于所有的表使用事务引擎的库。</strong></p>
+<p><strong><code>-single-transaction</code> 方法只适用于所有的表使用事务引擎的库。</strong></p>
 <blockquote>
 <p><strong>问题：既然要全库只读，为什么不使用 set global readonly=true 的方式呢？</strong></p>
 <ol>

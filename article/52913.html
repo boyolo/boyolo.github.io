@@ -210,7 +210,7 @@ SpringSecuritySpri...">
           <i class="iconfont iconheart"></i><span id="/article/52913.html" class="leancloud-like" data-flag-title="SpringSecurity"></span>
         </span>
       
-      <span class="post-info-item"><i class="iconfont iconfont-size"></i>4477</span>
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>11296</span>
     </div>
   </div>
 </section>
@@ -218,7 +218,8 @@ SpringSecuritySpri...">
       <section class="content">
         
         <p>学习源于<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1mm4y1X7Hc?p=8&amp;spm_id_from=pageDriver">三更草堂</a></p>
-<h2 id="SpringSecurity"><a href="#SpringSecurity" class="headerlink" title="SpringSecurity"></a>SpringSecurity</h2><p>Spring Security是一个功能强大且高度可定制的身份验证和访问控制框架。这是保护基于Spring的应用程序的事实上的标准。</p>
+<h2 id="SpringSecurity"><a href="#SpringSecurity" class="headerlink" title="SpringSecurity"></a>SpringSecurity</h2><p>Spring Security是一个<strong>功能强大且高度可定制的身份验证和访问控制框架</strong>。这是保护基于Spring的应用程序的事实上的标准。</p>
+<p>SpringSecurity 提供了一组可以在Spring应用上下文中配置的Bean，充分利用了Spring IoC、DI、AOP功能，为应用系统提供声明式的安全访问控制功能，减少了为企业系统安全控制编写大量重复代码的工作。</p>
 <p>Spring Security是一个专注于为Java应用程序提供身份验证和授权的框架。像所有Spring项目一样，Spring Security的真正力量在于它有多容易被扩展以满足自定义要求。</p>
 <p><strong>认证：验证当前访问系统的是不是本系统的用户，并且要确认具体是哪个用户</strong></p>
 <p><strong>授权：经过认证后判断当前用户是否有权限进行某个操作</strong></p>
@@ -239,16 +240,16 @@ SpringSecuritySpri...">
 <h3 id="SpringSecurity完整流程"><a href="#SpringSecurity完整流程" class="headerlink" title="SpringSecurity完整流程"></a>SpringSecurity完整流程</h3><p>SpringSecurity其实就是一个过滤器链，内部包含了各种功能的过滤器。</p>
 <p><strong>基础流程图</strong></p>
 <img   class="lazyload" data-original="/article/52913/%E6%B5%81%E7%A8%8B%E5%9B%BE-9039561.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="流程图">
-<p><strong>UsernamePasswordAuthenticationFilter</strong>:负责处理我们在登陆页面填写了用户名密码后的登陆请求。入门案例的认证工作主要有它负责。</p>
+<p><strong>UsernamePasswordAuthenticationFilter</strong>:负责处理我们在登陆页面填写了用户名密码后的登陆请求。</p>
 <p><strong>ExceptionTranslationFilter：</strong> 处理过滤器链中抛出的任何AccessDeniedException和AuthenticationException 。</p>
 <p><strong>FilterSecurityInterceptor：</strong> 负责权限校验的过滤器。</p>
 <p>SpringSecurity过滤器链中有哪些过滤器及它们的顺序：</p>
 <img   class="lazyload" data-original="/article/52913/SpringSecurity%E8%BF%87%E6%BB%A4%E5%99%A8%E9%93%BE.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="SpringSecurity过滤器链">
 <h3 id="认证流程详解"><a href="#认证流程详解" class="headerlink" title="认证流程详解"></a>认证流程详解</h3><img   class="lazyload" data-original="/article/52913/%E8%AE%A4%E8%AF%81%E6%B5%81%E7%A8%8B%E8%AF%A6%E8%A7%A3-9040230.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="认证流程详解">
 <p><strong>Authentication接口</strong>: 它的实现类，表示当前访问系统的用户，封装了用户相关信息。</p>
-<p><strong>AuthenticationManager接口</strong>：定义了认证Authentication的方法</p>
+<p><strong>AuthenticationManager接口</strong>：定义了认证Authentication的方法，在 Spring Security 中，用来处理身份认证的类是 AuthenticationManager，我们也称之为认证管理器。</p>
 <p><strong>UserDetailsService接口</strong>：加载用户特定数据的核心接口。里面定义了一个根据用户名查询用户信息的方法。</p>
-<p><strong>UserDetails接口</strong>：提供核心用户信息。通过UserDetailsService根据用户名获取处理的用户信息要封装成UserDetails对象返回。然后将这些信息封装到Authentication对象中。</p>
+<p><strong>UserDetails接口（继承了 Serializable 序列化）</strong>：提供核心用户信息。通过UserDetailsService根据用户名获取处理的用户信息要封装成UserDetails对象返回。然后将这些信息封装到Authentication对象中。</p>
 <ol>
 <li><p>自定义登录验证</p>
 <img   class="lazyload" data-original="/article/52913/%E8%87%AA%E5%AE%9A%E4%B9%89%E7%99%BB%E5%BD%95%E9%AA%8C%E8%AF%81.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="自定义登录验证">
@@ -296,7 +297,267 @@ SpringSecuritySpri...">
 <h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><h3 id="CSRF"><a href="#CSRF" class="headerlink" title="CSRF"></a>CSRF</h3><p>CSRF是指跨站请求伪造（Cross-site request forgery），是web常见的攻击之一。</p>
 <p>SpringSecurit 去防止 CSRF 攻击的方式就是通过 csrf_token 。后端会生成一个 csrf_token ，前端发起请求的时候需要携带这个 csrf_token ,后端会有过滤器进行校验，如果没有携带或者是伪造的就不允许访问。</p>
 <p>CSRF 攻击依靠的是 cookie 中所携带的认证信息。但是在前后端分离的项目中我们的认证信息其实是 token ，而 token 并不是存储中 cookie 中，并且需要前端代码去把token 设置到请求头中才可以，所以CSRF攻击也就不用担心了。</p>
-<p>3566930579</p>
+<hr>
+<h2 id="项目过程"><a href="#项目过程" class="headerlink" title="项目过程"></a><strong>项目过程</strong></h2><p><strong>前端输入用户密码传入后端，后端判断用户名密码是否正确，如果正确，会生成一个JWT令牌，返回给前端，如果不正确重新输入用户名密码。</strong></p>
+<p><strong>前端拿到JWT令牌之后，会放在请求头中，之后每一次请求都会携带JWT令牌，后端 JWT令牌拦截器，每次有请求进入后端，先判断JWT令牌 是否存在以及令牌是否正确合法有效，如果不存在或者JWT令牌不合法有效，拦截请求，如果JWT令牌合法有效，允许请求访问。</strong></p>
+<blockquote>
+<p><strong>引入依赖</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java">&lt;!--security 依赖--&gt;<br>&lt;dependency&gt;<br>  &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;<br>  &lt;artifactId&gt;spring-boot-starter-security&lt;/artifactId&gt;<br>&lt;/dependency&gt;<br>&lt;!--JWT 依赖--&gt;<br>&lt;dependency&gt;<br>  &lt;groupId&gt;io.jsonwebtoken&lt;/groupId&gt;<br>  &lt;artifactId&gt;jjwt&lt;/artifactId&gt;<br>  &lt;version&gt;<span class="hljs-number">0.9</span><span class="hljs-number">.0</span>&lt;/version&gt;<br>&lt;/dependency&gt;<br></code></pre></td></tr></table></figure>
+<p><strong>JWT配置</strong></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">jwt:</span><br>  <span class="hljs-comment"># JWT存储的请求头</span><br>  <span class="hljs-attr">tokenHeader:</span> <span class="hljs-string">Authorization</span><br>  <span class="hljs-comment"># JWT 加解密使用的密钥</span><br>  <span class="hljs-attr">secret:</span> <span class="hljs-string">yeb-secret</span><br>  <span class="hljs-comment"># JWT的超期限时间（60*60*24）</span><br>  <span class="hljs-attr">expiration:</span> <span class="hljs-number">604800</span><br>  <span class="hljs-comment"># JWT 负载中拿到开头</span><br>  <span class="hljs-attr">tokenHead:</span> <span class="hljs-string">Bearer</span><br></code></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p><strong>编写JwtToken工具类</strong></p>
+<ol>
+<li><p>根据用户信息生成Token</p>
+<ol>
+<li>generateToken(UserDetails userDetails)</li>
+<li>generateToken(Map&lt;String,Object&gt; claims)</li>
+<li>generateExpirationDate()</li>
+</ol>
+</li>
+<li><p>从Token中获取信息</p>
+<ol>
+<li><p>从Token中获取登录用户名</p>
+<p>public String getUserNameFromToken(String token)</p>
+</li>
+<li><p>从Token中获取荷载</p>
+<p>private Claims getClaimsFromToken(String token)</p>
+</li>
+</ol>
+</li>
+<li><p>判断Token是否有效</p>
+<ol>
+<li><p>判断 Token中的用户名和 用户信息中的用户名是否一致 并且 是否失效</p>
+<p>public boolean validateToken(String token , UserDetails userDetails)</p>
+</li>
+<li><p>判断 Token 是否失效</p>
+<p>private boolean isTokenExpired(String token)</p>
+</li>
+<li><p>获取 Token 失效时间</p>
+<p>private Date getExpiredDateFromToken(String token)</p>
+</li>
+</ol>
+</li>
+<li><p>判断 Token 是否可以被刷新</p>
+<p>public boolean canRefreshToken(String token)</p>
+</li>
+<li><p>刷新 Token</p>
+<p>public String refreshToken(String token)</p>
+</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol>
+<li><p><strong>前端输入用户密码传入后端，后端判断用户名密码是否正确，如果正确，会生成一个JWT令牌，返回给前端，如果不正确重新输入用户名密码。</strong></p>
+<ol>
+<li><p>使用 Admin 实现 UserDetails , 重写其中的方法</p>
+</li>
+<li><p>使用 AdminServiceImpl 实现类 ， 获取前端传入的 用户名、密码、图形验证码；</p>
+<ol>
+<li><p>获取请求中的的图形验证码进行校验；</p>
+</li>
+<li><p>通过 userDetailsService 接口中 loadUserByUsername(username) 根据传入的用户名生成用户信息 userDetails</p>
+<p>校验 userDetails </p>
+<p>校验 前端传入密码是否与数据库中存储的密码进行校验</p>
+</li>
+<li><p>SpringSecurity全局对象中 更新 用户登录信息</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//全局更新</span><br><span class="hljs-comment">//更新security登录用户对象</span><br>UsernamePasswordAuthenticationToken authenticationToken = <span class="hljs-keyword">new</span> UsernamePasswordAuthenticationToken(userDetails, <span class="hljs-keyword">null</span>, userDetails.getAuthorities());<br>SecurityContextHolder.getContext().setAuthentication(authenticationToken);<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>生成 Token ，将 Token 以及 请求头放入 map 传入前端</p>
+</li>
+</ol>
+</li>
+</ol>
+<p>登录成功</p>
+</li>
+<li><p><strong>JWT登录授权过滤器</strong></p>
+<p>存在token并且token格式正确，使其登录，同时判断token是否有效，有效重新 SpringSecurity全局对象中 更新 用户登录信息</p>
+</li>
+<li><p>自定义未授权和登录结果返回</p>
+<ol>
+<li>未登录或token失效处理器</li>
+<li>授权失败处理器</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<hr>
+<h3 id="UserDetailsService接口"><a href="#UserDetailsService接口" class="headerlink" title="UserDetailsService接口"></a>UserDetailsService接口</h3><blockquote>
+<p><strong>UserDetailsService接口</strong> 加载用户特定数据的核心接口。里面定义了一个根据用户名查询用户信息的方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function">UserDetails <span class="hljs-title">loadUserByUsername</span><span class="hljs-params">(String username)</span> throw UsernameNotFoundException</span>;<br></code></pre></td></tr></table></figure>
+<hr>
+<p><strong>UserDetails</strong>接口：提供核心用户信息。通过 UserDetailsService 根据用户名获取处理的用户信息要封装成UserDetails对象返回。然后将这些信息封装到Authentication对象中。</p>
+<hr>
+<p>UserDetails接口的实现类 <strong>User</strong> 其中有两个核心构造方法,其中第一个User()调用第二个 User()方法</p>
+<ul>
+<li>User()方法中的 username 是从 loadUserByUsername(String username) 中前端传入的username，然后 User()方法中的 password 是从数据库中 根据 username 查找对应的 用户，返回其密码（用来和前端传入的密码进行比较）。</li>
+</ul>
+<blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">User</span><span class="hljs-params">(String username, String password, Collection&lt;? extends GrantedAuthority&gt; authorities)</span> </span>&#123;<br>		<span class="hljs-keyword">this</span>(username, password, <span class="hljs-keyword">true</span>, <span class="hljs-keyword">true</span>, <span class="hljs-keyword">true</span>, <span class="hljs-keyword">true</span>, authorities);<br>	&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">User</span><span class="hljs-params">(String username, String password, <span class="hljs-keyword">boolean</span> enabled, <span class="hljs-keyword">boolean</span> accountNonExpired,</span></span><br><span class="hljs-params"><span class="hljs-function">			<span class="hljs-keyword">boolean</span> credentialsNonExpired, <span class="hljs-keyword">boolean</span> accountNonLocked,</span></span><br><span class="hljs-params"><span class="hljs-function">			Collection&lt;? extends GrantedAuthority&gt; authorities)</span> </span>&#123;<br>		Assert.isTrue(username != <span class="hljs-keyword">null</span> &amp;&amp; !<span class="hljs-string">&quot;&quot;</span>.equals(username) &amp;&amp; password != <span class="hljs-keyword">null</span>,<br>				<span class="hljs-string">&quot;Cannot pass null or empty values to constructor&quot;</span>);<br>		<span class="hljs-keyword">this</span>.username = username;<br>		<span class="hljs-keyword">this</span>.password = password;<br>		<span class="hljs-keyword">this</span>.enabled = enabled;<br>		<span class="hljs-keyword">this</span>.accountNonExpired = accountNonExpired;<br>		<span class="hljs-keyword">this</span>.credentialsNonExpired = credentialsNonExpired;<br>		<span class="hljs-keyword">this</span>.accountNonLocked = accountNonLocked;<br>		<span class="hljs-keyword">this</span>.authorities = Collections.unmodifiableSet(sortAuthorities(authorities));<br>	&#125;<br></code></pre></td></tr></table></figure>
+</blockquote>
+</blockquote>
+<blockquote>
+<p><strong>PasswordEncoder 接口</strong> Spring已经实例化，需要自定义重新实现 PasswordEncoder 实例。</p>
+<p>该接口共有两个主要方法</p>
+<ol>
+<li><p>对 密码进行加密 </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function">String <span class="hljs-title">encode</span><span class="hljs-params">(CharSequence rawPassword)</span></span>;<br></code></pre></td></tr></table></figure>
+<p>通过对 <strong>原始密码 rawPassword</strong> 进行加密，返回一个加密后的 字符串</p>
+</li>
+<li><p>匹配 原始密码 与 加密后的密码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">matches</span><span class="hljs-params">(CharSequence rawPassword, String encodedPassword)</span></span>;<br></code></pre></td></tr></table></figure>
+</li>
+</ol>
+<hr>
+<p>官方推荐使用<strong>PasswordEncoder 接口</strong>的实现类 <strong>BCryptPasswordEncoder</strong> 基于 <strong>Hash算法</strong> 实现单向加密 </p>
+</blockquote>
+<hr>
+<blockquote>
+<p><strong>UsernamePasswordAuthenticationFilter类</strong> 负责处理在登陆页面填写了用户名密码后的登陆请求</p>
+</blockquote>
+<hr>
+<blockquote>
+<p><strong>Authentication接口</strong>: 它的实现类，表示当前访问系统的用户，封装了用户相关信息。</p>
+</blockquote>
+<hr>
+<blockquote>
+<p><strong>FormLoginConfigurer类</strong> 可以自定义登陆成功登陆失败跳转</p>
+<p><strong>ForwardAuthenticationSuccessHandler</strong> 实现了 <strong>AuthenticationSuccessHandler 接口</strong> 定义了成功跳转链接</p>
+<p><strong>ForwardAuthenticationFailureHandler</strong> 实现了 <strong>AuthenticationFailureHandler 接口</strong> 定义了失败跳转链接</p>
+</blockquote>
+<hr>
+<blockquote>
+<p><strong>WebSecurityConfigurerAdapter</strong> 是个适配器，是构建<strong>SecurityFilterChain</strong>的关键， 在配置的时候,需要我们自己写个配置类去继承他,然后编写自己所特殊需要的配置</p>
+<p>重写的 <strong>configure(HttpSecurity http)</strong> 的方法就是用来配置 <strong>HttpSecurity</strong> 的</p>
+<blockquote>
+<p>http.</p>
+<p>anyRequest() 表示所有请求</p>
+<p>antMatches() 表示匹配请求</p>
+<p>regexMatches() 表示通过正则进行匹配</p>
+<p>mvcMatches() 表示匹配 ServletPath 为特有方法</p>
+<hr>
+<p>permitAll() 表示不需要被认证</p>
+<p>authenticated() 表示需要被认证</p>
+<p>hasAuthority() 表示需要某种权限</p>
+<p>hasAnyAuthority() 表示需要多个权限其中之一</p>
+<p>hasRole() 表示需要某种角色（初始化角色时 前缀 ROLE_ 匹配值不需要前缀）</p>
+<p>hasAnyRole() 表示需要多个角色中的其中之一</p>
+<p>hasIpAddress() 表示特定的 IP地址 才可以通过</p>
+<hr>
+<p>http.csrf() 跨站请求伪造攻击</p>
+<hr>
+<p>http.</p>
+<p>exceptionHandling() 表示异常处理</p>
+<p>accessDeniedHandler() 表示授权失败处理器</p>
+<p>authenticationEntryPoint() 表示认证失败处理器</p>
+</blockquote>
+</blockquote>
+<hr>
+<blockquote>
+<p><strong>AccessDeniedHandler接口</strong> 该类用来统一处理 <strong>AccessDeniedException</strong> 异常，为授权过程中出现异常</p>
+<p>自定义授权过程异常处理，实现<strong>AccessDeniedHandler接口</strong>，并重写handle() 方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">handle</span><span class="hljs-params">(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException)</span></span><br><span class="hljs-function">			<span class="hljs-keyword">throws</span> IOException, ServletException</span>;<br></code></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p><strong>基于注解的访问控制</strong></p>
+<p>需要通过 <strong>@EnableGlobalMethodSecurity</strong> 进行开启后使用</p>
+<p><strong>@Secured</strong>（方法或类） 专门用于判断是否具有角色 ，参数以 <strong>ROLE_</strong> 开头</p>
+<p><strong>@PreAuthorize/@PostAuthorize</strong>（方法或类） 在访问方法或类再执行之前/之后判断权限 </p>
+</blockquote>
+<hr>
+<blockquote>
+<p><strong>Token Auth</strong></p>
+<p>基于Token的身份验证方法，在服务端不需要存储用户的登录记录</p>
+<ol>
+<li>客户端使用用户名跟密码请求登陆</li>
+<li>服务端收到请求，验证用户名和密码</li>
+<li>验证成功，服务器端签发一个 Token，将这个Token发送给客户端</li>
+<li>客户端收到Token将其存储</li>
+<li>客户端每次向服务器请求资源的时候携带该 Token</li>
+<li>服务器端收到请求，验证请求中携带的Token，验证成功，返回请求数据</li>
+</ol>
+</blockquote>
+<blockquote>
+<p><strong>JWT</strong> JSON WEB Token ,定义了一种简介的、自包含的协议格式，用于在通信双方传递JSON对象，传递的信息经过数字签名可以被验证和信任。</p>
+<ol>
+<li>基于JSON，方便解析；</li>
+<li>可以在令牌中自定义丰富内容，易扩展；</li>
+<li>通过非对称加密算法及数字签名技术，防止篡改，安全性高；</li>
+<li>资源服务使用JWT可不依赖认证服务即可完成授权。</li>
+</ol>
+<p>JWT令牌较长，占存储空间比较大</p>
+</blockquote>
+<h3 id="JWT组成"><a href="#JWT组成" class="headerlink" title="JWT组成"></a><strong>JWT组成</strong></h3><blockquote>
+<ol>
+<li><p>头部 Header 描述JWT最基本信息</p>
+<p>对头部的 JSON 字符串 进行 BASE64编码解码</p>
+</li>
+<li><p>负载 payload 存放有效信息（不要放敏感信息）</p>
+<ol>
+<li>标准中注册的声明</li>
+<li>公共的声明</li>
+<li>私有的声明</li>
+</ol>
+</li>
+<li><p>签证、签名 signature</p>
+<ol>
+<li>header（BASE64编码之后的头部信息）</li>
+<li>payload （BASE64编码之后的载荷信息）</li>
+<li>secret （盐 ，必须保密，保存在服务器端）</li>
+</ol>
+</li>
+</ol>
+<p>JWT签发在服务器端，secret相当于私钥 </p>
+</blockquote>
+<blockquote>
+<p><strong>JJWT</strong>：提供端到端的JWT创建和验证的Java库</p>
+</blockquote>
+<hr>
+<blockquote>
+<p><strong>OAUTH2 认证</strong></p>
+<p>优点</p>
+<ol>
+<li>更安全，客户端不接触用户密码</li>
+<li>短寿命和封装的Token</li>
+<li>广泛传播、持续采用</li>
+<li>资源服务器和授权服务器解耦</li>
+<li>集中式授权，简化客户端</li>
+<li>客户可以具有不同的信任级别</li>
+</ol>
+<p>缺点</p>
+<ol>
+<li>协议框架太宽泛，造成各种实现的兼容性和互操作性差</li>
+<li>不是一个认证协议，本身不能告诉你任何用户信息</li>
+</ol>
+<img   class="lazyload" data-original="/article/52913/%E5%BE%AE%E4%BF%A1%E8%AE%A4%E8%AF%81%E4%B8%BE%E4%BE%8B.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="微信认证举例">
+<img   class="lazyload" data-original="/article/52913/%E8%AE%A4%E8%AF%81%E6%B5%81%E7%A8%8B.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="认证流程">
+</blockquote>
+<blockquote>
+<p>客户凭证(client Credentials) 客户端的clientId和密码用于认证客户</p>
+<p>令牌(tokens) 授权服务器在接受到客户请求后，颁发的访问令牌</p>
+<blockquote>
+<p>授权码 仅用于授权码授权类型，用于交换获取访问令牌和刷新令牌</p>
+<p>访问令牌 用于代表一个用户或服务直接去访问受保护的资源</p>
+<p>刷新令牌 用于去授权服务器获取一个刷新访问令牌</p>
+<p>beareaToken 不管谁拿到Token都可以访问资源</p>
+<p>proof of Possession Token 可以校验client是否对Token有明确的拥有权</p>
+</blockquote>
+<p>作用域(scopes) 客户请求访问令牌时，由资源拥有者外指定的细分权限</p>
+</blockquote>
+<blockquote>
+<img   class="lazyload" data-original="/article/52913/SpringSecurityOAuth2.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="SpringSecurityOAuth2">
+</blockquote>
+<blockquote>
+<img   class="lazyload" data-original="/article/52913/SpringSecurityOAuth2%E6%9E%B6%E6%9E%84.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  class title="SpringSecurityOAuth2架构">
+<ol>
+<li>用户访问，此时没有Token，Oauth2RestTemplate报错，报错信息会被Oauth2ClientContextFilter捕获，并重定向到认证服务器；</li>
+<li>认证服务器通过 Authorization Endpoint进行授权，并通过  AuthorizationServerTokenServices 生成授权码并返回给客户；</li>
+<li>客户端拿到授权码去认证服务器通过 Token Endpoint 调用 AuthorizationServerTokenServices 生成Token 并返回给客户端</li>
+<li>客户端拿到Token 去资源服务器访问资源，一般会通过 Oauth2AuthenticationManager 调用 ResourceServerTokenServices 进行校验，校验通过可获取资源</li>
+</ol>
+</blockquote>
 
       </section>
       <section class="extra">
@@ -372,7 +633,7 @@ SpringSecuritySpri...">
           
   <aside class="toc-wrap">
     <h3 class="toc-title">文章目录：</h3>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#SpringSecurity"><span class="toc-text">SpringSecurity</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE"><span class="toc-text">配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A4%E8%AF%81"><span class="toc-text">认证</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SpringSecurity%E5%AE%8C%E6%95%B4%E6%B5%81%E7%A8%8B"><span class="toc-text">SpringSecurity完整流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A4%E8%AF%81%E6%B5%81%E7%A8%8B%E8%AF%A6%E8%A7%A3"><span class="toc-text">认证流程详解</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%88%E6%9D%83"><span class="toc-text">授权</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%88%E6%9D%83%E5%9F%BA%E6%9C%AC%E6%B5%81%E7%A8%8B"><span class="toc-text">授权基本流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%88%E6%9D%83%E5%AE%9E%E7%8E%B0"><span class="toc-text">授权实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%A4%B1%E8%B4%A5%E5%A4%84%E7%90%86"><span class="toc-text">自定义失败处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B7%A8%E5%9F%9F"><span class="toc-text">跨域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%A5%E5%85%85"><span class="toc-text">补充</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CSRF"><span class="toc-text">CSRF</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#SpringSecurity"><span class="toc-text">SpringSecurity</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE"><span class="toc-text">配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A4%E8%AF%81"><span class="toc-text">认证</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SpringSecurity%E5%AE%8C%E6%95%B4%E6%B5%81%E7%A8%8B"><span class="toc-text">SpringSecurity完整流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A4%E8%AF%81%E6%B5%81%E7%A8%8B%E8%AF%A6%E8%A7%A3"><span class="toc-text">认证流程详解</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%88%E6%9D%83"><span class="toc-text">授权</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%88%E6%9D%83%E5%9F%BA%E6%9C%AC%E6%B5%81%E7%A8%8B"><span class="toc-text">授权基本流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%88%E6%9D%83%E5%AE%9E%E7%8E%B0"><span class="toc-text">授权实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%A4%B1%E8%B4%A5%E5%A4%84%E7%90%86"><span class="toc-text">自定义失败处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B7%A8%E5%9F%9F"><span class="toc-text">跨域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%A5%E5%85%85"><span class="toc-text">补充</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CSRF"><span class="toc-text">CSRF</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E8%BF%87%E7%A8%8B"><span class="toc-text">项目过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#UserDetailsService%E6%8E%A5%E5%8F%A3"><span class="toc-text">UserDetailsService接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JWT%E7%BB%84%E6%88%90"><span class="toc-text">JWT组成</span></a></li></ol></li></ol>
   </aside>
 
         

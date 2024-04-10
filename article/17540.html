@@ -209,7 +209,7 @@
           <i class="iconfont iconheart"></i><span id="/article/17540.html" class="leancloud-like" data-flag-title="Mysql45讲-实践（四）"></span>
         </span>
       
-      <span class="post-info-item"><i class="iconfont iconfont-size"></i>19333</span>
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>19460</span>
     </div>
   </div>
 </section>
@@ -425,7 +425,8 @@
 </blockquote>
 <p>然后，可以通过下面这条命令，将这些 INSERT 语句放到 db2 库里去执行</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">mysql -h127.0.0.1 -P13000  -uroot db2 -e &quot;source /client_tmp/t.sql&quot;<br></code></pre></td></tr></table></figure>
-<p>source 并不是一条 SQL 语句，而是一个客户端命令</p>
+<p>source 并不是一条 SQL 语句，而是一个</p>
+<p>客户端命令</p>
 <p>mysql 客户端执行这个命令的流程是这样的：</p>
 <ol>
 <li>打开文件，默认以分号为结尾读取一条条的 SQL 语句；</li>
@@ -739,7 +740,7 @@
 <p>第一个 insert 语句插入数据成功后，这个表的 AUTO_INCREMENT 没有改变（还是 4294967295），就导致了第二个 insert 语句又拿到相同的自增 id 值，再试图执行插入语句，报主键冲突错误。</p>
 </blockquote>
 <h3 id="InnoDB-系统自增-row-id"><a href="#InnoDB-系统自增-row-id" class="headerlink" title="InnoDB 系统自增 row_id"></a>InnoDB 系统自增 row_id</h3><p>如果创建的 InnoDB 表没有指定主键，那么 InnoDB 会给你创建一个不可见的，长度为 6 个字节的 <strong>row_id</strong>。</p>
-<p>InnoDB 维护了一个全局的 ‘dict_sys.row_id’ 值，所有无主键的 InnoDB 表，每插入一行数据，都将当前的 ‘dict_sys.row_id’ 值作为要插入数据的 row_id，然后把 ‘dict_sys.row_id’ 的值加 1。</p>
+<p>InnoDB 维护了一个全局的 ‘dict_sys.row_id’ 值，所有无主键的 InnoDB 表，每插入一行数据，都将当前的 ‘dict_sys.row_id’ 值作为要插入数据的 row_id，然后把 ‘dict_sys.row_id’ 的值加 1。                                                                                                                              </p>
 <p>实际上，在代码实现时 row_id 是一个长度为 8 字节的无符号长整型 (bigint unsigned)。但是，InnoDB 在设计时，给 row_id 留的只是 6 个字节的长度，这样写到数据表中时只放了最后 6 个字节，所以 row_id 能写到数据表中的值，就有两个特征：</p>
 <ol>
 <li><p>row_id 写入表中的值范围，是从 0 到 2<sup>48</sup>-1；</p>

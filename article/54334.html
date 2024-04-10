@@ -1,0 +1,537 @@
+
+
+<!DOCTYPE html>
+<html lang="en" color-mode=light>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Spring集成谷歌验证码 - Boyolo</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+  
+  <meta name="description" content="
+添加依赖
+123456&lt;!-- google ...">
+  <meta name="author" content="bobo">
+  <link rel="icon" href="/images/icons/favicon-16x16.png" type="image/png" sizes="16x16">
+  <link rel="icon" href="/images/icons/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" sizes="180x180">
+  <meta rel="mask-icon" href="/images/icons/boyolo-logo.svg" color="#333333">
+  
+    <meta rel="msapplication-TileImage" content="/images/icons/favicon-144x144.png">
+    <meta rel="msapplication-TileColor" content="#000000">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+    
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1445822_p6ry5n7lrr.css">
+
+  
+
+  
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+    
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/xcode.min.css" name="highlight-style" mode="light">
+
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/solarized-dark.min.css" name="highlight-style" mode="dark">
+
+      
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {};
+    var ZHAOO = window.ZHAOO || {};
+    CONFIG = {
+      isHome: false,
+      fancybox: true,
+      pjax: false,
+      loading: {
+        gif: '/images/theme/loading.gif',
+        lottie: ''
+      },
+      lazyload: {
+        enable: true,
+        only_post: 'false',
+        loading: {
+          gif: '/images/theme/loading.gif',
+          lottie: ''
+        }
+      },
+      donate: {
+        enable: true,
+        alipay: '/images/theme/alipay.jpg',
+        wechat: '/images/theme/wechatpay.jpg'
+      },
+      galleries: {
+        enable: true
+      },
+      fab: {
+        enable: true,
+        always_show: false
+      },
+      carrier: {
+        enable: true
+      },
+      daovoice: {
+        enable: false
+      },
+      preview: {
+        background: {
+          default: '',
+          api: ''
+        },
+        motto: {
+          default: '我在开了灯的床头下，想问问自己的心啊。',
+          typing: true,
+          api: 'https://v1.hitokoto.cn/?encode=text&c=i',
+          data_contents: ''
+        },
+      },
+      qrcode: {
+        enable: true,
+        type: 'url',
+        image: '/images/theme/wechat',
+      },
+      toc: {
+        enable: true
+      },
+      scrollbar: {
+        type: 'default'
+      },
+      notification: {
+        enable: false,
+        delay: 4500,
+        list: '',
+        page_white_list: '',
+        page_black_list: ''
+      },
+      search: {
+        enable: true,
+        path: 'search.xml'
+      }
+    }
+  </script>
+
+  
+
+  
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="lock-screen">
+  <div class="loading" id="loading"></div>
+  
+    
+
+
+  <nav class="navbar">
+    <div class="left">
+      
+        <i class="iconfont iconhome j-navbar-back-home"></i>
+      
+      
+        <i class="iconfont iconqrcode j-navbar-qrcode"></i>
+      
+      
+        <i class="iconfont iconmoono" id="color-toggle" color-toggle="light"></i>
+      
+      
+        <i class="iconfont iconsearch j-navbar-search"></i>
+      
+    </div>
+    <div class="center">Spring集成谷歌验证码</div>
+    <div class="right">
+      <i class="iconfont iconmenu j-navbar-menu"></i>
+    </div>
+    
+      <div id="qrcode-navbar"></div>
+    
+  </nav>
+
+  
+  
+
+<nav class="menu">
+  <div class="menu-container">
+    <div class="menu-close">
+      <i class="iconfont iconbaseline-close-px"></i>
+    </div>
+    <ul class="menu-content"><li class="menu-item">
+        <a href="/" class="underline "> 首页</a>
+      </li><li class="menu-item">
+        <a href="/tags/" class="underline "> 标签</a>
+      </li><li class="menu-item">
+        <a href="/categories/" class="underline "> 分类</a>
+      </li><li class="menu-item">
+        <a href="/archives/" class="underline "> 归档</a>
+      </li><li class="menu-item">
+        <a href="/galleries/" class="underline "> 相册</a>
+      </li><li class="menu-item">
+        <a href="/about/ " class="underline "> 关于</a>
+      </li></ul>
+    
+      <div class="menu-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a> |  website - <a target="_blank" href="https://boyolo.github.io/">bobo</a></p></div>
+    
+  </div>
+</nav>
+  <main id="main">
+  <div class="article-wrap">
+    <div class="row container">
+      <div class="col-xl-3"></div>
+      <div class="col-xl-6"><article class="article">
+  <div class="wrap">
+    <section class="head">
+  <img   class="lazyload" data-original="/images/theme/coverphoto/post-image.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title">Spring集成谷歌验证码</h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>August 14, 2022</span>
+      
+        <span class="post-info-item">
+          <i class="iconfont iconeye"></i><span id="/article/54334.html" class="leancloud-counter" data-flag-title="Spring集成谷歌验证码"></span>
+        </span>
+        <span class="post-info-item">
+          <i class="iconfont iconheart"></i><span id="/article/54334.html" class="leancloud-like" data-flag-title="Spring集成谷歌验证码"></span>
+        </span>
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>4636</span>
+    </div>
+  </div>
+</section>
+    <section class="main">
+      <section class="content">
+        
+        <blockquote>
+<p><strong>添加依赖</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!-- google kaptcha依赖 --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>  	<span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.github.axet<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>  	<span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>kaptcha<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>  	<span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>0.0.9<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p><strong>配置类 CaptchaConfig.java</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.boyolo.server.config;<br><br><span class="hljs-keyword">import</span> com.google.code.kaptcha.impl.DefaultKaptcha;<br><span class="hljs-keyword">import</span> com.google.code.kaptcha.util.Config;<br><span class="hljs-keyword">import</span> org.springframework.context.annotation.Bean;<br><span class="hljs-keyword">import</span> org.springframework.context.annotation.Configuration;<br><span class="hljs-keyword">import</span> java.util.Properties;<br><br><span class="hljs-meta">@Configuration</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CaptchaConfig</span> </span>&#123;<br><br>  <span class="hljs-meta">@Bean</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> DefaultKaptcha <span class="hljs-title">defaultKaptcha</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-comment">//验证码生成器</span><br>    DefaultKaptcha defaultKaptcha = <span class="hljs-keyword">new</span> DefaultKaptcha();<br>    <span class="hljs-comment">//配置</span><br>    Properties properties = <span class="hljs-keyword">new</span> Properties();<br>    <span class="hljs-comment">//是否有边框</span><br>    properties.setProperty(<span class="hljs-string">&quot;kaptcha.border&quot;</span>, <span class="hljs-string">&quot;yes&quot;</span>);<br>    <span class="hljs-comment">//设置边框颜色</span><br>    properties.setProperty(<span class="hljs-string">&quot;kaptcha.border.color&quot;</span>, <span class="hljs-string">&quot;105,179,90&quot;</span>);<br>    <span class="hljs-comment">//边框粗细度，默认为1</span><br>    <span class="hljs-comment">// properties.setProperty(&quot;kaptcha.border.thickness&quot;,&quot;1&quot;);</span><br>    <span class="hljs-comment">//验证码</span><br>    properties.setProperty(<span class="hljs-string">&quot;kaptcha.session.key&quot;</span>, <span class="hljs-string">&quot;code&quot;</span>);<br>    <span class="hljs-comment">//验证码文本字符颜色 默认为黑色</span><br>    properties.setProperty(<span class="hljs-string">&quot;kaptcha.textproducer.font.color&quot;</span>, <span class="hljs-string">&quot;blue&quot;</span>);<br>    <span class="hljs-comment">//设置字体样式</span><br>    properties.setProperty(<span class="hljs-string">&quot;kaptcha.textproducer.font.names&quot;</span>, <span class="hljs-string">&quot;宋体,楷体,微软雅黑&quot;</span>);<br>    <span class="hljs-comment">//字体大小，默认40</span><br>    properties.setProperty(<span class="hljs-string">&quot;kaptcha.textproducer.font.size&quot;</span>, <span class="hljs-string">&quot;30&quot;</span>);<br>    <span class="hljs-comment">//验证码文本字符内容范围 默认为abced2345678gfynmnpwx</span><br>    <span class="hljs-comment">// properties.setProperty(&quot;kaptcha.textproducer.char.string&quot;, &quot;&quot;);</span><br>    <span class="hljs-comment">//字符长度，默认为5</span><br>    properties.setProperty(<span class="hljs-string">&quot;kaptcha.textproducer.char.length&quot;</span>, <span class="hljs-string">&quot;4&quot;</span>);<br>    <span class="hljs-comment">//字符间距 默认为2</span><br>    properties.setProperty(<span class="hljs-string">&quot;kaptcha.textproducer.char.space&quot;</span>, <span class="hljs-string">&quot;4&quot;</span>);<br>    <span class="hljs-comment">//验证码图片宽度 默认为200</span><br>    properties.setProperty(<span class="hljs-string">&quot;kaptcha.image.width&quot;</span>, <span class="hljs-string">&quot;100&quot;</span>);<br>    <span class="hljs-comment">//验证码图片高度 默认为40</span><br>    properties.setProperty(<span class="hljs-string">&quot;kaptcha.image.height&quot;</span>, <span class="hljs-string">&quot;40&quot;</span>);<br>    Config config = <span class="hljs-keyword">new</span> Config(properties);<br>    defaultKaptcha.setConfig(config);<br>    <span class="hljs-keyword">return</span> defaultKaptcha;<br>  &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p><strong>CaptchaController</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.boyolo.server.controller;<br><span class="hljs-keyword">import</span> com.google.code.kaptcha.impl.DefaultKaptcha;<br><span class="hljs-keyword">import</span> io.swagger.annotations.ApiOperation;<br><span class="hljs-keyword">import</span> org.springframework.beans.factory.annotation.Autowired;<br><span class="hljs-keyword">import</span> org.springframework.web.bind.annotation.GetMapping;<br><span class="hljs-keyword">import</span> org.springframework.web.bind.annotation.RestController;<br><br><span class="hljs-keyword">import</span> javax.imageio.ImageIO;<br><span class="hljs-keyword">import</span> javax.servlet.ServletOutputStream;<br><span class="hljs-keyword">import</span> javax.servlet.http.HttpServletRequest;<br><span class="hljs-keyword">import</span> javax.servlet.http.HttpServletResponse;<br><span class="hljs-keyword">import</span> java.awt.image.BufferedImage;<br><span class="hljs-keyword">import</span> java.io.IOException;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@author</span> renbo</span><br><span class="hljs-comment"> */</span><br><span class="hljs-meta">@RestController</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CaptchaController</span> </span>&#123;<br><br>  <span class="hljs-meta">@Autowired</span><br>  <span class="hljs-keyword">private</span> DefaultKaptcha defaultKaptcha;<br><br>  <span class="hljs-meta">@ApiOperation(value = &quot;验证码&quot;)</span><br>  <span class="hljs-meta">@GetMapping(value = &quot;/captcha&quot;, produces = &quot;image/jpeg&quot;)</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">captcha</span><span class="hljs-params">(HttpServletRequest request, HttpServletResponse response)</span> </span>&#123;<br>    <span class="hljs-comment">// 定义response输出类型为image/jpeg类型</span><br>    response.setDateHeader(<span class="hljs-string">&quot;Expires&quot;</span>, <span class="hljs-number">0</span>);<br>    <span class="hljs-comment">// Set standard HTTP/1.1 no-cache headers.</span><br>    response.setHeader(<span class="hljs-string">&quot;Cache-Control&quot;</span>, <span class="hljs-string">&quot;no-store, no-cache, must-revalidate&quot;</span>);<br>    <span class="hljs-comment">// Set IE extended HTTP/1.1 no-cache headers (use addHeader).</span><br>    response.addHeader(<span class="hljs-string">&quot;Cache-Control&quot;</span>, <span class="hljs-string">&quot;post-check=0, pre-check=0&quot;</span>);<br>    <span class="hljs-comment">// Set standard HTTP/1.0 no-cache header.</span><br>    response.setHeader(<span class="hljs-string">&quot;Pragma&quot;</span>, <span class="hljs-string">&quot;no-cache&quot;</span>);<br>    <span class="hljs-comment">// return a jpeg</span><br>    response.setContentType(<span class="hljs-string">&quot;image/jpeg&quot;</span>);<br>    <span class="hljs-comment">//-------------------生成验证码 begin ------------------------</span><br>    <span class="hljs-comment">//获取验证码文本内容</span><br>    String text = defaultKaptcha.createText();<br>    System.out.println(<span class="hljs-string">&quot;验证码内容：&quot;</span> + text);<br>    <span class="hljs-comment">//将验证码放入session中</span><br>    request.getSession().setAttribute(<span class="hljs-string">&quot;captcha&quot;</span>, text);<br>    <span class="hljs-comment">//根据文本内容创建图形验证码</span><br>    BufferedImage image = defaultKaptcha.createImage(text);<br>    ServletOutputStream outputStream = <span class="hljs-keyword">null</span>;<br>    <span class="hljs-keyword">try</span> &#123;<br>      outputStream = response.getOutputStream();<br>      <span class="hljs-comment">//输出流输出图片，格式jpg</span><br>      ImageIO.write(image, <span class="hljs-string">&quot;jpg&quot;</span>, outputStream);<br>      outputStream.flush();<br>    &#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;<br>      e.printStackTrace();<br>    &#125; <span class="hljs-keyword">finally</span> &#123;<br>      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">null</span> != outputStream) &#123;<br>        <span class="hljs-keyword">try</span> &#123;<br>          outputStream.close();<br>        &#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;<br>          e.printStackTrace();<br>        &#125;<br>      &#125;<br>    &#125;<br>    <span class="hljs-comment">//-------------------生成验证码 end --------------------------</span><br>  &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+</blockquote>
+
+      </section>
+      <section class="extra">
+        
+          <ul class="copyright">
+  
+    <li><strong>本文作者：</strong>bobo</li>
+    <li><strong>本文链接：</strong><a href="https://boyolo.github.io/article/54334.html" title="https:&#x2F;&#x2F;boyolo.github.io&#x2F;article&#x2F;54334.html">https:&#x2F;&#x2F;boyolo.github.io&#x2F;article&#x2F;54334.html</a></li>
+    <li><strong>版权声明：</strong>本博客所有文章均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" title="BY-NC-SA" target="_blank" rel="noopener">BY-NC-SA</a> 许可协议，转载请注明出处！</li>
+  
+</ul>
+        
+        
+          <section class="donate">
+  <div id="qrcode-donate">
+    <img   class="lazyload" data-original="/images/theme/alipay.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" >
+  </div>
+  <div class="icon">
+    <a href="javascript:;" id="alipay"><i class="iconfont iconalipay"></i></a>
+    <a href="javascript:;" id="wechat"><i class="iconfont iconwechat-fill"></i></a>
+  </div>
+</section>
+        
+        
+  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Spring-%E9%AA%8C%E8%AF%81%E7%A0%81/" rel="tag">Java,Spring,验证码</a></li></ul> 
+
+        
+  <nav class="nav">
+    <a href="/article/33708.html"><i class="iconfont iconleft"></i>RabbitMQ</a>
+    <a href="/article/9386.html">位图<i class="iconfont iconright"></i></a>
+  </nav>
+
+      </section>
+      
+        <section class="comments">
+  
+    <div class="btn" id="comments-btn">查看评论</div>
+  
+  
+<div id="valine"></div>
+<script defer src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+  window.onload = function () {
+    var loadValine = function () {
+      new Valine({
+        el: '#valine',
+        app_id: "4HVCPi93D54US1F0MCMcBQOl-gzGzoHsz",
+        app_key: "y5RbGV3BRqejIr3lLyGjMxAU",
+        placeholder: "雁过留痕",
+        avatar: "robohash",
+        pageSize: "10",
+        lang: "zh-CN",
+      });
+    }
+    if ( true ) {
+      $("#comments-btn").on("click", function () {
+        $(this).hide();
+        loadValine();
+      });
+    } else {
+      loadValine();
+    }
+  };
+</script>
+
+</section>
+      
+    </section>
+  </div>
+</article></div>
+      <div class="col-xl-3">
+        
+          
+  <aside class="toc-wrap">
+    <h3 class="toc-title">文章目录：</h3>
+    
+  </aside>
+
+        
+      </div>
+    </div>
+  </div>
+</main>
+  
+
+<footer class="footer">
+  <div class="footer-social"><a 
+        href="tencent://message/?Menu=yes&uin=572643120 "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#12B7F5'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconQQ "></i>
+      </a><a 
+        href="weixin://dl/business/?ticket=bobo_liakeyou#wechat_redirect "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#09BB07'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconwechat-fill "></i>
+      </a><a 
+        href="https://github.com/boyolo "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#9f7be1'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  icongithub-fill "></i>
+      </a><a 
+        href="beau_renbo@163.com "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color=#FF3B00" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconmail"></i>
+      </a></div>
+  
+    <div class="footer-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a> |  website - <a target="_blank" href="https://boyolo.github.io/">bobo</a></p></div>
+  
+</footer>
+  
+      <div class="fab fab-plus">
+    <i class="iconfont iconplus"></i>
+  </div>
+  
+    <div class="fab fab-like">
+      <i class="iconfont iconheart"></i>
+    </div>
+  
+  
+  
+  <div class="fab fab-up">
+    <i class="iconfont iconcaret-up"></i>
+  </div>
+  
+  
+  
+    
+<script src="/js/color-mode.js"></script>
+
+  
+  
+    <div class="search">
+  <div class="search-container">
+    <div class="search-close">
+      <i class="iconfont iconbaseline-close-px"></i>
+    </div>
+    <div class="search-input-wrapper">
+      <i class="search-input-icon iconfont iconsearch"></i>
+      <input class="search-input" type="search" id="search-input" placeholder="Search..." autofocus autocomplete="off"
+        autocorrect="off" autocapitalize="off">
+    </div>
+    <div class="search-output" id="search-output"></div>
+  </div>
+</div>
+  
+</body>
+
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+
+
+
+
+
+  
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+
+
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+  
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
+
+
+
+
+<script src="/js/utils.js"></script>
+<script src="/js/script.js"></script>
+
+
+
+  <script>
+  $.getScript("//cdn.jsdelivr.net/npm/leancloud-storage@4.1.0/dist/av-min.js", () => {
+
+    AV.init({
+      appId: 'bUeKkITlp7tjPXHJVF6XYyFC-gzGzoHsz',
+      appKey: 'IaOs2Mc0ddmbLUeggtt9K0cT',
+      serverURLs: 'https://leancloud.cn/',
+    });
+
+    const Counter = AV.Object.extend("Counter");
+    const Like = AV.Object.extend("Like");
+
+    const showCount = (Counter) => {
+      const asyncLimit = new AsyncLimit(2);
+      $(".leancloud-counter").each(async (e) => {
+        const url = $(".leancloud-counter").eq(e).attr('id').trim();
+        const query = new AV.Query("Counter");
+        query.equalTo("words", url);
+        let count = await asyncLimit.run(() => query.count());
+        $(".leancloud-counter").eq(e).text(count ? count : 0);
+      });
+    }
+
+    const addCount = (Counter) => {
+      const url = $(".leancloud-counter").length === 1 ? $(".leancloud-counter").attr('id').trim() : 'https://boyolo.github.io';
+      var query = new Counter;
+      query.save({
+        words: url
+      });
+    }
+
+    const showLike = (Like) => {
+      const asyncLimit = new AsyncLimit(2);
+      $(".leancloud-like").each(async (e) => {
+        const url = $(".leancloud-like").eq(e).attr('id').trim();
+        const query = new AV.Query("Like");
+        query.equalTo("path", url);
+        let count = await asyncLimit.run(() => query.count());
+        $(".leancloud-like").eq(e).text(count ? count : 0);
+      });
+    }
+
+    const addLike = (Like) => {
+      const url = $(".leancloud-like").length === 1 ? $(".leancloud-like").attr('id').trim() : 'https://boyolo.github.io';
+      var query = new Like;
+      query.save({
+        path: url,
+        nickName: 'Anonymous'
+      });
+      $(".leancloud-like").addClass('islike');
+      $(".fab-like").children(".iconfont").removeClass("iconheart").addClass("iconheart-fill").css("color", "#eb3223");
+      ZHAOO.zui.message({ text: '爱你哦~', type: 'success' });
+      setTimeout(() => showLike(Like), 1000);
+    }
+
+    const handleLikeClick = () => {
+      const isLike = $(".leancloud-like").length === 1 && $(".leancloud-like").hasClass('islike') ? true : false;
+      if (isLike) {
+        ZHAOO.zui.message({ text: '小心心不可以收回呢~', type: 'warning' });
+      } else {
+        addLike(Like);
+      }
+    }
+
+    $(function () {
+      addCount(Counter);
+      showCount(Counter);
+      showLike(Like);
+      $(".fab-like").on("click", function () {
+        handleLikeClick();
+      });
+    });
+
+  });
+</script>
+
+
+
+
+
+  <script>
+    (function () {
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      } else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+  <script>
+    window.ga = window.ga || function () {
+      (ga.q = ga.q || []).push(arguments)
+    };
+    ga.l = +new Date;
+    ga('create', 'G-PS6Y34LRW9', 'auto');
+    ga('send', 'pageview');
+  </script>
+  <script defer src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</html>

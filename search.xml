@@ -262,6 +262,249 @@
       </tags>
   </entry>
   <entry>
+    <title>ARM</title>
+    <url>/article/16813.html</url>
+    <content><![CDATA[<p>1111</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>RabbitMQ</title>
+    <url>/article/33708.html</url>
+    <content><![CDATA[<h2 id="RabbitMQ"><a href="#RabbitMQ" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h2><p><strong>RabbitMQ</strong>是实现了高级消息队列协议（AMQP）的开源消息代理软件（亦称面向消息的中间件）。</p>
+<p><strong>AMQP</strong>（Advanced Message Queuing Protocol）高级消息队列协议，一个提供统一消息服务的应用层标准协议，是应用层协议的一个开放标准，为面向消息的中间件设计。AMQP是一个进程间传递异步消息的网络协议。</p>
+<img src="/article/33708/AMQP%E6%A0%B8%E5%BF%83%E7%BB%84%E6%88%90.png" class title="AMQP核心组成">
+<blockquote>
+<p><strong>Producer(生产者)</strong>:生产消息</p>
+<p><strong>ConnectionFactory(连接工厂)</strong>:生产Connection的的工厂</p>
+<p><strong>Connection(连接)</strong>:连接，应用程序与Broker的网络连接TCP/IP/三次握手和四次挥手。</p>
+<p>AMQP连接通常是长连接。AMQP是一个使用 TCP提供可靠投递的应用层协议。AMQP 使用认证机制并且提供 TLS（SSL）保护。当一个应用不再需要连接到 AMQP 代理的时候，需要优雅的释放掉 AMQP 连接，而不是直接将 TCP 连接关闭。</p>
+<p><strong>Channel(信道)</strong>:网络信道，是建立在Connection连接之上的一种轻量级的连接。几乎所有的操作都在Channel中进行，Channel是进行消息读写的通道，客户端可以建立多各Channel，每个Channel代表一个会话任务。</p>
+<p>大部分的业务操作是在Channel这个接口中完成的，包括:</p>
+<p>队列的声明queueDeclare<br>交换机的声明exchangeDeclare<br>队列的绑定queueBind<br>发布消息basicPublish<br>消费消息basicConsume等。<br>Broker(中间件)</p>
+<p><strong>VirtualHost(虚拟主机)</strong>:虚拟主机，用于进行逻辑隔离，一个虚拟主机理由可以有若干个Exchange和Queue，同一个虚拟主机里面不能有相同名字的Exchange。</p>
+<p>为了在一个单独的代理上实现多个隔离的环境（用户、用户组、交换机、队列 等），AMQP 提供了一个虚拟主机（virtual hosts - vhosts）的概念。这跟 Web servers虚拟主机概念非常相似，这为 AMQP 实体提供了完全隔离的环境。当连接被建立的时候，AMQP 客户端来指定使用哪个虚拟主机。</p>
+<p><strong>Exchange(交换机)</strong>:交换机，接受消息，根据路由键发送消息到绑定的队列（不具备消息存储的能力）。</p>
+<p>交换机是用来发送消息的 AMQP 实体。交换机拿到一个消息之后将它路由给一个或零个队列。它使用哪种路由算法是由交换机类型和绑定（Bindings）规则所决定的。</p>
+<p><strong>Consumer(消费者)</strong>:消费者消费消息。在AMQP中，消费者获取待消费消息的途径有两种：</p>
+<ul>
+<li>消息中间件将消息投递给消费者（push API）</li>
+<li>消费者主动获取消息 (pull API)</li>
+</ul>
+<p><strong>需要注意：多个消费者监听同一个队列时，队列中的消息只会被其中一个消费者消费（并不会每个消费者都消费一次）</strong></p>
+<p><strong>Message(消息)</strong>:消息，服务与应用程序之间传送的数据，由Properties（属性）和body（主体）组成。属性是对消息进行修饰，比如消息的优先级，延迟等高级特性，主体则就是消息体的内容。</p>
+</blockquote>
+<p>优点：</p>
+<ol>
+<li>应用耦合</li>
+<li>异步处理</li>
+<li>流量削峰</li>
+</ol>
+<h3 id="RabbitMQ优势"><a href="#RabbitMQ优势" class="headerlink" title="RabbitMQ优势"></a><strong>RabbitMQ优势</strong></h3><ol>
+<li>基于AMQP协议</li>
+<li>高并发（是一个容量的概念，服务器可以接受的最大任务数量）</li>
+<li>高性能（是一个速度的概念，单位时间内服务器可以处理的任务数）</li>
+<li>高可用（是一个持久的概念，单位时间内服务器可以正常工作的时间比例）</li>
+<li>强大的社区支持</li>
+<li>支持插件</li>
+<li>支持多语言</li>
+</ol>
+<h3 id="RabbitMQ界面"><a href="#RabbitMQ界面" class="headerlink" title="RabbitMQ界面"></a><strong>RabbitMQ界面</strong></h3><ol>
+<li><p>概要</p>
+<img src="/article/33708/%E6%A6%82%E8%A6%81.png" class title="概要">
+</li>
+<li><p>连接</p>
+<img src="/article/33708/%E8%BF%9E%E6%8E%A5.png" class title="连接">
+</li>
+<li><p>通道</p>
+<img src="/article/33708/%E9%80%9A%E9%81%93.png" class title="通道">
+<ol>
+<li>一个连接可以创建多个通道</li>
+<li>一个应用或者一个线程，都是一个通道</li>
+<li>在通道中创建队列，生产者的通道一般立马关闭，消费者是一只在监听，通道一直存在</li>
+</ol>
+</li>
+<li><p>交换机</p>
+<img src="/article/33708/%E4%BA%A4%E6%8D%A2%E6%9C%BA.png" class title="交换机">
+<p>| Type              | 解释                                                         |<br>| —————– | ———————————————————— |<br>| direct            | 它会把消息路由到那些 binding key 与 routing key 完全匹配的 Queue 中 |<br>| fanout            | 它会把所有发送到该 Exchange 的消息路由到所有与它绑定的 Queue 中 |<br>| headers           | headers 类型的 Exchange 不依赖于 routing key 与 binding key 的匹配规则来路由消息，而是根据发送的消息内容中的 headers 属性进行匹配。（headers 类型的交换器性能差，不实用，基本不会使用。） |<br>| topic             | 与direct模型相比，多了个可以使用通配符                       |<br>| x-delayed-message | 延迟交换机，可以延迟接收消息                                 |</p>
+<p>| <strong>Features</strong> | <strong>解释</strong>                                                     |<br>| ———— | ———————————————————— |<br>| D            | d 是 durable 的缩写，代表这个队列中的消息支持持久化          |<br>| AD           | ad 是 autoDelete 的缩写。代表当前队列的最后一个消费者退订时被自动删除。注意：此时不管队列中是否还存在消息，队列都会删除。 |<br>| excl         | 是 exclusive 的缩写。代表这是一个排他队列。如果一个队列被声明为排他队列，该队列仅对首次声明它的连接可见，并在连接断开时自动删除。这里需要注意三点：其一，排他队列是基于连接可见的，同一连接的不同信道是可以同时访问同一个连接创建的排他队列的。其二，“首次”，如果一个连接已经声明了一个排他队列，其他连接是不允许建立同名的排他队列的，这个与普通队列不同。其三，即使该队列是持久化的，一旦连接关闭或者客户端退出，该排他队列都会被自动删除的。这种队列适用于只限于一个客户端发送读取消息的应用场景。 |<br>| Args         | 是 arguments 的缩写。代表该队列配置了 arguments 参数。       |<br>| TTL          | 是 x-message-ttl 的缩写。设置队列中的所有消息的生存周期(统一为整个队列的所有消息设置生命周期), 也可以在发布消息的时候单独为某个消息指定剩余生存时间，单位毫秒。 |<br>| Exp          | Auto Expire，是 x-expires 配置的缩写。当队列在指定的时间没有被访问(consume, basicGet, queueDeclare…)就会被删除，Features=Exp。注意这里是删除队列，不是队列中的消息。 |<br>| Lim          | 说明该队列配置了 x-max-length。限定队列的消息的最大值长度，超过指定长度将会把最早的几条删除掉。 |<br>| Lim B        | 说明队列配置了 x-max-length-bytes。限定队列最大占用的空间大小， 一般受限于内存、磁盘的大小。 |<br>| DLX          | 说明该队列配置了 x-dead-letter-exchange。当队列消息长度大于最大长度、或者过期的等，将从队列中删除的消息推送到指定的交换机中去而不是丢弃掉。 |<br>| DLK          | x-dead-letter-routing-key 的缩写，将删除的消息推送到指定交换机的指定路由键的队列中去。 |<br>| Pri          | x-max-priority 的缩写，优先级队列。表明该队列支持优先级，先定义最大优先级值(定义最大值一般不要太大)，在发布消息的时候指定该消息的优先级， 优先级更高（数值更大的）的消息先被消费。 |<br>| Ovfl         | x-overflow 的缩写。队列中的消息溢出时，如何处理这些消息。要么丢弃队列头部的消息，要么拒绝接收后面生产者发送过来的所有消息。有两个配置项：drop-head，代表丢弃队列头部的消息，默认行为；reject-publish 设置队列中的消息溢出后,该队列的行为:”拒绝接收”(所有消息)。 |<br>| ha-all       | 镜像队列。all 表示镜像到集群上的所有节点，ha-params 参数忽略。 |</p>
+</li>
+</ol>
+<h3 id="七大示例"><a href="#七大示例" class="headerlink" title="七大示例"></a>七大示例</h3><ol>
+<li><p>Hello World</p>
+</li>
+<li><p>工作队列</p>
+<p>假如一共20条消息，A处理时间1s，B处理时间2s</p>
+<ol>
+<li><p>轮询</p>
+<p>A，B同时拿到各自的10条消息，然后再处理，所以A经过10s处理完，B要经过20s才能处理完</p>
+</li>
+<li><p>公平</p>
+<p>A和B不能直接拿到所有消息，设置<strong>int prefetchCount = 1</strong>表示消费者每次只能接收一条消息，只有处理完这条消息，才能处理下一条</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java">channel.basicQos(prefetchCount);<br></code></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ol>
+<pre><code>这样A处理的快，所以A可以不断从信道中得到消息，B处理的比A慢，间隔2s才可以获得一条消息
+
+**没有资源浪费**
+</code></pre><ol start="3">
+<li><p>发布订阅（使用交换机，使用广播模式<strong>fanout</strong>）</p>
+<ol>
+<li>生产者绑定交换机，将消息发送至交换机</li>
+<li>交换机生成<strong>排他队列</strong>，然后将交换机与队列进行绑定</li>
+<li>消费者监听对应队列的消息</li>
+</ol>
+<p>交换机将消息转发至队列，消费者可以收到生产发布的消息。 </p>
+</li>
+<li><p>路由队列（使用交换机，使用路由模式<strong>direct</strong>）</p>
+<ol>
+<li>生产者绑定交换机，并且定义不同的<strong>routingKey</strong>，生产者将携带不同<strong>routingKey</strong>的消息发送至交换机</li>
+<li>交换机生成<strong>排他队列</strong>，同时将队列与交换机进行绑定，此时不同的队列绑定不同的<strong>routingKey</strong></li>
+<li>消费者监听对应队列的消息</li>
+</ol>
+<p>交换机将携带不同的<strong>routingKey</strong>的消息转发至对应<strong>routingKey</strong>的队列，消费者可以收到生产发布的消息</p>
+</li>
+<li><p>主题队列（使用交换机，使用主题模式<strong>topic</strong>）</p>
+<p>* 匹配一个字符串</p>
+<p># 匹配0个或多个</p>
+<p><strong>队列和交换机绑定才可以使用通配符，发送消息时必须使用具体的路由名称</strong></p>
+</li>
+<li><p>PRC模式</p>
+<p>客户端同时是生产者和消费者，服务端者同时是生产者和消费者</p>
+<p>客户端发送请求携带 <strong>reply_to</strong> 表示服务端收到消息后转发的队列名 以及 <strong>correlation_id</strong> 表示该消息的唯一id</p>
+</li>
+</ol>
+<h3 id="RabbitMQ消息的事务机制"><a href="#RabbitMQ消息的事务机制" class="headerlink" title="RabbitMQ消息的事务机制"></a>RabbitMQ消息的事务机制</h3><ol>
+<li>通过AMQP事务机制实现；</li>
+<li>通过将channel设置成confirm模式来实现</li>
+</ol>
+<p><strong>两种事务控制形式不能同时开启</strong></p>
+<h4 id="通过AMQP事务机制实现"><a href="#通过AMQP事务机制实现" class="headerlink" title="通过AMQP事务机制实现"></a>通过AMQP事务机制实现</h4><ol>
+<li>txSelect() 将当前channel设置成transaction模式，即开启事务</li>
+<li>txCommit() 提交事务</li>
+<li>txRollback() 回滚事务</li>
+</ol>
+<p>在通过 txSelect() 开启事务之后，便可以发布消息给 broker 代理服务器了，如果 txCommit() 提交成功了，则消息一定到达了 broker 了,如果在 txCommit() 执行之前 broker 异常崩溃或者由于其他原因抛出异常，这个时候便可以捕获异常通过 txRollback() 回滚事务。</p>
+<p><strong>缺点：降低RabbitMQ的性能</strong></p>
+<h4 id="confirm确认模式"><a href="#confirm确认模式" class="headerlink" title="confirm确认模式"></a>confirm确认模式</h4><p>生产者将信道设置成 <strong>confirm</strong> 模式，一旦信道进入 confirm 模式，所有在该信道上面发布的消息都将会被指派一个<strong>唯一的ID(从1开始)</strong>，<strong>一旦消息被投递到所有匹配的队列之后</strong>，broker 就会发送一个确认给生产者(包含消息的唯一ID)，这就使得生产者知道消息已经正确到达目的队列了；</p>
+<p>如果消息和队列是可持久化的，那么确认消息会在将消息写入磁盘之后发出，broker 回传给生产者的确认消息中 delivery-tag 域包含了确认消息的序列号，此外 broker 也可以设置 basicAck 的 multiple 域，表示到这个序列号之前的所有消息都已经得到了处理。</p>
+<p>confirm模式最大的好处在于它是可以 异步 的，一旦发布一条消息，生产者应用程序就可以在等信道返回确认的同时继续发送下一条消息，当消息最终得到确认之后，生产者应用便可以通过回调方法来处理该确认消息，如果RabbitMQ 因为自身内部错误导致消息丢失，就会发送一条 nack 消息，生产者应用程序同样可以在回调方法中处理该 nack 消息。</p>
+<p>在 channel 被设置成 confirm 模式之后，所有被 publish 的后续消息都将被 confirm（即 ack）或者 nack 一次，但是没有对消息被 confirm 的快慢做任何保证，并且同一条消息不会既被 confirm 又被 nack。</p>
+<p><strong>实现方式</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 开启确认发布</span><br>channel.confirmSelect();<br></code></pre></td></tr></table></figure>
+<ol>
+<li><p>普通 confirm 模式</p>
+<p>这是一种简单的确认方式，它是一种 <strong>同步</strong> 确认发布的方式，也就是发布一个消息之后，只有收到了确认发布，后续的消息才能继续发布，waitForConfirms() 这个方法在消息被确认的时候返回true，如果在指定时间范围内，这个消息没有被确认那么它将返回false。</p>
+<p>waitForConfirmsOrDie() 这个方法只有在消息被确认的时候才返回，如果在指定时间范围内，这个消息没有被确认那么它将抛出异常。</p>
+<p>这种确认方式有一个最大的缺点就是：发布速度特别的慢，因为如果没有收到确认发布的消息，就会阻塞所有后续消息的发布，这种方式最多提供每秒不超过数百条发布消息的吞吐量。</p>
+</li>
+<li><p>批量 confirm 模式</p>
+<p>先发布一批消息，然后一起确认可以极大地提高吞吐量，当然这种方式的缺点就是：<strong>当发生故障导致发布出现问题时，不知道是哪个消息出现问题了</strong>，我们必须将整个批处理保存在内存中，以记录重要的信息而后重新发布消息。当然这种方案仍然是 同步的，也一样阻塞消息的发布。</p>
+</li>
+<li><p>异步 confirm 模式</p>
+<p>channel 利用回调函数 ConfirmListener() 来达到消息可靠性传递的，这个回调函数只包含 deliveryTag(当前Channel发出的消息序号) ，需要自己手动维护一个 unconfirm 的消息序号集合，每发布一条消息，集合中元素+1 ， 每回调一次 <code>handleAck</code> 方法，unconfirm集合删除相应的一条或多条记录</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//信道添加监听回调函数</span><br>channel.addConfirmListener(<span class="hljs-keyword">new</span> ConfirmListener()&#123;<br>  <span class="hljs-comment">//重写 handleAck 回调方法</span><br>  <span class="hljs-comment">//deliveryTag 消息发送序号</span><br>  <span class="hljs-comment">//multiple 是否是多条</span><br>  <span class="hljs-meta">@Override</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">handleAck</span><span class="hljs-params">(<span class="hljs-keyword">long</span> deliveryTag , <span class="hljs-keyword">boolean</span> multiple)</span> <span class="hljs-keyword">throws</span> IOException</span>&#123;<br>    处理逻辑<br>  &#125;<br>&#125;)<br></code></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="SpringAMQP"><a href="#SpringAMQP" class="headerlink" title="SpringAMQP"></a>SpringAMQP</h2><p>Spring AMQP 是对 Spring 基于 AMQP 的消息收发解决方案，它是一个抽象层，不依赖于特定的 AMQP Broker 实现和客户端的抽象，所以可以很方便地替换。</p>
+<h2 id="邮件发送"><a href="#邮件发送" class="headerlink" title="邮件发送"></a>邮件发送</h2><p><strong>邮箱中开启SMTP服务</strong></p>
+<blockquote>
+<p><strong>依赖</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java">&lt;dependencies&gt;<br>  &lt;dependency&gt;<br> 		&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;<br>  	&lt;artifactId&gt;spring-boot-starter-amqp&lt;/artifactId&gt;<br>  	&lt;version&gt;<span class="hljs-number">2.6</span><span class="hljs-number">.4</span>&lt;/version&gt;<br>  &lt;/dependency&gt;<br>  &lt;dependency&gt;<br>  	&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;<br>  	&lt;artifactId&gt;spring-boot-starter-mail&lt;/artifactId&gt;<br>  	&lt;version&gt;<span class="hljs-number">2.6</span><span class="hljs-number">.0</span>&lt;/version&gt;<br>  &lt;/dependency&gt;<br>  &lt;dependency&gt;<br>  	&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;<br>  	&lt;artifactId&gt;spring-boot-starter-thymeleaf&lt;/artifactId&gt;<br>  	&lt;version&gt;<span class="hljs-number">2.6</span><span class="hljs-number">.4</span>&lt;/version&gt;<br>  &lt;/dependency&gt;<br>  &lt;dependency&gt;<br>  	&lt;groupId&gt;com.boyolo&lt;/groupId&gt;<br>  	&lt;artifactId&gt;yeb-server&lt;/artifactId&gt;<br>  	&lt;version&gt;<span class="hljs-number">0.0</span><span class="hljs-number">.1</span>-SNAPSHOT&lt;/version&gt;<br>  &lt;/dependency&gt;<br>&lt;/dependencies&gt;<br></code></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p><strong>application.yml</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java">server:<br>  #端口<br>  port: <span class="hljs-number">8082</span><br>spring:<br>  #邮件配置<br>  mail:<br>    #邮件服务器地址<br>    host: smtp<span class="hljs-number">.163</span>.com<br>    #协议<br>    protocol: smtp<br>    #编码格式<br>    <span class="hljs-keyword">default</span>-encoding: utf-<span class="hljs-number">8</span><br>    #授权码（在邮箱开通服务时获取）<br>    password: NBFXNQFSTKVDEBTN<br>    #发送者邮箱地址<br>    username: beau_renbo@<span class="hljs-number">163.</span>com<br>    #端口（不同邮箱端口号不同）<br>    port: <span class="hljs-number">25</span><br><br>  #rabbitmq配置<br>  rabbitmq:<br>    #用户名<br>    username: guest<br>    #密码<br>    password: guest<br>    #服务器地址<br>    host: localhost<br>    #端口<br>    port: <span class="hljs-number">5672</span><br>    listener:<br>      simple:<br>        #开启手动确认<br>        acknowledge-mode: manual<br><br>  redis:<br>    #超时时间<br>    timeout: 10000ms<br>    #服务器地址<br>    host: <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span><br>    #服务器端口<br>    port: <span class="hljs-number">6379</span><br>    #数据库<br>    database: <span class="hljs-number">0</span><br>    password: buzhidao<br>    lettuce:<br>      pool:<br>        #最大连接数<br>        max-active: <span class="hljs-number">1024</span><br>        #最大连接阻塞等待时间<br>        max-wait: 10000ms<br>        #最大空闲连接<br>        max-idle: <span class="hljs-number">200</span><br>        #最小空闲连接<br>        min-idle: <span class="hljs-number">5</span><br></code></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p><strong>设置邮件发送常量</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.boyolo.server.pojo;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@author</span> renbo</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MailConstants</span> </span>&#123;<br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 消息投递中</span><br><span class="hljs-comment">     */</span><br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> Integer DELIVERING = <span class="hljs-number">0</span>;<br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 消息投递成功</span><br><span class="hljs-comment">     */</span><br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> Integer SUCCESS = <span class="hljs-number">1</span>;<br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 消息投递失败</span><br><span class="hljs-comment">     */</span><br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> Integer FAILURE = <span class="hljs-number">2</span>;<br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 最大尝试次数</span><br><span class="hljs-comment">     */</span><br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> Integer MAX_TRY_COUNT = <span class="hljs-number">3</span>;<br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 消息超时时间</span><br><span class="hljs-comment">     */</span><br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> Integer MSG_TIMEOUT = <span class="hljs-number">1</span>;<br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 对列</span><br><span class="hljs-comment">     */</span><br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String MAIL_QUEUE_NAME = <span class="hljs-string">&quot;mail.queue&quot;</span>;<br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 交换机</span><br><span class="hljs-comment">     */</span><br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String MAIL_EXCHANGE_NAME = <span class="hljs-string">&quot;mail.exchange&quot;</span>;<br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 路由键</span><br><span class="hljs-comment">     */</span><br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String MAIL_ROUTING_KEY_NAME = <span class="hljs-string">&quot;mail.routing.key&quot;</span>;<br><br>&#125;<br><br></code></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p><strong>邮件接收</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.boyolo.mail;<br><br><span class="hljs-keyword">import</span> com.boyolo.server.pojo.Employee;<br><span class="hljs-keyword">import</span> com.boyolo.server.pojo.MailConstants;<br><span class="hljs-keyword">import</span> com.rabbitmq.client.Channel;<br><span class="hljs-keyword">import</span> org.slf4j.Logger;<br><span class="hljs-keyword">import</span> org.slf4j.LoggerFactory;<br><span class="hljs-keyword">import</span> org.springframework.amqp.rabbit.annotation.RabbitListener;<br><span class="hljs-keyword">import</span> org.springframework.amqp.support.AmqpHeaders;<br><span class="hljs-keyword">import</span> org.springframework.beans.factory.annotation.Autowired;<br><span class="hljs-keyword">import</span> org.springframework.boot.autoconfigure.mail.MailProperties;<br><span class="hljs-keyword">import</span> org.springframework.data.redis.core.HashOperations;<br><span class="hljs-keyword">import</span> org.springframework.data.redis.core.RedisTemplate;<br><span class="hljs-keyword">import</span> org.springframework.mail.javamail.JavaMailSender;<br><span class="hljs-keyword">import</span> org.springframework.mail.javamail.MimeMessageHelper;<br><span class="hljs-keyword">import</span> org.springframework.messaging.Message;<br><span class="hljs-keyword">import</span> org.springframework.messaging.MessageHeaders;<br><span class="hljs-keyword">import</span> org.springframework.stereotype.Component;<br><span class="hljs-keyword">import</span> org.thymeleaf.TemplateEngine;<br><span class="hljs-keyword">import</span> org.thymeleaf.context.Context;<br><span class="hljs-keyword">import</span> javax.mail.internet.MimeMessage;<br><span class="hljs-keyword">import</span> java.io.IOException;<br><span class="hljs-keyword">import</span> java.util.Date;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@author</span> renbo</span><br><span class="hljs-comment"> */</span><br><span class="hljs-meta">@Component</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MailReceiver</span> </span>&#123;<br>  <span class="hljs-comment">//日志</span><br>  <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> Logger LOGGER = LoggerFactory.getLogger(MailReceiver.class);<br>	<br>  <span class="hljs-comment">//邮件发送</span><br>  <span class="hljs-meta">@Autowired</span><br>  <span class="hljs-keyword">private</span> JavaMailSender javaMailSender;<br>  <span class="hljs-comment">//邮件配置</span><br>  <span class="hljs-meta">@Autowired</span><br>  <span class="hljs-keyword">private</span> MailProperties mailProperties;<br>  <span class="hljs-comment">//模版引擎 负责把对象数据呈现成文本数据</span><br>  <span class="hljs-comment">/*</span><br><span class="hljs-comment">  1. 指令简单 - 内置不超过10个常用的指令.</span><br><span class="hljs-comment">	2. 基于XPath - 直接使用XPath查找对象,并且可以使用XPath强大的语法和函数.</span><br><span class="hljs-comment">	3. 容易扩展 - 无论是指令还是XPath函数都可以自定义.</span><br><span class="hljs-comment">	4. 解析超快 - 基于其语法特点,解析模板结构非常快.</span><br><span class="hljs-comment">  */</span><br>  <span class="hljs-meta">@Autowired</span><br>  <span class="hljs-keyword">private</span> TemplateEngine templateEngine;<br>  <span class="hljs-meta">@Autowired</span><br>  <span class="hljs-keyword">private</span> RedisTemplate redisTemplate;<br><br>  <span class="hljs-meta">@RabbitListener(queues = MailConstants.MAIL_QUEUE_NAME)</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">handler</span><span class="hljs-params">(Message message, Channel channel)</span> </span>&#123;<br>    Employee employee = (Employee) message.getPayload();<br>    MessageHeaders headers = message.getHeaders();<br>    <span class="hljs-comment">//消息序号</span><br>    <span class="hljs-keyword">long</span> tag = (<span class="hljs-keyword">long</span>) headers.get(AmqpHeaders.DELIVERY_TAG);<br>    String msgId = (String) headers.get(<span class="hljs-string">&quot;spring_returned_message_correlation&quot;</span>);<br>    HashOperations hashOperations = redisTemplate.opsForHash();<br><br>    <span class="hljs-keyword">try</span> &#123;<br>      <span class="hljs-keyword">if</span> (hashOperations.entries(<span class="hljs-string">&quot;mail_log&quot;</span>).containsKey(msgId)) &#123;<br>        LOGGER.error(<span class="hljs-string">&quot;消息已经被消费==========&gt;&#123;&#125;&quot;</span>, msgId);<br>        <span class="hljs-comment">/**</span><br><span class="hljs-comment">                 * 手动确认消息</span><br><span class="hljs-comment">                 * tag：消息序号</span><br><span class="hljs-comment">                 * multiple:是否确认多条</span><br><span class="hljs-comment">                 */</span><br>        channel.basicAck(tag, <span class="hljs-keyword">false</span>);<br>        <span class="hljs-keyword">return</span>;<br>      &#125;<br>      <br>      MimeMessage msg = javaMailSender.createMimeMessage();<br>      MimeMessageHelper helper = <span class="hljs-keyword">new</span> MimeMessageHelper(msg);<br>      <span class="hljs-comment">//发件人</span><br>      helper.setFrom(mailProperties.getUsername());<br>      <span class="hljs-comment">//收件人</span><br>      helper.setTo(employee.getEmail());<br>      <span class="hljs-comment">//主题</span><br>      helper.setSubject(<span class="hljs-string">&quot;入职欢迎邮件&quot;</span>);<br>      <span class="hljs-comment">//发送日期</span><br>      helper.setSentDate(<span class="hljs-keyword">new</span> Date());<br>      <br>      <span class="hljs-comment">//邮件内容</span><br>      Context context = <span class="hljs-keyword">new</span> Context();<br>      context.setVariable(<span class="hljs-string">&quot;name&quot;</span>, employee.getName());<br>      context.setVariable(<span class="hljs-string">&quot;posName&quot;</span>, employee.getPosition().getName());<br>      context.setVariable(<span class="hljs-string">&quot;jobLevelName&quot;</span>, employee.getJoblevel().getName());<br>      context.setVariable(<span class="hljs-string">&quot;departmentName&quot;</span>, employee.getDepartment().getName());<br><br>      String mail = templateEngine.process(<span class="hljs-string">&quot;mail&quot;</span>, context);<br>      helper.setText(mail, <span class="hljs-keyword">true</span>);<br><br>      javaMailSender.send(msg);<br>      LOGGER.info(<span class="hljs-string">&quot;邮件发送成功&quot;</span>);<br>      <span class="hljs-comment">//将消息Id存入redis</span><br>      hashOperations.put(<span class="hljs-string">&quot;mail_log&quot;</span>, msgId, <span class="hljs-string">&quot;OK&quot;</span>);<br>      <span class="hljs-comment">//手动确认消息</span><br>      channel.basicAck(tag, <span class="hljs-keyword">false</span>);<br>    &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>      <span class="hljs-keyword">try</span> &#123;<br>        <span class="hljs-comment">/**</span><br><span class="hljs-comment">                 * 手动确认消息</span><br><span class="hljs-comment">                 * tag：消息序号</span><br><span class="hljs-comment">                 * multiple:是否确认多条</span><br><span class="hljs-comment">                 * requeue:是否退回队列</span><br><span class="hljs-comment">                 */</span><br>        channel.basicNack(tag, <span class="hljs-keyword">false</span>, <span class="hljs-keyword">true</span>);<br>      &#125; <span class="hljs-keyword">catch</span> (IOException ioException) &#123;<br>        LOGGER.error(<span class="hljs-string">&quot;邮件发送失败========&gt;&#123;&#125;&quot;</span>, e.getMessage());<br>      &#125;<br>      LOGGER.error(<span class="hljs-string">&quot;邮件发送失败========&gt;&#123;&#125;&quot;</span>, e.getMessage());<br>    &#125;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p><strong>EmployeeServiceImpl.java</strong> 添加员工发送消息时消息可靠性–消息落库</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">if</span> (<span class="hljs-number">1</span> == employeeMapper.insert(employee)) &#123;<br><br>  Employee emp = employeeMapper.getEmployee(employee.getId()).get(<span class="hljs-number">0</span>);<br><br>  <span class="hljs-comment">//数据库记录发送的消息</span><br>  String msgId = UUID.randomUUID().toString();<br>  <span class="hljs-comment">//            String msgId = &quot;123456&quot;;</span><br>  MailLog mailLog = <span class="hljs-keyword">new</span> MailLog();<br>  mailLog.setMsgId(msgId);<br>  mailLog.setEid(employee.getId());<br>  mailLog.setStatus(<span class="hljs-number">0</span>);<br>  mailLog.setRouteKey(MailConstants.MAIL_ROUTING_KEY_NAME);<br>  mailLog.setExchange(MailConstants.MAIL_EXCHANGE_NAME);<br>  mailLog.setCount(<span class="hljs-number">0</span>);<br>  mailLog.setTryTime(LocalDateTime.now().plusMinutes(MailConstants.MSG_TIMEOUT));<br>  mailLog.setCreateTime(LocalDateTime.now());<br>  mailLog.setUpdateTime(LocalDateTime.now());<br>  mailLogMapper.insert(mailLog);<br><br>  <span class="hljs-comment">//发送信息</span><br>  rabbitTemplate.convertAndSend(MailConstants.MAIL_EXCHANGE_NAME, MailConstants.MAIL_ROUTING_KEY_NAME, emp, <span class="hljs-keyword">new</span> CorrelationData(msgId));<br><br>  <span class="hljs-keyword">return</span> RespBean.success(<span class="hljs-string">&quot;添加成功！&quot;</span>);<br></code></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>RabbitMQ配置</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.boyolo.server.config;<br><br><span class="hljs-keyword">import</span> com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;<br><span class="hljs-keyword">import</span> com.boyolo.server.pojo.MailConstants;<br><span class="hljs-keyword">import</span> com.boyolo.server.pojo.MailLog;<br><span class="hljs-keyword">import</span> com.boyolo.server.service.IMailLogService;<br><span class="hljs-keyword">import</span> org.slf4j.Logger;<br><span class="hljs-keyword">import</span> org.slf4j.LoggerFactory;<br><span class="hljs-keyword">import</span> org.springframework.amqp.core.Binding;<br><span class="hljs-keyword">import</span> org.springframework.amqp.core.BindingBuilder;<br><span class="hljs-keyword">import</span> org.springframework.amqp.core.DirectExchange;<br><span class="hljs-keyword">import</span> org.springframework.amqp.core.Queue;<br><span class="hljs-keyword">import</span> org.springframework.amqp.rabbit.connection.CachingConnectionFactory;<br><span class="hljs-keyword">import</span> org.springframework.amqp.rabbit.core.RabbitTemplate;<br><span class="hljs-keyword">import</span> org.springframework.beans.factory.annotation.Autowired;<br><span class="hljs-keyword">import</span> org.springframework.context.annotation.Bean;<br><span class="hljs-keyword">import</span> org.springframework.context.annotation.Configuration;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * RabbitMq 配置类</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@author</span> renbo</span><br><span class="hljs-comment"> */</span><br><span class="hljs-meta">@Configuration</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RabbitMqConfig</span> </span>&#123;<br><br>  <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> Logger LOGGER = LoggerFactory.getLogger(RabbitMqConfig.class);<br><br>  <span class="hljs-meta">@Autowired</span><br>  <span class="hljs-keyword">private</span> CachingConnectionFactory cachingConnectionFactory;<br><br>  <span class="hljs-meta">@Autowired</span><br>  <span class="hljs-keyword">private</span> IMailLogService mailLogService;<br><br>  <span class="hljs-meta">@Bean</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> RabbitTemplate <span class="hljs-title">rabbitTemplate</span><span class="hljs-params">()</span> </span>&#123;<br>    RabbitTemplate rabbitTemplate = <span class="hljs-keyword">new</span> RabbitTemplate(cachingConnectionFactory);<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">         * 消息确认回调，确认消息是否到达broker</span><br><span class="hljs-comment">         * data:消息唯一标识</span><br><span class="hljs-comment">         * ack：确认结果</span><br><span class="hljs-comment">         * cause：失败原因</span><br><span class="hljs-comment">         */</span><br>    rabbitTemplate.setConfirmCallback((data, ack, cause) -&gt; &#123;<br>      String msgId = data.getId();<br>      <span class="hljs-keyword">if</span> (ack) &#123;<br>        LOGGER.info(<span class="hljs-string">&quot;&#123;&#125;========&gt;消息发送成功&quot;</span>, msgId);<br>        mailLogService.update(<span class="hljs-keyword">new</span> UpdateWrapper&lt;MailLog&gt;().set(<span class="hljs-string">&quot;status&quot;</span>, <span class="hljs-number">1</span>).eq(<span class="hljs-string">&quot;msgID&quot;</span>, msgId));<br>      &#125; <span class="hljs-keyword">else</span> &#123;<br>        LOGGER.error(<span class="hljs-string">&quot;&#123;&#125;========&gt;消息发送失败&quot;</span>, msgId);<br>      &#125;<br>    &#125;);<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">         * 消息失败回调  比如route不到queue</span><br><span class="hljs-comment">         * smg：消息主题</span><br><span class="hljs-comment">         * repCode：响应码</span><br><span class="hljs-comment">         * repTExt：响应，描述</span><br><span class="hljs-comment">         * exchange：交换机</span><br><span class="hljs-comment">         * routingkey：路由键</span><br><span class="hljs-comment">         */</span><br><br>    <span class="hljs-comment">//        rabbitTemplate.setReturnCallback((msg, repCode, repText, exchange, routingkey)</span><br>    rabbitTemplate.setReturnsCallback((msg) -&gt; &#123;<br>      LOGGER.error(<span class="hljs-string">&quot;&#123;&#125;========&gt;消息发送queue时失败&quot;</span>,msg.getMessage().getBody());<br>    &#125;);<br><br>    <span class="hljs-keyword">return</span> rabbitTemplate;<br>  &#125;<br><br><br>  <span class="hljs-meta">@Bean</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> Queue <span class="hljs-title">queue</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Queue(MailConstants.MAIL_QUEUE_NAME);<br>  &#125;<br><br>  <span class="hljs-meta">@Bean</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> DirectExchange <span class="hljs-title">directExchange</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> DirectExchange(MailConstants.MAIL_EXCHANGE_NAME);<br>  &#125;<br><br>  <span class="hljs-meta">@Bean</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> Binding <span class="hljs-title">binding</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> BindingBuilder.bind(queue()).to(directExchange()).with(MailConstants.MAIL_ROUTING_KEY_NAME);<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p><strong>邮件发送定时任务–失败重传</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.boyolo.server.task;<br><br><span class="hljs-keyword">import</span> com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;<br><span class="hljs-keyword">import</span> com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;<br><span class="hljs-keyword">import</span> com.boyolo.server.pojo.Employee;<br><span class="hljs-keyword">import</span> com.boyolo.server.pojo.MailConstants;<br><span class="hljs-keyword">import</span> com.boyolo.server.pojo.MailLog;<br><span class="hljs-keyword">import</span> com.boyolo.server.service.IEmployeeService;<br><span class="hljs-keyword">import</span> com.boyolo.server.service.IMailLogService;<br><span class="hljs-keyword">import</span> org.springframework.amqp.rabbit.connection.CorrelationData;<br><span class="hljs-keyword">import</span> org.springframework.amqp.rabbit.core.RabbitTemplate;<br><span class="hljs-keyword">import</span> org.springframework.beans.factory.annotation.Autowired;<br><span class="hljs-keyword">import</span> org.springframework.scheduling.annotation.Scheduled;<br><span class="hljs-keyword">import</span> org.springframework.stereotype.Component;<br><br><span class="hljs-keyword">import</span> java.time.LocalDateTime;<br><span class="hljs-keyword">import</span> java.util.List;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 邮件发送定时任务</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@author</span> renbo</span><br><span class="hljs-comment"> */</span><br><span class="hljs-meta">@Component</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MailTask</span> </span>&#123;<br><br>  <span class="hljs-meta">@Autowired</span><br>  <span class="hljs-keyword">private</span> IMailLogService mailLogService;<br>  <span class="hljs-meta">@Autowired</span><br>  <span class="hljs-keyword">private</span> IEmployeeService employeeService;<br>  <span class="hljs-meta">@Autowired</span><br>  <span class="hljs-keyword">private</span> RabbitTemplate rabbitTemplate;<br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 邮件发送定时任务</span><br><span class="hljs-comment">     * 10s一次</span><br><span class="hljs-comment">     */</span><br>  <span class="hljs-meta">@Scheduled(cron = &quot;0/10 * * * * ?&quot;)</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">mailTask</span><span class="hljs-params">()</span> </span>&#123;<br>    List&lt;MailLog&gt; list = mailLogService.list(<span class="hljs-keyword">new</span> QueryWrapper&lt;MailLog&gt;().eq(<span class="hljs-string">&quot;status&quot;</span>, <span class="hljs-number">0</span>).lt(<span class="hljs-string">&quot;tryTime&quot;</span>, LocalDateTime.now()));<br>    list.forEach(mailLog -&gt; &#123;<br>      <span class="hljs-comment">//如果重试次数超过三次，更新状态为投递失败，不再重试</span><br>      <span class="hljs-keyword">if</span> (<span class="hljs-number">3</span> &lt;= mailLog.getCount())&#123;<br>        mailLogService.update(<span class="hljs-keyword">new</span> UpdateWrapper&lt;MailLog&gt;().set(<span class="hljs-string">&quot;status&quot;</span>,<span class="hljs-number">2</span>).eq(<span class="hljs-string">&quot;msgId&quot;</span>,mailLog.getMsgId()));<br>      &#125;<br>      mailLogService.update(<span class="hljs-keyword">new</span> UpdateWrapper&lt;MailLog&gt;().set(<span class="hljs-string">&quot;count&quot;</span>,mailLog.getCount()+<span class="hljs-number">1</span>).set(<span class="hljs-string">&quot;updateTime&quot;</span>,LocalDateTime.now()).set(<span class="hljs-string">&quot;tryTime&quot;</span>,LocalDateTime.now().plusMinutes(MailConstants.MSG_TIMEOUT)).eq(<span class="hljs-string">&quot;msgId&quot;</span>,mailLog.getMsgId()));<br>      Employee employee = employeeService.getEmployee(mailLog.getEid()).get(<span class="hljs-number">0</span>);<br>      <span class="hljs-comment">//重新发送消息</span><br>      rabbitTemplate.convertAndSend(MailConstants.MAIL_EXCHANGE_NAME,MailConstants.MAIL_ROUTING_KEY_NAME,employee,<span class="hljs-keyword">new</span> CorrelationData(mailLog.getMsgId()));<br><br>    &#125;);<br>  &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+</blockquote>
+<h2 id="RabbitMQ消息可靠性"><a href="#RabbitMQ消息可靠性" class="headerlink" title="RabbitMQ消息可靠性"></a>RabbitMQ消息可靠性</h2><p>保证消息百分百发送到消息队列中去</p>
+<ul>
+<li>保证mq节点成功接受消息</li>
+<li>消息发送端需要接受到mq服务端接受到消息的确认应答</li>
+<li>完善的消息补偿机制，发送失败的消息可以再感知并⼆次处理</li>
+</ul>
+<img src="/article/33708/%E6%B6%88%E6%81%AF%E4%B8%A2%E5%A4%B1%E5%8F%AF%E8%83%BD%E7%9A%84%E6%83%85%E5%86%B5.png" class title="消息丢失可能的情况">
+<ol>
+<li><p>确保生产者发送的消息被rabbitmq接收了；</p>
+<p><a href="#RabbitMQ消息的事务机制">RabbitMQ事务</a></p>
+</li>
+<li><p>确保队列中的消息能够持久化；</p>
+<ol>
+<li><p>创建 queue 的时候将其设置为持久化</p>
+<p>这样就可以保证 RabbitMQ 持久化 queue 的元数据，但是它是不会持久化 queue 里的数据的。</p>
+</li>
+<li><p>第二个是发送消息的时候将消息的 deliveryMode 设置为 2</p>
+<p>就是将消息设置为持久化的，此时 RabbitMQ 就会将消息持久化到磁盘上去。</p>
+</li>
+</ol>
+<p><strong>必须要同时设置这两个持久化才行</strong></p>
+</li>
+<li><p>确保消费者已经把消息处理完了。</p>
+<p>RabbitMQ提供了<strong>消息确认机制</strong></p>
+<p>消费者在订阅队列时，可以指定autoAck参数，</p>
+<ol>
+<li><p>当autoAck等于false时，RabbitMQ 会等待消费者显式地回复确认信号后才从内存（或者磁盘）中移去消息（实质上是先打上删除标记，之后再删除）。</p>
+</li>
+<li><p>当autoAck等于true时，RabbitMQ会自动把发送出去的消息置为确认，然后从内存（或者磁盘）中删除，而不管消费者是否真正的消费到了这些消息。</p>
+</li>
+<li><p>RabbitMQ不会为未确认的消息设置过期时间，它判断此消息是否需要重新投递给消费者的唯一依据是消费该消息的消费者连接是否已经断开，这么设计的原因是RabbitMQ允许消费者消费一条消息的时间可以很久很久。</p>
+</li>
+</ol>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>RabbitMQ</category>
+      </categories>
+      <tags>
+        <tag>RabbitMQ</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Spring集成谷歌验证码</title>
+    <url>/article/54334.html</url>
+    <content><![CDATA[<blockquote>
+<p><strong>添加依赖</strong></p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!-- google kaptcha依赖 --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>  	<span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.github.axet<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>  	<span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>kaptcha<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>  	<span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>0.0.9<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p><strong>配置类 CaptchaConfig.java</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.boyolo.server.config;<br><br><span class="hljs-keyword">import</span> com.google.code.kaptcha.impl.DefaultKaptcha;<br><span class="hljs-keyword">import</span> com.google.code.kaptcha.util.Config;<br><span class="hljs-keyword">import</span> org.springframework.context.annotation.Bean;<br><span class="hljs-keyword">import</span> org.springframework.context.annotation.Configuration;<br><span class="hljs-keyword">import</span> java.util.Properties;<br><br><span class="hljs-meta">@Configuration</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CaptchaConfig</span> </span>&#123;<br><br>  <span class="hljs-meta">@Bean</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> DefaultKaptcha <span class="hljs-title">defaultKaptcha</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-comment">//验证码生成器</span><br>    DefaultKaptcha defaultKaptcha = <span class="hljs-keyword">new</span> DefaultKaptcha();<br>    <span class="hljs-comment">//配置</span><br>    Properties properties = <span class="hljs-keyword">new</span> Properties();<br>    <span class="hljs-comment">//是否有边框</span><br>    properties.setProperty(<span class="hljs-string">&quot;kaptcha.border&quot;</span>, <span class="hljs-string">&quot;yes&quot;</span>);<br>    <span class="hljs-comment">//设置边框颜色</span><br>    properties.setProperty(<span class="hljs-string">&quot;kaptcha.border.color&quot;</span>, <span class="hljs-string">&quot;105,179,90&quot;</span>);<br>    <span class="hljs-comment">//边框粗细度，默认为1</span><br>    <span class="hljs-comment">// properties.setProperty(&quot;kaptcha.border.thickness&quot;,&quot;1&quot;);</span><br>    <span class="hljs-comment">//验证码</span><br>    properties.setProperty(<span class="hljs-string">&quot;kaptcha.session.key&quot;</span>, <span class="hljs-string">&quot;code&quot;</span>);<br>    <span class="hljs-comment">//验证码文本字符颜色 默认为黑色</span><br>    properties.setProperty(<span class="hljs-string">&quot;kaptcha.textproducer.font.color&quot;</span>, <span class="hljs-string">&quot;blue&quot;</span>);<br>    <span class="hljs-comment">//设置字体样式</span><br>    properties.setProperty(<span class="hljs-string">&quot;kaptcha.textproducer.font.names&quot;</span>, <span class="hljs-string">&quot;宋体,楷体,微软雅黑&quot;</span>);<br>    <span class="hljs-comment">//字体大小，默认40</span><br>    properties.setProperty(<span class="hljs-string">&quot;kaptcha.textproducer.font.size&quot;</span>, <span class="hljs-string">&quot;30&quot;</span>);<br>    <span class="hljs-comment">//验证码文本字符内容范围 默认为abced2345678gfynmnpwx</span><br>    <span class="hljs-comment">// properties.setProperty(&quot;kaptcha.textproducer.char.string&quot;, &quot;&quot;);</span><br>    <span class="hljs-comment">//字符长度，默认为5</span><br>    properties.setProperty(<span class="hljs-string">&quot;kaptcha.textproducer.char.length&quot;</span>, <span class="hljs-string">&quot;4&quot;</span>);<br>    <span class="hljs-comment">//字符间距 默认为2</span><br>    properties.setProperty(<span class="hljs-string">&quot;kaptcha.textproducer.char.space&quot;</span>, <span class="hljs-string">&quot;4&quot;</span>);<br>    <span class="hljs-comment">//验证码图片宽度 默认为200</span><br>    properties.setProperty(<span class="hljs-string">&quot;kaptcha.image.width&quot;</span>, <span class="hljs-string">&quot;100&quot;</span>);<br>    <span class="hljs-comment">//验证码图片高度 默认为40</span><br>    properties.setProperty(<span class="hljs-string">&quot;kaptcha.image.height&quot;</span>, <span class="hljs-string">&quot;40&quot;</span>);<br>    Config config = <span class="hljs-keyword">new</span> Config(properties);<br>    defaultKaptcha.setConfig(config);<br>    <span class="hljs-keyword">return</span> defaultKaptcha;<br>  &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p><strong>CaptchaController</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.boyolo.server.controller;<br><span class="hljs-keyword">import</span> com.google.code.kaptcha.impl.DefaultKaptcha;<br><span class="hljs-keyword">import</span> io.swagger.annotations.ApiOperation;<br><span class="hljs-keyword">import</span> org.springframework.beans.factory.annotation.Autowired;<br><span class="hljs-keyword">import</span> org.springframework.web.bind.annotation.GetMapping;<br><span class="hljs-keyword">import</span> org.springframework.web.bind.annotation.RestController;<br><br><span class="hljs-keyword">import</span> javax.imageio.ImageIO;<br><span class="hljs-keyword">import</span> javax.servlet.ServletOutputStream;<br><span class="hljs-keyword">import</span> javax.servlet.http.HttpServletRequest;<br><span class="hljs-keyword">import</span> javax.servlet.http.HttpServletResponse;<br><span class="hljs-keyword">import</span> java.awt.image.BufferedImage;<br><span class="hljs-keyword">import</span> java.io.IOException;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@author</span> renbo</span><br><span class="hljs-comment"> */</span><br><span class="hljs-meta">@RestController</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CaptchaController</span> </span>&#123;<br><br>  <span class="hljs-meta">@Autowired</span><br>  <span class="hljs-keyword">private</span> DefaultKaptcha defaultKaptcha;<br><br>  <span class="hljs-meta">@ApiOperation(value = &quot;验证码&quot;)</span><br>  <span class="hljs-meta">@GetMapping(value = &quot;/captcha&quot;, produces = &quot;image/jpeg&quot;)</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">captcha</span><span class="hljs-params">(HttpServletRequest request, HttpServletResponse response)</span> </span>&#123;<br>    <span class="hljs-comment">// 定义response输出类型为image/jpeg类型</span><br>    response.setDateHeader(<span class="hljs-string">&quot;Expires&quot;</span>, <span class="hljs-number">0</span>);<br>    <span class="hljs-comment">// Set standard HTTP/1.1 no-cache headers.</span><br>    response.setHeader(<span class="hljs-string">&quot;Cache-Control&quot;</span>, <span class="hljs-string">&quot;no-store, no-cache, must-revalidate&quot;</span>);<br>    <span class="hljs-comment">// Set IE extended HTTP/1.1 no-cache headers (use addHeader).</span><br>    response.addHeader(<span class="hljs-string">&quot;Cache-Control&quot;</span>, <span class="hljs-string">&quot;post-check=0, pre-check=0&quot;</span>);<br>    <span class="hljs-comment">// Set standard HTTP/1.0 no-cache header.</span><br>    response.setHeader(<span class="hljs-string">&quot;Pragma&quot;</span>, <span class="hljs-string">&quot;no-cache&quot;</span>);<br>    <span class="hljs-comment">// return a jpeg</span><br>    response.setContentType(<span class="hljs-string">&quot;image/jpeg&quot;</span>);<br>    <span class="hljs-comment">//-------------------生成验证码 begin ------------------------</span><br>    <span class="hljs-comment">//获取验证码文本内容</span><br>    String text = defaultKaptcha.createText();<br>    System.out.println(<span class="hljs-string">&quot;验证码内容：&quot;</span> + text);<br>    <span class="hljs-comment">//将验证码放入session中</span><br>    request.getSession().setAttribute(<span class="hljs-string">&quot;captcha&quot;</span>, text);<br>    <span class="hljs-comment">//根据文本内容创建图形验证码</span><br>    BufferedImage image = defaultKaptcha.createImage(text);<br>    ServletOutputStream outputStream = <span class="hljs-keyword">null</span>;<br>    <span class="hljs-keyword">try</span> &#123;<br>      outputStream = response.getOutputStream();<br>      <span class="hljs-comment">//输出流输出图片，格式jpg</span><br>      ImageIO.write(image, <span class="hljs-string">&quot;jpg&quot;</span>, outputStream);<br>      outputStream.flush();<br>    &#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;<br>      e.printStackTrace();<br>    &#125; <span class="hljs-keyword">finally</span> &#123;<br>      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">null</span> != outputStream) &#123;<br>        <span class="hljs-keyword">try</span> &#123;<br>          outputStream.close();<br>        &#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;<br>          e.printStackTrace();<br>        &#125;<br>      &#125;<br>    &#125;<br>    <span class="hljs-comment">//-------------------生成验证码 end --------------------------</span><br>  &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Java</category>
+        <category>验证码</category>
+      </categories>
+      <tags>
+        <tag>Java,Spring,验证码</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>位图</title>
     <url>/article/9386.html</url>
     <content><![CDATA[<h2 id="位图"><a href="#位图" class="headerlink" title="位图"></a>位图</h2><p>位图是通过将数组下标与应用中的一些值关联映射，数组中该下标所指定的位置上的元素可以用来标识应用中值的情况（是否存在或者数目 或者计数等），位图数组中每个元素在内存中占用1位，所以可以节省存储空间。位图是一种非常简洁快速的数据结构，它能同时使存储空间和速度最优化。</p>
@@ -459,6 +702,33 @@
 </ol>
 <figure class="highlight shell"><table><tr><td class="code"><pre><code class="hljs shell">如果：a[i]==b[j]，那么：max_lcs(i, j)就等于：<br>max(max_lcs(i-1,j-1)+1, max_lcs(i-1, j), max_lcs(i, j-1))；<br><br>如果：a[i]!=b[j]，那么：max_lcs(i, j)就等于：<br>max(max_lcs(i-1,j-1), max_lcs(i-1, j), max_lcs(i, j-1))；<br><br>其中max表示求三数中的最大值。<br></code></pre></td></tr></table></figure>
 <figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">lcs</span><span class="hljs-params">(<span class="hljs-keyword">char</span>[] a, <span class="hljs-keyword">int</span> n, <span class="hljs-keyword">char</span>[] b, <span class="hljs-keyword">int</span> m)</span> </span>&#123;<br>  <span class="hljs-keyword">int</span>[][] maxlcs = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[n][m];<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; m; ++j) &#123;<span class="hljs-comment">//初始化第0行：a[0..0]与b[0..j]的maxlcs</span><br>    <span class="hljs-keyword">if</span> (a[<span class="hljs-number">0</span>] == b[j]) maxlcs[<span class="hljs-number">0</span>][j] = <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (j != <span class="hljs-number">0</span>) maxlcs[<span class="hljs-number">0</span>][j] = maxlcs[<span class="hljs-number">0</span>][j-<span class="hljs-number">1</span>];<br>    <span class="hljs-keyword">else</span> maxlcs[<span class="hljs-number">0</span>][j] = <span class="hljs-number">0</span>;<br>  &#125;<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; ++i) &#123;<span class="hljs-comment">//初始化第0列：a[0..i]与b[0..0]的maxlcs</span><br>    <span class="hljs-keyword">if</span> (a[i] == b[<span class="hljs-number">0</span>]) maxlcs[i][<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (i != <span class="hljs-number">0</span>) maxlcs[i][<span class="hljs-number">0</span>] = maxlcs[i-<span class="hljs-number">1</span>][<span class="hljs-number">0</span>];<br>    <span class="hljs-keyword">else</span> maxlcs[i][<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;<br>  &#125;<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt; n; ++i) &#123; <span class="hljs-comment">// 填表</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">1</span>; j &lt; m; ++j) &#123;<br>      <span class="hljs-keyword">if</span> (a[i] == b[j]) maxlcs[i][j] = max(<br>          maxlcs[i-<span class="hljs-number">1</span>][j], maxlcs[i][j-<span class="hljs-number">1</span>], maxlcs[i-<span class="hljs-number">1</span>][j-<span class="hljs-number">1</span>]+<span class="hljs-number">1</span>);<br>      <span class="hljs-keyword">else</span> maxlcs[i][j] = max(<br>          maxlcs[i-<span class="hljs-number">1</span>][j], maxlcs[i][j-<span class="hljs-number">1</span>], maxlcs[i-<span class="hljs-number">1</span>][j-<span class="hljs-number">1</span>]);<br>    &#125;<br>  &#125;<br>  <span class="hljs-keyword">return</span> maxlcs[n-<span class="hljs-number">1</span>][m-<span class="hljs-number">1</span>];<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> <span class="hljs-title">max</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x, <span class="hljs-keyword">int</span> y, <span class="hljs-keyword">int</span> z)</span> </span>&#123;<br>  <span class="hljs-keyword">int</span> maxv = Integer.MIN_VALUE;<br>  <span class="hljs-keyword">if</span> (x &gt; maxv) maxv = x;<br>  <span class="hljs-keyword">if</span> (y &gt; maxv) maxv = y;<br>  <span class="hljs-keyword">if</span> (z &gt; maxv) maxv = z;<br>  <span class="hljs-keyword">return</span> maxv;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="背包问题总结"><a href="#背包问题总结" class="headerlink" title="背包问题总结"></a>背包问题总结</h2><h3 id="01背包"><a href="#01背包" class="headerlink" title="01背包"></a>01背包</h3><blockquote>
+<p><strong>dp[i][j]的含义：从下标为[0-i]的物品里任意取，放进容量为j的背包，价值总和最大是多少?</strong></p>
+</blockquote>
+<p><strong>不放物品i</strong>：由dp[i - 1][j]推出，即背包容量为j，里面不放物品i的最大价值，此时dp[i][j]就是dp[i - 1][j]。(其实就是当物品i的重量大于背包j的重量时，物品i无法放进背包中，所以被背包内的价值依然和前面相同。)</p>
+<p><strong>放物品i</strong>：由dp[i - 1][j - weight[i]]推出，dp[i - 1][j - weight[i]] 为背包容量为j - weight[i]的时候不放物品i的最大价值，那么dp[i - 1][j - weight[i]] + value[i] （物品i的价值），就是背包放物品i得到的最大价值</p>
+<p> <strong>dp[i][j] = max(dp[i - 1][j], dp[i - 1][j - weight[i]] + value[i]);</strong></p>
+<hr>
+<blockquote>
+<p><strong>dp[j]表示：容量为j的背包，所背的物品价值可以最大为dp[j]</strong></p>
+</blockquote>
+<p>dp[j]可以通过dp[j - weight[i]]推导出来，dp[j - weight[i]]表示容量为j - weight[i]的背包所背的最大价值。</p>
+<p>dp[j - weight[i]] + value[i] 表示 容量为 j - 物品i重量 的背包 加上 物品i的价值。（也就是容量为j的背包，放入物品i了之后的价值即：dp[j]）</p>
+<p>此时dp[j]有两个选择，一个是取自己dp[j] 相当于 二维dp数组中的dp[i-1][j]，即不放物品i，一个是取dp[j - weight[i]] + value[i]，即放物品i，指定是取最大的，毕竟是求最大价值，</p>
+<p><strong>dp[j] = max(dp[j], dp[j - weight[i]] + value[i]);</strong></p>
+<hr>
+<blockquote>
+<ol>
+<li><p>当动态规划数组为二维数组时–先遍历物品 再遍历背包无所谓</p>
+</li>
+<li><p>当动态规划数组为一维数组时–先遍历物品再遍历背包，并且逆序遍历背包</p>
+</li>
+</ol>
+</blockquote>
+<h3 id="完全背包"><a href="#完全背包" class="headerlink" title="完全背包"></a>完全背包</h3><p>对于完全背包，不论动态规划数组为一维还是二维，对物品遍历与背包遍历的顺序都是无所谓的</p>
+<h3 id="背包问题排列组合问题"><a href="#背包问题排列组合问题" class="headerlink" title="背包问题排列组合问题"></a>背包问题排列组合问题</h3><p>之前的遍历顺序不受凑成总和的元素的元素的顺序影响，而排列组合问题不同,求的是凑成总和的方法种类</p>
+<p><strong>如果求组合数就是外层for循环遍历物品，内层for遍历背包</strong>。</p>
+<p><strong>如果求排列数就是外层for遍历背包，内层for循环遍历物品</strong>。</p>
 ]]></content>
       <categories>
         <category>数据结构与算法</category>
@@ -1064,7 +1334,7 @@
 <hr>
 <p>对于 String 类型来说，除了 SDS 的额外开销，还有一个来自于 <strong>RedisObject</strong> 结构体的开销。</p>
 <p>因为 Redis 的数据类型有很多，而且，不同数据类型都有些相同的元数据要记录（比如最后一次访问的时间、被引用的次数等），所以，Redis 会用一个 RedisObject 结构体来统一记录这些元数据，同时指向实际数据。</p>
-<p>一个 RedisObject 包含了 8 字节的元数据和一个 8 字节指针，这个指针再进一步指向具体数据类型的实际数据所在</p>
+<p>一个 RedisObject 包含了 8 字节的元数据和一个 8 字节指针，这个指针再进一步指向具体数据类型的实际数据所在。</p>
 <img src="/article/30584/RedisObject%E7%BB%93%E6%9E%84%E4%BD%93.jpg" class title="RedisObject结构体">
 <hr>
 <p>为了节省内存空间，Redis 还对 Long 类型整数和 SDS 的内存布局做了专门的设计。</p>
@@ -1482,7 +1752,7 @@
 <p>Redis 提供了两个命令来生成 RDB 文件：</p>
 <ol>
 <li>save：在主线程中执行，会导致阻塞；</li>
-<li>bgsave：创建一个子进程，专门用于写入 RDB 文件，避免了主线程的阻塞，这也是 Redis RDB 文件生成的默认配置。</li>
+<li>bgsave：创建一个子进程，专门用于写入 RDB 文件，避免了主线程的阻塞，这也是 Redis RDB 文件生成的认配置。</li>
 </ol>
 <p><strong>关键问题：</strong></p>
 <ol>
@@ -2195,7 +2465,7 @@
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs sh\">echo never /sys/kernel/mm/transparent_hugepage/enabled<br></code></pre></td></tr></table></figure>
 </li>
 </ol>
-<h3 id="Redis-性能变慢-9-个检查点"><a href="#Redis-性能变慢-9-个检查点" class="headerlink" title="Redis 性能变慢 9 个检查点:"></a><strong>Redis 性能变慢 9 个检查点:</strong></h3><blockquote>
+<h3 id="Redis-性能变慢-8-个检查点"><a href="#Redis-性能变慢-8-个检查点" class="headerlink" title="Redis 性能变慢 8 个检查点:"></a><strong>Redis 性能变慢 8 个检查点:</strong></h3><blockquote>
 <ol>
 <li>获取 Redis 实例在当前环境下的基线性能。</li>
 <li>是否用了慢查询命令？如果是的话，就使用其他命令替代慢查询命令，或者把聚合计算命令放在客户端做。</li>
@@ -2373,6 +2643,86 @@
 <li>复制积压缓冲区(repl_backlog_buffer)是一个大小有限的环形缓冲区。当主节点把复制积压缓冲区写满后，会覆盖缓冲区中的旧命令数据。如果从节点还没有同步这些旧命令数据，就会造成主从节点间重新开始执行全量复制。</li>
 <li>为了应对复制积压缓冲区的溢出问题，我们可以调整复制积压缓冲区的大小，也就是设置 repl_backlog_size 这个参数的值</li>
 </ol>
+<h2 id="Java操作Redis"><a href="#Java操作Redis" class="headerlink" title="Java操作Redis"></a>Java操作Redis</h2><blockquote>
+<p><strong>Redis依赖</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java">&lt;!-- spring data redis 依赖 --&gt;<br>&lt;dependency&gt;<br>  &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;<br>  &lt;artifactId&gt;spring-boot-starter-data-redis&lt;/artifactId&gt;<br>&lt;/dependency&gt;<br></code></pre></td></tr></table></figure>
+<p>1.0 版本 默认使用连接池技术是 Jedis</p>
+<p>2.0 以上版本 默认使用连接池技术是 Lettuce</p>
+<p>如果使用 Jedis ，需要排除 Lettuce</p>
+</blockquote>
+<blockquote>
+<p><strong>Redis配置文件</strong></p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">spring:</span><br>	<span class="hljs-attr">redis:</span><br>    <span class="hljs-comment">#超时时间</span><br>    <span class="hljs-attr">timeout:</span> <span class="hljs-string">10000ms</span><br>    <span class="hljs-comment">#服务器地址</span><br>    <span class="hljs-attr">host:</span> <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span><br>    <span class="hljs-comment">#服务器端口</span><br>    <span class="hljs-attr">port:</span> <span class="hljs-number">6379</span><br>    <span class="hljs-comment">#数据库</span><br>    <span class="hljs-attr">database:</span> <span class="hljs-number">0</span><br>    <span class="hljs-attr">password:</span> <span class="hljs-string">*******</span><br>    <span class="hljs-attr">lettuce:</span><br>      <span class="hljs-attr">pool:</span><br>        <span class="hljs-comment">#最大连接数</span><br>        <span class="hljs-attr">max-active:</span> <span class="hljs-number">1024</span><br>        <span class="hljs-comment">#最大连接阻塞等待时间</span><br>        <span class="hljs-attr">max-wait:</span> <span class="hljs-string">10000ms</span><br>        <span class="hljs-comment">#最大空闲连接</span><br>        <span class="hljs-attr">max-idle:</span> <span class="hljs-number">200</span><br>        <span class="hljs-comment">#最小空闲连接</span><br>        <span class="hljs-attr">min-idle:</span> <span class="hljs-number">5</span><br></code></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p><strong>Redis配置类</strong> – 进行序列化</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.boyolo.server.config;<br><span class="hljs-keyword">import</span> org.springframework.context.annotation.Bean;<br><span class="hljs-keyword">import</span> org.springframework.context.annotation.Configuration;<br><span class="hljs-keyword">import</span> org.springframework.data.redis.connection.RedisConnectionFactory;<br><span class="hljs-keyword">import</span> org.springframework.data.redis.core.RedisTemplate;<br><span class="hljs-keyword">import</span> org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;<br><span class="hljs-keyword">import</span> org.springframework.data.redis.serializer.StringRedisSerializer;<br><br><span class="hljs-meta">@Configuration</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RedisConfig</span> </span>&#123;<br><br>  <span class="hljs-meta">@Bean</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> RedisTemplate&lt;String, Object&gt; <span class="hljs-title">redisTemplate</span><span class="hljs-params">(RedisConnectionFactory redisConnectionFactory)</span></span>&#123;<br>    RedisTemplate&lt;String, Object&gt; redisTemplate = <span class="hljs-keyword">new</span> RedisTemplate&lt;&gt;();<br>    <span class="hljs-comment">//String类型key序列器</span><br>    redisTemplate.setKeySerializer(<span class="hljs-keyword">new</span> StringRedisSerializer());<br>    <span class="hljs-comment">//String类型Value序列器</span><br>    redisTemplate.setValueSerializer(<span class="hljs-keyword">new</span> GenericJackson2JsonRedisSerializer());<br>    <span class="hljs-comment">//Hash类型key序列器</span><br>    redisTemplate.setHashKeySerializer(<span class="hljs-keyword">new</span> StringRedisSerializer());<br>    <span class="hljs-comment">//Hash类型Value序列器</span><br>    redisTemplate.setHashValueSerializer(<span class="hljs-keyword">new</span> GenericJackson2JsonRedisSerializer());<br>    redisTemplate.setConnectionFactory(redisConnectionFactory);<br>    <span class="hljs-keyword">return</span> redisTemplate;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p><strong>通过用户ID查询菜单，并存入Redis</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Autowired</span><br><span class="hljs-keyword">private</span> MenuMapper menuMapper;<br><span class="hljs-meta">@Autowired</span><br><span class="hljs-keyword">private</span> RedisTemplate&lt;String, Object&gt; redisTemplate;<br><br><span class="hljs-meta">@Override</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> List&lt;Menu&gt; <span class="hljs-title">getMenusByAdminID</span><span class="hljs-params">()</span> </span>&#123;<br>  Integer adminId = AdminUtils.getCurrentAdmin().getId();<br>  ValueOperations&lt;String, Object&gt; valueOperations = redisTemplate.opsForValue();<br>  <span class="hljs-comment">//从redis获取菜单数据</span><br>  List&lt;Menu&gt; menus = (List&lt;Menu&gt;) valueOperations.get(<span class="hljs-string">&quot;menu_&quot;</span> + adminId);<br>  <span class="hljs-comment">//如果为空，去数据库获取</span><br>  <span class="hljs-keyword">if</span> (CollectionUtils.isEmpty(menus)) &#123;<br>    menus = menuMapper.getMenusByAdminID(adminId);<br>    <span class="hljs-comment">//将数据设置到redis中</span><br>    valueOperations.set(<span class="hljs-string">&quot;menu_&quot;</span> + adminId, menus);<br>  &#125;<br>  <span class="hljs-keyword">return</span> menus;<br>&#125;<br></code></pre></td></tr></table></figure>
+</blockquote>
+<h2 id="FastDFS-头像上传"><a href="#FastDFS-头像上传" class="headerlink" title="FastDFS 头像上传"></a>FastDFS 头像上传</h2><h3 id="FastDFS简介"><a href="#FastDFS简介" class="headerlink" title="FastDFS简介"></a>FastDFS简介</h3><ol>
+<li><p>FastDFS 是一个开源的轻量级<strong>分布式文件系统</strong>，它对文件进行管理，功能包括：文件存储、文件同步、文件访问（文件上传、文件下载）等，解决了大容量存储和负载均衡的问题。</p>
+<p>FastDFS 为互联网量身定制，充分考虑了冗余备份、负载均衡、线性扩容等机制，并注重高可用、高性能等指标，使用 FastDFS 很容易搭建一套高性能的文件服务器集群提供文件上传、下载等服务。</p>
+</li>
+<li><p>FastDFS 服务端有两个角色：跟踪器（tracker）和存储节点（storage）。</p>
+<ol>
+<li>跟踪器主要做调度工作，在访问上起负载均衡的作用。</li>
+<li>存储节点存储文件，完成文件管理的所有功能，存储、同步和提供存取接口。</li>
+</ol>
+</li>
+</ol>
+<p>FastDFS 同时对文件的 metadata 进行管理。所谓文件的 metadata 就是文件的相关属性，以键值对（key value）方式表示。</p>
+<ol start="3">
+<li><p>集群</p>
+<p>跟踪器和存储节点都可以由一台或多台服务器构成【所以说都可以做集群】。跟踪器和存储节点中的服务器均可以随时增加或下线而不会影响线上服务。其中跟踪器中的所有服务器都是对等的，可以根据服务器的压力情况随时增加或减少。【<strong>跟踪器除了做调度作用以外，还可以在访问上能起到简单的负载均衡的作用</strong>。】 </p>
+<p>为了支持大容量，<strong>存储节点（服务器）采用了分卷（或分组）的组织方式</strong>。存储系统由一个或多个卷组成，卷与卷之间的文件是相互独立的，所有卷的文件容量累加就是整个存储系统中的文件容量。一个卷可以由一台或多台存储服务器组成，一个卷下的存储服务器中的文件都是相同的，卷中的多台存储服务器起到了<strong>冗余备份和负载均衡</strong>的作用。</p>
+<p>在卷中增加服务器时，同步已有的文件由系统自动完成，同步完成后，系统自动将新增服务器切换到线上提供服务。当存储空间不足或即将耗尽时，可以动态添加卷。只需要增加一台或多台服务器，并将它们配置为一个新的卷，这样就扩大了存储系统的容量。</p>
+</li>
+</ol>
+<p><strong>FastDFS 中的文件标识分为两个部分：卷名和文件名，二者缺一不可</strong></p>
+<h3 id="架构图"><a href="#架构图" class="headerlink" title="架构图"></a>架构图</h3><img src="/article/30584/FastDFS%E6%9E%B6%E6%9E%84%E5%9B%BE.png" class title="FastDFS架构图">
+<h3 id="同步机制"><a href="#同步机制" class="headerlink" title="同步机制"></a>同步机制</h3><p>同一组内的 storage server 之间是对等的，文件上传、删除等操作可以在任意一台 storage server 上进行；</p>
+<p>文件同步只在同组内的 storage server 之间进行，采用 push 方式，即源服务器同步给目标服务器；</p>
+<p>源头数据才需要同步，备份数据不需要再次同步，否则就构成环路了；</p>
+<p>上述第二条规则有个例外，就是新增加一台storage server时，由已有的一台storage server将已有的所有数据（包括源头数据和备份数据）同步给该新增服务器</p>
+<h3 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h3><p>Nginx是一款轻量级的Web服务器/反向代理服务器及电子邮件（IMAP/POP3）代理服务器。其特点是占有内存少，并发能力强。</p>
+<p>为了使Web应用直接使用HTTP协议，直接访问存储器中的文件</p>
+<h3 id="Java使用FastDFS"><a href="#Java使用FastDFS" class="headerlink" title="Java使用FastDFS"></a>Java使用FastDFS</h3><blockquote>
+<p><strong>依赖</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java">&lt;dependency&gt;<br>  &lt;groupId&gt;org.csource&lt;/groupId&gt;<br>  &lt;artifactId&gt;fastdfs-client-java&lt;/artifactId&gt;<br>  &lt;version&gt;<span class="hljs-number">1.29</span>-SNAPSHOT&lt;/version&gt;<br> &lt;/dependency&gt;<br></code></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p><strong>常用类</strong></p>
+<ol>
+<li><p><strong>CLientGlobal</strong></p>
+<p>用于加载配置文件的公共客户端工具</p>
+<p>init(String conf_filename) 根据配置文件路径以及命名，加载配置文件，并设置客户端公共参数，配置文件类型为 <strong>.conf</strong> 文件，可以使用绝对路径或相对路径加载；</p>
+<p>initByPropereties(Propereties props) 根据Propereties对象设置客户端公共参数</p>
+</li>
+<li><p><strong>TrackerClient</strong></p>
+<p>跟踪器客户端类型，创建此类对象时，需要传递跟踪器组，就是跟踪器的访问地址信息，无参构造方法默认使用ClientGlobal.g_tracker_group 常量作为跟踪器来构造对象</p>
+</li>
+<li><p><strong>TrackerServer</strong></p>
+<p>跟踪器服务类型，此类型的对象是通过跟踪器客户端构建的，实际上就是一个与FastDFS Tracker Server的链接对象。</p>
+</li>
+<li><p><strong>StorageServer</strong></p>
+<p>存储服务类型，通过跟踪器客户端对象构建，实质上就是一个与FastDFS Storage Server 的链接对象，是代码只能够与 StorageServer 链接的工具，获取的具体存储服务链接，是由 TrackerServer 分配的，所以构建存储服务器对象时，需要依赖跟踪器服务对象。</p>
+</li>
+<li><p><strong>StorageClient</strong></p>
+<p>存储客户端类型，此类型的对象时通过构造方法创建的，创建时，需传递跟踪器服务对象和存储服务对象，此对象实质上是一个访问 FastDFS Storage Server 的客户端对象，用于实现文件的读写操作。</p>
+</li>
+</ol>
+</blockquote>
+<blockquote>
+<p><strong>FastDFS配置</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs conf">#ubuntu 开启8888 23000 22122 端口<br>#开启tracker /etc/init.d/fdfs_trackerd stop<br>#开启stroage /etc/init.d/fdfs_storaged start<br>#开启nginx  /usr/local/nginx/sbin/nginx<br><br>#连接超时<br>connect_timeout = 2<br>#网络超时<br>network_time = 30<br>#编码格式<br>charset = UTF-8<br>#tracker端口<br>http.tracker_http_port = 8080<br>#防盗链功能<br>http.anit_steal_token = no<br>#密钥<br>http.secret_key = FastDFS1234567890<br>#tracker ip:端口号<br>tracker_server = 10.211.55.11:22122<br>#连接池配置<br>connection_pool.enabled = true<br>connection_pool.max_count_per_entry = 500<br>connection_pool.max_idle_time = 3600<br>connection_pool.max_wait_time_in_ms = 1000<br></code></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p><strong>FastDFS工具类</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.boyolo.server.utiles;<br><br><span class="hljs-keyword">import</span> org.csource.fastdfs.*;<br><span class="hljs-keyword">import</span> org.slf4j.Logger;<br><span class="hljs-keyword">import</span> org.slf4j.LoggerFactory;<br><span class="hljs-keyword">import</span> org.springframework.core.io.ClassPathResource;<br><span class="hljs-keyword">import</span> org.springframework.web.multipart.MultipartFile;<br><br><span class="hljs-keyword">import</span> java.io.ByteArrayInputStream;<br><span class="hljs-keyword">import</span> java.io.IOException;<br><span class="hljs-keyword">import</span> java.io.InputStream;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@author</span> renbo</span><br><span class="hljs-comment"> */</span><br><br><span class="hljs-comment">//centos服务器安装fastDFS</span><br><span class="hljs-comment">//https://www.cnblogs.com/homjun/p/14841843.html</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FastDFSUtils</span> </span>&#123;<br><br>  <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Logger logger = LoggerFactory.getLogger(FastDFSUtils.class);<br><br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 初始化客户端</span><br><span class="hljs-comment">     * ClientGlobal 读取配置文件，并初始化对应属性</span><br><span class="hljs-comment">     */</span><br>  <span class="hljs-keyword">static</span> &#123;<br>    <span class="hljs-keyword">try</span> &#123;<br>      String filePath = <span class="hljs-keyword">new</span> ClassPathResource(<span class="hljs-string">&quot;fdfs_client.conf&quot;</span>).getFile().getAbsolutePath();<br>      ClientGlobal.init(filePath);<br>      logger.info(<span class="hljs-string">&quot;初始化FastDFS成功&quot;</span>);<br>    &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>      logger.error(<span class="hljs-string">&quot;初始化FastDFS失败&quot;</span>, e.getMessage());<br>    &#125;<br>  &#125;<br><br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 生成TrackerServer</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">     * <span class="hljs-doctag">@throws</span> IOException</span><br><span class="hljs-comment">     */</span><br>  <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> TrackerServer <span class="hljs-title">getTrackerServer</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> IOException </span>&#123;<br>    TrackerClient trackerClient = <span class="hljs-keyword">new</span> TrackerClient();<br>    TrackerServer trackerServer = trackerClient.getTrackerServer();<br>    <span class="hljs-keyword">return</span> trackerServer;<br>  &#125;<br><br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 生成StorageClient</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">     * <span class="hljs-doctag">@throws</span> IOException</span><br><span class="hljs-comment">     */</span><br>  <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> StorageClient <span class="hljs-title">getStorageClient</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> IOException </span>&#123;<br>    TrackerServer trackerServer = getTrackerServer();<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> StorageClient(trackerServer, <span class="hljs-keyword">null</span>);<br>  &#125;<br><br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 上传文件</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> file</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">     */</span><br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String[] upload(MultipartFile file) &#123;<br>    String name = file.getOriginalFilename();<br>    logger.info(<span class="hljs-string">&quot;文件名：&quot;</span>, name);<br>    StorageClient storageClient = <span class="hljs-keyword">null</span>;<br>    String[] uploadResults = <span class="hljs-keyword">null</span>;<br>    <span class="hljs-keyword">try</span> &#123;<br>      <span class="hljs-comment">//获取 storageClient</span><br>      storageClient = getStorageClient();<br>      <span class="hljs-comment">//上传</span><br>      uploadResults = storageClient.upload_file(file.getBytes(), name.substring(name.lastIndexOf(<span class="hljs-string">&quot;.&quot;</span>) + <span class="hljs-number">1</span>), <span class="hljs-keyword">null</span>);<br><br>    &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>      logger.error(<span class="hljs-string">&quot;上传文件失败！&quot;</span>, e.getMessage());<br>    &#125;<br><br>    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">null</span> == uploadResults &amp;&amp; <span class="hljs-keyword">null</span> != storageClient) &#123;<br>      logger.error(<span class="hljs-string">&quot;上传失败！&quot;</span>, storageClient.getErrorCode());<br>    &#125;<br>    <span class="hljs-keyword">return</span> uploadResults;<br>  &#125;<br><br><br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 获取文件信息</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> groupName</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> remoteFileName</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">     */</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> FileInfo <span class="hljs-title">getFileInfo</span><span class="hljs-params">(String groupName, String remoteFileName)</span> </span>&#123;<br>    StorageClient storageClient = <span class="hljs-keyword">null</span>;<br>    <span class="hljs-keyword">try</span> &#123;<br>      storageClient = getStorageClient();<br>      <span class="hljs-keyword">return</span> storageClient.get_file_info(groupName, remoteFileName);<br>    &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>      logger.error(<span class="hljs-string">&quot;文件信息获取失败！&quot;</span>, e.getMessage());<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;<br>  &#125;<br><br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 下载文件</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> groupName</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> remoteFileName</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">     */</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> InputStream <span class="hljs-title">downFile</span><span class="hljs-params">(String groupName, String remoteFileName)</span> </span>&#123;<br>    StorageClient storageClient = <span class="hljs-keyword">null</span>;<br>    <span class="hljs-keyword">try</span> &#123;<br>      storageClient = getStorageClient();<br>      <span class="hljs-keyword">byte</span>[] fileByte = storageClient.download_file(groupName, remoteFileName);<br>      InputStream inputStream = <span class="hljs-keyword">new</span> ByteArrayInputStream(fileByte);<br>      <span class="hljs-keyword">return</span> inputStream;<br>    &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>      logger.error(<span class="hljs-string">&quot;文件下载失败！&quot;</span>, e.getMessage());<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;<br>  &#125;<br><br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 删除文件</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> groupName</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> remoteFileName</span><br><span class="hljs-comment">     */</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">deleteFile</span><span class="hljs-params">(String groupName, String remoteFileName)</span> </span>&#123;<br>    StorageClient storageClient = <span class="hljs-keyword">null</span>;<br>    <span class="hljs-keyword">try</span> &#123;<br>      storageClient = getStorageClient();<br>      storageClient.delete_file(groupName, remoteFileName);<br>    &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>      logger.error(<span class="hljs-string">&quot;文件删除失败！&quot;</span>, e.getMessage());<br>    &#125;<br>  &#125;<br><br><br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 获取文件路径</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">     */</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String <span class="hljs-title">getTrackerUrl</span><span class="hljs-params">()</span> </span>&#123;<br>    TrackerClient trackerClient = <span class="hljs-keyword">new</span> TrackerClient();<br>    TrackerServer trackerServer = <span class="hljs-keyword">null</span>;<br>    StorageServer storeStorage = <span class="hljs-keyword">null</span>;<br>    <span class="hljs-keyword">try</span> &#123;<br>      trackerServer = trackerClient.getTrackerServer();<br>      storeStorage = trackerClient.getStoreStorage(trackerServer);<br>    &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>      logger.error(<span class="hljs-string">&quot;文件路径获取失败！&quot;</span>, e.getMessage());<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;http://&quot;</span> + storeStorage.getInetSocketAddress().getHostString() + <span class="hljs-string">&quot;:8888/&quot;</span>;<br>    <span class="hljs-comment">//        return &quot;http://localhost:8888/&quot;;</span><br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+</blockquote>
 ]]></content>
       <categories>
         <category>Redis</category>
@@ -3181,11 +3531,11 @@
 <h3 id="二分查找的递归与非递归实现"><a href="#二分查找的递归与非递归实现" class="headerlink" title="二分查找的递归与非递归实现"></a>二分查找的递归与非递归实现</h3><p><strong>非递归实现</strong></p>
 <blockquote>
 <p>有序数组中不存在重复元素，用二分查找值等于给定值的数据</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">bsearch</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] a, <span class="hljs-keyword">int</span> n, <span class="hljs-keyword">int</span> value)</span> </span>&#123;<br>  <span class="hljs-keyword">int</span> low = <span class="hljs-number">0</span>;<br>  <span class="hljs-keyword">int</span> high = n - <span class="hljs-number">1</span>;<br><br>  <span class="hljs-keyword">while</span> (low &lt;= high) &#123;<br>    <span class="hljs-comment">//int mid = (low + high) / 2;</span><br>    <span class="hljs-keyword">int</span> mid = low+(high-low)/<span class="hljs-number">2</span>;<br>    <span class="hljs-keyword">if</span> (a[mid] == value) &#123;<br>      <span class="hljs-keyword">return</span> mid;<br>    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (a[mid] &lt; value) &#123;<br>      low = mid + <span class="hljs-number">1</span>;<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>      high = mid - <span class="hljs-number">1</span>;<br>    &#125;<br>  &#125;<br><br>  <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">bsearch</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] a, <span class="hljs-keyword">int</span> n, <span class="hljs-keyword">int</span> value)</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> low = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">int</span> high = n - <span class="hljs-number">1</span>;<br><br>    <span class="hljs-keyword">while</span> (low &lt;= high) &#123;<br>      <span class="hljs-comment">//int mid = (low + high) / 2;</span><br>      <span class="hljs-keyword">int</span> mid = low+(high-low)/<span class="hljs-number">2</span>;<br>      <span class="hljs-keyword">if</span> (a[mid] == value) &#123;<br>        <span class="hljs-keyword">return</span> mid;<br>      &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (a[mid] &lt; value) &#123;<br>        low = mid + <span class="hljs-number">1</span>;<br>      &#125; <span class="hljs-keyword">else</span> &#123;<br>        high = mid - <span class="hljs-number">1</span>;<br>      &#125;<br>    &#125;<br><br>    <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 </blockquote>
 <p><strong>注意：</strong></p>
 <ol>
-<li><p>注意是 low&lt;=high，而不是 low</p>
+<li><p>注意是 low&lt;=high，而不是 &lt;</p>
 </li>
 <li><p><strong>mid=(low+high)/2 这种写法是有问题的</strong>。</p>
 <p>因为如果 low 和 high 比较大的话，两者之和就有可能会溢出。</p>
@@ -3498,7 +3848,8 @@
 </blockquote>
 <p>然后，可以通过下面这条命令，将这些 INSERT 语句放到 db2 库里去执行</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs mysql">mysql -h127.0.0.1 -P13000  -uroot db2 -e &quot;source /client_tmp/t.sql&quot;<br></code></pre></td></tr></table></figure>
-<p>source 并不是一条 SQL 语句，而是一个客户端命令</p>
+<p>source 并不是一条 SQL 语句，而是一个</p>
+<p>客户端命令</p>
 <p>mysql 客户端执行这个命令的流程是这样的：</p>
 <ol>
 <li>打开文件，默认以分号为结尾读取一条条的 SQL 语句；</li>
@@ -3812,7 +4163,7 @@
 <p>第一个 insert 语句插入数据成功后，这个表的 AUTO_INCREMENT 没有改变（还是 4294967295），就导致了第二个 insert 语句又拿到相同的自增 id 值，再试图执行插入语句，报主键冲突错误。</p>
 </blockquote>
 <h3 id="InnoDB-系统自增-row-id"><a href="#InnoDB-系统自增-row-id" class="headerlink" title="InnoDB 系统自增 row_id"></a>InnoDB 系统自增 row_id</h3><p>如果创建的 InnoDB 表没有指定主键，那么 InnoDB 会给你创建一个不可见的，长度为 6 个字节的 <strong>row_id</strong>。</p>
-<p>InnoDB 维护了一个全局的 ‘dict_sys.row_id’ 值，所有无主键的 InnoDB 表，每插入一行数据，都将当前的 ‘dict_sys.row_id’ 值作为要插入数据的 row_id，然后把 ‘dict_sys.row_id’ 的值加 1。</p>
+<p>InnoDB 维护了一个全局的 ‘dict_sys.row_id’ 值，所有无主键的 InnoDB 表，每插入一行数据，都将当前的 ‘dict_sys.row_id’ 值作为要插入数据的 row_id，然后把 ‘dict_sys.row_id’ 的值加 1。                                                                                                                              </p>
 <p>实际上，在代码实现时 row_id 是一个长度为 8 字节的无符号长整型 (bigint unsigned)。但是，InnoDB 在设计时，给 row_id 留的只是 6 个字节的长度，这样写到数据表中时只放了最后 6 个字节，所以 row_id 能写到数据表中的值，就有两个特征：</p>
 <ol>
 <li><p>row_id 写入表中的值范围，是从 0 到 2<sup>48</sup>-1；</p>
@@ -5453,7 +5804,7 @@
 <p><img src="/article/binlog 写盘状态.png"><span class="image-caption">binlog 写盘状态</span></p>
 <p>每个线程有自己 binlog cache，但是共用同一份 binlog 文件</p>
 <ol>
-<li>图中的 write，指的就是指把日志写入到文件系统的 page cache，并没有把数据持久化到磁盘，所以速度比较快。</li>
+<li>图中的 write，指的就是指把日志写入到文件系统的 page cache，并没有把数据持久化到磁盘，所以速度比较快。 </li>
 <li>图中的 fsync，才是将数据持久化到磁盘的操作。一般情况下，我们认为 fsync 才占磁盘的 IOPS。</li>
 </ol>
 <blockquote>
@@ -5646,7 +5997,7 @@
 <li>备库 B 执行完成这个事务，我们把这个时刻记为 T3。</li>
 </ol>
 <p><strong>主备延迟</strong>，就是同一个事务，在备库执行完成的时间和主库执行完成的时间之间的差值，也就是 T3-T1。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs mysql">show slave status<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs mysql">&gt;show slave status<br></code></pre></td></tr></table></figure>
 <p>返回结果里面会显示 <code>seconds_behind_master</code>，用于表示当前备库延迟了多少秒</p>
 <ol>
 <li>每个事务的 binlog 里面都有一个时间字段，用于记录主库上写入的时间；</li>
@@ -5968,7 +6319,8 @@
     <title>SpringSecurity</title>
     <url>/article/52913.html</url>
     <content><![CDATA[<p>学习源于<a href="https://www.bilibili.com/video/BV1mm4y1X7Hc?p=8&amp;spm_id_from=pageDriver">三更草堂</a></p>
-<h2 id="SpringSecurity"><a href="#SpringSecurity" class="headerlink" title="SpringSecurity"></a>SpringSecurity</h2><p>Spring Security是一个功能强大且高度可定制的身份验证和访问控制框架。这是保护基于Spring的应用程序的事实上的标准。</p>
+<h2 id="SpringSecurity"><a href="#SpringSecurity" class="headerlink" title="SpringSecurity"></a>SpringSecurity</h2><p>Spring Security是一个<strong>功能强大且高度可定制的身份验证和访问控制框架</strong>。这是保护基于Spring的应用程序的事实上的标准。</p>
+<p>SpringSecurity 提供了一组可以在Spring应用上下文中配置的Bean，充分利用了Spring IoC、DI、AOP功能，为应用系统提供声明式的安全访问控制功能，减少了为企业系统安全控制编写大量重复代码的工作。</p>
 <p>Spring Security是一个专注于为Java应用程序提供身份验证和授权的框架。像所有Spring项目一样，Spring Security的真正力量在于它有多容易被扩展以满足自定义要求。</p>
 <p><strong>认证：验证当前访问系统的是不是本系统的用户，并且要确认具体是哪个用户</strong></p>
 <p><strong>授权：经过认证后判断当前用户是否有权限进行某个操作</strong></p>
@@ -5989,16 +6341,16 @@
 <h3 id="SpringSecurity完整流程"><a href="#SpringSecurity完整流程" class="headerlink" title="SpringSecurity完整流程"></a>SpringSecurity完整流程</h3><p>SpringSecurity其实就是一个过滤器链，内部包含了各种功能的过滤器。</p>
 <p><strong>基础流程图</strong></p>
 <img src="/article/52913/%E6%B5%81%E7%A8%8B%E5%9B%BE-9039561.png" class title="流程图">
-<p><strong>UsernamePasswordAuthenticationFilter</strong>:负责处理我们在登陆页面填写了用户名密码后的登陆请求。入门案例的认证工作主要有它负责。</p>
+<p><strong>UsernamePasswordAuthenticationFilter</strong>:负责处理我们在登陆页面填写了用户名密码后的登陆请求。</p>
 <p><strong>ExceptionTranslationFilter：</strong> 处理过滤器链中抛出的任何AccessDeniedException和AuthenticationException 。</p>
 <p><strong>FilterSecurityInterceptor：</strong> 负责权限校验的过滤器。</p>
 <p>SpringSecurity过滤器链中有哪些过滤器及它们的顺序：</p>
 <img src="/article/52913/SpringSecurity%E8%BF%87%E6%BB%A4%E5%99%A8%E9%93%BE.png" class title="SpringSecurity过滤器链">
 <h3 id="认证流程详解"><a href="#认证流程详解" class="headerlink" title="认证流程详解"></a>认证流程详解</h3><img src="/article/52913/%E8%AE%A4%E8%AF%81%E6%B5%81%E7%A8%8B%E8%AF%A6%E8%A7%A3-9040230.png" class title="认证流程详解">
 <p><strong>Authentication接口</strong>: 它的实现类，表示当前访问系统的用户，封装了用户相关信息。</p>
-<p><strong>AuthenticationManager接口</strong>：定义了认证Authentication的方法</p>
+<p><strong>AuthenticationManager接口</strong>：定义了认证Authentication的方法，在 Spring Security 中，用来处理身份认证的类是 AuthenticationManager，我们也称之为认证管理器。</p>
 <p><strong>UserDetailsService接口</strong>：加载用户特定数据的核心接口。里面定义了一个根据用户名查询用户信息的方法。</p>
-<p><strong>UserDetails接口</strong>：提供核心用户信息。通过UserDetailsService根据用户名获取处理的用户信息要封装成UserDetails对象返回。然后将这些信息封装到Authentication对象中。</p>
+<p><strong>UserDetails接口（继承了 Serializable 序列化）</strong>：提供核心用户信息。通过UserDetailsService根据用户名获取处理的用户信息要封装成UserDetails对象返回。然后将这些信息封装到Authentication对象中。</p>
 <ol>
 <li><p>自定义登录验证</p>
 <img src="/article/52913/%E8%87%AA%E5%AE%9A%E4%B9%89%E7%99%BB%E5%BD%95%E9%AA%8C%E8%AF%81.png" class title="自定义登录验证">
@@ -6046,7 +6398,267 @@
 <h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><h3 id="CSRF"><a href="#CSRF" class="headerlink" title="CSRF"></a>CSRF</h3><p>CSRF是指跨站请求伪造（Cross-site request forgery），是web常见的攻击之一。</p>
 <p>SpringSecurit 去防止 CSRF 攻击的方式就是通过 csrf_token 。后端会生成一个 csrf_token ，前端发起请求的时候需要携带这个 csrf_token ,后端会有过滤器进行校验，如果没有携带或者是伪造的就不允许访问。</p>
 <p>CSRF 攻击依靠的是 cookie 中所携带的认证信息。但是在前后端分离的项目中我们的认证信息其实是 token ，而 token 并不是存储中 cookie 中，并且需要前端代码去把token 设置到请求头中才可以，所以CSRF攻击也就不用担心了。</p>
-<p>3566930579</p>
+<hr>
+<h2 id="项目过程"><a href="#项目过程" class="headerlink" title="项目过程"></a><strong>项目过程</strong></h2><p><strong>前端输入用户密码传入后端，后端判断用户名密码是否正确，如果正确，会生成一个JWT令牌，返回给前端，如果不正确重新输入用户名密码。</strong></p>
+<p><strong>前端拿到JWT令牌之后，会放在请求头中，之后每一次请求都会携带JWT令牌，后端 JWT令牌拦截器，每次有请求进入后端，先判断JWT令牌 是否存在以及令牌是否正确合法有效，如果不存在或者JWT令牌不合法有效，拦截请求，如果JWT令牌合法有效，允许请求访问。</strong></p>
+<blockquote>
+<p><strong>引入依赖</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java">&lt;!--security 依赖--&gt;<br>&lt;dependency&gt;<br>  &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;<br>  &lt;artifactId&gt;spring-boot-starter-security&lt;/artifactId&gt;<br>&lt;/dependency&gt;<br>&lt;!--JWT 依赖--&gt;<br>&lt;dependency&gt;<br>  &lt;groupId&gt;io.jsonwebtoken&lt;/groupId&gt;<br>  &lt;artifactId&gt;jjwt&lt;/artifactId&gt;<br>  &lt;version&gt;<span class="hljs-number">0.9</span><span class="hljs-number">.0</span>&lt;/version&gt;<br>&lt;/dependency&gt;<br></code></pre></td></tr></table></figure>
+<p><strong>JWT配置</strong></p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">jwt:</span><br>  <span class="hljs-comment"># JWT存储的请求头</span><br>  <span class="hljs-attr">tokenHeader:</span> <span class="hljs-string">Authorization</span><br>  <span class="hljs-comment"># JWT 加解密使用的密钥</span><br>  <span class="hljs-attr">secret:</span> <span class="hljs-string">yeb-secret</span><br>  <span class="hljs-comment"># JWT的超期限时间（60*60*24）</span><br>  <span class="hljs-attr">expiration:</span> <span class="hljs-number">604800</span><br>  <span class="hljs-comment"># JWT 负载中拿到开头</span><br>  <span class="hljs-attr">tokenHead:</span> <span class="hljs-string">Bearer</span><br></code></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p><strong>编写JwtToken工具类</strong></p>
+<ol>
+<li><p>根据用户信息生成Token</p>
+<ol>
+<li>generateToken(UserDetails userDetails)</li>
+<li>generateToken(Map&lt;String,Object&gt; claims)</li>
+<li>generateExpirationDate()</li>
+</ol>
+</li>
+<li><p>从Token中获取信息</p>
+<ol>
+<li><p>从Token中获取登录用户名</p>
+<p>public String getUserNameFromToken(String token)</p>
+</li>
+<li><p>从Token中获取荷载</p>
+<p>private Claims getClaimsFromToken(String token)</p>
+</li>
+</ol>
+</li>
+<li><p>判断Token是否有效</p>
+<ol>
+<li><p>判断 Token中的用户名和 用户信息中的用户名是否一致 并且 是否失效</p>
+<p>public boolean validateToken(String token , UserDetails userDetails)</p>
+</li>
+<li><p>判断 Token 是否失效</p>
+<p>private boolean isTokenExpired(String token)</p>
+</li>
+<li><p>获取 Token 失效时间</p>
+<p>private Date getExpiredDateFromToken(String token)</p>
+</li>
+</ol>
+</li>
+<li><p>判断 Token 是否可以被刷新</p>
+<p>public boolean canRefreshToken(String token)</p>
+</li>
+<li><p>刷新 Token</p>
+<p>public String refreshToken(String token)</p>
+</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol>
+<li><p><strong>前端输入用户密码传入后端，后端判断用户名密码是否正确，如果正确，会生成一个JWT令牌，返回给前端，如果不正确重新输入用户名密码。</strong></p>
+<ol>
+<li><p>使用 Admin 实现 UserDetails , 重写其中的方法</p>
+</li>
+<li><p>使用 AdminServiceImpl 实现类 ， 获取前端传入的 用户名、密码、图形验证码；</p>
+<ol>
+<li><p>获取请求中的的图形验证码进行校验；</p>
+</li>
+<li><p>通过 userDetailsService 接口中 loadUserByUsername(username) 根据传入的用户名生成用户信息 userDetails</p>
+<p>校验 userDetails </p>
+<p>校验 前端传入密码是否与数据库中存储的密码进行校验</p>
+</li>
+<li><p>SpringSecurity全局对象中 更新 用户登录信息</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//全局更新</span><br><span class="hljs-comment">//更新security登录用户对象</span><br>UsernamePasswordAuthenticationToken authenticationToken = <span class="hljs-keyword">new</span> UsernamePasswordAuthenticationToken(userDetails, <span class="hljs-keyword">null</span>, userDetails.getAuthorities());<br>SecurityContextHolder.getContext().setAuthentication(authenticationToken);<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>生成 Token ，将 Token 以及 请求头放入 map 传入前端</p>
+</li>
+</ol>
+</li>
+</ol>
+<p>登录成功</p>
+</li>
+<li><p><strong>JWT登录授权过滤器</strong></p>
+<p>存在token并且token格式正确，使其登录，同时判断token是否有效，有效重新 SpringSecurity全局对象中 更新 用户登录信息</p>
+</li>
+<li><p>自定义未授权和登录结果返回</p>
+<ol>
+<li>未登录或token失效处理器</li>
+<li>授权失败处理器</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<hr>
+<h3 id="UserDetailsService接口"><a href="#UserDetailsService接口" class="headerlink" title="UserDetailsService接口"></a>UserDetailsService接口</h3><blockquote>
+<p><strong>UserDetailsService接口</strong> 加载用户特定数据的核心接口。里面定义了一个根据用户名查询用户信息的方法。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-function">UserDetails <span class="hljs-title">loadUserByUsername</span><span class="hljs-params">(String username)</span> throw UsernameNotFoundException</span>;<br></code></pre></td></tr></table></figure>
+<hr>
+<p><strong>UserDetails</strong>接口：提供核心用户信息。通过 UserDetailsService 根据用户名获取处理的用户信息要封装成UserDetails对象返回。然后将这些信息封装到Authentication对象中。</p>
+<hr>
+<p>UserDetails接口的实现类 <strong>User</strong> 其中有两个核心构造方法,其中第一个User()调用第二个 User()方法</p>
+<ul>
+<li>User()方法中的 username 是从 loadUserByUsername(String username) 中前端传入的username，然后 User()方法中的 password 是从数据库中 根据 username 查找对应的 用户，返回其密码（用来和前端传入的密码进行比较）。</li>
+</ul>
+<blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">User</span><span class="hljs-params">(String username, String password, Collection&lt;? extends GrantedAuthority&gt; authorities)</span> </span>&#123;<br>		<span class="hljs-keyword">this</span>(username, password, <span class="hljs-keyword">true</span>, <span class="hljs-keyword">true</span>, <span class="hljs-keyword">true</span>, <span class="hljs-keyword">true</span>, authorities);<br>	&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">User</span><span class="hljs-params">(String username, String password, <span class="hljs-keyword">boolean</span> enabled, <span class="hljs-keyword">boolean</span> accountNonExpired,</span></span><br><span class="hljs-params"><span class="hljs-function">			<span class="hljs-keyword">boolean</span> credentialsNonExpired, <span class="hljs-keyword">boolean</span> accountNonLocked,</span></span><br><span class="hljs-params"><span class="hljs-function">			Collection&lt;? extends GrantedAuthority&gt; authorities)</span> </span>&#123;<br>		Assert.isTrue(username != <span class="hljs-keyword">null</span> &amp;&amp; !<span class="hljs-string">&quot;&quot;</span>.equals(username) &amp;&amp; password != <span class="hljs-keyword">null</span>,<br>				<span class="hljs-string">&quot;Cannot pass null or empty values to constructor&quot;</span>);<br>		<span class="hljs-keyword">this</span>.username = username;<br>		<span class="hljs-keyword">this</span>.password = password;<br>		<span class="hljs-keyword">this</span>.enabled = enabled;<br>		<span class="hljs-keyword">this</span>.accountNonExpired = accountNonExpired;<br>		<span class="hljs-keyword">this</span>.credentialsNonExpired = credentialsNonExpired;<br>		<span class="hljs-keyword">this</span>.accountNonLocked = accountNonLocked;<br>		<span class="hljs-keyword">this</span>.authorities = Collections.unmodifiableSet(sortAuthorities(authorities));<br>	&#125;<br></code></pre></td></tr></table></figure>
+</blockquote>
+</blockquote>
+<blockquote>
+<p><strong>PasswordEncoder 接口</strong> Spring已经实例化，需要自定义重新实现 PasswordEncoder 实例。</p>
+<p>该接口共有两个主要方法</p>
+<ol>
+<li><p>对 密码进行加密 </p>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-function">String <span class="hljs-title">encode</span><span class="hljs-params">(CharSequence rawPassword)</span></span>;<br></code></pre></td></tr></table></figure>
+<p>通过对 <strong>原始密码 rawPassword</strong> 进行加密，返回一个加密后的 字符串</p>
+</li>
+<li><p>匹配 原始密码 与 加密后的密码</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">matches</span><span class="hljs-params">(CharSequence rawPassword, String encodedPassword)</span></span>;<br></code></pre></td></tr></table></figure>
+</li>
+</ol>
+<hr>
+<p>官方推荐使用<strong>PasswordEncoder 接口</strong>的实现类 <strong>BCryptPasswordEncoder</strong> 基于 <strong>Hash算法</strong> 实现单向加密 </p>
+</blockquote>
+<hr>
+<blockquote>
+<p><strong>UsernamePasswordAuthenticationFilter类</strong> 负责处理在登陆页面填写了用户名密码后的登陆请求</p>
+</blockquote>
+<hr>
+<blockquote>
+<p><strong>Authentication接口</strong>: 它的实现类，表示当前访问系统的用户，封装了用户相关信息。</p>
+</blockquote>
+<hr>
+<blockquote>
+<p><strong>FormLoginConfigurer类</strong> 可以自定义登陆成功登陆失败跳转</p>
+<p><strong>ForwardAuthenticationSuccessHandler</strong> 实现了 <strong>AuthenticationSuccessHandler 接口</strong> 定义了成功跳转链接</p>
+<p><strong>ForwardAuthenticationFailureHandler</strong> 实现了 <strong>AuthenticationFailureHandler 接口</strong> 定义了失败跳转链接</p>
+</blockquote>
+<hr>
+<blockquote>
+<p><strong>WebSecurityConfigurerAdapter</strong> 是个适配器，是构建<strong>SecurityFilterChain</strong>的关键， 在配置的时候,需要我们自己写个配置类去继承他,然后编写自己所特殊需要的配置</p>
+<p>重写的 <strong>configure(HttpSecurity http)</strong> 的方法就是用来配置 <strong>HttpSecurity</strong> 的</p>
+<blockquote>
+<p>http.</p>
+<p>anyRequest() 表示所有请求</p>
+<p>antMatches() 表示匹配请求</p>
+<p>regexMatches() 表示通过正则进行匹配</p>
+<p>mvcMatches() 表示匹配 ServletPath 为特有方法</p>
+<hr>
+<p>permitAll() 表示不需要被认证</p>
+<p>authenticated() 表示需要被认证</p>
+<p>hasAuthority() 表示需要某种权限</p>
+<p>hasAnyAuthority() 表示需要多个权限其中之一</p>
+<p>hasRole() 表示需要某种角色（初始化角色时 前缀 ROLE_ 匹配值不需要前缀）</p>
+<p>hasAnyRole() 表示需要多个角色中的其中之一</p>
+<p>hasIpAddress() 表示特定的 IP地址 才可以通过</p>
+<hr>
+<p>http.csrf() 跨站请求伪造攻击</p>
+<hr>
+<p>http.</p>
+<p>exceptionHandling() 表示异常处理</p>
+<p>accessDeniedHandler() 表示授权失败处理器</p>
+<p>authenticationEntryPoint() 表示认证失败处理器</p>
+</blockquote>
+</blockquote>
+<hr>
+<blockquote>
+<p><strong>AccessDeniedHandler接口</strong> 该类用来统一处理 <strong>AccessDeniedException</strong> 异常，为授权过程中出现异常</p>
+<p>自定义授权过程异常处理，实现<strong>AccessDeniedHandler接口</strong>，并重写handle() 方法</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">handle</span><span class="hljs-params">(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException)</span></span><br><span class="hljs-function">			<span class="hljs-keyword">throws</span> IOException, ServletException</span>;<br></code></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p><strong>基于注解的访问控制</strong></p>
+<p>需要通过 <strong>@EnableGlobalMethodSecurity</strong> 进行开启后使用</p>
+<p><strong>@Secured</strong>（方法或类） 专门用于判断是否具有角色 ，参数以 <strong>ROLE_</strong> 开头</p>
+<p><strong>@PreAuthorize/@PostAuthorize</strong>（方法或类） 在访问方法或类再执行之前/之后判断权限 </p>
+</blockquote>
+<hr>
+<blockquote>
+<p><strong>Token Auth</strong></p>
+<p>基于Token的身份验证方法，在服务端不需要存储用户的登录记录</p>
+<ol>
+<li>客户端使用用户名跟密码请求登陆</li>
+<li>服务端收到请求，验证用户名和密码</li>
+<li>验证成功，服务器端签发一个 Token，将这个Token发送给客户端</li>
+<li>客户端收到Token将其存储</li>
+<li>客户端每次向服务器请求资源的时候携带该 Token</li>
+<li>服务器端收到请求，验证请求中携带的Token，验证成功，返回请求数据</li>
+</ol>
+</blockquote>
+<blockquote>
+<p><strong>JWT</strong> JSON WEB Token ,定义了一种简介的、自包含的协议格式，用于在通信双方传递JSON对象，传递的信息经过数字签名可以被验证和信任。</p>
+<ol>
+<li>基于JSON，方便解析；</li>
+<li>可以在令牌中自定义丰富内容，易扩展；</li>
+<li>通过非对称加密算法及数字签名技术，防止篡改，安全性高；</li>
+<li>资源服务使用JWT可不依赖认证服务即可完成授权。</li>
+</ol>
+<p>JWT令牌较长，占存储空间比较大</p>
+</blockquote>
+<h3 id="JWT组成"><a href="#JWT组成" class="headerlink" title="JWT组成"></a><strong>JWT组成</strong></h3><blockquote>
+<ol>
+<li><p>头部 Header 描述JWT最基本信息</p>
+<p>对头部的 JSON 字符串 进行 BASE64编码解码</p>
+</li>
+<li><p>负载 payload 存放有效信息（不要放敏感信息）</p>
+<ol>
+<li>标准中注册的声明</li>
+<li>公共的声明</li>
+<li>私有的声明</li>
+</ol>
+</li>
+<li><p>签证、签名 signature</p>
+<ol>
+<li>header（BASE64编码之后的头部信息）</li>
+<li>payload （BASE64编码之后的载荷信息）</li>
+<li>secret （盐 ，必须保密，保存在服务器端）</li>
+</ol>
+</li>
+</ol>
+<p>JWT签发在服务器端，secret相当于私钥 </p>
+</blockquote>
+<blockquote>
+<p><strong>JJWT</strong>：提供端到端的JWT创建和验证的Java库</p>
+</blockquote>
+<hr>
+<blockquote>
+<p><strong>OAUTH2 认证</strong></p>
+<p>优点</p>
+<ol>
+<li>更安全，客户端不接触用户密码</li>
+<li>短寿命和封装的Token</li>
+<li>广泛传播、持续采用</li>
+<li>资源服务器和授权服务器解耦</li>
+<li>集中式授权，简化客户端</li>
+<li>客户可以具有不同的信任级别</li>
+</ol>
+<p>缺点</p>
+<ol>
+<li>协议框架太宽泛，造成各种实现的兼容性和互操作性差</li>
+<li>不是一个认证协议，本身不能告诉你任何用户信息</li>
+</ol>
+<img src="/article/52913/%E5%BE%AE%E4%BF%A1%E8%AE%A4%E8%AF%81%E4%B8%BE%E4%BE%8B.png" class title="微信认证举例">
+<img src="/article/52913/%E8%AE%A4%E8%AF%81%E6%B5%81%E7%A8%8B.png" class title="认证流程">
+</blockquote>
+<blockquote>
+<p>客户凭证(client Credentials) 客户端的clientId和密码用于认证客户</p>
+<p>令牌(tokens) 授权服务器在接受到客户请求后，颁发的访问令牌</p>
+<blockquote>
+<p>授权码 仅用于授权码授权类型，用于交换获取访问令牌和刷新令牌</p>
+<p>访问令牌 用于代表一个用户或服务直接去访问受保护的资源</p>
+<p>刷新令牌 用于去授权服务器获取一个刷新访问令牌</p>
+<p>beareaToken 不管谁拿到Token都可以访问资源</p>
+<p>proof of Possession Token 可以校验client是否对Token有明确的拥有权</p>
+</blockquote>
+<p>作用域(scopes) 客户请求访问令牌时，由资源拥有者外指定的细分权限</p>
+</blockquote>
+<blockquote>
+<img src="/article/52913/SpringSecurityOAuth2.png" class title="SpringSecurityOAuth2">
+</blockquote>
+<blockquote>
+<img src="/article/52913/SpringSecurityOAuth2%E6%9E%B6%E6%9E%84.png" class title="SpringSecurityOAuth2架构">
+<ol>
+<li>用户访问，此时没有Token，Oauth2RestTemplate报错，报错信息会被Oauth2ClientContextFilter捕获，并重定向到认证服务器；</li>
+<li>认证服务器通过 Authorization Endpoint进行授权，并通过  AuthorizationServerTokenServices 生成授权码并返回给客户；</li>
+<li>客户端拿到授权码去认证服务器通过 Token Endpoint 调用 AuthorizationServerTokenServices 生成Token 并返回给客户端</li>
+<li>客户端拿到Token 去资源服务器访问资源，一般会通过 Oauth2AuthenticationManager 调用 ResourceServerTokenServices 进行校验，校验通过可获取资源</li>
+</ol>
+</blockquote>
 ]]></content>
       <categories>
         <category>Java</category>
@@ -6857,12 +7469,12 @@
 <li>如果你在从库上备份，那么备份期间从库不能执行主库同步过来的 binlog，会导致主从延迟。</li>
 </ol>
 </blockquote>
-<p>官方自带的逻辑备份工具是 <strong>mysqldump</strong>。当 mysqldump 使用参数–<code>single-transaction</code> 的时候，导数据之前就会启动一个事务，来确保拿到一致性视图。而由于 MVCC 的支持，这个过程中数据是可以正常更新的。</p>
+<p>官方自带的逻辑备份工具是 <strong>mysqldump</strong>。当 mysqldump 使用参数<code>–single-transaction</code> 的时候，导数据之前就会启动一个事务，来确保拿到一致性视图。而由于 MVCC 的支持，这个过程中数据是可以正常更新的。</p>
 <blockquote>
 <p><strong>问题：有了mysqldump功能，为什么还需要 FTWRL 呢？</strong></p>
 <p>一致性读是好，但前提是引擎要支持<strong>可重复读</strong>隔离级别。比如，对于 MyISAM 这种不支持事务的引擎，如果备份过程中有更新，总是只能取到最新的数据，那么就破坏了备份的一致性。这时，我们就需要使用 FTWRL 命令了。</p>
 </blockquote>
-<p><strong><code>single-transaction</code> 方法只适用于所有的表使用事务引擎的库。</strong></p>
+<p><strong><code>-single-transaction</code> 方法只适用于所有的表使用事务引擎的库。</strong></p>
 <blockquote>
 <p><strong>问题：既然要全库只读，为什么不使用 set global readonly=true 的方式呢？</strong></p>
 <ol>
@@ -9790,9 +10402,9 @@ Thymeleaf 支持 HTML 原型，其文件后缀为</code>.html`，因此它可以
 </blockquote>
 <blockquote>
 <p>CarFactory接口</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.bobo.factory.method;<br><span class="hljs-comment">//工厂方法模式</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">CarFactory</span> </span>&#123;<br><span class="hljs-function">Car <span class="hljs-title">getCar</span><span class="hljs-params">()</span></span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.bobo.factory.method;<br><span class="hljs-comment">//工厂方法模式</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">CarFactory</span> </span>&#123;<br>	<span class="hljs-function">Car <span class="hljs-title">getCar</span><span class="hljs-params">()</span></span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>TSLFactory工厂实现类</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.bobo.factory.method;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TSLFactory</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">CarFactory</span> </span>&#123;<br> <span class="hljs-meta">@Override</span><br> <span class="hljs-function"><span class="hljs-keyword">public</span> Car <span class="hljs-title">getCar</span><span class="hljs-params">()</span> </span>&#123;<br>     <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> TSL();<br> &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.bobo.factory.method;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TSLFactory</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">CarFactory</span> </span>&#123;<br> <span class="hljs-meta">@Override</span><br>   <span class="hljs-function"><span class="hljs-keyword">public</span> Car <span class="hljs-title">getCar</span><span class="hljs-params">()</span> </span>&#123;<br>       <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> TSL();<br>   &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p> WLFactory工厂实现类</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.bobo.factory.method;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">WLFactory</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">CarFactory</span></span>&#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> Car <span class="hljs-title">getCar</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> WL();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 </blockquote>
@@ -9804,6 +10416,55 @@ Thymeleaf 支持 HTML 原型，其文件后缀为</code>.html`，因此它可以
 <p>输出</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java">WL<br>TSL<br></code></pre></td></tr></table></figure>
 </blockquote>
+<h3 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h3><p>单例设计模式（Singleton Design Pattern）:一个类只允许创建一个对象（或者叫实例），那这个类就是一个单例类，这种设计模式就叫作单例设计模式，简称单例模式。</p>
+<blockquote>
+<ol>
+<li>构造函数需要是 private 访问权限的，这样才能避免外部通过 new 创建实例；</li>
+<li>考虑对象创建时的线程安全问题；</li>
+<li>考虑是否支持延迟加载；</li>
+<li>考虑 getInstance() 性能是否高（是否加锁）。</li>
+</ol>
+</blockquote>
+<ol>
+<li><p>饿汉式</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Singleton1</span> </span>&#123;<br>  <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Singleton1 INSTANCE = <span class="hljs-keyword">new</span> Singleton1();<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Singleton1</span><span class="hljs-params">()</span> </span>&#123;&#125;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Singleton1 <span class="hljs-title">getInstance</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-keyword">return</span> INSTANCE;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>不支持延迟加载</p>
+<p>线程安全</p>
+</li>
+<li><p>懒汉式</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Singleton2</span> </span>&#123;<br>  <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Singleton2 INSTANCE;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Singleton2</span><span class="hljs-params">()</span></span>&#123;&#125;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">synchronized</span> Singleton2 <span class="hljs-title">getInstance</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-keyword">if</span> (INSTANCE == <span class="hljs-keyword">null</span>)&#123;<br>      INSTANCE = <span class="hljs-keyword">new</span> Singleton2();<br>    &#125;<br>    <span class="hljs-keyword">return</span> INSTANCE;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>支持延迟加载</p>
+<p>并发度低</p>
+</li>
+<li><p>双重检测</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Singleton3</span> </span>&#123;<br>  <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">volatile</span> Singleton3 INSTANCE;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Singleton3</span><span class="hljs-params">()</span> </span>&#123;&#125;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Singleton3 <span class="hljs-title">getInstance</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-keyword">if</span> (INSTANCE == <span class="hljs-keyword">null</span>)&#123;<br>      <span class="hljs-keyword">synchronized</span> (Singleton3.class)&#123;<br>        <span class="hljs-keyword">if</span> (INSTANCE == <span class="hljs-keyword">null</span>)&#123;<br>          INSTANCE = <span class="hljs-keyword">new</span> Singleton3();<br>        &#125;<br>      &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> INSTANCE;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>解决了懒汉式并发度低的问题</p>
+</li>
+<li><p>静态内部类</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Singleton4</span> </span>&#123;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Singleton4</span><span class="hljs-params">()</span> </span>&#123;&#125;<br>  <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SingletonStatic</span></span>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> Singleton4 INSTANCE = <span class="hljs-keyword">new</span> Singleton4();<br>  &#125;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Singleton4 <span class="hljs-title">getInstance</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-keyword">return</span> SingletonStatic.INSTANCE;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>既保证了线程安全，又能做到延迟加载</p>
+</li>
+<li><p>枚举</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">Singleton5</span> </span>&#123;<br>  INSTANCE;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>保证了实例创建的线程安全性和实例的唯一性</p>
+</li>
+</ol>
+<h3 id="适配器模式"><a href="#适配器模式" class="headerlink" title="适配器模式"></a>适配器模式</h3><p>适配器模式的英文翻译是 Adapter Design Pattern。顾名思义，这个模式就是用来做适配的，它将不兼容的接口转换为可兼容的接口，让原本由于接口不兼容而不能一起工作的类可以一起工作。</p>
+<p>ITarget 表示要转化成的接口定义。Adaptee 是一组不兼容 ITarget 接口定义的接口，Adaptor 将 Adaptee 转化成一组符合 ITarget 接口定义的接口。</p>
+<ol>
+<li><p>类适配器使用继承关系来实现</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">ITarget</span> </span>&#123; <br>  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">f1</span><span class="hljs-params">()</span></span>; <br>  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">f2</span><span class="hljs-params">()</span></span>; <br>  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">fc</span><span class="hljs-params">()</span></span>;<br>&#125;<br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Adaptee</span> </span>&#123; <br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">fa</span><span class="hljs-params">()</span> </span>&#123; <span class="hljs-comment">//... &#125; </span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">fb</span><span class="hljs-params">()</span> </span>&#123; <span class="hljs-comment">//... &#125; </span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">fc</span><span class="hljs-params">()</span> </span>&#123; <span class="hljs-comment">//... &#125;</span><br>&#125;<br>    <br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Adaptor</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Adaptee</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">ITarget</span> </span>&#123; <br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">f1</span><span class="hljs-params">()</span> </span>&#123; <br>    <span class="hljs-keyword">super</span>.fa(); <br>  &#125; <br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">f2</span><span class="hljs-params">()</span> </span>&#123; <span class="hljs-comment">//...重新实现f2()... &#125; </span><br>    <span class="hljs-comment">// 这里fc()不需要实现，直接继承自Adaptee，这是跟对象适配器最大的不同点</span><br> &#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>对象适配器使用组合关系来实现</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">ITarget</span> </span>&#123;<br>  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">f1</span><span class="hljs-params">()</span></span>;<br>  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">f2</span><span class="hljs-params">()</span></span>;<br>  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">fc</span><span class="hljs-params">()</span></span>;<br>&#125;<br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Adaptee</span> </span>&#123;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">fa</span><span class="hljs-params">()</span> </span>&#123; <span class="hljs-comment">//... &#125;</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">fb</span><span class="hljs-params">()</span> </span>&#123; <span class="hljs-comment">//... &#125;</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">fc</span><span class="hljs-params">()</span> </span>&#123; <span class="hljs-comment">//... &#125;</span><br>&#125;<br>    <br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Adaptor</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">ITarget</span> </span>&#123;<br>  <span class="hljs-keyword">private</span> Adaptee adaptee;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Adaptor</span><span class="hljs-params">(Adaptee adaptee)</span> </span>&#123;<br>    <span class="hljs-keyword">this</span>.adaptee = adaptee;<br>  &#125;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">f1</span><span class="hljs-params">()</span> </span>&#123;<br>    adaptee.fa(); <span class="hljs-comment">//委托给Adaptee</span><br>  &#125;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">f2</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-comment">//...重新实现f2()...</span><br>  &#125;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">fc</span><span class="hljs-params">()</span> </span>&#123;<br>    adaptee.fc();<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><strong>使用判断标准</strong>：一个是 Adaptee 接口的个数，另一个是 Adaptee 和 ITarget 的契合程度。</p>
+<ol>
+<li>如果 Adaptee 接口并不多，那两种实现方式都可以。</li>
+<li>如果 Adaptee 接口很多，而且 Adaptee 和 ITarget 接口定义大部分都相同，那我们推荐使用类适配器，因为 Adaptor 复用父类 Adaptee 的接口，比起对象适配器的实现方式，Adaptor 的代码量要少一些。</li>
+<li>如果 Adaptee 接口很多，而且 Adaptee 和 ITarget 接口定义大部分都不相同，那我们推荐使用对象适配器，因为组合结构相对于继承更加灵活。</li>
+</ol>
 ]]></content>
       <categories>
         <category>设计模式</category>
@@ -10712,6 +11373,7 @@ Thymeleaf 支持 HTML 原型，其文件后缀为</code>.html`，因此它可以
 <p>如果非得希望得到int[]的话，只能用循环赋值来得到了。</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">int</span>[] d = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[list.size()];<br><span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;i&lt;list.size();i++)&#123;<br>    d[i] = list.get(i);<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>如果既不想用循环，又想要得到int[]，那就只能在jdk8中使用IntStream了。 </p>
+<h2 id="调用函数"><a href="#调用函数" class="headerlink" title="调用函数"></a>调用函数</h2><p>public int <strong>indexOf</strong>(int ch)返回指定<a href="https://baike.baidu.com/item/字符">字符</a>在此<a href="https://baike.baidu.com/item/字符串">字符串</a>中第一次出现处的索引</p>
 ]]></content>
       <categories>
         <category>LeetCode</category>
@@ -11768,8 +12430,8 @@ Thymeleaf 支持 HTML 原型，其文件后缀为</code>.html`，因此它可以
 </table>
 ]]></content>
       <categories>
-        <category>网络编程</category>
         <category>JavaWeb</category>
+        <category>网络编程</category>
         <category>HTTP的请求和响应</category>
         <category>HTTP的请求和响应</category>
       </categories>
@@ -14415,8 +15077,8 @@ Thymeleaf 支持 HTML 原型，其文件后缀为</code>.html`，因此它可以
     <url>/article/33962.html</url>
     <content><![CDATA[]]></content>
       <categories>
-        <category>语言</category>
         <category>Java</category>
+        <category>语言</category>
         <category>Java</category>
         <category>内存</category>
       </categories>
